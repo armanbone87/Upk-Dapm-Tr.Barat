@@ -986,7 +986,7 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH =================
+        // ================= SINKRONISASI CLOUD DUA ARAH (DIPERBAIKI) =================
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -1027,19 +1027,17 @@
                 btn.disabled = true;
             }
 
-            const payload = {
-                action: "backup_all",
-                lpp: getLPPData(),
-                kas: getKasData(),
-                kasOps: getKasOpsData()
-            };
-
             try {
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload)
+                const payloadStr = encodeURIComponent(JSON.stringify({
+                    action: "backup_all",
+                    lpp: getLPPData(),
+                    kas: getKasData(),
+                    kasOps: getKasOpsData()
+                }));
+
+                await fetch(`${GOOGLE_SCRIPT_URL}?data=${payloadStr}`, {
+                    method: "GET",
+                    mode: "no-cors"
                 });
 
                 if (badge) {
@@ -1051,6 +1049,10 @@
                 }
             } catch (err) {
                 console.error("Gagal sinkronisasi ke Google Sheet:", err);
+                if (badge) {
+                    badge.textContent = "Mode Offline";
+                    badge.className = "badge bg-danger text-white small me-1";
+                }
                 if (!silent) {
                     alert("⚠️ Gagal mengirim data ke Google Sheet. Periksa koneksi internet Anda.");
                 }
