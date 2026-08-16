@@ -13,28 +13,109 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; font-size: 0.84rem; background-color: #f8fafc; color: #1e293b; }
-        .navbar-custom { background: #0f172a; }
-        .card-custom { border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #ffffff; }
-        .btn-compact { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 0.5rem; font-weight: 500; }
-        .form-control-compact, .form-select-compact { font-size: 0.82rem; padding: 0.35rem 0.65rem; border-radius: 0.5rem; }
-        
-        .customer-item { transition: all 0.15s ease; cursor: pointer; border-left: 3px solid transparent; }
-        .customer-item:hover, .customer-item.active { background-color: #f1f5f9 !important; border-left-color: #0284c7; }
-        
-        .table-compact th { background-color: #f8fafc; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: middle; white-space: nowrap; padding: 0.4rem 0.5rem; text-align: center; }
-        .table-compact td { font-size: 0.75rem; vertical-align: middle; white-space: nowrap; padding: 0.4rem 0.5rem; }
-
-        /* Desain Kwitansi Profesional & Menarik */
-        .kwitansi-profesional { 
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border: 2px solid #0284c7; 
-            border-radius: 1rem; 
-            padding: 1.5rem; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        /* === VARIABEL TEMA WARNA === */
+        :root {
+            --bg-body-gradient: linear-gradient(135deg, #0b132b 0%, #1c2541 50%, #3a506b 100%);
+            --navbar-bg: #0b132b;
+            --card-bg: #1c2541;
+            --card-light-bg: #222d4f;
+            --text-main: #e0e1dd;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.12);
+            --table-th-bg: #0b132b;
+            --table-td-bg: #1e293b;
+            --table-td-color: #f8fafc;
         }
 
-        /* Styling Logo Premium & Menyala (Glow Effect) */
+        [data-theme="light"] {
+            --bg-body-gradient: #f1f5f9;
+            --navbar-bg: #0f172a;
+            --card-bg: #ffffff;
+            --card-light-bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --table-th-bg: #f8fafc;
+            --table-td-bg: #ffffff;
+            --table-td-color: #1e293b;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            font-size: 0.84rem; 
+            background: var(--bg-body-gradient);
+            color: var(--text-main); 
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 2px solid var(--border-color); }
+        
+        .card-custom { 
+            border: 1px solid var(--border-color); 
+            border-radius: 0.85rem; 
+            background: var(--card-bg); 
+            color: var(--text-main);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-light-custom {
+            background: var(--card-light-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-compact { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 0.5rem; font-weight: 500; }
+        .form-control-compact, .form-select-compact { 
+            font-size: 0.82rem; 
+            padding: 0.35rem 0.65rem; 
+            border-radius: 0.5rem; 
+            background-color: var(--card-light-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+        .form-control-compact:focus, .form-select-compact:focus {
+            background-color: var(--card-light-bg);
+            color: var(--text-main);
+            border-color: #0284c7;
+            box-shadow: 0 0 0 0.25rem rgba(2, 132, 199, 0.25);
+        }
+        
+        .customer-item { transition: all 0.15s ease; cursor: pointer; border-left: 3px solid transparent; background-color: var(--card-bg); color: var(--text-main); border-bottom: 1px solid var(--border-color); }
+        .customer-item:hover, .customer-item.active { background-color: rgba(2, 132, 199, 0.1) !important; border-left-color: #0284c7; color: var(--text-main); }
+        
+        .table-compact th { 
+            background-color: var(--table-th-bg); 
+            color: #0284c7; 
+            font-size: 0.72rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            vertical-align: middle; 
+            white-space: nowrap; 
+            padding: 0.5rem; 
+            text-align: center; 
+            border-color: var(--border-color); 
+        }
+        .table-compact td { 
+            font-size: 0.75rem; 
+            vertical-align: middle; 
+            white-space: nowrap; 
+            padding: 0.5rem; 
+            color: var(--table-td-color); 
+            border-color: var(--border-color); 
+            background-color: var(--table-td-bg);
+        }
+        .table-hover tbody tr:hover td { background-color: rgba(2, 132, 199, 0.05); }
+
+        .kwitansi-profesional { 
+            background: var(--card-bg);
+            border: 2px solid var(--border-color); 
+            border-radius: 1rem; 
+            padding: 1.5rem; 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            color: var(--text-main);
+        }
+
         .logo-container {
             display: flex;
             justify-content: center;
@@ -48,50 +129,46 @@
             object-fit: contain;
             border-radius: 50%;
             padding: 4px;
-            background: #ffffff;
-            border: 2px solid rgba(2, 132, 199, 0.4);
-            box-shadow: 0 0 20px rgba(2, 132, 199, 0.5), 0 0 10px rgba(56, 189, 248, 0.3);
+            background: var(--card-bg);
+            border: 2px solid rgba(2, 132, 199, 0.5);
+            box-shadow: 0 0 20px rgba(2, 132, 199, 0.4);
             animation: pulseGlow 3s infinite ease-in-out;
             transition: transform 0.3s ease;
         }
         .logo-glow:hover {
             transform: scale(1.08);
-            box-shadow: 0 0 25px rgba(2, 132, 199, 0.8), 0 0 15px rgba(56, 189, 248, 0.6);
         }
 
         @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 15px rgba(2, 132, 199, 0.4), 0 0 5px rgba(56, 189, 248, 0.2);
-            }
-            50% {
-                box-shadow: 0 0 25px rgba(2, 132, 199, 0.7), 0 0 12px rgba(56, 189, 248, 0.5);
-            }
-            100% {
-                box-shadow: 0 0 15px rgba(2, 132, 199, 0.4), 0 0 5px rgba(56, 189, 248, 0.2);
-            }
+            0% { box-shadow: 0 0 15px rgba(2, 132, 199, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(2, 132, 199, 0.6); }
+            100% { box-shadow: 0 0 15px rgba(2, 132, 199, 0.3); }
         }
 
         @media print {
+            body { background: #ffffff !important; color: #000 !important; }
             body * { visibility: hidden; }
             #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi * { visibility: visible; }
-            #areaCetakLPP { position: absolute; left: 0; top: 0; width: 100%; }
-            #areaCetakKwitansi { position: absolute; left: 10%; top: 20px; width: 80%; }
+            #areaCetakLPP { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; }
+            #areaCetakKwitansi { position: absolute; left: 10%; top: 20px; width: 80%; background: #fff; color: #000; }
             .no-print { display: none !important; }
             @page { size: auto; margin: 8mm; }
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
-    <!-- ================= NAVBAR SLIM ================= -->
     <nav class="navbar navbar-dark navbar-custom py-2 shadow-sm no-print">
         <div class="container-fluid px-3 px-md-4">
             <div class="d-flex align-items-center">
-                <span class="navbar-brand fw-bold fs-6 mb-0 d-flex align-items-center" style="cursor: pointer;" onclick="handleBrandClick()">
-                    <i class="bi bi-wallet2 text-info me-2"></i> SISKEU UPK <span class="badge bg-secondary ms-2 fw-normal" style="font-size: 0.65rem;">DAPM TR. BARAT</span>
+                <span class="navbar-brand fw-bold fs-6 mb-0 d-flex align-items-center text-light" style="cursor: pointer;" onclick="handleBrandClick()">
+                    <i class="bi bi-shield-shaded text-info me-2 fs-5"></i> SISKEU UPK <span class="badge bg-primary ms-2 fw-normal" style="font-size: 0.65rem;">DAPM TR. BARAT</span>
                 </span>
             </div>
             <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-outline-light btn-compact" id="themeToggleBtn" onclick="toggleTheme()" title="Ganti Mode Siang / Malam">
+                    <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+                </button>
                 <span id="syncStatusBadge" class="badge bg-warning text-dark small me-1">Memuat Cloud...</span>
                 <span id="adminGreeting" class="text-light small me-2 d-none d-md-inline text-opacity-75"></span>
                 <button id="btnNavAuth" class="btn btn-outline-light btn-compact" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -101,16 +178,14 @@
         </div>
     </nav>
 
-    <!-- ================= LANDING PAGE ================= -->
     <div id="publicContent" class="container py-5 text-center" style="max-width: 650px;">
-        <div class="card-custom p-4 p-md-5 mt-3 shadow-sm">
-            <!-- Logo UPK dan DAPM Menyala & Premium -->
+        <div class="card-custom p-4 p-md-5 mt-3 shadow-lg">
             <div class="logo-container">
-                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" title="Logo UPK">
-                <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" title="Logo DAPM">
+                <img src="LOGO UPK BARU.GIF" alt="Logo UPK" class="logo-glow" title="Logo UPK">
+                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" title="Logo DAPM">
             </div>
-            <h4 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="text-muted small mb-4">Sistem Informasi Keuangan, Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan.</p>
+            <h4 class="fw-bold mb-1" style="color: var(--text-main);">UPK DAPM TANETE RIATTANG BARAT</h4>
+            <p class="small mb-4" style="color: var(--text-muted);">Sistem Informasi Keuangan, Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
                 <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -120,11 +195,9 @@
         </div>
     </div>
 
-    <!-- ================= DASHBOARD UTAMA ================= -->
     <div id="privateDashboard" class="container-fluid px-3 px-md-4 py-3 d-none">
         
-        <!-- Action Top Bar / Tab Navigasi Utama -->
-        <div class="d-flex flex-wrap justify-content-between align-items-center bg-white p-2 px-3 border rounded-3 mb-3 no-print">
+        <div class="d-flex flex-wrap justify-content-between align-items-center card-custom p-2 px-3 mb-3 no-print">
             <div class="btn-group flex-wrap gap-1" role="group">
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnProfil" onclick="bukaView('panelProfil')">
                     <i class="bi bi-info-circle me-1"></i> Profil DAPM TR. Barat
@@ -156,27 +229,26 @@
             </div>
         </div>
 
-        <!-- ================= 0. VIEW PROFIL DAPM TR. BARAT ================= -->
         <div id="viewPanelProfil" class="d-none">
             <div class="card-custom p-4 p-md-5 mb-3">
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <span class="badge bg-primary mb-2">Kelembagaan Resmi</span>
-                        <h3 class="fw-bold text-dark mb-2">UPK DAPM TANETE RIATTANG BARAT</h3>
-                        <p class="text-muted mb-3">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan. Berkomitmen dalam pengelolaan dana bergulir secara akuntabel, transparan, dan profesional guna mendukung kesejahteraan masyarakat.</p>
-                        <div class="d-flex gap-3 text-secondary small">
+                        <h3 class="fw-bold mb-2" style="color: var(--text-main);">UPK DAPM TANETE RIATTANG BARAT</h3>
+                        <p class="small mb-3" style="color: var(--text-muted);">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
+                        <div class="d-flex gap-3 small" style="color: var(--text-muted);">
                             <div><i class="bi bi-geo-alt-fill text-danger me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone</div>
                             <div><i class="bi bi-shield-lock-fill text-success me-1"></i> Sistem Keuangan Terintegrasi LPP</div>
                         </div>
                     </div>
                     <div class="col-md-4 text-center mt-4 mt-md-0">
-                        <div class="p-4 bg-light rounded-4 border">
+                        <div class="p-4 card-light-custom rounded-4">
                             <div class="logo-container mb-2">
+                                <img src="LOGO UPK BARU.GIF" alt="Logo UPK" class="logo-glow" style="width: 50px; height: 50px;">
                                 <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" style="width: 50px; height: 50px;">
-                                <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" style="width: 50px; height: 50px;">
                             </div>
-                            <h6 class="fw-bold mb-1">SISKEU UPK</h6>
-                            <p class="text-muted small mb-0">Laporan Perkembangan Pinjaman & Kas</p>
+                            <h6 class="fw-bold mb-1" style="color: var(--text-main);">SISKEU UPK</h6>
+                            <p class="small mb-0" style="color: var(--text-muted);">Laporan Perkembangan Pinjaman & Kas</p>
                         </div>
                     </div>
                 </div>
@@ -185,14 +257,14 @@
             <div class="row g-3">
                 <div class="col-md-4">
                     <div class="card-custom p-3 h-100">
-                        <h6 class="fw-bold text-primary mb-2"><i class="bi bi-bullseye me-1"></i> Visi & Misi</h6>
-                        <p class="text-muted small mb-0">Menjadi lembaga keuangan mikro yang mandiri dan terpercaya dalam mengelola dana bergulir untuk mengentaskan kemiskinan serta memberdayakan ekonomi kerakyatan di wilayah Tanete Riattang Barat.</p>
+                        <h6 class="fw-bold text-info mb-2"><i class="bi bi-bullseye me-1"></i> Visi & Misi</h6>
+                        <p class="small mb-0" style="color: var(--text-muted);">Menjadi lembaga keuangan mikro yang mandiri dan terpercaya dalam mengelola dana bergulir untuk memberdayakan ekonomi kerakyatan di wilayah Tanete Riattang Barat.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card-custom p-3 h-100">
                         <h6 class="fw-bold text-success mb-2"><i class="bi bi-check2-all me-1"></i> Layanan Utama</h6>
-                        <ul class="text-muted small ps-3 mb-0">
+                        <ul class="small ps-3 mb-0" style="color: var(--text-muted);">
                             <li>Pengelolaan Dana Bergulir Perorangan/Kelompok</li>
                             <li>Pencatatan Laporan Perkembangan Pinjaman (LPP)</li>
                             <li>Kasir Setoran Angsuran & Cetak Kwitansi Resmi</li>
@@ -203,42 +275,41 @@
                 <div class="col-md-4">
                     <div class="card-custom p-3 h-100">
                         <h6 class="fw-bold text-warning mb-2"><i class="bi bi-headset me-1"></i> Bantuan & Dukungan</h6>
-                        <p class="text-muted small mb-2">Hubungi administrator atau pengurus UPK DAPM Tanete Riattang Barat untuk informasi pinjaman dan verifikasi setoran.</p>
-                        <button class="btn btn-outline-primary btn-compact w-100" onclick="bukaView('panelDasborKeuangan')"><i class="bi bi-speedometer2 me-1"></i> Masuk Dasbor Keuangan</button>
+                        <p class="small mb-2" style="color: var(--text-muted);">Hubungi administrator atau pengurus UPK DAPM Tanete Riattang Barat untuk informasi pinjaman dan verifikasi setoran.</p>
+                        <button class="btn btn-outline-secondary btn-compact w-100" onclick="bukaView('panelDasborKeuangan')"><i class="bi bi-speedometer2 me-1"></i> Masuk Dasbor Keuangan</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= 1. VIEW DASBOR KEUANGAN UPK ================= -->
         <div id="viewPanelDasborKeuangan">
             <div class="row g-3 mb-3">
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3">
-                        <span class="text-muted small d-block">Total Plafon Tersalurkan</span>
-                        <h5 class="fw-bold text-primary mb-0" id="dashFinPlafon">Rp 0</h5>
-                        <small class="text-muted" style="font-size: 0.7rem;"><span id="dashFinTotalNasabah">0</span> Peminjam Aktif</small>
+                        <span class="small d-block" style="color: var(--text-muted);">Total Plafon Tersalurkan</span>
+                        <h5 class="fw-bold text-info mb-0" id="dashFinPlafon">Rp 0</h5>
+                        <small class="small" style="color: var(--text-muted); font-size: 0.7rem;"><span id="dashFinTotalNasabah">0</span> Peminjam Aktif</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3">
-                        <span class="text-muted small d-block">Total Realisasi Pokok Masuk</span>
+                        <span class="small d-block" style="color: var(--text-muted);">Total Realisasi Pokok Masuk</span>
                         <h5 class="fw-bold text-success mb-0" id="dashFinRealPokok">Rp 0</h5>
-                        <small class="text-muted" style="font-size: 0.7rem;">Jasa: <span id="dashFinRealBunga">Rp 0</span></small>
+                        <small class="small" style="color: var(--text-muted); font-size: 0.7rem;">Jasa: <span id="dashFinRealBunga">Rp 0</span></small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3">
-                        <span class="text-muted small d-block">Sisa Saldo Piutang (Outs.)</span>
+                        <span class="small d-block" style="color: var(--text-muted);">Sisa Saldo Piutang (Outs.)</span>
                         <h5 class="fw-bold text-danger mb-0" id="dashFinSaldoOuts">Rp 0</h5>
-                        <small class="text-muted" style="font-size: 0.7rem;">Dana masih bergulir</small>
+                        <small class="small" style="color: var(--text-muted); font-size: 0.7rem;">Dana masih bergulir</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3">
-                        <span class="text-muted small d-block">Saldo Kas Operasional</span>
-                        <h5 class="fw-bold text-dark mb-0" id="dashFinSaldoKas">Rp 0</h5>
-                        <small class="text-muted" style="font-size: 0.7rem;">Kas Masuk - Keluar</small>
+                        <span class="small d-block" style="color: var(--text-muted);">Saldo Kas Operasional</span>
+                        <h5 class="fw-bold mb-0" style="color: var(--text-main);" id="dashFinSaldoKas">Rp 0</h5>
+                        <small class="small" style="color: var(--text-muted); font-size: 0.7rem;">Kas Masuk - Keluar</small>
                     </div>
                 </div>
             </div>
@@ -247,23 +318,23 @@
                 <div class="col-lg-8">
                     <div class="card-custom p-3 p-md-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="fw-bold text-secondary mb-0"><i class="bi bi-graph-up-arrow me-1"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
+                            <h6 class="fw-bold mb-0" style="color: var(--text-main);"><i class="bi bi-graph-up-arrow me-1"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
                             <span class="badge bg-success" id="dashFinTingkatPengembalian">0%</span>
                         </div>
-                        <div class="progress mb-3" style="height: 10px;">
+                        <div class="progress mb-3 bg-secondary" style="height: 10px;">
                             <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" id="dashFinProgressBar" role="progressbar" style="width: 0%;"></div>
                         </div>
                         <div class="row g-2 text-center small">
-                            <div class="col-4 border-end">
-                                <span class="text-muted d-block">Target Pokok s/d Bln Ini:</span>
-                                <strong id="dashFinTargetPokok">Rp 0</strong>
+                            <div class="col-4 border-end" style="border-color: var(--border-color) !important;">
+                                <span class="d-block" style="color: var(--text-muted);">Target Pokok s/d Bln Ini:</span>
+                                <strong style="color: var(--text-main);" id="dashFinTargetPokok">Rp 0</strong>
                             </div>
-                            <div class="col-4 border-end">
-                                <span class="text-muted d-block">Realisasi Pokok:</span>
+                            <div class="col-4 border-end" style="border-color: var(--border-color) !important;">
+                                <span class="d-block" style="color: var(--text-muted);">Realisasi Pokok:</span>
                                 <strong class="text-success" id="dashFinRealPokok2">Rp 0</strong>
                             </div>
                             <div class="col-4">
-                                <span class="text-muted d-block">Total Tunggakan Pokok:</span>
+                                <span class="d-block" style="color: var(--text-muted);">Total Tunggakan Pokok:</span>
                                 <strong class="text-danger" id="dashFinTunggakan">Rp 0</strong>
                             </div>
                         </div>
@@ -273,14 +344,14 @@
                 <div class="col-lg-4">
                     <div class="card-custom p-3 p-md-4 h-100 d-flex flex-column justify-content-between">
                         <div>
-                            <h6 class="fw-bold text-secondary mb-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Aksi Cepat UPK</h6>
-                            <p class="text-muted small mb-3">Pilih modul operasional untuk mempercepat pelayanan nasabah:</p>
+                            <h6 class="fw-bold mb-2" style="color: var(--text-main);"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Aksi Cepat UPK</h6>
+                            <p class="small mb-3" style="color: var(--text-muted);">Pilih modul operasional untuk mempercepat pelayanan nasabah:</p>
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-outline-success btn-compact text-start fw-semibold" onclick="bukaView('panelBayarAngsuran')">
                                 <i class="bi bi-receipt-cutoff me-2"></i> Kasir Pembayaran Angsuran
                             </button>
-                            <button class="btn btn-outline-primary btn-compact text-start fw-semibold" onclick="bukaView('panelDataPeminjam')">
+                            <button class="btn btn-outline-info btn-compact text-start fw-semibold" onclick="bukaView('panelDataPeminjam')">
                                 <i class="bi bi-people me-2"></i> Kelola Data Peminjam
                             </button>
                             <button class="btn btn-outline-secondary btn-compact text-start fw-semibold" onclick="bukaView('panelLPP')">
@@ -292,7 +363,6 @@
             </div>
         </div>
 
-        <!-- ================= 2. VIEW DATA PEMINJAM ================= -->
         <div id="viewPanelDataPeminjam" class="d-none">
             <div class="card-custom p-3">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
@@ -326,62 +396,55 @@
                                 <th class="no-print">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="peminjamTableBody">
-                            <!-- Data Peminjam dirender via JS -->
-                        </tbody>
+                        <tbody id="peminjamTableBody"></tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- ================= 3. VIEW PANEL BAYAR & KWITANSI ================= -->
         <div id="viewPanelBayarAngsuran" class="d-none">
             <div class="row g-3">
-                <!-- SISI KIRI: CARI PEMINJAM -->
                 <div class="col-lg-4 col-xl-3">
                     <div class="card-custom p-3 h-100">
                         <div class="input-group input-group-sm mb-2">
-                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+                            <span class="input-group-text border-end-0" style="background: var(--card-light-bg); color: var(--text-main); border-color: var(--border-color);"><i class="bi bi-search"></i></span>
                             <input type="text" id="tellerSearchInput" class="form-control form-control-compact border-start-0" placeholder="Cari peminjam..." onkeyup="renderTellerCustomerList()">
                         </div>
-                        <div class="d-flex justify-content-between align-items-center small text-muted mb-2">
+                        <div class="d-flex justify-content-between align-items-center small mb-2" style="color: var(--text-muted);">
                             <span>Daftar Nasabah:</span>
-                            <span id="tellerCountBadge" class="fw-semibold">0</span>
+                            <span id="tellerCountBadge" class="fw-semibold" style="color: var(--text-main);">0</span>
                         </div>
-                        <div class="list-group rounded-2 overflow-auto" id="tellerCustomerList" style="max-height: 480px;">
-                            <!-- List Nasabah -->
-                        </div>
+                        <div class="list-group rounded-2 overflow-auto" id="tellerCustomerList" style="max-height: 480px;"></div>
                     </div>
                 </div>
 
-                <!-- SISI KANAN: FORM ANGSURAN & INTEGRASI LPP -->
                 <div class="col-lg-8 col-xl-9">
                     <div id="tellerEmptyState" class="card-custom p-5 text-center h-100 d-flex justify-content-center align-items-center">
-                        <i class="bi bi-person-lines-fill text-muted fs-1 mb-2"></i>
-                        <h6 class="fw-semibold text-secondary">Pilih Nasabah di Sebelah Kiri</h6>
-                        <p class="text-muted small mb-0">Klik nama nasabah untuk memproses pembayaran angsuran, melanjutkan target LPP, dan melihat total sisa tagihan.</p>
+                        <div>
+                            <i class="bi bi-person-lines-fill fs-1 mb-2" style="color: var(--text-muted);"></i>
+                            <h6 class="fw-semibold" style="color: var(--text-main);">Pilih Nasabah di Sebelah Kiri</h6>
+                            <p class="small mb-0" style="color: var(--text-muted);">Klik nama nasabah untuk memproses pembayaran angsuran, melanjutkan target LPP, dan melihat total sisa tagihan.</p>
+                        </div>
                     </div>
 
                     <div id="tellerActiveForm" class="card-custom p-3 p-md-4 d-none">
-                        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3" style="border-color: var(--border-color) !important;">
                             <div>
-                                <h6 class="fw-bold text-primary mb-0" id="tellerNamaNasabah">-</h6>
-                                <small class="text-muted" id="tellerDesaNasabah">-</small>
+                                <h6 class="fw-bold text-info mb-0" id="tellerNamaNasabah">-</h6>
+                                <small style="color: var(--text-muted);" id="tellerDesaNasabah">-</small>
                             </div>
                             <div class="text-end">
-                                <span class="badge bg-light text-dark border" id="tellerPlafonTenor">-</span>
+                                <span class="badge border" style="background: var(--card-light-bg); color: var(--text-main); border-color: var(--border-color);" id="tellerPlafonTenor">-</span>
                             </div>
                         </div>
 
-                        <div class="row g-2 mb-3 bg-light p-2 rounded-2 border">
+                        <div class="row g-2 mb-3 card-light-custom p-2 rounded-2 border">
                             <div class="col-md-6">
-                                <label class="small fw-semibold text-secondary mb-1">Pembayaran Angsuran Ke-</label>
-                                <select id="selectAngsuranKe" class="form-select form-select-compact fw-semibold" onchange="onAngsuranKeChanged()">
-                                    <!-- Opsi Angsuran -->
-                                </select>
+                                <label class="small fw-semibold mb-1" style="color: var(--text-main);">Pembayaran Angsuran Ke-</label>
+                                <select id="selectAngsuranKe" class="form-select form-select-compact fw-semibold" onchange="onAngsuranKeChanged()"></select>
                             </div>
                             <div class="col-md-6">
-                                <label class="small fw-semibold text-secondary mb-1">Tanggal Transaksi</label>
+                                <label class="small fw-semibold mb-1" style="color: var(--text-main);">Tanggal Transaksi</label>
                                 <input type="date" id="tellerInputTgl" class="form-control form-control-compact" onchange="onTanggalBayarChanged()">
                             </div>
                         </div>
@@ -393,23 +456,23 @@
                                         <th class="text-start">Parameter LPP & Sisa Tagihan</th>
                                         <th>Pokok (Rp)</th>
                                         <th>Bunga / Jasa (Rp)</th>
-                                        <th class="table-danger">Total Sisa Tagihan</th>
+                                        <th class="table-danger text-dark">Total Sisa Tagihan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-start text-muted">Target Akumulatif (s/d Bln Ini)</td>
-                                        <td class="text-end fw-bold" id="posTargetPokok">0</td>
-                                        <td class="text-end fw-bold" id="posTargetBunga">0</td>
+                                        <td class="text-start" style="color: var(--text-muted);">Target Akumulatif (s/d Bln Ini)</td>
+                                        <td class="text-end fw-bold" style="color: var(--text-main);" id="posTargetPokok">0</td>
+                                        <td class="text-end fw-bold" style="color: var(--text-main);" id="posTargetBunga">0</td>
                                         <td class="text-end fw-bold text-danger table-danger align-middle" rowspan="2">
                                             <span id="tellerTotalSisaGabungan" class="fs-6">Rp 0</span><br>
                                             <small class="fw-normal text-muted" style="font-size: 0.68rem;">(Pokok: <span id="tellerSisaPokok">0</span> + Jasa: <span id="tellerSisaJasa">0</span>)</small>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-start text-muted">Realisasi s/d Bulan Lalu (Dari LPP)</td>
-                                        <td class="text-end text-secondary fw-semibold" id="posRealLaluPokok">0</td>
-                                        <td class="text-end text-secondary fw-semibold" id="posRealLaluBunga">0</td>
+                                        <td class="text-start" style="color: var(--text-muted);">Realisasi s/d Bulan Lalu (Dari LPP)</td>
+                                        <td class="text-end fw-semibold" style="color: var(--text-muted);" id="posRealLaluPokok">0</td>
+                                        <td class="text-end fw-semibold" style="color: var(--text-muted);" id="posRealLaluBunga">0</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -417,10 +480,10 @@
 
                         <form id="tellerPaymentForm">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <label class="small fw-bold text-dark mb-0">Input Setoran Bulan Ini:</label>
+                                <label class="small fw-bold mb-0" style="color: var(--text-main);">Input Setoran Bulan Ini:</label>
                                 <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-outline-secondary py-0" onclick="quickFillAngsuran('target')">Sesuai Target</button>
-                                    <button type="button" class="btn btn-outline-secondary py-0" onclick="quickFillAngsuran('normal')">1x Angsuran</button>
+                                    <button type="button" class="btn btn-outline-secondary py-0" style="color: var(--text-main);" onclick="quickFillAngsuran('target')">Sesuai Target</button>
+                                    <button type="button" class="btn btn-outline-secondary py-0" style="color: var(--text-main);" onclick="quickFillAngsuran('normal')">1x Angsuran</button>
                                     <button type="button" class="btn btn-outline-danger py-0" onclick="quickFillAngsuran('lunas')">Pelunasan</button>
                                 </div>
                             </div>
@@ -428,13 +491,13 @@
                             <div class="row g-2 mb-3">
                                 <div class="col-md-6">
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-text bg-light">Pokok</span>
+                                        <span class="input-group-text text-success" style="background: var(--card-light-bg); border-color: var(--border-color);">Pokok</span>
                                         <input type="text" id="tellerInputPokok" class="form-control form-control-compact text-end fw-bold text-success" placeholder="0" required oninput="hitungTellerSisaRealtime()">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-text bg-light">Bunga</span>
+                                        <span class="input-group-text text-info" style="background: var(--card-light-bg); border-color: var(--border-color);">Bunga</span>
                                         <input type="text" id="tellerInputJasa" class="form-control form-control-compact text-end fw-bold text-info" placeholder="0" required oninput="hitungTellerSisaRealtime()">
                                     </div>
                                 </div>
@@ -445,25 +508,24 @@
                                     <input type="text" id="tellerInputWA" class="form-control form-control-compact" placeholder="WhatsApp Nasabah (0812...)">
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <span class="small text-muted me-2">Estimasi Sisa Pokok:</span>
+                                    <span class="small me-2" style="color: var(--text-muted);">Estimasi Sisa Pokok:</span>
                                     <strong class="text-danger small" id="tellerEstimasiSisa">Rp 0</strong>
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-end gap-2 border-top pt-3">
-                                <button type="button" class="btn btn-light btn-compact" onclick="resetTellerForm()">Batal</button>
+                            <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
+                                <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="resetTellerForm()">Batal</button>
                                 <button type="submit" class="btn btn-success btn-compact fw-semibold">
                                     <i class="bi bi-check2-circle me-1"></i> Simpan Pembayaran & Buat Bukti WA
                                 </button>
                             </div>
                         </form>
 
-                        <!-- RIWAYAT PEMBAYARAN NASABAH -->
-                        <div class="mt-4 pt-3 border-top">
-                            <h6 class="fw-bold text-secondary mb-2" style="font-size: 0.8rem;"><i class="bi bi-clock-history me-1"></i> Riwayat Pembayaran Angsuran</h6>
+                        <div class="mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
+                            <h6 class="fw-bold mb-2" style="font-size: 0.8rem; color: var(--text-main);"><i class="bi bi-clock-history me-1"></i> Riwayat Pembayaran Angsuran</h6>
                             <div class="table-responsive" style="max-height: 180px;">
                                 <table class="table table-sm table-bordered table-compact mb-0 text-center">
-                                    <thead class="table-light">
+                                    <thead>
                                         <tr>
                                             <th>Bln/Ke</th>
                                             <th>Tanggal</th>
@@ -471,52 +533,51 @@
                                             <th>Jasa (Rp)</th>
                                             <th>Total (Rp)</th>
                                             <th>Sisa Pokok (Rp)</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tellerHistoryTableBody">
-                                        <tr><td colspan="6" class="text-muted">Belum ada riwayat tercatat.</td></tr>
+                                        <tr><td colspan="7" style="color: var(--text-muted);">Belum ada riwayat tercatat.</td></tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <!-- BUKTI SETORAN / KWITANSI PROFESIONAL -->
-                        <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none">
+                        <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none" style="border-color: var(--border-color) !important;">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="badge bg-success p-2"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di LPP</span>
                                 <div class="d-flex gap-2 no-print">
-                                    <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Kwitansi</button>
+                                    <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Kwitansi</button>
                                     <button class="btn btn-success btn-compact fw-semibold" onclick="kirimBuktiWA()"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti ke WhatsApp</button>
                                 </div>
                             </div>
 
-                            <!-- Area Cetak Kwitansi Profesional -->
                             <div id="areaCetakKwitansi" class="kwitansi-profesional">
-                                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3" style="border-color: var(--border-color) !important;">
                                     <div>
-                                        <h6 class="fw-bold text-primary mb-0"><i class="bi bi-patch-check-fill text-success me-1"></i> BUKTI SETORAN RESMI UPK</h6>
-                                        <small class="text-muted">DAPM Tanete Riattang Barat - Kab. Bone</small>
+                                        <h6 class="fw-bold text-info mb-0"><i class="bi bi-patch-check-fill text-success me-1"></i> BUKTI SETORAN RESMI UPK</h6>
+                                        <small style="color: var(--text-muted);">DAPM Tanete Riattang Barat - Kab. Bone</small>
                                     </div>
                                     <div class="text-end">
-                                        <span class="badge bg-dark" id="kwtNoTransaksi">No: -</span><br>
-                                        <small class="text-muted" id="kwtTglTransaksi">-</small>
+                                        <span class="badge border" style="background: var(--card-light-bg); color: var(--text-main); border-color: var(--border-color);" id="kwtNoTransaksi">No: -</span><br>
+                                        <small style="color: var(--text-muted);" id="kwtTglTransaksi">-</small>
                                     </div>
                                 </div>
 
-                                <div class="row g-2 mb-3 small bg-white p-2 rounded border">
+                                <div class="row g-2 mb-3 small card-light-custom p-2 rounded border">
                                     <div class="col-6">
-                                        <span class="text-muted d-block">Nama Peminjam:</span>
-                                        <strong class="text-dark fs-6" id="kwtNamaNasabah">-</strong>
+                                        <span class="d-block" style="color: var(--text-muted);">Nama Peminjam:</span>
+                                        <strong class="fs-6" style="color: var(--text-main);" id="kwtNamaNasabah">-</strong>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <span class="text-muted d-block">Desa / Kelurahan:</span>
-                                        <strong class="text-dark" id="kwtDesa">-</strong>
+                                        <span class="d-block" style="color: var(--text-muted);">Desa / Kelurahan:</span>
+                                        <strong style="color: var(--text-main);" id="kwtDesa">-</strong>
                                     </div>
                                 </div>
 
                                 <div class="table-responsive mb-3">
                                     <table class="table table-sm table-bordered mb-0 text-center small">
-                                        <thead class="table-light">
+                                        <thead>
                                             <tr>
                                                 <th>Keterangan Pembayaran</th>
                                                 <th>Nominal (Rp)</th>
@@ -539,18 +600,18 @@
                                     </table>
                                 </div>
 
-                                <div class="row g-2 bg-light p-2 rounded border small text-center">
-                                    <div class="col-6 border-end">
-                                        <span class="text-muted d-block">Sisa Saldo Pokok</span>
+                                <div class="row g-2 card-light-custom p-2 rounded border small text-center">
+                                    <div class="col-6 border-end" style="border-color: var(--border-color) !important;">
+                                        <span class="d-block" style="color: var(--text-muted);">Sisa Saldo Pokok</span>
                                         <strong class="text-danger fs-6" id="kwtSisaSaldo">Rp 0</strong>
                                     </div>
                                     <div class="col-6">
-                                        <span class="text-muted d-block">Sisa Saldo Jasa</span>
+                                        <span class="d-block" style="color: var(--text-muted);">Sisa Saldo Jasa</span>
                                         <strong class="text-info fs-6" id="kwtSisaJasaKwt">Rp 0</strong>
                                     </div>
                                 </div>
 
-                                <div class="text-center mt-3 pt-2 border-top text-muted" style="font-size: 0.72rem;">
+                                <div class="text-center mt-3 pt-2 border-top" style="border-color: var(--border-color) !important; font-size: 0.72rem; color: var(--text-muted);">
                                     <span>Terima kasih atas kedisiplinan Anda membayar angsuran tepat waktu. Berkelanjutan untuk kesejahteraan bersama.</span>
                                 </div>
                             </div>
@@ -561,12 +622,11 @@
             </div>
         </div>
 
-        <!-- ================= 4. VIEW TABEL MASTER LPP ================= -->
         <div id="viewPanelLPP" class="d-none">
             <div class="card-custom p-3">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2 no-print">
                     <div class="d-flex gap-2 align-items-center">
-                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-primary btn-compact fw-semibold">
+                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-info btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
                         <input type="text" id="searchInput" class="form-control form-control-compact" style="width: 200px;" placeholder="Cari peminjam..." onkeyup="filterLPPTable()">
@@ -576,9 +636,9 @@
                     </div>
                     <div class="d-flex gap-2">
                         <input type="file" id="csvFileInput" accept=".csv, .xlsx, .xls" class="d-none" onchange="handleLPPFileUpload(event)">
-                        <button class="btn btn-outline-primary btn-compact" onclick="document.getElementById('csvFileInput').click()"><i class="bi bi-upload me-1"></i> Import CSV</button>
-                        <button class="btn btn-outline-secondary btn-compact" onclick="downloadCurrentDataCSV()"><i class="bi bi-download me-1"></i> Export</button>
-                        <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
+                        <button class="btn btn-outline-info btn-compact" onclick="document.getElementById('csvFileInput').click()"><i class="bi bi-upload me-1"></i> Import CSV</button>
+                        <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="downloadCurrentDataCSV()"><i class="bi bi-download me-1"></i> Export</button>
+                        <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
                         <button class="btn btn-outline-danger btn-compact" onclick="resetToSample()"><i class="bi bi-arrow-counterclockwise"></i></button>
                     </div>
                 </div>
@@ -593,47 +653,42 @@
                                 <th rowspan="2">Plafon</th>
                                 <th rowspan="2">Tenor</th>
                                 <th rowspan="2">Cair</th>
-                                <th colspan="2" class="bg-warning bg-opacity-25">Target s/d Bln Ini</th>
+                                <th colspan="2" style="background-color: #334155; color: #fde047;">Target s/d Bln Ini</th>
                                 <th colspan="2">Realisasi s/d Bln Lalu</th>
                                 <th colspan="2">Realisasi Bln Ini</th>
-                                <th colspan="2" class="bg-success bg-opacity-25">Realisasi Total</th>
+                                <th colspan="2" style="background-color: #065f46; color: #a7f3d0;">Realisasi Total</th>
                                 <th rowspan="2">Saldo</th>
                                 <th rowspan="2">%</th>
-                                <th colspan="2" class="bg-danger bg-opacity-25">Tunggakan</th>
+                                <th colspan="2" style="background-color: #991b1b; color: #fecaca;">Tunggakan</th>
                             </tr>
                             <tr>
+                                <th style="background-color: #334155; color: #fde047;">Pokok</th>
+                                <th style="background-color: #334155; color: #fde047;">Bunga</th>
                                 <th>Pokok</th>
                                 <th>Bunga</th>
-                                <th>Pokok</th>
-                                <th>Bunga</th>
-                                <th>Pokok</th>
-                                <th>Bunga</th>
-                                <th>Pokok</th>
-                                <th>Bunga</th>
-                                <th>Pokok</th>
-                                <th>Bunga</th>
+                                <th style="color: #6fffe9;">Pokok</th>
+                                <th style="color: #6fffe9;">Bunga</th>
+                                <th style="background-color: #065f46; color: #a7f3d0;">Pokok</th>
+                                <th style="background-color: #065f46; color: #a7f3d0;">Bunga</th>
+                                <th style="background-color: #991b1b; color: #fecaca;">Pokok</th>
+                                <th style="background-color: #991b1b; color: #fecaca;">Bunga</th>
                             </tr>
                         </thead>
-                        <tbody id="lppTableBody">
-                            <!-- Data LPP -->
-                        </tbody>
-                        <tfoot class="fw-bold" id="lppTableFoot">
-                            <!-- Total LPP -->
-                        </tfoot>
+                        <tbody id="lppTableBody"></tbody>
+                        <tfoot class="fw-bold" id="lppTableFoot"></tfoot>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- ================= 5. VIEW PANEL MUTASI KAS ================= -->
         <div id="viewPanelKas" class="d-none">
             <div class="card-custom p-3">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex align-items-center gap-2">
-                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-primary btn-compact fw-semibold">
+                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-info btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
-                        <h6 class="fw-bold mb-0">Buku Kas Masuk & Keluar</h6>
+                        <h6 class="fw-bold mb-0" style="color: var(--text-main);">Buku Kas Masuk & Keluar</h6>
                     </div>
                     <button class="btn btn-success btn-compact" data-bs-toggle="modal" data-bs-target="#transaksiModal">
                         <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
@@ -641,7 +696,7 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover table-compact align-middle mb-0">
-                        <thead class="table-light">
+                        <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Keterangan</th>
@@ -651,9 +706,7 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="transaksiTableBody">
-                            <!-- Data Kas -->
-                        </tbody>
+                        <tbody id="transaksiTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -661,31 +714,31 @@
 
     </div>
 
-    <!-- ================= MODAL TAMBAH / EDIT PEMINJAM ================= -->
+    <!-- MODAL TAMBAH / EDIT PEMINJAM -->
     <div class="modal fade" id="tambahPeminjamModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content card-custom p-4 shadow">
-                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                    <h6 class="fw-bold text-primary mb-0" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru</h6>
+            <div class="modal-content card-custom p-4 shadow-lg border">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3" style="border-color: var(--border-color) !important;">
+                    <h6 class="fw-bold text-info mb-0" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru</h6>
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formTambahPeminjam">
                     <input type="hidden" id="editIndex" value="">
                     <div class="mb-2">
-                        <label class="small fw-semibold text-secondary mb-1">Nama Lengkap Peminjam</label>
+                        <label class="small fw-semibold mb-1" style="color: var(--text-muted);">Nama Lengkap Peminjam</label>
                         <input type="text" id="newNama" class="form-control form-control-compact" placeholder="Contoh: SURIANI, S.Pd" required>
                     </div>
                     <div class="mb-2">
-                        <label class="small fw-semibold text-secondary mb-1">Desa / Kelurahan</label>
+                        <label class="small fw-semibold mb-1" style="color: var(--text-muted);">Desa / Kelurahan</label>
                         <input type="text" id="newDesa" class="form-control form-control-compact" placeholder="Contoh: WATANG PALAKKA" required>
                     </div>
                     <div class="row g-2 mb-2">
                         <div class="col-md-6">
-                            <label class="small fw-semibold text-secondary mb-1">Plafon Pinjaman (Rp)</label>
+                            <label class="small fw-semibold mb-1" style="color: var(--text-muted);">Plafon Pinjaman (Rp)</label>
                             <input type="number" id="newPlafon" class="form-control form-control-compact" placeholder="Contoh: 10000000" required oninput="hitungSimulasiPeminjamBaru()">
                         </div>
                         <div class="col-md-6">
-                            <label class="small fw-semibold text-secondary mb-1">Tenor (Bulan)</label>
+                            <label class="small fw-semibold mb-1" style="color: var(--text-muted);">Tenor (Bulan)</label>
                             <select id="newTenor" class="form-select form-select-compact" onchange="hitungSimulasiPeminjamBaru()">
                                 <option value="12">12 Bulan</option>
                                 <option value="18">18 Bulan</option>
@@ -697,40 +750,40 @@
 
                     <div class="row g-2 mb-2">
                         <div class="col-md-6">
-                            <label class="small fw-semibold text-secondary mb-1">Persen Jasa (% per Bulan)</label>
+                            <label class="small fw-semibold mb-1" style="color: var(--text-muted);">Persen Jasa (% per Bulan)</label>
                             <div class="input-group input-group-sm">
-                                <input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact fw-bold text-primary" value="1.5" placeholder="1.5" required oninput="hitungSimulasiPeminjamBaru()">
-                                <span class="input-group-text bg-light">% / Bln</span>
+                                <input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact fw-bold text-info" value="1.5" placeholder="1.5" required oninput="hitungSimulasiPeminjamBaru()">
+                                <span class="input-group-text" style="background: var(--card-light-bg); color: var(--text-muted); border-color: var(--border-color);">% / Bln</span>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small fw-semibold text-secondary mb-1">Tanggal Pencairan</label>
+                            <label class="small fw-semibold mb-1" style="color: var(--text-muted);">Tanggal Pencairan</label>
                             <input type="date" id="newTglCair" class="form-control form-control-compact" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="small fw-semibold text-secondary mb-1">No. WhatsApp Nasabah (opsional)</label>
+                        <label class="small fw-semibold mb-1" style="color: var(--text-muted);">No. WhatsApp Nasabah (opsional)</label>
                         <input type="text" id="newNoHp" class="form-control form-control-compact" placeholder="Contoh: 081234567890">
                     </div>
 
-                    <div class="alert alert-info py-2 px-3 small rounded-2 mb-3">
+                    <div class="card-light-custom py-2 px-3 small rounded-2 mb-3 border">
                         <div class="d-flex justify-content-between mb-1">
-                            <span>Angsuran Pokok / Bulan:</span>
-                            <strong id="simulasiPokokPerBulan">Rp 0</strong>
+                            <span style="color: var(--text-muted);">Angsuran Pokok / Bulan:</span>
+                            <strong style="color: var(--text-main);" id="simulasiPokokPerBulan">Rp 0</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-1">
-                            <span>Jasa / Bunga per Bulan:</span>
-                            <strong class="text-primary" id="simulasiJasaPerBulan">Rp 0</strong>
+                            <span style="color: var(--text-muted);">Jasa / Bunga per Bulan:</span>
+                            <strong class="text-info" id="simulasiJasaPerBulan">Rp 0</strong>
                         </div>
-                        <div class="d-flex justify-content-between border-top pt-1 fw-bold">
-                            <span>Total Setoran / Bulan:</span>
+                        <div class="d-flex justify-content-between border-top pt-1 fw-bold" style="border-color: var(--border-color) !important;">
+                            <span style="color: var(--text-muted);">Total Setoran / Bulan:</span>
                             <strong class="text-success" id="simulasiTotalPerBulan">Rp 0</strong>
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-end gap-2 border-top pt-3">
-                        <button type="button" class="btn btn-light btn-compact" data-bs-dismiss="modal">Batal</button>
+                    <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
+                        <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary btn-compact fw-semibold" id="btnSimpanPeminjamText">
                             <i class="bi bi-save me-1"></i> Simpan Peminjam
                         </button>
@@ -740,13 +793,13 @@
         </div>
     </div>
 
-    <!-- ================= MODAL LOGIN ================= -->
+    <!-- MODAL LOGIN -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 360px;">
-            <div class="modal-content card-custom p-3 shadow">
+            <div class="modal-content card-custom p-3 shadow-lg border">
                 <div class="text-center mb-3">
-                    <h6 class="fw-bold text-dark mb-0">Login SISKEU UPK</h6>
-                    <small class="text-muted">Tanete Riattang Barat - Bone</small>
+                    <h6 class="fw-bold mb-0" style="color: var(--text-main);">Login SISKEU UPK</h6>
+                    <small style="color: var(--text-muted);">Tanete Riattang Barat - Bone</small>
                 </div>
                 <div id="loginError" class="alert alert-danger py-1 small text-center d-none">
                     Username / password salah!
@@ -766,11 +819,11 @@
         </div>
     </div>
 
-    <!-- ================= MODAL TAMBAH KAS ================= -->
+    <!-- MODAL TAMBAH KAS -->
     <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
-            <div class="modal-content card-custom p-3 shadow">
-                <h6 class="fw-bold mb-3">Tambah Mutasi Kas</h6>
+            <div class="modal-content card-custom p-3 shadow-lg border">
+                <h6 class="fw-bold mb-3" style="color: var(--text-main);">Tambah Mutasi Kas</h6>
                 <form id="transaksiForm">
                     <div class="mb-2">
                         <input type="text" id="tNama" class="form-control form-control-compact" placeholder="Keterangan / Transaksi" required>
@@ -788,7 +841,7 @@
                         <input type="number" id="tNominal" class="form-control form-control-compact" placeholder="Nominal (Rp)" required>
                     </div>
                     <div class="d-flex justify-content-end gap-2">
-                        <button type="button" class="btn btn-light btn-compact" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary btn-compact">Simpan</button>
                     </div>
                 </form>
@@ -799,9 +852,52 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- ================= LOGIKA JAVASCRIPT ================= -->
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfWRbo6751T2bvAIp-CVHEoXQ4wabnzGieMAjF0cT_0J4o6waldAgfeuW_NOxlP-5b8Q/exec";
+
+        // === FITUR AUTO-LOGOUT 5 MENIT TIDAK TERSENTUH ===
+        let idleTimer = null;
+        const IDLE_TIMEOUT_MS = 5 * 60 * 1000; 
+
+        function resetIdleTimer() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                if (idleTimer) clearTimeout(idleTimer);
+                idleTimer = setTimeout(() => {
+                    alert("⚠️ Sesi Anda telah berakhir karena tidak ada aktivitas selama 5 menit. Anda akan dikeluarkan secara otomatis.");
+                    logout();
+                }, IDLE_TIMEOUT_MS);
+            }
+        }
+
+        ['mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart', 'click'].forEach(event => {
+            window.addEventListener(event, resetIdleTimer, true);
+        });
+
+        // === TOGGLE TEMA (MODE MALAM / SIANG) ===
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.className = 'bi bi-sun-fill text-warning';
+                localStorage.setItem('upk_theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'bi bi-moon-stars-fill';
+                localStorage.setItem('upk_theme', 'dark');
+            }
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('upk_theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            const themeIcon = document.getElementById('themeIcon');
+            if (themeIcon) {
+                themeIcon.className = savedTheme === 'light' ? 'bi bi-sun-fill text-warning' : 'bi bi-moon-stars-fill';
+            }
+        }
 
         const sampleLPPData = [
             { no: 1, nama: "RISMAWATI,S.Pd", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", targetPokok: 4250000, targetBunga: 750000, realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [] },
@@ -847,6 +943,9 @@
 
         function convertToInputDate(strDate) {
             if (!strDate) return new Date().toISOString().split('T')[0];
+            if (strDate.includes('T')) {
+                return strDate.split('T')[0];
+            }
             if (strDate.includes('/')) {
                 const parts = strDate.split('/');
                 if (parts.length === 3) {
@@ -856,7 +955,18 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH (LOAD & SAVE) =================
+        function formatTanggalTampil(strDate) {
+            if (!strDate) return '-';
+            if (strDate.includes('T')) {
+                const datePart = strDate.split('T')[0];
+                const parts = datePart.split('-');
+                if (parts.length === 3) {
+                    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+                }
+            }
+            return strDate;
+        }
+
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -928,13 +1038,15 @@
             }
         }
 
-        // ================= NAVIGASI VIEW =================
         function bukaView(viewName) {
             const allViews = ['viewPanelProfil', 'viewPanelDasborKeuangan', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKas'];
             allViews.forEach(v => document.getElementById(v).classList.add('d-none'));
 
             const allBtns = ['tabBtnProfil', 'tabBtnDasborKeuangan', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKas'];
-            allBtns.forEach(b => document.getElementById(b).className = 'btn btn-compact btn-outline-secondary');
+            allBtns.forEach(b => {
+                const el = document.getElementById(b);
+                if (el) el.className = 'btn btn-compact btn-outline-secondary';
+            });
 
             if (viewName === 'panelProfil') {
                 document.getElementById('viewPanelProfil').classList.remove('d-none');
@@ -970,7 +1082,6 @@
             }
         }
 
-        // ================= DASBOR KEUANGAN UPK =================
         function updateDasborKeuangan() {
             const data = getLPPData();
             let tPlafon = 0, tRealPokok = 0, tRealBunga = 0, tSaldo = 0, tTargetPokok = 0, tTunggakPokok = 0;
@@ -981,7 +1092,9 @@
                 tRealBunga += parseNum(r.realTotBunga);
                 tSaldo += parseNum(r.saldo);
                 tTargetPokok += parseNum(r.targetPokok);
-                tTunggakPokok += parseNum(r.tunggakPokok);
+                
+                let tungP = Math.max(0, parseNum(r.targetPokok) - parseNum(r.realTotPokok));
+                tTunggakPokok += tungP;
             });
 
             const kasData = getKasData();
@@ -1007,7 +1120,6 @@
             document.getElementById('dashFinProgressBar').style.width = `${persenKolektibilitas}%`;
         }
 
-        // ================= DATA PEMINJAM =================
         function renderDataPeminjamTable() {
             const query = (document.getElementById('peminjamSearchInput').value || '').toLowerCase();
             const desa = (document.getElementById('peminjamDesaFilter').value || '').toLowerCase();
@@ -1033,7 +1145,7 @@
             });
 
             if (filtered.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="11" class="text-center py-3 text-muted">Data peminjam tidak ditemukan.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="11" class="text-center py-3" style="color: var(--text-muted);">Data peminjam tidak ditemukan.</td></tr>';
                 return;
             }
 
@@ -1047,12 +1159,12 @@
                 tbody.innerHTML += `
                     <tr>
                         <td class="text-center">${item.no || (index + 1)}</td>
-                        <td class="fw-semibold text-dark">${item.nama}</td>
+                        <td class="fw-semibold" style="color: var(--text-main);">${item.nama}</td>
                         <td>${item.desa}</td>
-                        <td class="text-end fw-semibold text-primary">Rp ${formatRp(plafon)}</td>
+                        <td class="text-end fw-semibold text-info">Rp ${formatRp(plafon)}</td>
                         <td class="text-center">${item.tenor} Bln</td>
-                        <td class="text-center fw-bold text-info">${persenTampil}%</td>
-                        <td class="text-center">${item.tglCair || '-'}</td>
+                        <td class="text-center fw-bold text-warning">${persenTampil}%</td>
+                        <td class="text-center">${formatTanggalTampil(item.tglCair)}</td>
                         <td class="text-end fw-bold text-danger">Rp ${formatRp(saldo)}</td>
                         <td class="text-center">
                             <span class="badge ${isLunas ? 'bg-primary' : 'bg-success'} py-1">${isLunas ? 'Lunas' : 'Aktif'}</span>
@@ -1062,7 +1174,7 @@
                             <button class="btn btn-sm btn-success py-0 px-2 fw-semibold me-1" style="font-size:0.7rem;" onclick="langsungBayarDariLPP(${realIndex})">
                                 <i class="bi bi-cash me-1"></i> Bayar
                             </button>
-                            <button class="btn btn-sm btn-primary py-0 px-2 fw-semibold me-1" style="font-size:0.7rem;" onclick="bukaModalEditPeminjam(${realIndex})">
+                            <button class="btn btn-sm btn-info text-dark py-0 px-2 fw-semibold me-1" style="font-size:0.7rem;" onclick="bukaModalEditPeminjam(${realIndex})">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                             <button class="btn btn-sm btn-outline-danger py-0 px-2" style="font-size:0.7rem;" onclick="hapusPeminjam(${realIndex})">
@@ -1074,7 +1186,6 @@
             });
         }
 
-        // ================= TAMBAH & EDIT PEMINJAM =================
         function hitungSimulasiPeminjamBaru() {
             const plafon = parseFloat(document.getElementById('newPlafon').value) || 0;
             const tenor = parseInt(document.getElementById('newTenor').value) || 12;
@@ -1237,7 +1348,6 @@
             }
         }
 
-        // ================= TELLER / KASIR & SISA GABUNGAN =================
         let currentActiveNasabahIdx = null;
         let lastPaymentReceipt = null;
 
@@ -1251,7 +1361,7 @@
             document.getElementById('tellerCountBadge').textContent = filtered.length;
 
             if (filtered.length === 0) {
-                listContainer.innerHTML = '<div class="p-3 text-center text-muted small">Tidak ditemukan.</div>';
+                listContainer.innerHTML = '<div class="p-3 text-center small" style="color: var(--text-muted);">Tidak ditemukan.</div>';
                 return;
             }
 
@@ -1261,15 +1371,15 @@
                 const isLunas = saldo <= 0;
 
                 const itemBtn = document.createElement('div');
-                itemBtn.className = `list-group-item customer-item p-2 border-bottom ${currentActiveNasabahIdx === originalIdx ? 'active' : ''}`;
+                itemBtn.className = `list-group-item customer-item p-2 ${currentActiveNasabahIdx === originalIdx ? 'active' : ''}`;
                 itemBtn.onclick = () => pilihNasabahTeller(originalIdx);
 
                 itemBtn.innerHTML = `
                     <div class="d-flex justify-content-between align-items-center">
-                        <strong class="text-dark">${item.nama}</strong>
+                        <strong style="color: var(--text-main);">${item.nama}</strong>
                         <span class="badge ${isLunas ? 'bg-primary' : 'bg-success'} py-0" style="font-size: 0.65rem;">${isLunas ? 'Lunas' : 'Aktif'}</span>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center small text-muted" style="font-size: 0.72rem;">
+                    <div class="d-flex justify-content-between align-items-center small" style="font-size: 0.72rem; color: var(--text-muted);">
                         <span>${item.desa}</span>
                         <span class="text-danger">Rp ${formatRp(saldo)}</span>
                     </div>
@@ -1318,7 +1428,7 @@
 
             let persenNasabah = n.persenJasa !== undefined ? n.persenJasa : 1.5;
             document.getElementById('tellerNamaNasabah').textContent = n.nama;
-            document.getElementById('tellerDesaNasabah').textContent = `Kel/Desa: ${n.desa} | Jasa: ${persenNasabah}%/bln | Cair: ${n.tglCair || '-'}`;
+            document.getElementById('tellerDesaNasabah').textContent = `Kel/Desa: ${n.desa} | Jasa: ${persenNasabah}%/bln | Cair: ${formatTanggalTampil(n.tglCair)}`;
             document.getElementById('tellerPlafonTenor').textContent = `Plafon: Rp ${formatRp(plafon)} (${tenor} Bln)`;
             document.getElementById('tellerInputTgl').value = new Date().toISOString().split('T')[0];
             document.getElementById('tellerInputWA').value = n.noHp || '';
@@ -1435,22 +1545,48 @@
             tbody.innerHTML = '';
 
             if (!nasabah.history || nasabah.history.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="text-muted small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" style="color: var(--text-muted);" class="small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
                 return;
             }
 
-            nasabah.history.forEach((h) => {
+            nasabah.history.forEach((h, hIdx) => {
                 tbody.innerHTML += `
                     <tr>
                         <td>Ke-${h.angsuranKe}</td>
                         <td>${h.tanggal}</td>
                         <td class="text-end text-success">Rp ${formatRp(h.pokok)}</td>
                         <td class="text-end text-info">Rp ${formatRp(h.jasa)}</td>
-                        <td class="text-end fw-semibold">Rp ${formatRp(h.total)}</td>
+                        <td class="text-end fw-semibold" style="color: var(--text-main);">Rp ${formatRp(h.total)}</td>
                         <td class="text-end text-danger">Rp ${formatRp(h.sisaSaldo)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger py-0 px-2" style="font-size:0.7rem;" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${hIdx})">
+                                <i class="bi bi-trash"></i> Hapus
+                            </button>
+                        </td>
                     </tr>
                 `;
             });
+        }
+
+        function hapusRiwayatPembayaran(nasabahIdx, historyIdx) {
+            const allData = getLPPData();
+            const nasabah = allData[nasabahIdx];
+            if (!nasabah || !nasabah.history || !nasabah.history[historyIdx]) return;
+
+            if (confirm(`Hapus riwayat angsuran ke-${nasabah.history[historyIdx].angsuranKe}? Saldo dan realisasi akan disesuaikan kembali.`)) {
+                const deleted = nasabah.history.splice(historyIdx, 1)[0];
+                
+                nasabah.realTotPokok = Math.max(0, parseNum(nasabah.realTotPokok) - parseNum(deleted.pokok));
+                nasabah.realTotBunga = Math.max(0, parseNum(nasabah.realTotBunga) - parseNum(deleted.jasa));
+                
+                nasabah.saldo = parseNum(nasabah.plafon) - parseNum(nasabah.realTotPokok);
+                nasabah.angsuranKe = Math.max(1, parseNum(nasabah.angsuranKe) - 1);
+                
+                saveLPPData(allData);
+                pilihNasabahTeller(nasabahIdx);
+                updateDasborKeuangan();
+                backupKeGoogleSheet(true);
+            }
         }
 
         function resetTellerForm() {
@@ -1496,8 +1632,11 @@
             n.realTotBunga = parseNum(n.realLaluBunga) + parseNum(n.realIniBunga);
             n.saldo = Math.max(0, plafon - n.realTotPokok);
             n.persen = `${Math.min(100, Math.round((n.realTotPokok / (n.targetPokok || 1)) * 100))}%`;
-            n.tunggakPokok = Math.max(0, n.targetPokok - n.realTotPokok);
-            n.tunggakBunga = Math.max(0, n.targetBunga - n.realTotBunga);
+            
+            // Rumus total tunggakan pokok dan jasa = Target - Realisasi s/d bulan ini
+            n.tunggakPokok = Math.max(0, parseNum(n.targetPokok) - parseNum(n.realTotPokok));
+            n.tunggakBunga = Math.max(0, parseNum(n.targetBunga) - parseNum(n.realTotBunga));
+            
             n.noHp = noWA;
             n.angsuranKe = keX + 1;
 
@@ -1569,7 +1708,6 @@
             window.open(url, '_blank');
         }
 
-        // ================= TABEL MASTER LPP =================
         function updateDesaDropdown(data) {
             const select = document.getElementById('desaFilter');
             const currentVal = select.value;
@@ -1596,7 +1734,7 @@
             let tPlafon = 0, tTarP = 0, tTarB = 0, tLaluP = 0, tLaluB = 0, tIniP = 0, tIniB = 0, tTotP = 0, tTotB = 0, tSaldo = 0, tTungP = 0, tTungB = 0;
 
             if (data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="18" class="text-center py-3 text-muted">Data kosong.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="18" class="text-center py-3" style="color: var(--text-muted);">Data kosong.</td></tr>`;
                 tfoot.innerHTML = '';
                 return;
             }
@@ -1608,7 +1746,10 @@
                 const iP = parseNum(r.realIniPokok), iB = parseNum(r.realIniBunga);
                 const totP = parseNum(r.realTotPokok), totB = parseNum(r.realTotBunga);
                 const saldo = parseNum(r.saldo);
-                const tungP = parseNum(r.tunggakPokok), tungB = parseNum(r.tunggakBunga);
+                
+                // Rumus total tunggakan pokok dan jasa = Target s/d Bln Ini - Realisasi Total
+                let tungP = Math.max(0, tarP - totP);
+                let tungB = Math.max(0, tarB - totB);
 
                 tPlafon += plafon; tTarP += tarP; tTarB += tarB; tLaluP += lP; tLaluB += lB;
                 tIniP += iP; tIniB += iB; tTotP += totP; tTotB += totB; tSaldo += saldo;
@@ -1617,44 +1758,44 @@
                 tbody.innerHTML += `
                     <tr>
                         <td class="text-center">${r.no || (idx + 1)}</td>
-                        <td class="fw-semibold">${r.nama || '-'}</td>
+                        <td class="fw-semibold" style="color: var(--text-main);">${r.nama || '-'}</td>
                         <td>${r.desa || '-'}</td>
-                        <td class="text-end">${formatRp(plafon)}</td>
+                        <td class="text-end text-info">${formatRp(plafon)}</td>
                         <td class="text-center">${r.tenor || '-'}</td>
-                        <td class="text-center">${r.tglCair || '-'}</td>
-                        <td class="text-end bg-warning bg-opacity-10">${formatRp(tarP)}</td>
-                        <td class="text-end bg-warning bg-opacity-10">${formatRp(tarB)}</td>
-                        <td class="text-end">${formatRp(lP)}</td>
-                        <td class="text-end">${formatRp(lB)}</td>
-                        <td class="text-end text-primary fw-semibold">${formatRp(iP)}</td>
-                        <td class="text-end text-primary fw-semibold">${formatRp(iB)}</td>
-                        <td class="text-end bg-success bg-opacity-10 text-success fw-bold">${formatRp(totP)}</td>
-                        <td class="text-end bg-success bg-opacity-10 text-success fw-bold">${formatRp(totB)}</td>
+                        <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
+                        <td class="text-end" style="background-color: rgba(253, 224, 71, 0.15); color: #fde047; font-weight: 600;">${formatRp(tarP)}</td>
+                        <td class="text-end" style="background-color: rgba(253, 224, 71, 0.15); color: #fde047; font-weight: 600;">${formatRp(tarB)}</td>
+                        <td class="text-end" style="color: var(--text-muted);">${formatRp(lP)}</td>
+                        <td class="text-end" style="color: var(--text-muted);">${formatRp(lB)}</td>
+                        <td class="text-end text-info fw-semibold">${formatRp(iP)}</td>
+                        <td class="text-end text-info fw-semibold">${formatRp(iB)}</td>
+                        <td class="text-end" style="background-color: rgba(6, 95, 70, 0.35); color: #6ee7b7; font-weight: bold;">${formatRp(totP)}</td>
+                        <td class="text-end" style="background-color: rgba(6, 95, 70, 0.35); color: #6ee7b7; font-weight: bold;">${formatRp(totB)}</td>
                         <td class="text-end fw-bold text-danger">${formatRp(saldo)}</td>
-                        <td class="text-center">${r.persen || '0%'}</td>
-                        <td class="text-end bg-danger bg-opacity-10 text-danger">${formatRp(tungP)}</td>
-                        <td class="text-end bg-danger bg-opacity-10 text-danger">${formatRp(tungB)}</td>
+                        <td class="text-center text-warning">${r.persen || '0%'}</td>
+                        <td class="text-end" style="background-color: rgba(153, 27, 27, 0.35); color: #fca5a5; font-weight: 600;">${formatRp(tungP)}</td>
+                        <td class="text-end" style="background-color: rgba(153, 27, 27, 0.35); color: #fca5a5; font-weight: 600;">${formatRp(tungB)}</td>
                     </tr>
                 `;
             });
 
             tfoot.innerHTML = `
-                <tr class="text-end table-light">
+                <tr class="text-end" style="background: var(--card-light-bg); color: var(--text-main);">
                     <td colspan="3" class="text-center">TOTAL</td>
-                    <td>${formatRp(tPlafon)}</td>
+                    <td class="text-info">${formatRp(tPlafon)}</td>
                     <td></td><td></td>
-                    <td class="bg-warning bg-opacity-10">${formatRp(tTarP)}</td>
-                    <td class="bg-warning bg-opacity-10">${formatRp(tTarB)}</td>
+                    <td style="color: #fde047;">${formatRp(tTarP)}</td>
+                    <td style="color: #fde047;">${formatRp(tTarB)}</td>
                     <td>${formatRp(tLaluP)}</td>
                     <td>${formatRp(tLaluB)}</td>
-                    <td>${formatRp(tIniP)}</td>
-                    <td>${formatRp(tIniB)}</td>
-                    <td class="bg-success bg-opacity-10 text-success">${formatRp(tTotP)}</td>
-                    <td class="bg-success bg-opacity-10 text-success">${formatRp(tTotB)}</td>
+                    <td class="text-info">${formatRp(tIniP)}</td>
+                    <td class="text-info">${formatRp(tIniB)}</td>
+                    <td style="color: #6ee7b7;">${formatRp(tTotP)}</td>
+                    <td style="color: #6ee7b7;">${formatRp(tTotB)}</td>
                     <td class="text-danger">${formatRp(tSaldo)}</td>
                     <td></td>
-                    <td class="bg-danger bg-opacity-10 text-danger">${formatRp(tTungP)}</td>
-                    <td class="bg-danger bg-opacity-10 text-danger">${formatRp(tTungB)}</td>
+                    <td style="color: #fca5a5; font-weight: bold;">${formatRp(tTungP)}</td>
+                    <td style="color: #fca5a5; font-weight: bold;">${formatRp(tTungB)}</td>
                 </tr>
             `;
         }
@@ -1737,8 +1878,8 @@
                             realTotBunga: parseNum(row[13]),
                             saldo: parseNum(row[14]), 
                             persen: row[15] || '0%', 
-                            tunggakPokok: parseNum(row[16]), 
-                            tunggakBunga: parseNum(row[17]),
+                            tunggakPokok: Math.max(0, targetP - realTotP), 
+                            tunggakBunga: Math.max(0, targetB - parseNum(row[13])),
                             angsuranKe: deteksiKe, 
                             noHp: "",
                             persenJasa: deteksiPersen,
@@ -1778,7 +1919,6 @@
             }
         }
 
-        // ================= KAS OPERASIONAL =================
         const defaultKas = [{ id: 1, nama: 'Operasional Kantor UPK', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
         function getKasData() { const d = localStorage.getItem('upk_kas_data'); return d ? JSON.parse(d) : defaultKas; }
 
@@ -1826,7 +1966,6 @@
             }
         }
 
-        // ================= AUTH =================
         function checkAuthUI() {
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             const btnAuth = document.getElementById('btnNavAuth');
@@ -1840,6 +1979,7 @@
                 btnAuth.removeAttribute('data-bs-toggle');
                 btnAuth.onclick = logout;
                 bukaView('panelProfil');
+                resetIdleTimer();
             } else {
                 document.getElementById('publicContent').classList.remove('d-none');
                 document.getElementById('privateDashboard').classList.add('d-none');
@@ -1847,6 +1987,7 @@
                 btnAuth.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i> Masuk';
                 btnAuth.setAttribute('data-bs-toggle', 'modal');
                 btnAuth.onclick = null;
+                if (idleTimer) clearTimeout(idleTimer);
             }
         }
 
@@ -1869,6 +2010,7 @@
         }
 
         window.onload = async function() {
+            initTheme();
             await loadDataDariGoogleSheet();
             checkAuthUI();
         };
