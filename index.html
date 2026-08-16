@@ -34,6 +34,43 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
+        /* Styling Logo Premium & Menyala (Glow Effect) */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .logo-glow {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            border-radius: 50%;
+            padding: 4px;
+            background: #ffffff;
+            border: 2px solid rgba(2, 132, 199, 0.4);
+            box-shadow: 0 0 20px rgba(2, 132, 199, 0.5), 0 0 10px rgba(56, 189, 248, 0.3);
+            animation: pulseGlow 3s infinite ease-in-out;
+            transition: transform 0.3s ease;
+        }
+        .logo-glow:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(2, 132, 199, 0.8), 0 0 15px rgba(56, 189, 248, 0.6);
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 15px rgba(2, 132, 199, 0.4), 0 0 5px rgba(56, 189, 248, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(2, 132, 199, 0.7), 0 0 12px rgba(56, 189, 248, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(2, 132, 199, 0.4), 0 0 5px rgba(56, 189, 248, 0.2);
+            }
+        }
+
         @media print {
             body * { visibility: hidden; }
             #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi * { visibility: visible; }
@@ -65,16 +102,18 @@
     </nav>
 
     <!-- ================= LANDING PAGE ================= -->
-    <div id="publicContent" class="container py-5 text-center" style="max-width: 600px;">
-        <div class="card-custom p-4 p-md-5 mt-4 shadow-sm">
-            <div class="mb-3 text-primary">
-                <i class="bi bi-shield-check display-4"></i>
+    <div id="publicContent" class="container py-5 text-center" style="max-width: 650px;">
+        <div class="card-custom p-4 p-md-5 mt-3 shadow-sm">
+            <!-- Logo UPK dan DAPM Menyala & Premium -->
+            <div class="logo-container">
+                <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" title="Logo UPK">
+                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" title="Logo DAPM">
             </div>
             <h4 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h4>
             <p class="text-muted small mb-4">Sistem Informasi Keuangan, Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
-                <button class="btn btn-primary btn-compact py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Buka Dasbor Keuangan & LPP
                 </button>
             </div>
@@ -132,7 +171,10 @@
                     </div>
                     <div class="col-md-4 text-center mt-4 mt-md-0">
                         <div class="p-4 bg-light rounded-4 border">
-                            <i class="bi bi-bank display-3 text-primary mb-2"></i>
+                            <div class="logo-container mb-2">
+                                <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" style="width: 50px; height: 50px;">
+                                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" style="width: 50px; height: 50px;">
+                            </div>
                             <h6 class="fw-bold mb-1">SISKEU UPK</h6>
                             <p class="text-muted small mb-0">Laporan Perkembangan Pinjaman & Kas</p>
                         </div>
