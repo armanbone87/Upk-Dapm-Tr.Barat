@@ -68,7 +68,7 @@
                 <i class="bi bi-shield-check display-4"></i>
             </div>
             <h4 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional[cite: 1].</p>
+            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
                 <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -985,7 +985,7 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH (DIOPTIMALKAN DENGAN POST) =================
+        // ================= SINKRONISASI CLOUD DUA ARAH (STABIL & LENGKAP) =================
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -1001,6 +1001,9 @@
                 }
                 if (result && result.kas && result.kas.length > 0) {
                     localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
+                }
+                if (result && result.kasOps && result.kasOps.length > 0) {
+                    localStorage.setItem('upk_kas_ops_data', JSON.stringify(result.kasOps));
                 }
                 if (badge) {
                     badge.textContent = "Terhubung Cloud";
@@ -1024,17 +1027,26 @@
             }
 
             try {
-                const payload = {
+                const dataObj = {
                     action: "backup_all",
                     lpp: getLPPData(),
-                    kas: getKasData()
+                    kas: getKasData(),
+                    kasOps: getKasOpsData()
                 };
 
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload)
+                // Ringkas history agar muat dikirim lewat URL GET
+                dataObj.lpp.forEach(item => {
+                    if (item.history && item.history.length > 15) {
+                        item.history = item.history.slice(0, 15);
+                    }
+                });
+
+                const jsonStr = JSON.stringify(dataObj);
+                const encodedData = encodeURIComponent(jsonStr);
+
+                await fetch(`${GOOGLE_SCRIPT_URL}?action=backup_all&data=${encodedData}`, {
+                    method: "GET",
+                    mode: "no-cors"
                 });
 
                 if (badge) {
@@ -1042,7 +1054,7 @@
                     badge.className = "badge bg-success text-white small me-1";
                 }
                 if (!silent) {
-                    alert("✅ Data LPP dan Buku Kas BERHASIL disinkronkan ke Google Sheet!");
+                    alert("✅ Data LPP, Kas SPP, & Buku Operasional BERHASIL disinkronkan ke Google Sheet!");
                 }
             } catch (err) {
                 console.error("Gagal sinkronisasi:", err);
@@ -1132,7 +1144,7 @@
                 tTunggakPokok += parseNum(r.tunggakPokok);
             });
 
-            const kasOpsData = getKasData();
+            const kasOpsData = getKasOpsData();
             let totalKasMasuk = tRealPokok + tRealBunga;
             let totalKasKeluar = 0;
             kasOpsData.forEach(k => {
@@ -1350,15 +1362,16 @@
                 allData.push(newBorrower);
                 saveLPPData(allData);
 
-                const kasData = getKasData();
-                kasData.unshift({
+                let kasOps = getKasOpsData();
+                kasOps.unshift({
                     id: Date.now(),
                     nama: `Pencairan Pinjaman Baru (${nama})`,
+                    kategori: 'Pencairan Piutang',
                     kelurahan: desa,
                     tipe: 'Keluar',
                     nominal: plafon
                 });
-                localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+                localStorage.setItem('upk_kas_ops_data', JSON.stringify(kasOps));
 
                 this.reset();
                 let modalEl = document.getElementById('tambahPeminjamModal');
@@ -1930,6 +1943,11 @@
         // ================= KAS OPERASIONAL & KATEGORI AKUN =================
         const defaultKas = [{ id: 1, nama: 'Operasional Kantor UPK', kategori: 'Lain-Lain Operasional', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
         function getKasData() { const d = localStorage.getItem('upk_kas_data'); return d ? JSON.parse(d) : defaultKas; }
+        
+        function getKasOpsData() { 
+            const d = localStorage.getItem('upk_kas_ops_data'); 
+            return d ? JSON.parse(d) : []; 
+        }
 
         const kategoriMasuk = ['Setoran Jasa Dari Kas SPP', 'Lain-Lain Pendapatan'];
         const kategoriKeluar = ['Honor', 'Transport', 'Adm & Umum', 'Lain-Lain Operasional', 'Lain-Lain Non Ops', 'Lain-Lain Non Biaya'];
@@ -1951,10 +1969,16 @@
         }
 
         function renderKas() {
-            const data = getKasData();
+            const data = getKasOpsData();
             const tbody = document.getElementById('transaksiTableBody');
             if (!tbody) return;
             tbody.innerHTML = '';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">Belum ada transaksi operasional.</td></tr>';
+                return;
+            }
+
             data.forEach((item, index) => {
                 const isMasuk = item.tipe === 'Masuk';
                 tbody.innerHTML += `
@@ -1970,10 +1994,138 @@
                 `;
             });
         }
+        
+        function renderKasSPP() {
+            const lppData = getLPPData();
+            const tbody = document.getElementById('kasSPPTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            
+            let html = '';
+            let no = 1;
+            lppData.forEach(item => {
+                if (item.history && item.history.length > 0) {
+                    item.history.forEach(h => {
+                        html += `
+                            <tr>
+                                <td>${no++}</td>
+                                <td>Angsuran Ke-${h.angsuranKe} (${item.nama}) - Pokok: Rp ${formatRp(h.pokok)}, Jasa: Rp ${formatRp(h.jasa)}</td>
+                                <td>${item.desa}</td>
+                                <td><span class="badge bg-success">Masuk</span></td>
+                                <td class="text-success fw-semibold">Rp ${formatRp(h.total)}</td>
+                            </tr>
+                        `;
+                    });
+                }
+            });
+            
+            if (html === '') {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-3">Belum ada penerimaan Kas SPP tercatat dari angsuran.</td></tr>';
+            } else {
+                tbody.innerHTML = html;
+            }
+        }
+        
+        function hitungLaporanLabaRugi() {
+            const lppData = getLPPData();
+            const kasOpsData = getKasOpsData();
+            
+            let totalJasaLPP = 0;
+            lppData.forEach(item => {
+                totalJasaLPP += parseNum(item.realTotBunga);
+            });
+            
+            let pendapatanLain = 0;
+            let biayaHonor = 0;
+            let biayaTransport = 0;
+            let biayaAdm = 0;
+            let biayaOpsLain = 0;
+            let nonOps = 0;
+            let nonBiaya = 0;
+            
+            kasOpsData.forEach(k => {
+                const nom = Number(k.nominal) || 0;
+                if (k.tipe === 'Masuk') {
+                    if (k.kategori === 'Lain-Lain Pendapatan') pendapatanLain += nom;
+                } else if (k.tipe === 'Keluar') {
+                    if (k.kategori === 'Honor') biayaHonor += nom;
+                    else if (k.kategori === 'Transport') biayaTransport += nom;
+                    else if (k.kategori === 'Adm & Umum') biayaAdm += nom;
+                    else if (k.kategori === 'Lain-Lain Operasional') biayaOpsLain += nom;
+                    else if (k.kategori === 'Lain-Lain Non Ops') nonOps += nom;
+                    else if (k.kategori === 'Lain-Lain Non Biaya') nonBiaya += nom;
+                }
+            });
+            
+            const totalPendapatan = totalJasaLPP + pendapatanLain;
+            const totalBiayaOps = biayaHonor + biayaTransport + biayaAdm + biayaOpsLain;
+            const labaBersih = totalPendapatan - totalBiayaOps - nonOps - nonBiaya;
+            
+            document.getElementById('lrPendapatanJasa').textContent = 'Rp ' + formatRp(totalJasaLPP);
+            document.getElementById('lrPendapatanLain').textContent = 'Rp ' + formatRp(pendapatanLain);
+            document.getElementById('lrTotalPendapatan').textContent = 'Rp ' + formatRp(totalPendapatan);
+            
+            document.getElementById('lrBiayaHonor').textContent = 'Rp ' + formatRp(biayaHonor);
+            document.getElementById('lrBiayaTransport').textContent = 'Rp ' + formatRp(biayaTransport);
+            document.getElementById('lrBiayaAdm').textContent = 'Rp ' + formatRp(biayaAdm);
+            document.getElementById('lrBiayaOpsLain').textContent = 'Rp ' + formatRp(biayaOpsLain);
+            document.getElementById('lrTotalBiayaOps').textContent = 'Rp ' + formatRp(totalBiayaOps);
+            
+            document.getElementById('lrNonOps').textContent = 'Rp ' + formatRp(nonOps);
+            document.getElementById('lrNonBiaya').textContent = 'Rp ' + formatRp(nonBiaya);
+            document.getElementById('lrLabaBersih').textContent = 'Rp ' + formatRp(labaBersih);
+        }
+        
+        function hitungLaporanNeraca() {
+            const lppData = getLPPData();
+            const kasOpsData = getKasOpsData();
+            
+            let totalPiutang = 0;
+            let totalRealPokok = 0;
+            let totalRealBunga = 0;
+            lppData.forEach(item => {
+                totalPiutang += parseNum(item.saldo);
+                totalRealPokok += parseNum(item.realTotPokok);
+                totalRealBunga += parseNum(item.realTotBunga);
+            });
+            
+            let kasMasukOps = 0;
+            let kasKeluarOps = 0;
+            kasOpsData.forEach(k => {
+                if (k.tipe === 'Masuk') kasMasukOps += Number(k.nominal);
+                if (k.tipe === 'Keluar') kasKeluarOps += Number(k.nominal);
+            });
+            
+            const totalKas = (totalRealPokok + totalRealBunga + kasMasukOps) - kasKeluarOps;
+            const aktivaTetap = 5000000;
+            const totalAktiva = totalKas + totalPiutang + aktivaTetap;
+            
+            let totalPlafonAwal = 0;
+            lppData.forEach(item => {
+                totalPlafonAwal += parseNum(item.plafon);
+            });
+            const modalAwal = totalPlafonAwal > 0 ? totalPlafonAwal : 50000000;
+            
+            // Hitung laba bersih berjalan
+            let totalJasaLPP = totalRealBunga;
+            let pendapatanLain = kasOpsData.filter(k => k.tipe === 'Masuk' && k.kategori === 'Lain-Lain Pendapatan').reduce((a, b) => a + Number(b.nominal), 0);
+            let totalBeban = kasOpsData.filter(k => k.tipe === 'Keluar').reduce((a, b) => a + Number(b.nominal), 0);
+            const labaBerjalan = (totalJasaLPP + pendapatanLain) - totalBeban;
+            
+            const totalPasiva = modalAwal + labaBerjalan;
+            
+            document.getElementById('neracaKas').textContent = 'Rp ' + formatRp(totalKas);
+            document.getElementById('neracaPiutang').textContent = 'Rp ' + formatRp(totalPiutang);
+            document.getElementById('neracaTotalAktiva').textContent = 'Rp ' + formatRp(totalAktiva);
+            
+            document.getElementById('neracaModalAwal').textContent = 'Rp ' + formatRp(modalAwal);
+            document.getElementById('neracaLabaBerjalan').textContent = 'Rp ' + formatRp(labaBerjalan);
+            document.getElementById('neracaTotalPasiva').textContent = 'Rp ' + formatRp(totalPasiva);
+        }
 
         document.getElementById('transaksiForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const data = getKasData();
+            const data = getKasOpsData();
             data.unshift({
                 id: Date.now(), 
                 nama: document.getElementById('tNama').value,
@@ -1982,7 +2134,7 @@
                 tipe: document.getElementById('tTipe').value,
                 nominal: Number(document.getElementById('tNominal').value)
             });
-            localStorage.setItem('upk_kas_data', JSON.stringify(data));
+            localStorage.setItem('upk_kas_ops_data', JSON.stringify(data));
             this.reset();
             updateKategoriOpsi();
             bootstrap.Modal.getInstance(document.getElementById('transaksiModal')).hide();
@@ -1993,7 +2145,7 @@
 
         function hapusKas(id) {
             if (confirm('Hapus transaksi?')) {
-                localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
+                localStorage.setItem('upk_kas_ops_data', JSON.stringify(getKasOpsData().filter(i => i.id !== id)));
                 renderKas();
                 updateDasborKeuangan();
                 backupKeGoogleSheet(true);
