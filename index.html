@@ -68,7 +68,7 @@
                 <i class="bi bi-shield-check display-4"></i>
             </div>
             <h4 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional.</p>
+            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional[cite: 1].</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
                 <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -985,7 +985,7 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH (DIOPTIMALKAN) =================
+        // ================= SINKRONISASI CLOUD DUA ARAH (DIOPTIMALKAN DENGAN POST) =================
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -1024,27 +1024,17 @@
             }
 
             try {
-                // Mengirim data melalui parameter URL GET untuk menghindari blokir payload CORS di GitHub Pages
-                const dataObj = {
+                const payload = {
                     action: "backup_all",
                     lpp: getLPPData(),
                     kas: getKasData()
                 };
-                
-                // Ringkas history LPP jika terlalu besar agar muat di URL
-                dataObj.lpp.forEach(item => {
-                    if (item.history && item.history.length > 20) {
-                        item.history = item.history.slice(0, 20);
-                    }
-                });
 
-                const jsonStr = JSON.stringify(dataObj);
-                const encodedData = encodeURIComponent(jsonStr);
-
-                // Kirim menggunakan metode GET parameter
-                await fetch(`${GOOGLE_SCRIPT_URL}?data=${encodedData}`, {
-                    method: "GET",
-                    mode: "no-cors"
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
                 });
 
                 if (badge) {
@@ -1055,7 +1045,7 @@
                     alert("✅ Data LPP dan Buku Kas BERHASIL disinkronkan ke Google Sheet!");
                 }
             } catch (err) {
-                console.error("Gagal sinkronisasi ke Google Sheet:", err);
+                console.error("Gagal sinkronisasi:", err);
                 if (badge) {
                     badge.textContent = "Mode Offline";
                     badge.className = "badge bg-danger text-white small me-1";
