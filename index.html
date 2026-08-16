@@ -986,7 +986,7 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH (LOAD & SAVE) =================
+        // ================= SINKRONISASI CLOUD DUA ARAH (DIPERBAIKI) =================
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -1002,9 +1002,6 @@
                 }
                 if (result && result.kas && result.kas.length > 0) {
                     localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
-                }
-                if (result && result.kasOps && result.kasOps.length > 0) {
-                    localStorage.setItem('upk_kas_ops_data', JSON.stringify(result.kasOps));
                 }
                 if (badge) {
                     badge.textContent = "Terhubung Cloud";
@@ -1031,8 +1028,7 @@
                 const payloadStr = encodeURIComponent(JSON.stringify({
                     action: "backup_all",
                     lpp: getLPPData(),
-                    kas: getKasData(),
-                    kasOps: getKasOpsData()
+                    kas: getKasData()
                 }));
 
                 await fetch(`${GOOGLE_SCRIPT_URL}?data=${payloadStr}`, {
@@ -1045,7 +1041,7 @@
                     badge.className = "badge bg-success text-white small me-1";
                 }
                 if (!silent) {
-                    alert("✅ Data LPP, Kas SPP, & Buku Operasional BERHASIL disinkronkan ke Google Sheet!");
+                    alert("✅ Data LPP dan Buku Kas BERHASIL disinkronkan ke Google Sheet!");
                 }
             } catch (err) {
                 console.error("Gagal sinkronisasi ke Google Sheet:", err);
@@ -1054,7 +1050,7 @@
                     badge.className = "badge bg-danger text-white small me-1";
                 }
                 if (!silent) {
-                    alert("⚠️ Gagal mengirim data ke Google Sheet. Periksa koneksi internet Anda.");
+                    alert("⚠️ Gagal menyinkronkan ke Cloud. Periksa kembali deployment Google Apps Script Anda.");
                 }
             } finally {
                 if (btn && !silent) {
@@ -1067,7 +1063,10 @@
         // ================= NAVIGASI VIEW =================
         function bukaView(viewName) {
             const allViews = ['viewPanelDasborKeuangan', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKasSPP', 'viewPanelKasOps', 'viewPanelLabaRugi', 'viewPanelNeraca'];
-            allViews.forEach(v => document.getElementById(v).classList.add('d-none'));
+            allViews.forEach(v => {
+                const el = document.getElementById(v);
+                if (el) el.classList.add('d-none');
+            });
 
             const allBtns = ['tabBtnDasborKeuangan', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKasSPP', 'tabBtnKasOps', 'tabBtnLabaRugi', 'tabBtnNeraca'];
             allBtns.forEach(b => {
@@ -1132,7 +1131,7 @@
                 tTunggakPokok += parseNum(r.tunggakPokok);
             });
 
-            const kasOpsData = getKasOpsData();
+            const kasOpsData = getKasData();
             let totalKasMasuk = tRealPokok + tRealBunga;
             let totalKasKeluar = 0;
             kasOpsData.forEach(k => {
@@ -1350,16 +1349,15 @@
                 allData.push(newBorrower);
                 saveLPPData(allData);
 
-                let kasOps = getKasOpsData();
-                kasOps.unshift({
+                const kasData = getKasData();
+                kasData.unshift({
                     id: Date.now(),
                     nama: `Pencairan Pinjaman Baru (${nama})`,
-                    kategori: 'Pencairan Piutang',
                     kelurahan: desa,
                     tipe: 'Keluar',
                     nominal: plafon
                 });
-                localStorage.setItem('upk_kas_ops_data', JSON.stringify(kasOps));
+                localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
 
                 this.reset();
                 let modalEl = document.getElementById('tambahPeminjamModal');
