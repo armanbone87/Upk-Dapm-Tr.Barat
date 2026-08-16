@@ -35,7 +35,7 @@
 
         @media print {
             body * { visibility: hidden; }
-            #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi *, #areaCetakLabaRugi, #areaCetakLabaRugi *, #areaCetakNeraca, #areaCetakNeraca * { visibility: visible; }
+            #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi *, #areaCetakLabaRugi, #areaCetakLabaRugi * { visibility: visible; }
             .no-print { display: none !important; }
             @page { size: auto; margin: 8mm; }
         }
@@ -68,7 +68,7 @@
                 <i class="bi bi-shield-check display-4"></i>
             </div>
             <h4 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional.</p>
+            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan & Kas SPP.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
                 <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -99,15 +99,6 @@
                     </button>
                     <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnKasSPP" onclick="bukaView('panelKasSPP')">
                         <i class="bi bi-journal-bookmark-fill me-1"></i> Kas SPP
-                    </button>
-                    <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnKasOps" onclick="bukaView('panelKasOps')">
-                        <i class="bi bi-journal-text me-1"></i> Buku Operasional
-                    </button>
-                    <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnLabaRugi" onclick="bukaView('panelLabaRugi')">
-                        <i class="bi bi-graph-up me-1"></i> Laba Rugi
-                    </button>
-                    <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnNeraca" onclick="bukaView('panelNeraca')">
-                        <i class="bi bi-pie-chart-fill me-1"></i> Neraca
                     </button>
                 </div>
 
@@ -148,9 +139,9 @@
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3 border-start border-dark border-4">
-                        <span class="text-muted small d-block">Saldo Kas SPP & Operasional</span>
+                        <span class="text-muted small d-block">Saldo Kas SPP</span>
                         <h5 class="fw-bold text-dark mb-0" id="dashFinSaldoKas">Rp 0</h5>
-                        <small class="text-muted" style="font-size: 0.7rem;">Akumulasi Kas Masuk - Keluar</small>
+                        <small class="text-muted" style="font-size: 0.7rem;">Akumulasi Pokok & Jasa Masuk</small>
                     </div>
                 </div>
             </div>
@@ -192,11 +183,8 @@
                             <button class="btn btn-outline-success btn-compact text-start fw-semibold" onclick="bukaView('panelBayarAngsuran')">
                                 <i class="bi bi-receipt-cutoff me-2"></i> Kasir Pembayaran Angsuran
                             </button>
-                            <button class="btn btn-outline-primary btn-compact text-start fw-semibold" onclick="bukaView('panelLabaRugi')">
-                                <i class="bi bi-graph-up me-2"></i> Laporan Laba Rugi Komprehensif
-                            </button>
-                            <button class="btn btn-outline-dark btn-compact text-start fw-semibold" onclick="bukaView('panelNeraca')">
-                                <i class="bi bi-pie-chart-fill me-2"></i> Neraca Keuangan Terintegrasi LPP
+                            <button class="btn btn-outline-primary btn-compact text-start fw-semibold" onclick="bukaView('panelDataPeminjam')">
+                                <i class="bi bi-people-fill me-2"></i> Manajemen Data Peminjam
                             </button>
                         </div>
                     </div>
@@ -397,7 +385,7 @@
                         <!-- BUKTI SETORAN / KWITANSI PROFESIONAL -->
                         <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-success p-2"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di Kas SPP & Laba Rugi</span>
+                                <span class="badge bg-success p-2"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di Kas SPP</span>
                                 <div class="d-flex gap-2 no-print">
                                     <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Kwitansi</button>
                                     <button class="btn btn-success btn-compact fw-semibold" onclick="kirimBuktiWA()"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti ke WhatsApp</button>
@@ -442,7 +430,7 @@
                                                 <td class="text-end fw-bold text-success" id="kwtPokok">Rp 0</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-start">Setoran Jasa / Bunga Pinjaman (Masuk Kas SPP & Laba Rugi)</td>
+                                                <td class="text-start">Setoran Jasa / Bunga Pinjaman (Masuk Kas SPP)</td>
                                                 <td class="text-end fw-bold text-info" id="kwtJasa">Rp 0</td>
                                             </tr>
                                             <tr class="table-active fw-bold">
@@ -571,212 +559,6 @@
             </div>
         </div>
 
-        <!-- ================= 6. VIEW PANEL BUKU OPERASIONAL ================= -->
-        <div id="viewPanelKasOps" class="d-none">
-            <div class="card-custom p-3 shadow-sm">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex align-items-center gap-2">
-                        <button onclick="bukaView('panelDasborKeuangan')" class="btn btn-outline-primary btn-compact fw-semibold">
-                            <i class="bi bi-arrow-left me-1"></i> Dasbor
-                        </button>
-                        <h6 class="fw-bold mb-0">Buku Operasional Kantor (Pemasukan & Pengeluaran Biaya)</h6>
-                    </div>
-                    <button class="btn btn-success btn-compact shadow-sm" data-bs-toggle="modal" data-bs-target="#transaksiModal" onclick="updateKategoriOpsi()">
-                        <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Operasional
-                    </button>
-                </div>
-                <div class="table-responsive" style="max-height: 500px;">
-                    <table class="table table-hover table-compact align-middle mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>No</th>
-                                <th>Uraian / Keterangan</th>
-                                <th>Kategori Biaya/Pendapatan</th>
-                                <th>Kelurahan/Desa</th>
-                                <th>Tipe</th>
-                                <th>Nominal (Rp)</th>
-                                <th class="no-print">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transaksiTableBody">
-                            <!-- Data Operasional -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= 7. VIEW PANEL LAPORAN LABA RUGI ================= -->
-        <div id="viewPanelLabaRugi" class="d-none">
-            <div class="card-custom p-4 shadow-sm" style="max-width: 850px; margin: 0 auto;">
-                <div class="d-flex justify-content-between align-items-center mb-3 no-print">
-                    <button onclick="bukaView('panelDasborKeuangan')" class="btn btn-outline-primary btn-compact">
-                        <i class="bi bi-arrow-left me-1"></i> Dasbor
-                    </button>
-                    <button class="btn btn-outline-dark btn-compact" onclick="window.print()">
-                        <i class="bi bi-printer me-1"></i> Cetak Laba Rugi
-                    </button>
-                </div>
-
-                <div id="areaCetakLabaRugi">
-                    <div class="text-center border-bottom pb-3 mb-3">
-                        <h5 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h5>
-                        <h6 class="text-secondary mb-1">KABUPATEN BONE</h6>
-                        <h6 class="fw-bold text-primary mb-0">LAPORAN LABA / RUGI KOMPREHENSIF</h6>
-                        <small class="text-muted">Periode Tahun 2026</small>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="table table-sm table-bordered table-compact align-middle">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>KODE & URAIAN AKUN / KATEGORI</th>
-                                    <th class="text-end">JUMLAH (IDR)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- PENDAPATAN -->
-                                <tr class="table-secondary fw-bold">
-                                    <td colspan="2">I. PENDAPATAN OPERASIONAL</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">Pendapatan Setoran Jasa SPP (Dari LPP / Kas SPP)</td>
-                                    <td class="text-end fw-semibold text-success" id="lrPendapatanJasa">Rp 0</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">Lain-Lain Pendapatan Operasional</td>
-                                    <td class="text-end fw-semibold text-success" id="lrPendapatanLain">Rp 0</td>
-                                </tr>
-                                <tr class="fw-bold bg-light">
-                                    <td class="text-end">TOTAL PENDAPATAN:</td>
-                                    <td class="text-end text-success" id="lrTotalPendapatan">Rp 0</td>
-                                </tr>
-
-                                <!-- BIAYA / PENGELUARAN -->
-                                <tr class="table-secondary fw-bold">
-                                    <td colspan="2">II. BIAYA / BEBAN OPERASIONAL KANTOR</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">Biaya Honor Pengelola & Staf</td>
-                                    <td class="text-end text-danger" id="lrBiayaHonor">Rp 0</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">Biaya Transport & Perjalanan Dinas</td>
-                                    <td class="text-end text-danger" id="lrBiayaTransport">Rp 0</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">Biaya Administrasi & Umum Kantor</td>
-                                    <td class="text-end text-danger" id="lrBiayaAdm">Rp 0</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">Lain-Lain Biaya Operasional</td>
-                                    <td class="text-end text-danger" id="lrBiayaOpsLain">Rp 0</td>
-                                </tr>
-                                <tr class="fw-bold bg-light">
-                                    <td class="text-end">TOTAL BIAYA OPERASIONAL:</td>
-                                    <td class="text-end text-danger" id="lrTotalBiayaOps">Rp 0</td>
-                                </tr>
-
-                                <!-- NON OPERASIONAL & NON BIAYA -->
-                                <tr class="table-secondary fw-bold">
-                                    <td colspan="2">III. POS NON OPERASIONAL & NON BIAYA</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">Lain-Lain Pendapatan / Pengeluaran Non Operasional (Non Ops)</td>
-                                    <td class="text-end" id="lrNonOps">Rp 0</td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4">Lain-Lain Penyesuaian / Non Biaya</td>
-                                    <td class="text-end" id="lrNonBiaya">Rp 0</td>
-                                </tr>
-
-                                <!-- LABA BERSIH -->
-                                <tr class="table-primary fw-bold fs-6">
-                                    <td class="text-end">LABA BERSIH (NET PROFIT):</td>
-                                    <td class="text-end text-primary" id="lrLabaBersih">Rp 0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= 8. VIEW PANEL NERACA KEUANGAN (TERINTEGRASI LPP) ================= -->
-        <div id="viewPanelNeraca" class="d-none">
-            <div class="card-custom p-4 shadow-sm" style="max-width: 900px; margin: 0 auto;">
-                <div class="d-flex justify-content-between align-items-center mb-3 no-print">
-                    <button onclick="bukaView('panelDasborKeuangan')" class="btn btn-outline-primary btn-compact">
-                        <i class="bi bi-arrow-left me-1"></i> Dasbor
-                    </button>
-                    <button class="btn btn-outline-dark btn-compact" onclick="window.print()">
-                        <i class="bi bi-printer me-1"></i> Cetak Neraca
-                    </button>
-                </div>
-
-                <div id="areaCetakNeraca">
-                    <div class="text-center border-bottom pb-3 mb-3">
-                        <h5 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h5>
-                        <h6 class="text-secondary mb-1">KABUPATEN BONE</h6>
-                        <h6 class="fw-bold text-dark mb-0">NERACA KEUANGAN (BALANCE SHEET)</h6>
-                        <small class="text-muted">Terintegrasi Data Master LPP & Buku Operasional</small>
-                    </div>
-
-                    <div class="row g-3">
-                        <!-- AKTIVA / ASSET -->
-                        <div class="col-md-6">
-                            <h6 class="fw-bold text-primary border-bottom pb-1"><i class="bi bi-wallet2 me-1"></i> AKTIVA (ASSETS)</h6>
-                            <table class="table table-sm table-bordered table-compact align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td>Kas & Setara Kas (Saldo Operasional)</td>
-                                        <td class="text-end fw-semibold" id="neracaKas">Rp 0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Piutang Pinjaman SPP (Sisa Plafon LPP)</td>
-                                        <td class="text-end fw-semibold text-danger" id="neracaPiutang">Rp 0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Aktiva Tetap & Inventaris Kantor</td>
-                                        <td class="text-end fw-semibold">Rp 5.000.000</td>
-                                    </tr>
-                                    <tr class="table-primary fw-bold">
-                                        <td>TOTAL AKTIVA</td>
-                                        <td class="text-end text-primary" id="neracaTotalAktiva">Rp 0</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- PASIVA (KEWAJIBAN & MODAL) -->
-                        <div class="col-md-6">
-                            <h6 class="fw-bold text-danger border-bottom pb-1"><i class="bi bi-shield-lock me-1"></i> PASIVA (LIABILITIES & EQUITY)</h6>
-                            <table class="table table-sm table-bordered table-compact align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td>Kewajiban / Utang Lancar</td>
-                                        <td class="text-end fw-semibold">Rp 0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Modal Disetor / Dana Bergulir Awal</td>
-                                        <td class="text-end fw-semibold" id="neracaModalAwal">Rp 0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Laba Bersih Berjalan (Net Profit)</td>
-                                        <td class="text-end fw-semibold text-success" id="neracaLabaBerjalan">Rp 0</td>
-                                    </tr>
-                                    <tr class="table-danger fw-bold">
-                                        <td>TOTAL PASIVA & MODAL</td>
-                                        <td class="text-end text-danger" id="neracaTotalPasiva">Rp 0</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- ================= MODAL TAMBAH / EDIT PEMINJAM ================= -->
@@ -884,48 +666,6 @@
         </div>
     </div>
 
-    <!-- ================= MODAL TAMBAH BUKU OPERASIONAL ================= -->
-    <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
-            <div class="modal-content card-custom p-4 shadow">
-                <h6 class="fw-bold mb-3"><i class="bi bi-journal-plus me-1 text-primary"></i> Tambah Transaksi Buku Operasional</h6>
-                <form id="transaksiForm">
-                    <div class="mb-2">
-                        <label class="small fw-semibold text-secondary mb-1">Uraian / Keterangan Transaksi</label>
-                        <input type="text" id="tNama" class="form-control form-control-compact" placeholder="Contoh: Pembayaran Listrik & Air Kantor" required>
-                    </div>
-                    <div class="row g-2 mb-2">
-                        <div class="col-md-6">
-                            <label class="small fw-semibold text-secondary mb-1">Tipe Transaksi</label>
-                            <select id="tTipe" class="form-select form-select-compact" required onchange="updateKategoriOpsi()">
-                                <option value="Masuk">Kas Masuk (Pendapatan)</option>
-                                <option value="Keluar">Kas Keluar (Biaya)</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small fw-semibold text-secondary mb-1">Kategori Akun</label>
-                            <select id="tKategori" class="form-select form-select-compact" required>
-                                <!-- Terisi otomatis via JS -->
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <label class="small fw-semibold text-secondary mb-1">Kelurahan / Desa</label>
-                        <input type="text" id="tKelurahan" class="form-control form-control-compact" placeholder="Contoh: Tanete Riattang Barat" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="small fw-semibold text-secondary mb-1">Nominal (Rp)</label>
-                        <input type="number" id="tNominal" class="form-control form-control-compact fw-bold text-dark" placeholder="Contoh: 500000" required>
-                    </div>
-                    <div class="d-flex justify-content-end gap-2 border-top pt-3">
-                        <button type="button" class="btn btn-light btn-compact" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary btn-compact fw-semibold shadow-sm">Simpan Transaksi</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -985,7 +725,7 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH (STABIL & LENGKAP) =================
+        // ================= SINKRONISASI CLOUD DUA ARAH (VERSI STABIL) =================
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -1001,9 +741,6 @@
                 }
                 if (result && result.kas && result.kas.length > 0) {
                     localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
-                }
-                if (result && result.kasOps && result.kasOps.length > 0) {
-                    localStorage.setItem('upk_kas_ops_data', JSON.stringify(result.kasOps));
                 }
                 if (badge) {
                     badge.textContent = "Terhubung Cloud";
@@ -1030,11 +767,9 @@
                 const dataObj = {
                     action: "backup_all",
                     lpp: getLPPData(),
-                    kas: getKasData(),
-                    kasOps: getKasOpsData()
+                    kas: getKasData()
                 };
-
-                // Ringkas history agar muat dikirim lewat URL GET
+                
                 dataObj.lpp.forEach(item => {
                     if (item.history && item.history.length > 15) {
                         item.history = item.history.slice(0, 15);
@@ -1054,7 +789,7 @@
                     badge.className = "badge bg-success text-white small me-1";
                 }
                 if (!silent) {
-                    alert("✅ Data LPP, Kas SPP, & Buku Operasional BERHASIL disinkronkan ke Google Sheet!");
+                    alert("✅ Data LPP dan Buku Kas BERHASIL disinkronkan ke Google Sheet!");
                 }
             } catch (err) {
                 console.error("Gagal sinkronisasi:", err);
@@ -1075,13 +810,13 @@
 
         // ================= NAVIGASI VIEW =================
         function bukaView(viewName) {
-            const allViews = ['viewPanelDasborKeuangan', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKasSPP', 'viewPanelKasOps', 'viewPanelLabaRugi', 'viewPanelNeraca'];
+            const allViews = ['viewPanelDasborKeuangan', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKasSPP'];
             allViews.forEach(v => {
                 const el = document.getElementById(v);
                 if (el) el.classList.add('d-none');
             });
 
-            const allBtns = ['tabBtnDasborKeuangan', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKasSPP', 'tabBtnKasOps', 'tabBtnLabaRugi', 'tabBtnNeraca'];
+            const allBtns = ['tabBtnDasborKeuangan', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKasSPP'];
             allBtns.forEach(b => {
                 const el = document.getElementById(b);
                 if (el) el.className = 'btn btn-compact btn-outline-secondary';
@@ -1107,18 +842,6 @@
                 document.getElementById('viewPanelKasSPP').classList.remove('d-none');
                 document.getElementById('tabBtnKasSPP').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
                 renderKasSPP();
-            } else if (viewName === 'panelKasOps') {
-                document.getElementById('viewPanelKasOps').classList.remove('d-none');
-                document.getElementById('tabBtnKasOps').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
-                renderKasOps();
-            } else if (viewName === 'panelLabaRugi') {
-                document.getElementById('viewPanelLabaRugi').classList.remove('d-none');
-                document.getElementById('tabBtnLabaRugi').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
-                hitungLaporanLabaRugi();
-            } else if (viewName === 'panelNeraca') {
-                document.getElementById('viewPanelNeraca').classList.remove('d-none');
-                document.getElementById('tabBtnNeraca').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
-                hitungLaporanNeraca();
             }
         }
 
@@ -1144,14 +867,7 @@
                 tTunggakPokok += parseNum(r.tunggakPokok);
             });
 
-            const kasOpsData = getKasOpsData();
-            let totalKasMasuk = tRealPokok + tRealBunga;
-            let totalKasKeluar = 0;
-            kasOpsData.forEach(k => {
-                if (k.tipe === 'Masuk') totalKasMasuk += Number(k.nominal);
-                if (k.tipe === 'Keluar') totalKasKeluar += Number(k.nominal);
-            });
-            const saldoKasTotal = totalKasMasuk - totalKasKeluar;
+            const saldoKasTotal = tRealPokok + tRealBunga;
 
             document.getElementById('dashFinPlafon').textContent = 'Rp ' + formatRp(tPlafon);
             document.getElementById('dashFinTotalNasabah').textContent = data.length;
@@ -1361,17 +1077,6 @@
 
                 allData.push(newBorrower);
                 saveLPPData(allData);
-
-                let kasOps = getKasOpsData();
-                kasOps.unshift({
-                    id: Date.now(),
-                    nama: `Pencairan Pinjaman Baru (${nama})`,
-                    kategori: 'Pencairan Piutang',
-                    kelurahan: desa,
-                    tipe: 'Keluar',
-                    nominal: plafon
-                });
-                localStorage.setItem('upk_kas_ops_data', JSON.stringify(kasOps));
 
                 this.reset();
                 let modalEl = document.getElementById('tambahPeminjamModal');
@@ -1678,24 +1383,13 @@
 
             saveLPPData(allData);
 
-            const totalBayar = bayarPokok + bayarJasa;
-            const kasData = getKasData();
-            kasData.unshift({
-                id: Date.now(),
-                nama: `Angsuran Ke-${keX} (${n.nama}) - P:${formatRp(bayarPokok)}, J:${formatRp(bayarJasa)}`,
-                kelurahan: n.desa,
-                tipe: 'Masuk',
-                nominal: totalBayar
-            });
-            localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
-
             lastPaymentReceipt = {
                 noKwt: `KWT-${Date.now().toString().slice(-6)}`,
                 nama: n.nama,
                 desa: n.desa,
                 pokok: bayarPokok,
                 jasa: bayarJasa,
-                total: totalBayar,
+                total: bayarPokok + bayarJasa,
                 sisaSaldo: n.saldo,
                 sisaJasa: sisaJasaSelesai,
                 angsuranKe: keX,
@@ -1930,71 +1624,6 @@
             document.body.removeChild(link);
         }
 
-        function resetToSample() {
-            if (confirm('Kembalikan ke data default?')) {
-                localStorage.removeItem('upk_lpp_master');
-                renderLPPTable();
-                renderTellerCustomerList();
-                renderDataPeminjamTable();
-                updateDasborKeuangan();
-            }
-        }
-
-        // ================= KAS OPERASIONAL & KATEGORI AKUN =================
-        const defaultKas = [{ id: 1, nama: 'Operasional Kantor UPK', kategori: 'Lain-Lain Operasional', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
-        function getKasData() { const d = localStorage.getItem('upk_kas_data'); return d ? JSON.parse(d) : defaultKas; }
-        
-        function getKasOpsData() { 
-            const d = localStorage.getItem('upk_kas_ops_data'); 
-            return d ? JSON.parse(d) : []; 
-        }
-
-        const kategoriMasuk = ['Setoran Jasa Dari Kas SPP', 'Lain-Lain Pendapatan'];
-        const kategoriKeluar = ['Honor', 'Transport', 'Adm & Umum', 'Lain-Lain Operasional', 'Lain-Lain Non Ops', 'Lain-Lain Non Biaya'];
-
-        function updateKategoriOpsi() {
-            const tipeEl = document.getElementById('tTipe');
-            const selectKat = document.getElementById('tKategori');
-            if (!tipeEl || !selectKat) return;
-            
-            const tipe = tipeEl.value;
-            selectKat.innerHTML = '';
-            const list = (tipe === 'Masuk') ? kategoriMasuk : kategoriKeluar;
-            list.forEach(k => {
-                const opt = document.createElement('option');
-                opt.value = k;
-                opt.textContent = k;
-                selectKat.appendChild(opt);
-            });
-        }
-
-        function renderKas() {
-            const data = getKasOpsData();
-            const tbody = document.getElementById('transaksiTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-            
-            if (data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-3">Belum ada transaksi operasional.</td></tr>';
-                return;
-            }
-
-            data.forEach((item, index) => {
-                const isMasuk = item.tipe === 'Masuk';
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${item.nama}</td>
-                        <td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
-                        <td>${item.kelurahan}</td>
-                        <td><span class="badge ${isMasuk ? 'bg-success' : 'bg-danger'} py-0">${item.tipe}</span></td>
-                        <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-semibold">Rp ${formatRp(item.nominal)}</td>
-                        <td><button class="btn btn-outline-danger btn-sm py-0 px-2" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button></td>
-                    </tr>
-                `;
-            });
-        }
-        
         function renderKasSPP() {
             const lppData = getLPPData();
             const tbody = document.getElementById('kasSPPTableBody');
@@ -2023,132 +1652,6 @@
                 tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-3">Belum ada penerimaan Kas SPP tercatat dari angsuran.</td></tr>';
             } else {
                 tbody.innerHTML = html;
-            }
-        }
-        
-        function hitungLaporanLabaRugi() {
-            const lppData = getLPPData();
-            const kasOpsData = getKasOpsData();
-            
-            let totalJasaLPP = 0;
-            lppData.forEach(item => {
-                totalJasaLPP += parseNum(item.realTotBunga);
-            });
-            
-            let pendapatanLain = 0;
-            let biayaHonor = 0;
-            let biayaTransport = 0;
-            let biayaAdm = 0;
-            let biayaOpsLain = 0;
-            let nonOps = 0;
-            let nonBiaya = 0;
-            
-            kasOpsData.forEach(k => {
-                const nom = Number(k.nominal) || 0;
-                if (k.tipe === 'Masuk') {
-                    if (k.kategori === 'Lain-Lain Pendapatan') pendapatanLain += nom;
-                } else if (k.tipe === 'Keluar') {
-                    if (k.kategori === 'Honor') biayaHonor += nom;
-                    else if (k.kategori === 'Transport') biayaTransport += nom;
-                    else if (k.kategori === 'Adm & Umum') biayaAdm += nom;
-                    else if (k.kategori === 'Lain-Lain Operasional') biayaOpsLain += nom;
-                    else if (k.kategori === 'Lain-Lain Non Ops') nonOps += nom;
-                    else if (k.kategori === 'Lain-Lain Non Biaya') nonBiaya += nom;
-                }
-            });
-            
-            const totalPendapatan = totalJasaLPP + pendapatanLain;
-            const totalBiayaOps = biayaHonor + biayaTransport + biayaAdm + biayaOpsLain;
-            const labaBersih = totalPendapatan - totalBiayaOps - nonOps - nonBiaya;
-            
-            document.getElementById('lrPendapatanJasa').textContent = 'Rp ' + formatRp(totalJasaLPP);
-            document.getElementById('lrPendapatanLain').textContent = 'Rp ' + formatRp(pendapatanLain);
-            document.getElementById('lrTotalPendapatan').textContent = 'Rp ' + formatRp(totalPendapatan);
-            
-            document.getElementById('lrBiayaHonor').textContent = 'Rp ' + formatRp(biayaHonor);
-            document.getElementById('lrBiayaTransport').textContent = 'Rp ' + formatRp(biayaTransport);
-            document.getElementById('lrBiayaAdm').textContent = 'Rp ' + formatRp(biayaAdm);
-            document.getElementById('lrBiayaOpsLain').textContent = 'Rp ' + formatRp(biayaOpsLain);
-            document.getElementById('lrTotalBiayaOps').textContent = 'Rp ' + formatRp(totalBiayaOps);
-            
-            document.getElementById('lrNonOps').textContent = 'Rp ' + formatRp(nonOps);
-            document.getElementById('lrNonBiaya').textContent = 'Rp ' + formatRp(nonBiaya);
-            document.getElementById('lrLabaBersih').textContent = 'Rp ' + formatRp(labaBersih);
-        }
-        
-        function hitungLaporanNeraca() {
-            const lppData = getLPPData();
-            const kasOpsData = getKasOpsData();
-            
-            let totalPiutang = 0;
-            let totalRealPokok = 0;
-            let totalRealBunga = 0;
-            lppData.forEach(item => {
-                totalPiutang += parseNum(item.saldo);
-                totalRealPokok += parseNum(item.realTotPokok);
-                totalRealBunga += parseNum(item.realTotBunga);
-            });
-            
-            let kasMasukOps = 0;
-            let kasKeluarOps = 0;
-            kasOpsData.forEach(k => {
-                if (k.tipe === 'Masuk') kasMasukOps += Number(k.nominal);
-                if (k.tipe === 'Keluar') kasKeluarOps += Number(k.nominal);
-            });
-            
-            const totalKas = (totalRealPokok + totalRealBunga + kasMasukOps) - kasKeluarOps;
-            const aktivaTetap = 5000000;
-            const totalAktiva = totalKas + totalPiutang + aktivaTetap;
-            
-            let totalPlafonAwal = 0;
-            lppData.forEach(item => {
-                totalPlafonAwal += parseNum(item.plafon);
-            });
-            const modalAwal = totalPlafonAwal > 0 ? totalPlafonAwal : 50000000;
-            
-            // Hitung laba bersih berjalan
-            let totalJasaLPP = totalRealBunga;
-            let pendapatanLain = kasOpsData.filter(k => k.tipe === 'Masuk' && k.kategori === 'Lain-Lain Pendapatan').reduce((a, b) => a + Number(b.nominal), 0);
-            let totalBeban = kasOpsData.filter(k => k.tipe === 'Keluar').reduce((a, b) => a + Number(b.nominal), 0);
-            const labaBerjalan = (totalJasaLPP + pendapatanLain) - totalBeban;
-            
-            const totalPasiva = modalAwal + labaBerjalan;
-            
-            document.getElementById('neracaKas').textContent = 'Rp ' + formatRp(totalKas);
-            document.getElementById('neracaPiutang').textContent = 'Rp ' + formatRp(totalPiutang);
-            document.getElementById('neracaTotalAktiva').textContent = 'Rp ' + formatRp(totalAktiva);
-            
-            document.getElementById('neracaModalAwal').textContent = 'Rp ' + formatRp(modalAwal);
-            document.getElementById('neracaLabaBerjalan').textContent = 'Rp ' + formatRp(labaBerjalan);
-            document.getElementById('neracaTotalPasiva').textContent = 'Rp ' + formatRp(totalPasiva);
-        }
-
-        document.getElementById('transaksiForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const data = getKasOpsData();
-            data.unshift({
-                id: Date.now(), 
-                nama: document.getElementById('tNama').value,
-                kategori: document.getElementById('tKategori').value,
-                kelurahan: document.getElementById('tKelurahan').value, 
-                tipe: document.getElementById('tTipe').value,
-                nominal: Number(document.getElementById('tNominal').value)
-            });
-            localStorage.setItem('upk_kas_ops_data', JSON.stringify(data));
-            this.reset();
-            updateKategoriOpsi();
-            bootstrap.Modal.getInstance(document.getElementById('transaksiModal')).hide();
-            renderKas();
-            updateDasborKeuangan();
-            backupKeGoogleSheet(true);
-        });
-
-        function hapusKas(id) {
-            if (confirm('Hapus transaksi?')) {
-                localStorage.setItem('upk_kas_ops_data', JSON.stringify(getKasOpsData().filter(i => i.id !== id)));
-                renderKas();
-                updateDasborKeuangan();
-                backupKeGoogleSheet(true);
             }
         }
 
@@ -2196,8 +1699,6 @@
 
         window.onload = async function() {
             await loadDataDariGoogleSheet();
-            updateKategoriOpsi();
-            renderKas();
             checkAuthUI();
         };
     </script>
