@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISKEU LPP - UPK DAPM TR BARAT KAB. BONE</title>
+    <title>SISKEU LPP - UPK DAPM TR BARAT</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -13,18 +13,19 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; font-size: 0.84rem; background-color: #f1f5f9; color: #1e293b; }
-        .navbar-custom { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-bottom: 3px solid #0284c7; }
-        .card-custom { border: 1px solid #cbd5e1; border-radius: 0.85rem; background: #ffffff; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05); }
-        .btn-compact { padding: 0.4rem 0.8rem; font-size: 0.81rem; border-radius: 0.5rem; font-weight: 500; }
-        .form-control-compact, .form-select-compact { font-size: 0.82rem; padding: 0.4rem 0.65rem; border-radius: 0.5rem; }
+        body { font-family: 'Inter', sans-serif; font-size: 0.84rem; background-color: #f8fafc; color: #1e293b; }
+        .navbar-custom { background: #0f172a; }
+        .card-custom { border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #ffffff; }
+        .btn-compact { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 0.5rem; font-weight: 500; }
+        .form-control-compact, .form-select-compact { font-size: 0.82rem; padding: 0.35rem 0.65rem; border-radius: 0.5rem; }
         
         .customer-item { transition: all 0.15s ease; cursor: pointer; border-left: 3px solid transparent; }
-        .customer-item:hover, .customer-item.active { background-color: #f8fafc !important; border-left-color: #0284c7; }
+        .customer-item:hover, .customer-item.active { background-color: #f1f5f9 !important; border-left-color: #0284c7; }
         
-        .table-compact th { background-color: #f8fafc; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: middle; white-space: nowrap; padding: 0.45rem 0.5rem; text-align: center; }
-        .table-compact td { font-size: 0.75rem; vertical-align: middle; white-space: nowrap; padding: 0.45rem 0.5rem; }
+        .table-compact th { background-color: #f8fafc; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: middle; white-space: nowrap; padding: 0.4rem 0.5rem; text-align: center; }
+        .table-compact td { font-size: 0.75rem; vertical-align: middle; white-space: nowrap; padding: 0.4rem 0.5rem; }
 
+        /* Desain Kwitansi Profesional & Menarik */
         .kwitansi-profesional { 
             background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border: 2px solid #0284c7; 
@@ -35,7 +36,9 @@
 
         @media print {
             body * { visibility: hidden; }
-            #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi *, #areaCetakLabaRugi, #areaCetakLabaRugi * { visibility: visible; }
+            #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi * { visibility: visible; }
+            #areaCetakLPP { position: absolute; left: 0; top: 0; width: 100%; }
+            #areaCetakKwitansi { position: absolute; left: 10%; top: 20px; width: 80%; }
             .no-print { display: none !important; }
             @page { size: auto; margin: 8mm; }
         }
@@ -48,7 +51,7 @@
         <div class="container-fluid px-3 px-md-4">
             <div class="d-flex align-items-center">
                 <span class="navbar-brand fw-bold fs-6 mb-0 d-flex align-items-center" style="cursor: pointer;" onclick="handleBrandClick()">
-                    <i class="bi bi-bank2 text-info me-2 fs-5"></i> SISKEU UPK <span class="badge bg-info text-dark ms-2 fw-semibold" style="font-size: 0.65rem;">DAPM TR BARAT KAB. BONE</span>
+                    <i class="bi bi-wallet2 text-info me-2"></i> SISKEU LPP <span class="badge bg-secondary ms-2 fw-normal" style="font-size: 0.65rem;">UPK DAPM TR BARAT</span>
                 </span>
             </div>
             <div class="d-flex align-items-center gap-2">
@@ -68,11 +71,11 @@
                 <i class="bi bi-shield-check display-4"></i>
             </div>
             <h4 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan & Kas SPP.</p>
+            <p class="text-muted small mb-4">Sistem Informasi Keuangan, Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan[cite: 1].</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
-                <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <i class="bi bi-box-arrow-in-right me-1"></i> Buka Dasbor Keuangan Terpadu
+                <button class="btn btn-primary btn-compact py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Buka Dasbor Keuangan & LPP
                 </button>
             </div>
         </div>
@@ -81,35 +84,33 @@
     <!-- ================= DASHBOARD UTAMA ================= -->
     <div id="privateDashboard" class="container-fluid px-3 px-md-4 py-3 d-none">
         
-        <!-- Action Top Bar / Tab Navigasi Profesional -->
-        <div class="card-custom p-2 px-3 mb-3 no-print shadow-sm">
-            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
-                <div class="btn-group flex-wrap gap-1" role="group">
-                    <button type="button" class="btn btn-compact btn-primary fw-semibold shadow-sm" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')">
-                        <i class="bi bi-speedometer2 me-1"></i> Dasbor
-                    </button>
-                    <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnDataPeminjam" onclick="bukaView('panelDataPeminjam')">
-                        <i class="bi bi-people-fill me-1"></i> Peminjam
-                    </button>
-                    <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnBayar" onclick="bukaView('panelBayarAngsuran')">
-                        <i class="bi bi-receipt-cutoff me-1"></i> Kasir & Bayar
-                    </button>
-                    <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnLPP" onclick="bukaView('panelLPP')">
-                        <i class="bi bi-table me-1"></i> Master LPP
-                    </button>
-                    <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnKasSPP" onclick="bukaView('panelKasSPP')">
-                        <i class="bi bi-journal-bookmark-fill me-1"></i> Kas SPP
-                    </button>
-                </div>
+        <!-- Action Top Bar / Tab Navigasi Utama -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center bg-white p-2 px-3 border rounded-3 mb-3 no-print">
+            <div class="btn-group flex-wrap gap-1" role="group">
+                <button type="button" class="btn btn-compact btn-primary fw-semibold" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')">
+                    <i class="bi bi-speedometer2 me-1"></i> Dasbor Keuangan
+                </button>
+                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnDataPeminjam" onclick="bukaView('panelDataPeminjam')">
+                    <i class="bi bi-people-fill me-1"></i> Data Peminjam
+                </button>
+                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnBayar" onclick="bukaView('panelBayarAngsuran')">
+                    <i class="bi bi-receipt-cutoff me-1"></i> Kasir & Bayar
+                </button>
+                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnLPP" onclick="bukaView('panelLPP')">
+                    <i class="bi bi-table me-1"></i> Tabel Master LPP
+                </button>
+                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnKas" onclick="bukaView('panelKas')">
+                    <i class="bi bi-journal-text me-1"></i> Buku Kas
+                </button>
+            </div>
 
-                <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-outline-success btn-compact fw-semibold" id="btnSyncGSheet" onclick="backupKeGoogleSheet()">
-                        <i class="bi bi-file-earmark-spreadsheet me-1"></i> Sinkron Cloud
-                    </button>
-                    <button class="btn btn-success btn-compact fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()">
-                        <i class="bi bi-person-plus-fill me-1"></i> Peminjam Baru
-                    </button>
-                </div>
+            <div class="d-flex align-items-center gap-2 mt-2 mt-md-0">
+                <button class="btn btn-outline-success btn-compact fw-semibold" id="btnSyncGSheet" onclick="backupKeGoogleSheet()">
+                    <i class="bi bi-file-earmark-spreadsheet me-1"></i> Sinkron Cloud
+                </button>
+                <button class="btn btn-success btn-compact fw-semibold" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()">
+                    <i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam
+                </button>
             </div>
         </div>
 
@@ -117,38 +118,38 @@
         <div id="viewPanelDasborKeuangan">
             <div class="row g-3 mb-3">
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-3 border-start border-primary border-4">
+                    <div class="card-custom p-3">
                         <span class="text-muted small d-block">Total Plafon Tersalurkan</span>
                         <h5 class="fw-bold text-primary mb-0" id="dashFinPlafon">Rp 0</h5>
                         <small class="text-muted" style="font-size: 0.7rem;"><span id="dashFinTotalNasabah">0</span> Peminjam Aktif</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-3 border-start border-success border-4">
+                    <div class="card-custom p-3">
                         <span class="text-muted small d-block">Total Realisasi Pokok Masuk</span>
                         <h5 class="fw-bold text-success mb-0" id="dashFinRealPokok">Rp 0</h5>
                         <small class="text-muted" style="font-size: 0.7rem;">Jasa: <span id="dashFinRealBunga">Rp 0</span></small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-3 border-start border-danger border-4">
+                    <div class="card-custom p-3">
                         <span class="text-muted small d-block">Sisa Saldo Piutang (Outs.)</span>
                         <h5 class="fw-bold text-danger mb-0" id="dashFinSaldoOuts">Rp 0</h5>
                         <small class="text-muted" style="font-size: 0.7rem;">Dana masih bergulir</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-3 border-start border-dark border-4">
-                        <span class="text-muted small d-block">Saldo Kas SPP</span>
+                    <div class="card-custom p-3">
+                        <span class="text-muted small d-block">Saldo Kas Operasional</span>
                         <h5 class="fw-bold text-dark mb-0" id="dashFinSaldoKas">Rp 0</h5>
-                        <small class="text-muted" style="font-size: 0.7rem;">Akumulasi Pokok & Jasa Masuk</small>
+                        <small class="text-muted" style="font-size: 0.7rem;">Kas Masuk - Keluar</small>
                     </div>
                 </div>
             </div>
 
             <div class="row g-3">
                 <div class="col-lg-8">
-                    <div class="card-custom p-3 p-md-4 h-100 shadow-sm">
+                    <div class="card-custom p-3 p-md-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="fw-bold text-secondary mb-0"><i class="bi bi-graph-up-arrow me-1"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
                             <span class="badge bg-success" id="dashFinTingkatPengembalian">0%</span>
@@ -174,17 +175,20 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="card-custom p-3 p-md-4 h-100 d-flex flex-column justify-content-between shadow-sm">
+                    <div class="card-custom p-3 p-md-4 h-100 d-flex flex-column justify-content-between">
                         <div>
-                            <h6 class="fw-bold text-secondary mb-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Aksi Cepat UPK Kab. Bone</h6>
-                            <p class="text-muted small mb-3">Pilih modul operasional untuk mempercepat layanan nasabah:</p>
+                            <h6 class="fw-bold text-secondary mb-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Aksi Cepat UPK</h6>
+                            <p class="text-muted small mb-3">Pilih modul operasional untuk mempercepat pelayanan nasabah:</p>
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-outline-success btn-compact text-start fw-semibold" onclick="bukaView('panelBayarAngsuran')">
                                 <i class="bi bi-receipt-cutoff me-2"></i> Kasir Pembayaran Angsuran
                             </button>
                             <button class="btn btn-outline-primary btn-compact text-start fw-semibold" onclick="bukaView('panelDataPeminjam')">
-                                <i class="bi bi-people-fill me-2"></i> Manajemen Data Peminjam
+                                <i class="bi bi-people me-2"></i> Kelola Data Peminjam
+                            </button>
+                            <button class="btn btn-outline-secondary btn-compact text-start fw-semibold" onclick="bukaView('panelLPP')">
+                                <i class="bi bi-table me-2"></i> Buka Master LPP 18 Kolom[cite: 1]
                             </button>
                         </div>
                     </div>
@@ -194,7 +198,7 @@
 
         <!-- ================= 2. VIEW DATA PEMINJAM ================= -->
         <div id="viewPanelDataPeminjam" class="d-none">
-            <div class="card-custom p-3 shadow-sm">
+            <div class="card-custom p-3">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
                     <div class="d-flex gap-2 align-items-center">
                         <input type="text" id="peminjamSearchInput" class="form-control form-control-compact" style="width: 220px;" placeholder="Cari nama peminjam/desa..." onkeyup="renderDataPeminjamTable()">
@@ -239,7 +243,7 @@
             <div class="row g-3">
                 <!-- SISI KIRI: CARI PEMINJAM -->
                 <div class="col-lg-4 col-xl-3">
-                    <div class="card-custom p-3 h-100 shadow-sm">
+                    <div class="card-custom p-3 h-100">
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
                             <input type="text" id="tellerSearchInput" class="form-control form-control-compact border-start-0" placeholder="Cari peminjam..." onkeyup="renderTellerCustomerList()">
@@ -256,15 +260,13 @@
 
                 <!-- SISI KANAN: FORM ANGSURAN & INTEGRASI LPP -->
                 <div class="col-lg-8 col-xl-9">
-                    <div id="tellerEmptyState" class="card-custom p-5 text-center h-100 d-flex justify-content-center align-items-center shadow-sm">
-                        <div>
-                            <i class="bi bi-person-lines-fill text-muted fs-1 mb-2"></i>
-                            <h6 class="fw-semibold text-secondary">Pilih Nasabah di Sebelah Kiri</h6>
-                            <p class="text-muted small mb-0">Klik nama nasabah untuk memproses pembayaran angsuran, melanjutkan target LPP, dan mencetak kwitansi resmi.</p>
-                        </div>
+                    <div id="tellerEmptyState" class="card-custom p-5 text-center h-100 d-flex justify-content-center align-items-center">
+                        <i class="bi bi-person-lines-fill text-muted fs-1 mb-2"></i>
+                        <h6 class="fw-semibold text-secondary">Pilih Nasabah di Sebelah Kiri</h6>
+                        <p class="text-muted small mb-0">Klik nama nasabah untuk memproses pembayaran angsuran, melanjutkan target LPP, dan melihat total sisa tagihan.</p>
                     </div>
 
-                    <div id="tellerActiveForm" class="card-custom p-3 p-md-4 d-none shadow-sm">
+                    <div id="tellerActiveForm" class="card-custom p-3 p-md-4 d-none">
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                             <div>
                                 <h6 class="fw-bold text-primary mb-0" id="tellerNamaNasabah">-</h6>
@@ -354,7 +356,7 @@
 
                             <div class="d-flex justify-content-end gap-2 border-top pt-3">
                                 <button type="button" class="btn btn-light btn-compact" onclick="resetTellerForm()">Batal</button>
-                                <button type="submit" class="btn btn-success btn-compact fw-semibold shadow-sm">
+                                <button type="submit" class="btn btn-success btn-compact fw-semibold">
                                     <i class="bi bi-check2-circle me-1"></i> Simpan Pembayaran & Buat Bukti WA
                                 </button>
                             </div>
@@ -385,7 +387,7 @@
                         <!-- BUKTI SETORAN / KWITANSI PROFESIONAL -->
                         <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-success p-2"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di Kas SPP</span>
+                                <span class="badge bg-success p-2"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di LPP</span>
                                 <div class="d-flex gap-2 no-print">
                                     <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Kwitansi</button>
                                     <button class="btn btn-success btn-compact fw-semibold" onclick="kirimBuktiWA()"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti ke WhatsApp</button>
@@ -430,7 +432,7 @@
                                                 <td class="text-end fw-bold text-success" id="kwtPokok">Rp 0</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-start">Setoran Jasa / Bunga Pinjaman (Masuk Kas SPP)</td>
+                                                <td class="text-start">Setoran Jasa / Bunga Pinjaman</td>
                                                 <td class="text-end fw-bold text-info" id="kwtJasa">Rp 0</td>
                                             </tr>
                                             <tr class="table-active fw-bold">
@@ -465,11 +467,11 @@
 
         <!-- ================= 4. VIEW TABEL MASTER LPP ================= -->
         <div id="viewPanelLPP" class="d-none">
-            <div class="card-custom p-3 shadow-sm">
+            <div class="card-custom p-3">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2 no-print">
                     <div class="d-flex gap-2 align-items-center">
-                        <button onclick="bukaView('panelDasborKeuangan')" class="btn btn-outline-primary btn-compact fw-semibold">
-                            <i class="bi bi-arrow-left me-1"></i> Dasbor
+                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-primary btn-compact fw-semibold">
+                            <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
                         <input type="text" id="searchInput" class="form-control form-control-compact" style="width: 200px;" placeholder="Cari peminjam..." onkeyup="filterLPPTable()">
                         <select id="desaFilter" class="form-select form-select-compact" style="width: 170px;" onchange="filterLPPTable()">
@@ -478,9 +480,10 @@
                     </div>
                     <div class="d-flex gap-2">
                         <input type="file" id="csvFileInput" accept=".csv, .xlsx, .xls" class="d-none" onchange="handleLPPFileUpload(event)">
-                        <button class="btn btn-outline-primary btn-compact" onclick="document.getElementById('csvFileInput').click()"><i class="bi bi-upload me-1"></i> Import</button>
+                        <button class="btn btn-outline-primary btn-compact" onclick="document.getElementById('csvFileInput').click()"><i class="bi bi-upload me-1"></i> Import CSV</button>
                         <button class="btn btn-outline-secondary btn-compact" onclick="downloadCurrentDataCSV()"><i class="bi bi-download me-1"></i> Export</button>
                         <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
+                        <button class="btn btn-outline-danger btn-compact" onclick="resetToSample()"><i class="bi bi-arrow-counterclockwise"></i></button>
                     </div>
                 </div>
 
@@ -526,33 +529,34 @@
             </div>
         </div>
 
-        <!-- ================= 5. VIEW PANEL KAS SPP ================= -->
-        <div id="viewPanelKasSPP" class="d-none">
-            <div class="card-custom p-3 shadow-sm">
+        <!-- ================= 5. VIEW PANEL MUTASI KAS ================= -->
+        <div id="viewPanelKas" class="d-none">
+            <div class="card-custom p-3">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex align-items-center gap-2">
-                        <button onclick="bukaView('panelDasborKeuangan')" class="btn btn-outline-primary btn-compact fw-semibold">
-                            <i class="bi bi-arrow-left me-1"></i> Dasbor
+                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-primary btn-compact fw-semibold">
+                            <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
-                        <h6 class="fw-bold mb-0">Buku Kas SPP (Penerimaan Angsuran Pokok & Jasa)</h6>
+                        <h6 class="fw-bold mb-0">Buku Kas Masuk & Keluar</h6>
                     </div>
-                    <button class="btn btn-outline-dark btn-compact" onclick="window.print()">
-                        <i class="bi bi-printer me-1"></i> Cetak Kas SPP
+                    <button class="btn btn-success btn-compact" data-bs-toggle="modal" data-bs-target="#transaksiModal">
+                        <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
                     </button>
                 </div>
-                <div class="table-responsive" style="max-height: 500px;">
+                <div class="table-responsive">
                     <table class="table table-hover table-compact align-middle mb-0">
                         <thead class="table-light">
                             <tr>
                                 <th>No</th>
-                                <th>Uraian / Keterangan Pembayaran SPP</th>
+                                <th>Keterangan</th>
                                 <th>Desa/Kelurahan</th>
                                 <th>Tipe</th>
-                                <th>Nominal (Rp)</th>
+                                <th>Nominal</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="kasSPPTableBody">
-                            <!-- Data Kas SPP -->
+                        <tbody id="transaksiTableBody">
+                            <!-- Data Kas -->
                         </tbody>
                     </table>
                 </div>
@@ -631,7 +635,7 @@
 
                     <div class="d-flex justify-content-end gap-2 border-top pt-3">
                         <button type="button" class="btn btn-light btn-compact" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary btn-compact fw-semibold shadow-sm" id="btnSimpanPeminjamText">
+                        <button type="submit" class="btn btn-primary btn-compact fw-semibold" id="btnSimpanPeminjamText">
                             <i class="bi bi-save me-1"></i> Simpan Peminjam
                         </button>
                     </div>
@@ -646,7 +650,7 @@
             <div class="modal-content card-custom p-3 shadow">
                 <div class="text-center mb-3">
                     <h6 class="fw-bold text-dark mb-0">Login SISKEU UPK</h6>
-                    <small class="text-muted">Tanete Riattang Barat - Kab. Bone</small>
+                    <small class="text-muted">Tanete Riattang Barat - Bone</small>
                 </div>
                 <div id="loginError" class="alert alert-danger py-1 small text-center d-none">
                     Username / password salah!
@@ -658,9 +662,39 @@
                     <div class="mb-3">
                         <input type="password" id="password" class="form-control form-control-compact" placeholder="Password (admin123)" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-compact w-100 fw-semibold shadow-sm">
+                    <button type="submit" class="btn btn-primary btn-compact w-100 fw-semibold">
                         Masuk Sistem
                     </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL TAMBAH KAS ================= -->
+    <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content card-custom p-3 shadow">
+                <h6 class="fw-bold mb-3">Tambah Mutasi Kas</h6>
+                <form id="transaksiForm">
+                    <div class="mb-2">
+                        <input type="text" id="tNama" class="form-control form-control-compact" placeholder="Keterangan / Transaksi" required>
+                    </div>
+                    <div class="mb-2">
+                        <input type="text" id="tKelurahan" class="form-control form-control-compact" placeholder="Kelurahan / Desa" required>
+                    </div>
+                    <div class="mb-2">
+                        <select id="tTipe" class="form-select form-select-compact" required>
+                            <option value="Masuk">Kas Masuk</option>
+                            <option value="Keluar">Kas Keluar</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" id="tNominal" class="form-control form-control-compact" placeholder="Nominal (Rp)" required>
+                    </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-light btn-compact" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary btn-compact">Simpan</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -674,7 +708,8 @@
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfWRbo6751T2bvAIp-CVHEoXQ4wabnzGieMAjF0cT_0J4o6waldAgfeuW_NOxlP-5b8Q/exec";
 
         const sampleLPPData = [
-            { no: 1, nama: "RISMAWATI,S.Pd", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", targetPokok: 4250000, targetBunga: 750000, realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [] }
+            { no: 1, nama: "RISMAWATI,S.Pd", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", targetPokok: 4250000, targetBunga: 750000, realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 2, nama: "MAHMUD AGSAN(MASYITA)", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "08/10/2025", targetPokok: 8500000, targetBunga: 1500000, realLaluPokok: 7650000, realLaluBunga: 1350000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 8500000, realTotBunga: 1500000, saldo: 1500000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 10, noHp: "", persenJasa: 1.5, history: [] }
         ];
 
         function parseNum(val) {
@@ -725,7 +760,7 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH (VERSI STABIL) =================
+        // ================= SINKRONISASI CLOUD DUA ARAH (LOAD & SAVE) =================
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -763,21 +798,18 @@
                 btn.disabled = true;
             }
 
-            try {
-                const dataObj = {
-                    action: "backup_all",
-                    lpp: getLPPData(),
-                    kas: getKasData()
-                };
+            const payload = {
+                action: "backup_all",
+                lpp: getLPPData(),
+                kas: getKasData()
+            };
 
-                // Menggunakan fetch POST dengan body teks agar data sebesar apapun tidak terpotong
+            try {
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: "POST",
                     mode: "no-cors",
-                    headers: {
-                        "Content-Type": "text/plain;charset=utf-8"
-                    },
-                    body: JSON.stringify(dataObj)
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
                 });
 
                 if (badge) {
@@ -788,13 +820,9 @@
                     alert("✅ Data LPP dan Buku Kas BERHASIL disinkronkan ke Google Sheet!");
                 }
             } catch (err) {
-                console.error("Gagal sinkronisasi:", err);
-                if (badge) {
-                    badge.textContent = "Mode Offline";
-                    badge.className = "badge bg-danger text-white small me-1";
-                }
+                console.error("Gagal sinkronisasi ke Google Sheet:", err);
                 if (!silent) {
-                    alert("⚠️ Gagal menyinkronkan ke Cloud.");
+                    alert("⚠️ Gagal mengirim data ke Google Sheet. Periksa koneksi internet Anda.");
                 }
             } finally {
                 if (btn && !silent) {
@@ -806,38 +834,32 @@
 
         // ================= NAVIGASI VIEW =================
         function bukaView(viewName) {
-            const allViews = ['viewPanelDasborKeuangan', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKasSPP'];
-            allViews.forEach(v => {
-                const el = document.getElementById(v);
-                if (el) el.classList.add('d-none');
-            });
+            const allViews = ['viewPanelDasborKeuangan', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKas'];
+            allViews.forEach(v => document.getElementById(v).classList.add('d-none'));
 
-            const allBtns = ['tabBtnDasborKeuangan', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKasSPP'];
-            allBtns.forEach(b => {
-                const el = document.getElementById(b);
-                if (el) el.className = 'btn btn-compact btn-outline-secondary';
-            });
+            const allBtns = ['tabBtnDasborKeuangan', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKas'];
+            allBtns.forEach(b => document.getElementById(b).className = 'btn btn-compact btn-outline-secondary');
 
             if (viewName === 'panelDasborKeuangan') {
                 document.getElementById('viewPanelDasborKeuangan').classList.remove('d-none');
-                document.getElementById('tabBtnDasborKeuangan').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
+                document.getElementById('tabBtnDasborKeuangan').className = 'btn btn-compact btn-primary fw-semibold';
                 updateDasborKeuangan();
             } else if (viewName === 'panelDataPeminjam') {
                 document.getElementById('viewPanelDataPeminjam').classList.remove('d-none');
-                document.getElementById('tabBtnDataPeminjam').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
+                document.getElementById('tabBtnDataPeminjam').className = 'btn btn-compact btn-primary fw-semibold';
                 renderDataPeminjamTable();
             } else if (viewName === 'panelBayarAngsuran') {
                 document.getElementById('viewPanelBayarAngsuran').classList.remove('d-none');
-                document.getElementById('tabBtnBayar').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
+                document.getElementById('tabBtnBayar').className = 'btn btn-compact btn-primary fw-semibold';
                 renderTellerCustomerList();
             } else if (viewName === 'panelLPP') {
                 document.getElementById('viewPanelLPP').classList.remove('d-none');
-                document.getElementById('tabBtnLPP').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
+                document.getElementById('tabBtnLPP').className = 'btn btn-compact btn-primary fw-semibold';
                 renderLPPTable();
-            } else if (viewName === 'panelKasSPP') {
-                document.getElementById('viewPanelKasSPP').classList.remove('d-none');
-                document.getElementById('tabBtnKasSPP').className = 'btn btn-compact btn-primary fw-semibold shadow-sm';
-                renderKasSPP();
+            } else if (viewName === 'panelKas') {
+                document.getElementById('viewPanelKas').classList.remove('d-none');
+                document.getElementById('tabBtnKas').className = 'btn btn-compact btn-primary fw-semibold';
+                renderKas();
             }
         }
 
@@ -863,7 +885,13 @@
                 tTunggakPokok += parseNum(r.tunggakPokok);
             });
 
-            const saldoKasTotal = tRealPokok + tRealBunga;
+            const kasData = getKasData();
+            let totalKasMasuk = 0, totalKasKeluar = 0;
+            kasData.forEach(k => {
+                if (k.tipe === 'Masuk') totalKasMasuk += Number(k.nominal);
+                if (k.tipe === 'Keluar') totalKasKeluar += Number(k.nominal);
+            });
+            const saldoKasOperasional = totalKasMasuk - totalKasKeluar;
 
             document.getElementById('dashFinPlafon').textContent = 'Rp ' + formatRp(tPlafon);
             document.getElementById('dashFinTotalNasabah').textContent = data.length;
@@ -871,7 +899,7 @@
             document.getElementById('dashFinRealPokok2').textContent = 'Rp ' + formatRp(tRealPokok);
             document.getElementById('dashFinRealBunga').textContent = 'Rp ' + formatRp(tRealBunga);
             document.getElementById('dashFinSaldoOuts').textContent = 'Rp ' + formatRp(tSaldo);
-            document.getElementById('dashFinSaldoKas').textContent = 'Rp ' + formatRp(saldoKasTotal);
+            document.getElementById('dashFinSaldoKas').textContent = 'Rp ' + formatRp(saldoKasOperasional);
             document.getElementById('dashFinTargetPokok').textContent = 'Rp ' + formatRp(tTargetPokok);
             document.getElementById('dashFinTunggakan').textContent = 'Rp ' + formatRp(tTunggakPokok);
 
@@ -1074,6 +1102,16 @@
                 allData.push(newBorrower);
                 saveLPPData(allData);
 
+                const kasData = getKasData();
+                kasData.unshift({
+                    id: Date.now(),
+                    nama: `Pencairan Pinjaman Baru (${nama})`,
+                    kelurahan: desa,
+                    tipe: 'Keluar',
+                    nominal: plafon
+                });
+                localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+
                 this.reset();
                 let modalEl = document.getElementById('tambahPeminjamModal');
                 let modalObj = bootstrap.Modal.getInstance(modalEl);
@@ -1100,7 +1138,7 @@
             }
         }
 
-        // ================= TELLER / KASIR =================
+        // ================= TELLER / KASIR & SISA GABUNGAN =================
         let currentActiveNasabahIdx = null;
         let lastPaymentReceipt = null;
 
@@ -1379,13 +1417,24 @@
 
             saveLPPData(allData);
 
+            const totalBayar = bayarPokok + bayarJasa;
+            const kasData = getKasData();
+            kasData.unshift({
+                id: Date.now(),
+                nama: `Angsuran Ke-${keX} (${n.nama}) - P:${formatRp(bayarPokok)}, J:${formatRp(bayarJasa)}`,
+                kelurahan: n.desa,
+                tipe: 'Masuk',
+                nominal: totalBayar
+            });
+            localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+
             lastPaymentReceipt = {
                 noKwt: `KWT-${Date.now().toString().slice(-6)}`,
                 nama: n.nama,
                 desa: n.desa,
                 pokok: bayarPokok,
                 jasa: bayarJasa,
-                total: bayarPokok + bayarJasa,
+                total: totalBayar,
                 sisaSaldo: n.saldo,
                 sisaJasa: sisaJasaSelesai,
                 angsuranKe: keX,
@@ -1620,34 +1669,61 @@
             document.body.removeChild(link);
         }
 
-        function renderKasSPP() {
-            const lppData = getLPPData();
-            const tbody = document.getElementById('kasSPPTableBody');
-            if (!tbody) return;
+        function resetToSample() {
+            if (confirm('Kembalikan ke data default?')) {
+                localStorage.removeItem('upk_lpp_master');
+                renderLPPTable();
+                renderTellerCustomerList();
+                renderDataPeminjamTable();
+                updateDasborKeuangan();
+            }
+        }
+
+        // ================= KAS OPERASIONAL =================
+        const defaultKas = [{ id: 1, nama: 'Operasional Kantor UPK', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
+        function getKasData() { const d = localStorage.getItem('upk_kas_data'); return d ? JSON.parse(d) : defaultKas; }
+
+        function renderKas() {
+            const data = getKasData();
+            const tbody = document.getElementById('transaksiTableBody');
             tbody.innerHTML = '';
-            
-            let html = '';
-            let no = 1;
-            lppData.forEach(item => {
-                if (item.history && item.history.length > 0) {
-                    item.history.forEach(h => {
-                        html += `
-                            <tr>
-                                <td>${no++}</td>
-                                <td>Angsuran Ke-${h.angsuranKe} (${item.nama}) - Pokok: Rp ${formatRp(h.pokok)}, Jasa: Rp ${formatRp(h.jasa)}</td>
-                                <td>${item.desa}</td>
-                                <td><span class="badge bg-success">Masuk</span></td>
-                                <td class="text-success fw-semibold">Rp ${formatRp(h.total)}</td>
-                            </tr>
-                        `;
-                    });
-                }
+            data.forEach((item, index) => {
+                const isMasuk = item.tipe === 'Masuk';
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${item.nama}</td>
+                        <td>${item.kelurahan}</td>
+                        <td><span class="badge ${isMasuk ? 'bg-success' : 'bg-danger'} py-0">${item.tipe}</span></td>
+                        <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-semibold">Rp ${formatRp(item.nominal)}</td>
+                        <td><button class="btn btn-outline-danger btn-sm py-0 px-2" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button></td>
+                    </tr>
+                `;
             });
-            
-            if (html === '') {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-3">Belum ada penerimaan Kas SPP tercatat dari angsuran.</td></tr>';
-            } else {
-                tbody.innerHTML = html;
+        }
+
+        document.getElementById('transaksiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = getKasData();
+            data.unshift({
+                id: Date.now(), nama: document.getElementById('tNama').value,
+                kelurahan: document.getElementById('tKelurahan').value, tipe: document.getElementById('tTipe').value,
+                nominal: Number(document.getElementById('tNominal').value)
+            });
+            localStorage.setItem('upk_kas_data', JSON.stringify(data));
+            this.reset();
+            bootstrap.Modal.getInstance(document.getElementById('transaksiModal')).hide();
+            renderKas();
+            updateDasborKeuangan();
+            backupKeGoogleSheet(true);
+        });
+
+        function hapusKas(id) {
+            if (confirm('Hapus transaksi?')) {
+                localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
+                renderKas();
+                updateDasborKeuangan();
+                backupKeGoogleSheet(true);
             }
         }
 
