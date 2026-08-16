@@ -769,19 +769,15 @@
                     lpp: getLPPData(),
                     kas: getKasData()
                 };
-                
-                dataObj.lpp.forEach(item => {
-                    if (item.history && item.history.length > 15) {
-                        item.history = item.history.slice(0, 15);
-                    }
-                });
 
-                const jsonStr = JSON.stringify(dataObj);
-                const encodedData = encodeURIComponent(jsonStr);
-
-                await fetch(`${GOOGLE_SCRIPT_URL}?action=backup_all&data=${encodedData}`, {
-                    method: "GET",
-                    mode: "no-cors"
+                // Menggunakan fetch POST dengan body teks agar data sebesar apapun tidak terpotong
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "text/plain;charset=utf-8"
+                    },
+                    body: JSON.stringify(dataObj)
                 });
 
                 if (badge) {
