@@ -68,7 +68,7 @@
                 <i class="bi bi-shield-check display-4"></i>
             </div>
             <h4 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional[cite: 1].</p>
+            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
                 <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -581,7 +581,7 @@
                         </button>
                         <h6 class="fw-bold mb-0">Buku Operasional Kantor (Pemasukan & Pengeluaran Biaya)</h6>
                     </div>
-                    <button class="btn btn-success btn-compact shadow-sm" data-bs-toggle="modal" data-bs-target="#transaksiModal">
+                    <button class="btn btn-success btn-compact shadow-sm" data-bs-toggle="modal" data-bs-target="#transaksiModal" onclick="updateKategoriOpsi()">
                         <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Operasional
                     </button>
                 </div>
@@ -934,8 +934,7 @@
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfWRbo6751T2bvAIp-CVHEoXQ4wabnzGieMAjF0cT_0J4o6waldAgfeuW_NOxlP-5b8Q/exec";
 
         const sampleLPPData = [
-            { no: 1, nama: "RISMAWATI,S.Pd", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", targetPokok: 4250000, targetBunga: 750000, realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [] },
-            { no: 2, nama: "MAHMUD AGSAN(MASYITA)", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "08/10/2025", targetPokok: 8500000, targetBunga: 1500000, realLaluPokok: 7650000, realLaluBunga: 1350000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 8500000, realTotBunga: 1500000, saldo: 1500000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 10, noHp: "", persenJasa: 1.5, history: [] }
+            { no: 1, nama: "RISMAWATI,S.Pd", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", targetPokok: 4250000, targetBunga: 750000, realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [] }
         ];
 
         function parseNum(val) {
@@ -986,7 +985,7 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH (DIPERBAIKI) =================
+        // ================= SINKRONISASI CLOUD DUA ARAH =================
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -1002,6 +1001,9 @@
                 }
                 if (result && result.kas && result.kas.length > 0) {
                     localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
+                }
+                if (result && result.kasOps && result.kasOps.length > 0) {
+                    localStorage.setItem('upk_kas_ops_data', JSON.stringify(result.kasOps));
                 }
                 if (badge) {
                     badge.textContent = "Terhubung Cloud";
@@ -1028,7 +1030,8 @@
                 const payloadStr = encodeURIComponent(JSON.stringify({
                     action: "backup_all",
                     lpp: getLPPData(),
-                    kas: getKasData()
+                    kas: getKasData(),
+                    kasOps: getKasOpsData()
                 }));
 
                 await fetch(`${GOOGLE_SCRIPT_URL}?data=${payloadStr}`, {
@@ -1041,7 +1044,7 @@
                     badge.className = "badge bg-success text-white small me-1";
                 }
                 if (!silent) {
-                    alert("✅ Data LPP dan Buku Kas BERHASIL disinkronkan ke Google Sheet!");
+                    alert("✅ Data LPP, Kas SPP, & Buku Operasional BERHASIL disinkronkan ke Google Sheet!");
                 }
             } catch (err) {
                 console.error("Gagal sinkronisasi ke Google Sheet:", err);
@@ -1131,7 +1134,7 @@
                 tTunggakPokok += parseNum(r.tunggakPokok);
             });
 
-            const kasOpsData = getKasData();
+            const kasOpsData = getKasOpsData();
             let totalKasMasuk = tRealPokok + tRealBunga;
             let totalKasKeluar = 0;
             kasOpsData.forEach(k => {
@@ -1349,15 +1352,16 @@
                 allData.push(newBorrower);
                 saveLPPData(allData);
 
-                const kasData = getKasData();
-                kasData.unshift({
+                let kasOps = getKasOpsData();
+                kasOps.unshift({
                     id: Date.now(),
                     nama: `Pencairan Pinjaman Baru (${nama})`,
+                    kategori: 'Pencairan Piutang',
                     kelurahan: desa,
                     tipe: 'Keluar',
                     nominal: plafon
                 });
-                localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+                localStorage.setItem('upk_kas_ops_data', JSON.stringify(kasOps));
 
                 this.reset();
                 let modalEl = document.getElementById('tambahPeminjamModal');
@@ -1926,13 +1930,33 @@
             }
         }
 
-        // ================= KAS OPERASIONAL =================
-        const defaultKas = [{ id: 1, nama: 'Operasional Kantor UPK', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
+        // ================= KAS OPERASIONAL & KATEGORI AKUN =================
+        const defaultKas = [{ id: 1, nama: 'Operasional Kantor UPK', kategori: 'Lain-Lain Operasional', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
         function getKasData() { const d = localStorage.getItem('upk_kas_data'); return d ? JSON.parse(d) : defaultKas; }
+
+        const kategoriMasuk = ['Setoran Jasa Dari Kas SPP', 'Lain-Lain Pendapatan'];
+        const kategoriKeluar = ['Honor', 'Transport', 'Adm & Umum', 'Lain-Lain Operasional', 'Lain-Lain Non Ops', 'Lain-Lain Non Biaya'];
+
+        function updateKategoriOpsi() {
+            const tipeEl = document.getElementById('tTipe');
+            const selectKat = document.getElementById('tKategori');
+            if (!tipeEl || !selectKat) return;
+            
+            const tipe = tipeEl.value;
+            selectKat.innerHTML = '';
+            const list = (tipe === 'Masuk') ? kategoriMasuk : kategoriKeluar;
+            list.forEach(k => {
+                const opt = document.createElement('option');
+                opt.value = k;
+                opt.textContent = k;
+                selectKat.appendChild(opt);
+            });
+        }
 
         function renderKas() {
             const data = getKasData();
             const tbody = document.getElementById('transaksiTableBody');
+            if (!tbody) return;
             tbody.innerHTML = '';
             data.forEach((item, index) => {
                 const isMasuk = item.tipe === 'Masuk';
@@ -1940,6 +1964,7 @@
                     <tr>
                         <td>${index + 1}</td>
                         <td>${item.nama}</td>
+                        <td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
                         <td>${item.kelurahan}</td>
                         <td><span class="badge ${isMasuk ? 'bg-success' : 'bg-danger'} py-0">${item.tipe}</span></td>
                         <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-semibold">Rp ${formatRp(item.nominal)}</td>
@@ -1953,12 +1978,16 @@
             e.preventDefault();
             const data = getKasData();
             data.unshift({
-                id: Date.now(), nama: document.getElementById('tNama').value,
-                kelurahan: document.getElementById('tKelurahan').value, tipe: document.getElementById('tTipe').value,
+                id: Date.now(), 
+                nama: document.getElementById('tNama').value,
+                kategori: document.getElementById('tKategori').value,
+                kelurahan: document.getElementById('tKelurahan').value, 
+                tipe: document.getElementById('tTipe').value,
                 nominal: Number(document.getElementById('tNominal').value)
             });
             localStorage.setItem('upk_kas_data', JSON.stringify(data));
             this.reset();
+            updateKategoriOpsi();
             bootstrap.Modal.getInstance(document.getElementById('transaksiModal')).hide();
             renderKas();
             updateDasborKeuangan();
@@ -2018,6 +2047,8 @@
 
         window.onload = async function() {
             await loadDataDariGoogleSheet();
+            updateKategoriOpsi();
+            renderKas();
             checkAuthUI();
         };
     </script>
