@@ -68,7 +68,7 @@
                 <i class="bi bi-shield-check display-4"></i>
             </div>
             <h4 class="fw-bold text-dark mb-1">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional[cite: 1].</p>
+            <p class="text-muted small mb-4">Kabupaten Bone - Sistem Informasi Keuangan, Data Peminjam, LPP Perorangan, Kas SPP & Buku Operasional.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
                 <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -934,8 +934,7 @@
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfWRbo6751T2bvAIp-CVHEoXQ4wabnzGieMAjF0cT_0J4o6waldAgfeuW_NOxlP-5b8Q/exec";
 
         const sampleLPPData = [
-            { no: 1, nama: "RISMAWATI,S.Pd", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", targetPokok: 4250000, targetBunga: 750000, realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [] },
-            { no: 2, nama: "MAHMUD AGSAN(MASYITA)", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "08/10/2025", targetPokok: 8500000, targetBunga: 1500000, realLaluPokok: 7650000, realLaluBunga: 1350000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 8500000, realTotBunga: 1500000, saldo: 1500000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 10, noHp: "", persenJasa: 1.5, history: [] }
+            { no: 1, nama: "RISMAWATI,S.Pd", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", targetPokok: 4250000, targetBunga: 750000, realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", tunggakPokok: 0, tunggakBunga: 0, angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [] }
         ];
 
         function parseNum(val) {
@@ -986,7 +985,7 @@
             return strDate;
         }
 
-        // ================= SINKRONISASI CLOUD DUA ARAH =================
+        // ================= SINKRONISASI CLOUD DUA ARAH (DIOPTIMALKAN) =================
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
@@ -1002,9 +1001,6 @@
                 }
                 if (result && result.kas && result.kas.length > 0) {
                     localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
-                }
-                if (result && result.kasOps && result.kasOps.length > 0) {
-                    localStorage.setItem('upk_kas_ops_data', JSON.stringify(result.kasOps));
                 }
                 if (badge) {
                     badge.textContent = "Terhubung Cloud";
@@ -1028,20 +1024,27 @@
             }
 
             try {
-                const payload = {
+                // Mengirim data melalui parameter URL GET untuk menghindari blokir payload CORS di GitHub Pages
+                const dataObj = {
                     action: "backup_all",
                     lpp: getLPPData(),
-                    kas: getKasData(),
-                    kasOps: getKasOpsData()
+                    kas: getKasData()
                 };
+                
+                // Ringkas history LPP jika terlalu besar agar muat di URL
+                dataObj.lpp.forEach(item => {
+                    if (item.history && item.history.length > 20) {
+                        item.history = item.history.slice(0, 20);
+                    }
+                });
 
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: {
-                        "Content-Type": "text/plain;charset=utf-8"
-                    },
-                    body: JSON.stringify(payload)
+                const jsonStr = JSON.stringify(dataObj);
+                const encodedData = encodeURIComponent(jsonStr);
+
+                // Kirim menggunakan metode GET parameter
+                await fetch(`${GOOGLE_SCRIPT_URL}?data=${encodedData}`, {
+                    method: "GET",
+                    mode: "no-cors"
                 });
 
                 if (badge) {
@@ -1049,7 +1052,7 @@
                     badge.className = "badge bg-success text-white small me-1";
                 }
                 if (!silent) {
-                    alert("✅ Data LPP, Kas SPP, & Buku Operasional BERHASIL disinkronkan ke Google Sheet!");
+                    alert("✅ Data LPP dan Buku Kas BERHASIL disinkronkan ke Google Sheet!");
                 }
             } catch (err) {
                 console.error("Gagal sinkronisasi ke Google Sheet:", err);
@@ -1058,7 +1061,7 @@
                     badge.className = "badge bg-danger text-white small me-1";
                 }
                 if (!silent) {
-                    alert("⚠️ Gagal menyinkronkan ke Cloud. Periksa kembali koneksi internet Anda.");
+                    alert("⚠️ Gagal menyinkronkan ke Cloud.");
                 }
             } finally {
                 if (btn && !silent) {
@@ -1139,7 +1142,7 @@
                 tTunggakPokok += parseNum(r.tunggakPokok);
             });
 
-            const kasOpsData = getKasOpsData();
+            const kasOpsData = getKasData();
             let totalKasMasuk = tRealPokok + tRealBunga;
             let totalKasKeluar = 0;
             kasOpsData.forEach(k => {
@@ -1357,16 +1360,15 @@
                 allData.push(newBorrower);
                 saveLPPData(allData);
 
-                let kasOps = getKasOpsData();
-                kasOps.unshift({
+                const kasData = getKasData();
+                kasData.unshift({
                     id: Date.now(),
                     nama: `Pencairan Pinjaman Baru (${nama})`,
-                    kategori: 'Pencairan Piutang',
                     kelurahan: desa,
                     tipe: 'Keluar',
                     nominal: plafon
                 });
-                localStorage.setItem('upk_kas_ops_data', JSON.stringify(kasOps));
+                localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
 
                 this.reset();
                 let modalEl = document.getElementById('tambahPeminjamModal');
