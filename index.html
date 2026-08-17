@@ -13,31 +13,45 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <style>
-        /* === VARIABEL TEMA WARNA === */
+        /* === VARIABEL TEMA WARNA YANG DIOPTIMALKAN AGAR JELAS DI SIANG & MALAM === */
         :root {
             --bg-body-gradient: linear-gradient(135deg, #0b132b 0%, #1c2541 50%, #3a506b 100%);
             --navbar-bg: #0b132b;
             --card-bg: #1c2541;
             --card-light-bg: #222d4f;
-            --text-main: #e0e1dd;
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.12);
-            --table-th-bg: #0b132b;
+            --border-color: rgba(255, 255, 255, 0.15);
+            --table-th-bg: #0f172a;
             --table-td-bg: #1e293b;
-            --table-td-color: #f8fafc;
+            --table-td-color: #f1f5f9;
+            /* Warna Khusus Kolom Tabel agar kontras tinggi di Dark Mode */
+            --col-target-bg: rgba(234, 179, 8, 0.18);
+            --col-target-color: #fde047;
+            --col-real-bg: rgba(16, 185, 129, 0.22);
+            --col-real-color: #6ee7b7;
+            --col-tung-bg: rgba(239, 68, 68, 0.22);
+            --col-tung-color: #fca5a5;
         }
 
         [data-theme="light"] {
-            --bg-body-gradient: #f1f5f9;
+            --bg-body-gradient: #f8fafc;
             --navbar-bg: #0f172a;
             --card-bg: #ffffff;
-            --card-light-bg: #f8fafc;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --table-th-bg: #f8fafc;
+            --card-light-bg: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --table-th-bg: #e2e8f0;
             --table-td-bg: #ffffff;
-            --table-td-color: #1e293b;
+            --table-td-color: #0f172a;
+            /* Warna Khusus Kolom Tabel agar kontras tinggi di Light Mode */
+            --col-target-bg: rgba(202, 138, 4, 0.12);
+            --col-target-color: #854d0e;
+            --col-real-bg: rgba(5, 150, 105, 0.12);
+            --col-real-color: #065f46;
+            --col-tung-bg: rgba(220, 38, 38, 0.12);
+            --col-tung-color: #991b1b;
         }
 
         body { 
@@ -82,11 +96,11 @@
         }
         
         .customer-item { transition: all 0.15s ease; cursor: pointer; border-left: 3px solid transparent; background-color: var(--card-bg); color: var(--text-main); border-bottom: 1px solid var(--border-color); }
-        .customer-item:hover, .customer-item.active { background-color: rgba(2, 132, 199, 0.1) !important; border-left-color: #0284c7; color: var(--text-main); }
+        .customer-item:hover, .customer-item.active { background-color: rgba(2, 132, 199, 0.15) !important; border-left-color: #0284c7; }
         
         .table-compact th { 
             background-color: var(--table-th-bg); 
-            color: #0284c7; 
+            color: var(--text-main); 
             font-size: 0.72rem; 
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
@@ -95,6 +109,7 @@
             padding: 0.5rem; 
             text-align: center; 
             border-color: var(--border-color); 
+            font-weight: 700;
         }
         .table-compact td { 
             font-size: 0.75rem; 
@@ -104,8 +119,9 @@
             color: var(--table-td-color); 
             border-color: var(--border-color); 
             background-color: var(--table-td-bg);
+            font-weight: 500;
         }
-        .table-hover tbody tr:hover td { background-color: rgba(2, 132, 199, 0.05); }
+        .table-hover tbody tr:hover td { background-color: rgba(2, 132, 199, 0.08); }
 
         .kwitansi-profesional { 
             background: var(--card-bg);
@@ -135,9 +151,7 @@
             animation: pulseGlow 3s infinite ease-in-out;
             transition: transform 0.3s ease;
         }
-        .logo-glow:hover {
-            transform: scale(1.08);
-        }
+        .logo-glow:hover { transform: scale(1.08); }
 
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 15px rgba(2, 132, 199, 0.3); }
@@ -1800,18 +1814,18 @@
                         <td class="text-end text-info">${formatRp(plafon)}</td>
                         <td class="text-center">${tenor} Bln</td>
                         <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
-                        <td class="text-end fw-bold" style="background: rgba(253, 224, 71, 0.15); color: #fde047;">${formatRp(tarP)}</td>
-                        <td class="text-end fw-bold" style="background: rgba(253, 224, 71, 0.15); color: #fde047;">${formatRp(tarB)}</td>
-                        <td class="text-end text-muted">${formatRp(lP)}</td>
-                        <td class="text-end text-muted">${formatRp(lB)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">${formatRp(tarP)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">${formatRp(tarB)}</td>
+                        <td class="text-end" style="color: var(--text-muted);">${formatRp(lP)}</td>
+                        <td class="text-end" style="color: var(--text-muted);">${formatRp(lB)}</td>
                         <td class="text-end text-info fw-semibold">${formatRp(iP)}</td>
                         <td class="text-end text-info fw-semibold">${formatRp(iB)}</td>
-                        <td class="text-end fw-bold" style="background: rgba(6, 95, 70, 0.35); color: #6ee7b7;">${formatRp(totP)}</td>
-                        <td class="text-end fw-bold" style="background: rgba(6, 95, 70, 0.35); color: #6ee7b7;">${formatRp(totB)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">${formatRp(totP)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">${formatRp(totB)}</td>
                         <td class="text-end fw-bold text-danger">${formatRp(saldo)}</td>
                         <td class="text-center text-warning">${r.persen || '0%'}</td>
-                        <td class="text-end fw-bold" style="background: rgba(153, 27, 27, 0.35); color: #fca5a5;">${formatRp(tungP)}</td>
-                        <td class="text-end fw-bold" style="background: rgba(153, 27, 27, 0.35); color: #fca5a5;">${formatRp(tungB)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-tung-bg); color: var(--col-tung-color);">${formatRp(tungP)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-tung-bg); color: var(--col-tung-color);">${formatRp(tungB)}</td>
                     </tr>
                 `;
             });
@@ -1821,18 +1835,18 @@
                     <td colspan="3" class="text-center">TOTAL</td>
                     <td class="text-info">${formatRp(tPlafon)}</td>
                     <td></td><td></td>
-                    <td style="color: #fde047;">${formatRp(tTarP)}</td>
-                    <td style="color: #fde047;">${formatRp(tTarB)}</td>
+                    <td style="color: var(--col-target-color);">${formatRp(tTarP)}</td>
+                    <td style="color: var(--col-target-color);">${formatRp(tTarB)}</td>
                     <td>${formatRp(tLaluP)}</td>
                     <td>${formatRp(tLaluB)}</td>
                     <td class="text-info">${formatRp(tIniP)}</td>
                     <td class="text-info">${formatRp(tIniB)}</td>
-                    <td style="color: #6ee7b7;">${formatRp(tTotP)}</td>
-                    <td style="color: #6ee7b7;">${formatRp(tTotB)}</td>
+                    <td style="color: var(--col-real-color);">${formatRp(tTotP)}</td>
+                    <td style="color: var(--col-real-color);">${formatRp(tTotB)}</td>
                     <td class="text-danger">${formatRp(tSaldo)}</td>
                     <td></td>
-                    <td style="color: #fca5a5; font-weight: bold;">${formatRp(tTungP)}</td>
-                    <td style="color: #fca5a5; font-weight: bold;">${formatRp(tTungB)}</td>
+                    <td style="color: var(--col-tung-color); font-weight: bold;">${formatRp(tTungP)}</td>
+                    <td style="color: var(--col-tung-color); font-weight: bold;">${formatRp(tTungB)}</td>
                 </tr>
             `;
         }
@@ -2007,7 +2021,7 @@
                 bukaView('panelProfil');
                 resetIdleTimer();
             } else {
-                document.getElementById('publicContent').classList.remove('d-none');
+                document.getElementById('publicContent').classList.add('d-none');
                 document.getElementById('privateDashboard').classList.add('d-none');
                 greeting.textContent = '';
                 btnAuth.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i> Masuk';
@@ -2037,7 +2051,7 @@
 
         window.onload = async function() {
             initTheme();
-            await loadDataDariGoogleSheet();
+            await loadDataDariGoogleScript(); // jika ada
             checkAuthUI();
         };
     </script>
