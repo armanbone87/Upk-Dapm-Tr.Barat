@@ -2156,7 +2156,8 @@
                 bukaView('panelProfil');
                 resetIdleTimer();
             } else {
-                document.getElementById('publicContent').classList.add('d-none');
+                // DIPERBAIKI: Menggunakan remove('d-none') agar halaman utama (landing) muncul saat belum login
+                document.getElementById('publicContent').classList.remove('d-none');
                 document.getElementById('privateDashboard').classList.add('d-none');
                 greeting.textContent = '';
                 btnAuth.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i> Masuk';
