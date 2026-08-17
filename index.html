@@ -14,16 +14,18 @@
 
     <style>
         :root {
-            --bg-body-gradient: linear-gradient(135deg, #0b132b 0%, #1c2541 50%, #3a506b 100%);
-            --navbar-bg: #0b132b;
-            --card-bg: #1c2541;
-            --card-light-bg: #222d4f;
+            --bg-body: #090d16;
+            --sidebar-bg: #0e1525;
+            --card-bg: #131c31;
+            --card-light-bg: #1a253f;
             --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.15);
-            --table-th-bg: #0f172a;
-            --table-td-bg: #1e293b;
-            --table-td-color: #f1f5f9;
+            --text-muted: #64748b;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --neon-green: #10b981;
+            --neon-green-glow: rgba(16, 185, 129, 0.35);
+            --table-th-bg: #0e1525;
+            --table-td-bg: #131c31;
+            --table-td-color: #f8fafc;
             --col-target-bg: rgba(234, 179, 8, 0.18);
             --col-target-color: #fde047;
             --col-real-bg: rgba(16, 185, 129, 0.22);
@@ -33,13 +35,15 @@
         }
 
         [data-theme="light"] {
-            --bg-body-gradient: #f8fafc;
-            --navbar-bg: #0f172a;
+            --bg-body: #f8fafc;
+            --sidebar-bg: #0f172a;
             --card-bg: #ffffff;
             --card-light-bg: #f1f5f9;
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-color: #cbd5e1;
+            --neon-green: #059669;
+            --neon-green-glow: rgba(5, 150, 105, 0.25);
             --table-th-bg: #e2e8f0;
             --table-td-bg: #ffffff;
             --table-td-color: #0f172a;
@@ -54,26 +58,27 @@
         body { 
             font-family: 'Inter', sans-serif; 
             font-size: 0.84rem; 
-            background: var(--bg-body-gradient);
+            background-color: var(--bg-body);
             color: var(--text-main); 
             min-height: 100vh;
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 2px solid var(--border-color); }
+        .navbar-custom { background: var(--sidebar-bg) !important; border-bottom: 1px solid var(--border-color); }
         
         .card-custom { 
             border: 1px solid var(--border-color); 
-            border-radius: 0.85rem; 
+            border-radius: 1rem; 
             background: var(--card-bg); 
             color: var(--text-main);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
         .card-light-custom {
             background: var(--card-light-bg);
             border: 1px solid var(--border-color);
             color: var(--text-main);
+            border-radius: 0.75rem;
         }
 
         .btn-compact { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 0.5rem; font-weight: 500; }
@@ -88,12 +93,12 @@
         .form-control-compact:focus, .form-select-compact:focus {
             background-color: var(--card-light-bg);
             color: var(--text-main);
-            border-color: #0284c7;
-            box-shadow: 0 0 0 0.25rem rgba(2, 132, 199, 0.25);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 0 0.25rem var(--neon-green-glow);
         }
         
         .customer-item { transition: all 0.15s ease; cursor: pointer; border-left: 3px solid transparent; background-color: var(--card-bg); color: var(--text-main); border-bottom: 1px solid var(--border-color); }
-        .customer-item:hover, .customer-item.active { background-color: rgba(2, 132, 199, 0.15) !important; border-left-color: #0284c7; }
+        .customer-item:hover, .customer-item.active { background-color: rgba(16, 185, 129, 0.15) !important; border-left-color: var(--neon-green); }
         
         .table-compact th { 
             background-color: var(--table-th-bg); 
@@ -118,7 +123,7 @@
             background-color: var(--table-td-bg);
             font-weight: 500;
         }
-        .table-hover tbody tr:hover td { background-color: rgba(2, 132, 199, 0.08); }
+        .table-hover tbody tr:hover td { background-color: rgba(16, 185, 129, 0.08); }
 
         .kwitansi-profesional { 
             background: var(--card-bg);
@@ -143,17 +148,17 @@
             border-radius: 50%;
             padding: 4px;
             background: var(--card-bg);
-            border: 2px solid rgba(2, 132, 199, 0.5);
-            box-shadow: 0 0 20px rgba(2, 132, 199, 0.4);
+            border: 2px solid rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
             animation: pulseGlow 3s infinite ease-in-out;
             transition: transform 0.3s ease;
         }
         .logo-glow:hover { transform: scale(1.08); }
 
         @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(2, 132, 199, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(2, 132, 199, 0.6); }
-            100% { box-shadow: 0 0 15px rgba(2, 132, 199, 0.3); }
+            0% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
         }
 
         @media print {
@@ -173,7 +178,7 @@
         <div class="container-fluid px-3 px-md-4">
             <div class="d-flex align-items-center">
                 <span class="navbar-brand fw-bold fs-6 mb-0 d-flex align-items-center text-light" style="cursor: pointer;" onclick="handleBrandClick()">
-                    <i class="bi bi-shield-shaded text-info me-2 fs-5"></i> SISKEU UPK <span class="badge bg-primary ms-2 fw-normal" style="font-size: 0.65rem;">DAPM TR. BARAT</span>
+                    <img src="logo-dapm.png" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;" class="me-2"> SISKEU UPK <span class="badge bg-success ms-2 fw-normal text-dark" style="font-size: 0.65rem; background-color: var(--neon-green) !important;">DAPM TR. BARAT</span>
                 </span>
             </div>
             <div class="d-flex align-items-center gap-2">
@@ -199,7 +204,7 @@
             <p class="small mb-4" style="color: var(--text-muted);">Sistem Informasi Keuangan, Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
-                <button class="btn btn-primary btn-compact py-2 fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <button class="btn btn-success btn-compact py-2 fw-semibold shadow-sm text-dark" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: var(--neon-green); border: none;">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Buka Dasbor Keuangan & LPP
                 </button>
             </div>
@@ -213,11 +218,11 @@
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnProfil" onclick="bukaView('panelProfil')">
                     <i class="bi bi-info-circle me-1"></i> Profil DAPM TR. Barat
                 </button>
-                <button type="button" class="btn btn-compact btn-primary fw-semibold" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')">
+                <button type="button" class="btn btn-compact btn-success fw-semibold text-dark" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')" style="background-color: var(--neon-green); border: none;">
                     <i class="bi bi-speedometer2 me-1"></i> Dasbor Keuangan
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnJatuhTempo" onclick="bukaView('panelJatuhTempo')">
-                    <i class="bi bi-calendar-check me-1"></i> Panel Jatuh Tempo[cite: 1]
+                    <i class="bi bi-calendar-check me-1"></i> Panel Jatuh Tempo
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnDataPeminjam" onclick="bukaView('panelDataPeminjam')">
                     <i class="bi bi-people-fill me-1"></i> Data Peminjam
@@ -237,7 +242,7 @@
                 <button class="btn btn-outline-success btn-compact fw-semibold" id="btnSyncGSheet" onclick="backupKeGoogleSheet()">
                     <i class="bi bi-file-earmark-spreadsheet me-1"></i> Sinkron Cloud
                 </button>
-                <button class="btn btn-success btn-compact fw-semibold" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()">
+                <button class="btn btn-success btn-compact fw-semibold text-dark" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()" style="background-color: var(--neon-green); border: none;">
                     <i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam
                 </button>
             </div>
@@ -247,7 +252,7 @@
             <div class="card-custom p-4 p-md-5 mb-3">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <span class="badge bg-primary mb-2">Kelembagaan Resmi</span>
+                        <span class="badge bg-success mb-2 text-dark" style="background-color: var(--neon-green) !important;">Kelembagaan Resmi</span>
                         <h3 class="fw-bold mb-2" style="color: var(--text-main);">UPK DAPM TANETE RIATTANG BARAT</h3>
                         <p class="small mb-3" style="color: var(--text-muted);">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
                         <div class="d-flex gap-3 small" style="color: var(--text-muted);">
@@ -333,10 +338,10 @@
                     <div class="card-custom p-3 p-md-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="fw-bold mb-0" style="color: var(--text-main);"><i class="bi bi-graph-up-arrow me-1"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
-                            <span class="badge bg-success" id="dashFinTingkatPengembalian">0%</span>
+                            <span class="badge bg-success text-dark" id="dashFinTingkatPengembalian" style="background-color: var(--neon-green) !important;">0%</span>
                         </div>
                         <div class="progress mb-3 bg-secondary" style="height: 10px;">
-                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" id="dashFinProgressBar" role="progressbar" style="width: 0%;"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" id="dashFinProgressBar" role="progressbar" style="width: 0%; background-color: var(--neon-green);"></div>
                         </div>
                         <div class="row g-2 text-center small">
                             <div class="col-4 border-end" style="border-color: var(--border-color) !important;">
@@ -383,7 +388,7 @@
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-2 border-bottom" style="border-color: var(--border-color) !important;">
                     <div>
                         <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-calendar-check text-warning me-2"></i> Panel Jatuh Tempo & Target Real-time</h5>
-                        <p class="small mb-0" style="color: var(--text-muted);">Menghitung target Pokok & Jasa secara <em>real-time</em> berdasarkan bulan berjalan sejak tanggal pencairan (`hitungBulanBerjalan`), serta pemantauan status pembayaran[cite: 1].</p>
+                        <p class="small mb-0" style="color: var(--text-muted);">Menghitung target Pokok & Jasa secara <em>real-time</em> berdasarkan bulan berjalan sejak tanggal pencairan (`hitungBulanBerjalan`), serta pemantauan status pembayaran.</p>
                     </div>
                     <div class="d-flex gap-2 align-items-center">
                         <label class="small fw-semibold" style="color: var(--text-muted);">Tanggal Pantau:</label>
@@ -442,7 +447,7 @@
                         </select>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-success btn-compact" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()">
+                        <button class="btn btn-success btn-compact text-dark fw-semibold" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()" style="background-color: var(--neon-green); border: none;">
                             <i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru
                         </button>
                     </div>
@@ -584,7 +589,7 @@
 
                             <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
                                 <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="resetTellerForm()">Batal</button>
-                                <button type="submit" class="btn btn-success btn-compact fw-semibold">
+                                <button type="submit" class="btn btn-success btn-compact fw-semibold text-dark" style="background-color: var(--neon-green); border: none;">
                                     <i class="bi bi-check2-circle me-1"></i> Simpan Pembayaran & Buat Bukti WA
                                 </button>
                             </div>
@@ -614,10 +619,10 @@
 
                         <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none" style="border-color: var(--border-color) !important;">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-success p-2"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di LPP</span>
+                                <span class="badge bg-success p-2 text-dark" style="background-color: var(--neon-green) !important;"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di LPP</span>
                                 <div class="d-flex gap-2 no-print">
                                     <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Kwitansi</button>
-                                    <button class="btn btn-success btn-compact fw-semibold" onclick="kirimBuktiWA()"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti ke WhatsApp</button>
+                                    <button class="btn btn-success btn-compact fw-semibold text-dark" onclick="kirimBuktiWA()" style="background-color: var(--neon-green); border: none;"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti ke WhatsApp</button>
                                 </div>
                             </div>
 
@@ -759,7 +764,7 @@
                         </button>
                         <h6 class="fw-bold mb-0" style="color: var(--text-main);">Buku Kas Masuk & Keluar</h6>
                     </div>
-                    <button class="btn btn-success btn-compact" data-bs-toggle="modal" data-bs-target="#transaksiModal">
+                    <button class="btn btn-success btn-compact text-dark fw-semibold" data-bs-toggle="modal" data-bs-target="#transaksiModal" style="background-color: var(--neon-green); border: none;">
                         <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
                     </button>
                 </div>
@@ -853,7 +858,7 @@
 
                     <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
                         <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary btn-compact fw-semibold" id="btnSimpanPeminjamText">
+                        <button type="submit" class="btn btn-success btn-compact fw-semibold text-dark" id="btnSimpanPeminjamText" style="background-color: var(--neon-green); border: none;">
                             <i class="bi bi-save me-1"></i> Simpan Peminjam
                         </button>
                     </div>
@@ -880,7 +885,7 @@
                     <div class="mb-3">
                         <input type="password" id="password" class="form-control form-control-compact" placeholder="Password (admin123)" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-compact w-100 fw-semibold">
+                    <button type="submit" class="btn btn-success btn-compact w-100 fw-semibold text-dark" style="background-color: var(--neon-green); border: none;">
                         Masuk Sistem
                     </button>
                 </form>
@@ -911,7 +916,7 @@
                     </div>
                     <div class="d-flex justify-content-end gap-2">
                         <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary btn-compact">Simpan</button>
+                        <button type="submit" class="btn btn-success btn-compact text-dark fw-semibold" style="background-color: var(--neon-green); border: none;">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -1134,33 +1139,47 @@
 
             if (viewName === 'panelProfil') {
                 document.getElementById('viewPanelProfil').classList.remove('d-none');
-                document.getElementById('tabBtnProfil').className = 'btn btn-compact btn-primary fw-semibold';
+                document.getElementById('tabBtnProfil').className = 'btn btn-compact btn-success fw-semibold text-dark';
+                document.getElementById('tabBtnProfil').style.backgroundColor = 'var(--neon-green)';
+                document.getElementById('tabBtnProfil').style.border = 'none';
             } else if (viewName === 'panelDasborKeuangan') {
                 document.getElementById('viewPanelDasborKeuangan').classList.remove('d-none');
-                document.getElementById('tabBtnDasborKeuangan').className = 'btn btn-compact btn-primary fw-semibold';
+                document.getElementById('tabBtnDasborKeuangan').className = 'btn btn-compact btn-success fw-semibold text-dark';
+                document.getElementById('tabBtnDasborKeuangan').style.backgroundColor = 'var(--neon-green)';
+                document.getElementById('tabBtnDasborKeuangan').style.border = 'none';
                 updateDasborKeuangan();
             } else if (viewName === 'panelJatuhTempo') {
                 document.getElementById('viewPanelJatuhTempo').classList.remove('d-none');
-                document.getElementById('tabBtnJatuhTempo').className = 'btn btn-compact btn-primary fw-semibold';
+                document.getElementById('tabBtnJatuhTempo').className = 'btn btn-compact btn-success fw-semibold text-dark';
+                document.getElementById('tabBtnJatuhTempo').style.backgroundColor = 'var(--neon-green)';
+                document.getElementById('tabBtnJatuhTempo').style.border = 'none';
                 if (!document.getElementById('filterTglJatuhTempo').value) {
                     document.getElementById('filterTglJatuhTempo').value = new Date().toISOString().split('T')[0];
                 }
                 renderJatuhTempoTable();
             } else if (viewName === 'panelDataPeminjam') {
                 document.getElementById('viewPanelDataPeminjam').classList.remove('d-none');
-                document.getElementById('tabBtnDataPeminjam').className = 'btn btn-compact btn-primary fw-semibold';
+                document.getElementById('tabBtnDataPeminjam').className = 'btn btn-compact btn-success fw-semibold text-dark';
+                document.getElementById('tabBtnDataPeminjam').style.backgroundColor = 'var(--neon-green)';
+                document.getElementById('tabBtnDataPeminjam').style.border = 'none';
                 renderDataPeminjamTable();
             } else if (viewName === 'panelBayarAngsuran') {
                 document.getElementById('viewPanelBayarAngsuran').classList.remove('d-none');
-                document.getElementById('tabBtnBayar').className = 'btn btn-compact btn-primary fw-semibold';
+                document.getElementById('tabBtnBayar').className = 'btn btn-compact btn-success fw-semibold text-dark';
+                document.getElementById('tabBtnBayar').style.backgroundColor = 'var(--neon-green)';
+                document.getElementById('tabBtnBayar').style.border = 'none';
                 renderTellerCustomerList();
             } else if (viewName === 'panelLPP') {
                 document.getElementById('viewPanelLPP').classList.remove('d-none');
-                document.getElementById('tabBtnLPP').className = 'btn btn-compact btn-primary fw-semibold';
+                document.getElementById('tabBtnLPP').className = 'btn btn-compact btn-success fw-semibold text-dark';
+                document.getElementById('tabBtnLPP').style.backgroundColor = 'var(--neon-green)';
+                document.getElementById('tabBtnLPP').style.border = 'none';
                 renderLPPTable();
             } else if (viewName === 'panelKas') {
                 document.getElementById('viewPanelKas').classList.remove('d-none');
-                document.getElementById('tabBtnKas').className = 'btn btn-compact btn-primary fw-semibold';
+                document.getElementById('tabBtnKas').className = 'btn btn-compact btn-success fw-semibold text-dark';
+                document.getElementById('tabBtnKas').style.backgroundColor = 'var(--neon-green)';
+                document.getElementById('tabBtnKas').style.border = 'none';
                 renderKas();
             }
         }
@@ -1224,7 +1243,7 @@
                 }
 
                 if (bayarHariIniPokok > 0 || bayarHariIniJasa > 0) {
-                    statusBayarHariIni = `<span class="badge bg-success py-1"><i class="bi bi-check-circle me-1"></i> Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)}, J: Rp ${formatRp(bayarHariIniJasa)})</span>`;
+                    statusBayarHariIni = `<span class="badge bg-success py-1 text-dark" style="background-color: var(--neon-green) !important;"><i class="bi bi-check-circle me-1"></i> Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)}, J: Rp ${formatRp(bayarHariIniJasa)})</span>`;
                 } else if (realIniPokok > 0 || realIniBunga > 0) {
                     statusBayarHariIni = `<span class="badge bg-info text-dark py-1"><i class="bi bi-check2-all me-1"></i> Terisi Bln Ini (P: Rp ${formatRp(realIniPokok)}, J: Rp ${formatRp(realIniBunga)})</span>`;
                 }
@@ -1245,7 +1264,7 @@
                         <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">Rp ${formatRp(realTotBunga)}</td>
                         <td class="text-center">${statusBayarHariIni}</td>
                         <td class="text-center no-print">
-                            <button class="btn btn-sm btn-success py-0 px-2 fw-semibold" style="font-size:0.7rem;" onclick="langsungBayarDariLPP(${realIndex})">
+                            <button class="btn btn-sm btn-success py-0 px-2 fw-semibold text-dark" style="font-size:0.7rem; background-color: var(--neon-green); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
                                 <i class="bi bi-cash me-1"></i> Kasir
                             </button>
                         </td>
@@ -1353,11 +1372,11 @@
                         <td class="text-center">${formatTanggalTampil(item.tglCair)}</td>
                         <td class="text-end fw-bold text-danger">Rp ${formatRp(saldo)}</td>
                         <td class="text-center">
-                            <span class="badge ${isLunas ? 'bg-primary' : 'bg-success'} py-1">${isLunas ? 'Lunas' : 'Aktif'}</span>
+                            <span class="badge ${isLunas ? 'bg-primary' : 'bg-success text-dark'} py-1" ${!isLunas ? 'style="background-color: var(--neon-green) !important;"' : ''}>${isLunas ? 'Lunas' : 'Aktif'}</span>
                         </td>
                         <td class="text-center">${item.noHp || '-'}</td>
                         <td class="text-center no-print">
-                            <button class="btn btn-sm btn-success py-0 px-2 fw-semibold me-1" style="font-size:0.7rem;" onclick="langsungBayarDariLPP(${realIndex})">
+                            <button class="btn btn-sm btn-success py-0 px-2 fw-semibold text-dark me-1" style="font-size:0.7rem; background-color: var(--neon-green); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
                                 <i class="bi bi-cash me-1"></i> Bayar
                             </button>
                             <button class="btn btn-sm btn-info text-dark py-0 px-2 fw-semibold me-1" style="font-size:0.7rem;" onclick="bukaModalEditPeminjam(${realIndex})">
@@ -1555,7 +1574,7 @@
                 itemBtn.innerHTML = `
                     <div class="d-flex justify-content-between align-items-center">
                         <strong style="color: var(--text-main);">${item.nama}</strong>
-                        <span class="badge ${isLunas ? 'bg-primary' : 'bg-success'} py-0" style="font-size: 0.65rem;">${isLunas ? 'Lunas' : 'Aktif'}</span>
+                        <span class="badge ${isLunas ? 'bg-primary' : 'bg-success text-dark'} py-0" style="font-size: 0.65rem; ${!isLunas ? 'background-color: var(--neon-green) !important;' : ''}">${isLunas ? 'Lunas' : 'Aktif'}</span>
                     </div>
                     <div class="d-flex justify-content-between align-items-center small" style="font-size: 0.72rem; color: var(--text-muted);">
                         <span>${item.desa}</span>
@@ -2108,7 +2127,7 @@
                         <td>${index + 1}</td>
                         <td>${item.nama}</td>
                         <td>${item.kelurahan}</td>
-                        <td><span class="badge ${isMasuk ? 'bg-success' : 'bg-danger'} py-0">${item.tipe}</span></td>
+                        <td><span class="badge ${isMasuk ? 'bg-success text-dark' : 'bg-danger'} py-0" ${isMasuk ? 'style="background-color: var(--neon-green) !important;"' : ''}>${item.tipe}</span></td>
                         <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-semibold">Rp ${formatRp(item.nominal)}</td>
                         <td><button class="btn btn-outline-danger btn-sm py-0 px-2" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button></td>
                     </tr>
@@ -2156,7 +2175,6 @@
                 bukaView('panelProfil');
                 resetIdleTimer();
             } else {
-                // DIPERBAIKI: Menggunakan remove('d-none') agar halaman utama (landing) muncul saat belum login
                 document.getElementById('publicContent').classList.remove('d-none');
                 document.getElementById('privateDashboard').classList.add('d-none');
                 greeting.textContent = '';
