@@ -13,7 +13,6 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <style>
-        /* === VARIABEL TEMA WARNA YANG DIOPTIMALKAN AGAR JELAS DI SIANG & MALAM === */
         :root {
             --bg-body-gradient: linear-gradient(135deg, #0b132b 0%, #1c2541 50%, #3a506b 100%);
             --navbar-bg: #0b132b;
@@ -25,7 +24,6 @@
             --table-th-bg: #0f172a;
             --table-td-bg: #1e293b;
             --table-td-color: #f1f5f9;
-            /* Warna Khusus Kolom Tabel agar kontras tinggi di Dark Mode */
             --col-target-bg: rgba(234, 179, 8, 0.18);
             --col-target-color: #fde047;
             --col-real-bg: rgba(16, 185, 129, 0.22);
@@ -45,7 +43,6 @@
             --table-th-bg: #e2e8f0;
             --table-td-bg: #ffffff;
             --table-td-color: #0f172a;
-            /* Warna Khusus Kolom Tabel agar kontras tinggi di Light Mode */
             --col-target-bg: rgba(202, 138, 4, 0.12);
             --col-target-color: #854d0e;
             --col-real-bg: rgba(5, 150, 105, 0.12);
@@ -219,6 +216,9 @@
                 <button type="button" class="btn btn-compact btn-primary fw-semibold" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')">
                     <i class="bi bi-speedometer2 me-1"></i> Dasbor Keuangan
                 </button>
+                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnJatuhTempo" onclick="bukaView('panelJatuhTempo')">
+                    <i class="bi bi-calendar-check me-1"></i> Panel Jatuh Tempo[cite: 1]
+                </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnDataPeminjam" onclick="bukaView('panelDataPeminjam')">
                     <i class="bi bi-people-fill me-1"></i> Data Peminjam
                 </button>
@@ -362,17 +362,72 @@
                             <p class="small mb-3" style="color: var(--text-muted);">Pilih modul operasional untuk mempercepat pelayanan nasabah:</p>
                         </div>
                         <div class="d-grid gap-2">
+                            <button class="btn btn-outline-warning btn-compact text-start fw-semibold" onclick="bukaView('panelJatuhTempo')">
+                                <i class="bi bi-calendar-check me-2"></i> Panel Jatuh Tempo & Target Real-time
+                            </button>
                             <button class="btn btn-outline-success btn-compact text-start fw-semibold" onclick="bukaView('panelBayarAngsuran')">
                                 <i class="bi bi-receipt-cutoff me-2"></i> Kasir Pembayaran Angsuran
                             </button>
                             <button class="btn btn-outline-info btn-compact text-start fw-semibold" onclick="bukaView('panelDataPeminjam')">
                                 <i class="bi bi-people me-2"></i> Kelola Data Peminjam
                             </button>
-                            <button class="btn btn-outline-secondary btn-compact text-start fw-semibold" onclick="bukaView('panelLPP')">
-                                <i class="bi bi-table me-2"></i> Buka Master LPP 18 Kolom
-                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL JATUH TEMPO BARU -->
+        <div id="viewPanelJatuhTempo" class="d-none">
+            <div class="card-custom p-3 p-md-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-2 border-bottom" style="border-color: var(--border-color) !important;">
+                    <div>
+                        <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-calendar-check text-warning me-2"></i> Panel Jatuh Tempo & Target Real-time</h5>
+                        <p class="small mb-0" style="color: var(--text-muted);">Menghitung target Pokok & Jasa secara <em>real-time</em> berdasarkan bulan berjalan sejak tanggal pencairan (`hitungBulanBerjalan`), serta pemantauan status pembayaran[cite: 1].</p>
+                    </div>
+                    <div class="d-flex gap-2 align-items-center">
+                        <label class="small fw-semibold" style="color: var(--text-muted);">Tanggal Pantau:</label>
+                        <input type="date" id="filterTglJatuhTempo" class="form-control form-control-compact" onchange="renderJatuhTempoTable()">
+                    </div>
+                </div>
+
+                <!-- Informasi Realisasi Hari Ini -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="card-light-custom p-3 rounded-3 border">
+                            <span class="small d-block text-muted"><i class="bi bi-cash-stack text-success me-1"></i> Realisasi Pokok Dibayarkan Hari Ini</span>
+                            <h4 class="fw-bold text-success mb-0" id="todayRealPokokDisplay">Rp 0</h4>
+                            <small class="text-muted" style="font-size: 0.72rem;">Total akumulasi setoran pokok nasabah pada tanggal terpilih</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-light-custom p-3 rounded-3 border">
+                            <span class="small d-block text-muted"><i class="bi bi-percent text-info me-1"></i> Realisasi Jasa / Bunga Dibayarkan Hari Ini</span>
+                            <h4 class="fw-bold text-info mb-0" id="todayRealJasaDisplay">Rp 0</h4>
+                            <small class="text-muted" style="font-size: 0.72rem;">Total akumulasi setoran jasa nasabah pada tanggal terpilih</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive overflow-auto" style="max-height: 480px;">
+                    <table class="table table-bordered table-hover table-compact mb-0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Peminjam</th>
+                                <th>Desa / Kelurahan</th>
+                                <th>Tgl Cair</th>
+                                <th>Bulan Berjalan</th>
+                                <th style="background-color: var(--col-target-bg); color: var(--col-target-color);">Target Pokok (Real-time)</th>
+                                <th style="background-color: var(--col-target-bg); color: var(--col-target-color);">Target Jasa (Real-time)</th>
+                                <th style="background-color: var(--col-real-bg); color: var(--col-real-color);">Realisasi Pokok (Total)</th>
+                                <th style="background-color: var(--col-real-bg); color: var(--col-real-color);">Realisasi Jasa (Total)</th>
+                                <th>Status Pembayaran (Bulan Ini / Hari Ini)</th>
+                                <th class="no-print">Aksi Kasir</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jatuhTempoTableBody"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -869,12 +924,10 @@
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfWRbo6751T2bvAIp-CVHEoXQ4wabnzGieMAjF0cT_0J4o6waldAgfeuW_NOxlP-5b8Q/exec";
 
-        // === FUNGSI PEMBULATAN KE RIBUAN TERDEKAT ===
         function bulatkan(num) {
             return Math.round(num / 1000) * 1000;
         }
 
-        // === FITUR AUTO-LOGOUT 5 MENIT TIDAK TERSENTUH ===
         let idleTimer = null;
         const IDLE_TIMEOUT_MS = 5 * 60 * 1000; 
 
@@ -892,7 +945,6 @@
             window.addEventListener(event, resetIdleTimer, true);
         });
 
-        // === TOGGLE TEMA (MODE MALAM / SIANG) ===
         function toggleTheme() {
             const body = document.body;
             const themeIcon = document.getElementById('themeIcon');
@@ -986,12 +1038,10 @@
             return strDate;
         }
 
-        // FUNGSI UTAMA: Menghitung bulan berjalan berdasarkan Tanggal Pencairan & Tenor (Memperhatikan Jasa & Lama Pinjaman)
         function hitungBulanBerjalan(tglCairStr, tenorMax) {
             if (!tglCairStr) return 0;
             const cair = parseTanggal(tglCairStr);
             const now = new Date();
-            // Jika bulan sama dengan pencairan, return 0 (Target baru muncul bulan berikutnya)
             if (now.getFullYear() === cair.getFullYear() && now.getMonth() === cair.getMonth()) return 0;
             
             let diff = (now.getFullYear() - cair.getFullYear()) * 12 + (now.getMonth() - cair.getMonth());
@@ -1073,10 +1123,10 @@
         }
 
         function bukaView(viewName) {
-            const allViews = ['viewPanelProfil', 'viewPanelDasborKeuangan', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKas'];
+            const allViews = ['viewPanelProfil', 'viewPanelDasborKeuangan', 'viewPanelJatuhTempo', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKas'];
             allViews.forEach(v => document.getElementById(v).classList.add('d-none'));
 
-            const allBtns = ['tabBtnProfil', 'tabBtnDasborKeuangan', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKas'];
+            const allBtns = ['tabBtnProfil', 'tabBtnDasborKeuangan', 'tabBtnJatuhTempo', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKas'];
             allBtns.forEach(b => {
                 const el = document.getElementById(b);
                 if (el) el.className = 'btn btn-compact btn-outline-secondary';
@@ -1089,6 +1139,13 @@
                 document.getElementById('viewPanelDasborKeuangan').classList.remove('d-none');
                 document.getElementById('tabBtnDasborKeuangan').className = 'btn btn-compact btn-primary fw-semibold';
                 updateDasborKeuangan();
+            } else if (viewName === 'panelJatuhTempo') {
+                document.getElementById('viewPanelJatuhTempo').classList.remove('d-none');
+                document.getElementById('tabBtnJatuhTempo').className = 'btn btn-compact btn-primary fw-semibold';
+                if (!document.getElementById('filterTglJatuhTempo').value) {
+                    document.getElementById('filterTglJatuhTempo').value = new Date().toISOString().split('T')[0];
+                }
+                renderJatuhTempoTable();
             } else if (viewName === 'panelDataPeminjam') {
                 document.getElementById('viewPanelDataPeminjam').classList.remove('d-none');
                 document.getElementById('tabBtnDataPeminjam').className = 'btn btn-compact btn-primary fw-semibold';
@@ -1116,6 +1173,90 @@
             }
         }
 
+        function renderJatuhTempoTable() {
+            const allData = getLPPData();
+            const tbody = document.getElementById('jatuhTempoTableBody');
+            tbody.innerHTML = '';
+
+            const selectedDateInput = document.getElementById('filterTglJatuhTempo').value;
+            const formattedSelectedDate = selectedDateInput ? formatTanggalID(new Date(selectedDateInput)) : formatTanggalID(new Date());
+
+            let totalTodayPokok = 0;
+            let totalTodayJasa = 0;
+
+            if (allData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="11" class="text-center py-3" style="color: var(--text-muted);">Belum ada data peminjam.</td></tr>';
+                document.getElementById('todayRealPokokDisplay').textContent = 'Rp 0';
+                document.getElementById('todayRealJasaDisplay').textContent = 'Rp 0';
+                return;
+            }
+
+            allData.forEach((item, index) => {
+                const realIndex = allData.indexOf(item);
+                const plafon = parseNum(item.plafon);
+                const tenor = parseInt(item.tenor) || 12;
+                const persenJasa = item.persenJasa !== undefined ? parseFloat(item.persenJasa) : 1.5;
+                
+                const bulanBerjalan = hitungBulanBerjalan(item.tglCair, tenor);
+
+                const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
+                const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
+
+                const targetPokokRT = bulanBerjalan >= tenor ? plafon : bulatkan(pokokPerBulan * bulanBerjalan);
+                const targetJasaRT = bulatkan(bungaPerBulan * bulanBerjalan);
+
+                const realTotPokok = parseNum(item.realTotPokok);
+                const realTotBunga = parseNum(item.realTotBunga);
+                const realIniPokok = parseNum(item.realIniPokok);
+                const realIniBunga = parseNum(item.realIniBunga);
+
+                let bayarHariIniPokok = 0;
+                let bayarHariIniJasa = 0;
+                let statusBayarHariIni = '<span class="badge bg-secondary py-1">Belum Bayar Hari Ini</span>';
+
+                if (item.history && item.history.length > 0) {
+                    item.history.forEach(h => {
+                        if (h.tanggal === formattedSelectedDate) {
+                            bayarHariIniPokok += parseNum(h.pokok);
+                            bayarHariIniJasa += parseNum(h.jasa);
+                        }
+                    });
+                }
+
+                if (bayarHariIniPokok > 0 || bayarHariIniJasa > 0) {
+                    statusBayarHariIni = `<span class="badge bg-success py-1"><i class="bi bi-check-circle me-1"></i> Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)}, J: Rp ${formatRp(bayarHariIniJasa)})</span>`;
+                } else if (realIniPokok > 0 || realIniBunga > 0) {
+                    statusBayarHariIni = `<span class="badge bg-info text-dark py-1"><i class="bi bi-check2-all me-1"></i> Terisi Bln Ini (P: Rp ${formatRp(realIniPokok)}, J: Rp ${formatRp(realIniBunga)})</span>`;
+                }
+
+                totalTodayPokok += bayarHariIniPokok > 0 ? bayarHariIniPokok : realIniPokok;
+                totalTodayJasa += bayarHariIniJasa > 0 ? bayarHariIniJasa : realIniBunga;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="text-center">${index + 1}</td>
+                        <td class="fw-semibold" style="color: var(--text-main);">${item.nama}</td>
+                        <td>${item.desa}</td>
+                        <td class="text-center">${formatTanggalTampil(item.tglCair)}</td>
+                        <td class="text-center fw-bold text-info">${bulanBerjalan} Bln</td>
+                        <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">Rp ${formatRp(targetPokokRT)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">Rp ${formatRp(targetJasaRT)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">Rp ${formatRp(realTotPokok)}</td>
+                        <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">Rp ${formatRp(realTotBunga)}</td>
+                        <td class="text-center">${statusBayarHariIni}</td>
+                        <td class="text-center no-print">
+                            <button class="btn btn-sm btn-success py-0 px-2 fw-semibold" style="font-size:0.7rem;" onclick="langsungBayarDariLPP(${realIndex})">
+                                <i class="bi bi-cash me-1"></i> Kasir
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('todayRealPokokDisplay').textContent = 'Rp ' + formatRp(totalTodayPokok);
+            document.getElementById('todayRealJasaDisplay').textContent = 'Rp ' + formatRp(totalTodayJasa);
+        }
+
         function updateDasborKeuangan() {
             const data = getLPPData();
             let tPlafon = 0, tRealPokok = 0, tRealBunga = 0, tSaldo = 0, tTargetPokok = 0, tTunggakPokok = 0;
@@ -1123,7 +1264,6 @@
             data.forEach(r => {
                 const plafon = parseNum(r.plafon);
                 const tenor = parseInt(r.tenor) || 12;
-                const persenJasa = r.persenJasa !== undefined ? parseFloat(r.persenJasa) : 1.5;
                 const bln = hitungBulanBerjalan(r.tglCair, tenor);
 
                 let tarP = 0;
@@ -1515,7 +1655,6 @@
             let sisaPokokTotal = Math.max(0, plafon - parseNum(n.realTotPokok));
             let totalSisaGabungan = sisaPokokTotal + sisaJasaTotal;
 
-            // Target dihitung presisi berdasarkan bulan ke-X, tenor, dan % jasa
             let targetPokokAkumulatif = Math.min(plafon, pokokPerBulan * keX);
             let targetBungaAkumulatif = bungaPerBulan * keX;
 
@@ -1662,7 +1801,6 @@
             let bungaPerBulan = bulatkan(plafon * (persenNasabah / 100));
 
             const targetP = Math.min(plafon, pokokPerBulan * keX);
-            const targetB = bungaPerBulan * keX;
 
             n.realLaluPokok = parseNum(n.realTotPokok);
             n.realLaluBunga = parseNum(n.realTotBunga);
@@ -1781,7 +1919,6 @@
                 const persenJasa = r.persenJasa !== undefined ? parseFloat(r.persenJasa) : 1.5;
                 const bulanBerjalan = hitungBulanBerjalan(r.tglCair, tenor);
 
-                // Target Pokok & Jasa dihitung presisi berdasarkan Tanggal Cair, Tenor, dan Jasa (%)
                 const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
                 const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
 
@@ -1798,7 +1935,6 @@
                 const totP = parseNum(r.realTotPokok), totB = parseNum(r.realTotBunga);
                 const saldo = parseNum(r.saldo);
                 
-                // Tunggakan = Target s/d Bln Ini - Realisasi Total
                 let tungP = Math.max(0, tarP - totP);
                 let tungB = Math.max(0, tarB - totB);
 
@@ -1890,7 +2026,6 @@
                         const plafonP = parseNum(row[3]);
                         const tenorP = parseNum(row[4]) || 12;
                         const realIniB = parseNum(row[11]);
-                        const targetB = parseNum(row[7]);
                         const namaP = row[1] || '';
 
                         const pokokPerBulan = bulatkan(Math.ceil(plafonP / (tenorP || 1)));
@@ -2051,7 +2186,7 @@
 
         window.onload = async function() {
             initTheme();
-            await loadDataDariGoogleScript(); // jika ada
+            await loadDataDariGoogleSheet();
             checkAuthUI();
         };
     </script>
