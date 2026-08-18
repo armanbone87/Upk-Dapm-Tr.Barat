@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISKEU UPK DAPM TR. BARAT</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- PapaParse & SheetJS -->
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <style>
         :root {
-            --bg-body: #090d16;
-            --sidebar-bg: #0e1525;
+            --bg-body-gradient: linear-gradient(135deg, #090d16 0%, #131c31 50%, #0e1525 100%);
+            --navbar-bg: #0e1525;
             --card-bg: #131c31;
             --card-light-bg: #1a253f;
             --text-main: #f8fafc;
-            --text-muted: #64748b;
+            --text-muted: #94a3b8;
             --border-color: rgba(255, 255, 255, 0.08);
             --neon-green: #10b981;
             --neon-green-glow: rgba(16, 185, 129, 0.35);
@@ -35,8 +33,8 @@
         }
 
         [data-theme="light"] {
-            --bg-body: #f8fafc;
-            --sidebar-bg: #0f172a;
+            --bg-body-gradient: #f8fafc;
+            --navbar-bg: #0f172a;
             --card-bg: #ffffff;
             --card-light-bg: #f1f5f9;
             --text-main: #0f172a;
@@ -58,13 +56,13 @@
         body { 
             font-family: 'Inter', sans-serif; 
             font-size: 0.84rem; 
-            background-color: var(--bg-body);
+            background: var(--bg-body-gradient);
             color: var(--text-main); 
             min-height: 100vh;
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        .navbar-custom { background: var(--sidebar-bg) !important; border-bottom: 1px solid var(--border-color); }
+        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 1px solid var(--border-color); }
         
         .card-custom { 
             border: 1px solid var(--border-color); 
@@ -164,9 +162,10 @@
         @media print {
             body { background: #ffffff !important; color: #000 !important; }
             body * { visibility: hidden; }
-            #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi * { visibility: visible; }
+            #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi *, #areaCetakLaporan, #areaCetakLaporan * { visibility: visible; }
             #areaCetakLPP { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; }
             #areaCetakKwitansi { position: absolute; left: 10%; top: 20px; width: 80%; background: #fff; color: #000; }
+            #areaCetakLaporan { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; }
             .no-print { display: none !important; }
             @page { size: auto; margin: 8mm; }
         }
@@ -216,25 +215,28 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center card-custom p-2 px-3 mb-3 no-print">
             <div class="btn-group flex-wrap gap-1" role="group">
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnProfil" onclick="bukaView('panelProfil')">
-                    <i class="bi bi-info-circle me-1"></i> Profil DAPM TR. Barat
+                    <i class="bi bi-info-circle me-1"></i> Profil
                 </button>
                 <button type="button" class="btn btn-compact btn-success fw-semibold text-dark" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')" style="background-color: var(--neon-green); border: none;">
-                    <i class="bi bi-speedometer2 me-1"></i> Dasbor Keuangan
+                    <i class="bi bi-speedometer2 me-1"></i> Dasbor
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnJatuhTempo" onclick="bukaView('panelJatuhTempo')">
-                    <i class="bi bi-calendar-check me-1"></i> Panel Jatuh Tempo
+                    <i class="bi bi-calendar-check me-1"></i> Jatuh Tempo
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnDataPeminjam" onclick="bukaView('panelDataPeminjam')">
-                    <i class="bi bi-people-fill me-1"></i> Data Peminjam
+                    <i class="bi bi-people-fill me-1"></i> Peminjam
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnBayar" onclick="bukaView('panelBayarAngsuran')">
                     <i class="bi bi-receipt-cutoff me-1"></i> Kasir & Bayar
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnLPP" onclick="bukaView('panelLPP')">
-                    <i class="bi bi-table me-1"></i> Tabel Master LPP
+                    <i class="bi bi-table me-1"></i> Tabel LPP
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnKas" onclick="bukaView('panelKas')">
                     <i class="bi bi-journal-text me-1"></i> Buku Kas
+                </button>
+                <button type="button" class="btn btn-compact btn-outline-secondary text-info fw-semibold" id="tabBtnLaporan" onclick="bukaView('panelLaporan')">
+                    <i class="bi bi-file-earmark-bar-graph me-1"></i> Laporan
                 </button>
             </div>
 
@@ -269,33 +271,6 @@
                             <h6 class="fw-bold mb-1" style="color: var(--text-main);">SISKEU UPK</h6>
                             <p class="small mb-0" style="color: var(--text-muted);">Laporan Perkembangan Pinjaman & Kas</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="card-custom p-3 h-100">
-                        <h6 class="fw-bold text-info mb-2"><i class="bi bi-bullseye me-1"></i> Visi & Misi</h6>
-                        <p class="small mb-0" style="color: var(--text-muted);">Menjadi lembaga keuangan mikro yang mandiri dan terpercaya dalam mengelola dana bergulir untuk memberdayakan ekonomi kerakyatan di wilayah Tanete Riattang Barat.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-custom p-3 h-100">
-                        <h6 class="fw-bold text-success mb-2"><i class="bi bi-check2-all me-1"></i> Layanan Utama</h6>
-                        <ul class="small ps-3 mb-0" style="color: var(--text-muted);">
-                            <li>Pengelolaan Dana Bergulir Perorangan/Kelompok</li>
-                            <li>Pencatatan Laporan Perkembangan Pinjaman (LPP)</li>
-                            <li>Kasir Setoran Angsuran & Cetak Kwitansi Resmi</li>
-                            <li>Sinkronisasi Data Cloud Real-time</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-custom p-3 h-100">
-                        <h6 class="fw-bold text-warning mb-2"><i class="bi bi-headset me-1"></i> Bantuan & Dukungan</h6>
-                        <p class="small mb-2" style="color: var(--text-muted);">Hubungi administrator atau pengurus UPK DAPM Tanete Riattang Barat untuk informasi pinjaman dan verifikasi setoran.</p>
-                        <button class="btn btn-outline-secondary btn-compact w-100" onclick="bukaView('panelDasborKeuangan')"><i class="bi bi-speedometer2 me-1"></i> Masuk Dasbor Keuangan</button>
                     </div>
                 </div>
             </div>
@@ -373,8 +348,8 @@
                             <button class="btn btn-outline-success btn-compact text-start fw-semibold" onclick="bukaView('panelBayarAngsuran')">
                                 <i class="bi bi-receipt-cutoff me-2"></i> Kasir Pembayaran Angsuran
                             </button>
-                            <button class="btn btn-outline-info btn-compact text-start fw-semibold" onclick="bukaView('panelDataPeminjam')">
-                                <i class="bi bi-people me-2"></i> Kelola Data Peminjam
+                            <button class="btn btn-outline-info btn-compact text-start fw-semibold" onclick="bukaView('panelLaporan')">
+                                <i class="bi bi-file-earmark-bar-graph me-2"></i> Lihat Laporan Rekapitulasi Otomatis
                             </button>
                         </div>
                     </div>
@@ -382,13 +357,12 @@
             </div>
         </div>
 
-        <!-- PANEL JATUH TEMPO BARU -->
         <div id="viewPanelJatuhTempo" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-2 border-bottom" style="border-color: var(--border-color) !important;">
                     <div>
-                        <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-calendar-check text-warning me-2"></i> Panel Jatuh Tempo & Target Real-time</h5>
-                        <p class="small mb-0" style="color: var(--text-muted);">Menghitung target Pokok & Jasa secara <em>real-time</em> berdasarkan bulan berjalan sejak tanggal pencairan (`hitungBulanBerjalan`), serta pemantauan status pembayaran.</p>
+                        <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-calendar-check text-warning me-2"></i> Panel Jatuh Tempo & Pengingat Penagihan</h5>
+                        <p class="small mb-0" style="color: var(--text-muted);">Pantau target pembayaran real-time dan kirim pesan pengingat tagihan langsung ke WhatsApp nasabah.</p>
                     </div>
                     <div class="d-flex gap-2 align-items-center">
                         <label class="small fw-semibold" style="color: var(--text-muted);">Tanggal Pantau:</label>
@@ -396,20 +370,17 @@
                     </div>
                 </div>
 
-                <!-- Informasi Realisasi Hari Ini -->
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <div class="card-light-custom p-3 rounded-3 border">
                             <span class="small d-block text-muted"><i class="bi bi-cash-stack text-success me-1"></i> Realisasi Pokok Dibayarkan Hari Ini</span>
                             <h4 class="fw-bold text-success mb-0" id="todayRealPokokDisplay">Rp 0</h4>
-                            <small class="text-muted" style="font-size: 0.72rem;">Total akumulasi setoran pokok nasabah pada tanggal terpilih</small>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card-light-custom p-3 rounded-3 border">
-                            <span class="small d-block text-muted"><i class="bi bi-percent text-info me-1"></i> Realisasi Jasa / Bunga Dibayarkan Hari Ini</span>
+                            <span class="small d-block text-muted"><i class="bi bi-percent text-info me-1"></i> Realisasi Jasa Dibayarkan Hari Ini</span>
                             <h4 class="fw-bold text-info mb-0" id="todayRealJasaDisplay">Rp 0</h4>
-                            <small class="text-muted" style="font-size: 0.72rem;">Total akumulasi setoran jasa nasabah pada tanggal terpilih</small>
                         </div>
                     </div>
                 </div>
@@ -421,14 +392,11 @@
                                 <th>No</th>
                                 <th>Nama Peminjam</th>
                                 <th>Desa / Kelurahan</th>
-                                <th>Tgl Cair</th>
-                                <th>Bulan Berjalan</th>
-                                <th style="background-color: var(--col-target-bg); color: var(--col-target-color);">Target Pokok (Real-time)</th>
-                                <th style="background-color: var(--col-target-bg); color: var(--col-target-color);">Target Jasa (Real-time)</th>
-                                <th style="background-color: var(--col-real-bg); color: var(--col-real-color);">Realisasi Pokok (Total)</th>
-                                <th style="background-color: var(--col-real-bg); color: var(--col-real-color);">Realisasi Jasa (Total)</th>
-                                <th>Status Pembayaran (Bulan Ini / Hari Ini)</th>
-                                <th class="no-print">Aksi Kasir</th>
+                                <th>Bln Berjalan</th>
+                                <th style="background-color: var(--col-target-bg); color: var(--col-target-color);">Target Pokok</th>
+                                <th style="background-color: var(--col-target-bg); color: var(--col-target-color);">Target Jasa</th>
+                                <th>Status Pembayaran</th>
+                                <th class="no-print">Aksi & Reminder WA</th>
                             </tr>
                         </thead>
                         <tbody id="jatuhTempoTableBody"></tbody>
@@ -497,7 +465,7 @@
                         <div>
                             <i class="bi bi-person-lines-fill fs-1 mb-2" style="color: var(--text-muted);"></i>
                             <h6 class="fw-semibold" style="color: var(--text-main);">Pilih Nasabah di Sebelah Kiri</h6>
-                            <p class="small mb-0" style="color: var(--text-muted);">Klik nama nasabah untuk memproses pembayaran angsuran, melanjutkan target LPP, dan melihat total sisa tagihan.</p>
+                            <p class="small mb-0" style="color: var(--text-muted);">Sistem dilengkapi proteksi validasi pelunasan otomatis & pencegahan input melebihi sisa piutang.</p>
                         </div>
                     </div>
 
@@ -510,6 +478,10 @@
                             <div class="text-end">
                                 <span class="badge border" style="background: var(--card-light-bg); color: var(--text-main); border-color: var(--border-color);" id="tellerPlafonTenor">-</span>
                             </div>
+                        </div>
+
+                        <div id="nasabahLunasAlert" class="alert alert-primary py-2 small d-none mb-3">
+                            <i class="bi bi-info-circle-fill me-1"></i> Nasabah ini status pinjamannya sudah <b>LUNAS</b>. Transaksi pembayaran baru tidak diperlukan kecuali koreksi riwayat.
                         </div>
 
                         <div class="row g-2 mb-3 card-light-custom p-2 rounded-2 border">
@@ -589,7 +561,7 @@
 
                             <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
                                 <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="resetTellerForm()">Batal</button>
-                                <button type="submit" class="btn btn-success btn-compact fw-semibold text-dark" style="background-color: var(--neon-green); border: none;">
+                                <button type="submit" id="btnSubmitPembayaran" class="btn btn-success btn-compact fw-semibold text-dark" style="background-color: var(--neon-green); border: none;">
                                     <i class="bi bi-check2-circle me-1"></i> Simpan Pembayaran & Buat Bukti WA
                                 </button>
                             </div>
@@ -786,9 +758,67 @@
             </div>
         </div>
 
+        <div id="viewPanelLaporan" class="d-none">
+            <div class="card-custom p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom" style="border-color: var(--border-color) !important;">
+                    <div>
+                        <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-file-earmark-bar-graph text-info me-2"></i> Laporan Rekapitulasi Keuangan & Piutang UPK</h5>
+                        <p class="small mb-0" style="color: var(--text-muted);">Ringkasan resmi bulanan dan tahunan untuk kebutuhan pengurus serta musyawarah.</p>
+                    </div>
+                    <div class="d-flex gap-2 no-print">
+                        <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Laporan</button>
+                    </div>
+                </div>
+
+                <div id="areaCetakLaporan">
+                    <div class="text-center mb-4">
+                        <h5 class="fw-bold mb-1">REKAPITULASI PERKEMBANGAN DANA BERGULIR (SPP)</h5>
+                        <p class="small text-muted mb-0">UPK DAPM Kecamatan Tanete Riattang Barat - Kabupaten Bone</p>
+                        <hr class="w-50 mx-auto my-2">
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <div class="card-light-custom p-3 rounded-3 border">
+                                <span class="small d-block text-muted">Total Plafon Aktif</span>
+                                <h4 class="fw-bold text-info mb-0" id="repTotalPlafon">Rp 0</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-light-custom p-3 rounded-3 border">
+                                <span class="small d-block text-muted">Total Realisasi Piutang Masuk</span>
+                                <h4 class="fw-bold text-success mb-0" id="repTotalRealisasi">Rp 0</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-light-custom p-3 rounded-3 border">
+                                <span class="small d-block text-muted">Total Sisa Saldo Piutang</span>
+                                <h4 class="fw-bold text-danger mb-0" id="repTotalSaldo">Rp 0</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6 class="fw-bold mb-2 text-info"><i class="bi bi-pie-chart me-1"></i> Rekapitulasi per Desa / Kelurahan</h6>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered table-compact mb-0 text-center">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Desa / Kelurahan</th>
+                                    <th>Jumlah Kelompok/Peminjam</th>
+                                    <th>Total Plafon (Rp)</th>
+                                    <th>Total Saldo Piutang (Rp)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rekapDesaTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- MODAL TAMBAH / EDIT PEMINJAM -->
     <div class="modal fade" id="tambahPeminjamModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
@@ -867,7 +897,6 @@
         </div>
     </div>
 
-    <!-- MODAL LOGIN -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 360px;">
             <div class="modal-content card-custom p-3 shadow-lg border">
@@ -893,7 +922,6 @@
         </div>
     </div>
 
-    <!-- MODAL TAMBAH KAS -->
     <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
             <div class="modal-content card-custom p-3 shadow-lg border">
@@ -923,7 +951,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -1128,10 +1155,10 @@
         }
 
         function bukaView(viewName) {
-            const allViews = ['viewPanelProfil', 'viewPanelDasborKeuangan', 'viewPanelJatuhTempo', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKas'];
+            const allViews = ['viewPanelProfil', 'viewPanelDasborKeuangan', 'viewPanelJatuhTempo', 'viewPanelDataPeminjam', 'viewPanelBayarAngsuran', 'viewPanelLPP', 'viewPanelKas', 'viewPanelLaporan'];
             allViews.forEach(v => document.getElementById(v).classList.add('d-none'));
 
-            const allBtns = ['tabBtnProfil', 'tabBtnDasborKeuangan', 'tabBtnJatuhTempo', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKas'];
+            const allBtns = ['tabBtnProfil', 'tabBtnDasborKeuangan', 'tabBtnJatuhTempo', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKas', 'tabBtnLaporan'];
             allBtns.forEach(b => {
                 const el = document.getElementById(b);
                 if (el) el.className = 'btn btn-compact btn-outline-secondary';
@@ -1181,6 +1208,12 @@
                 document.getElementById('tabBtnKas').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnKas').style.border = 'none';
                 renderKas();
+            } else if (viewName === 'panelLaporan') {
+                document.getElementById('viewPanelLaporan').classList.remove('d-none');
+                document.getElementById('tabBtnLaporan').className = 'btn btn-compact btn-success fw-semibold text-dark';
+                document.getElementById('tabBtnLaporan').style.backgroundColor = 'var(--neon-green)';
+                document.getElementById('tabBtnLaporan').style.border = 'none';
+                renderLaporanRekapitulasi();
             }
         }
 
@@ -1190,6 +1223,26 @@
             } else {
                 window.location.hash = '#beranda';
             }
+        }
+
+        // Fungsi WA Pengingat Penagihan yang Telah Diperbarui & Dioptimalkan
+        function kirimPesanJatuhTempoWA(nama, desa, noHp, sisaSaldo) {
+            let phone = (noHp || '').replace(/[^0-9]/g, '');
+            
+            if (!phone || phone.length < 9) {
+                let inputNo = prompt(`Nomor WhatsApp untuk nasabah "${nama}" belum terdaftar atau kosong.\nMasukkan Nomor WhatsApp yang benar (Contoh: 08123456789):`);
+                if (!inputNo) return;
+                phone = inputNo.replace(/[^0-9]/g, '');
+            }
+
+            if (phone.startsWith('0')) {
+                phone = '62' + phone.substring(1);
+            }
+
+            const pesan = `🏛️ *PENGINGAT ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. Bpk/Ibu *${nama}*\nKelurahan/Desa: ${desa}\n-----------------------------------------\nKami informasikan bahwa jadwal angsuran dana bergulir Anda telah tiba / mendekati jatuh tempo.\nSisa Saldo Pokok Anda saat ini: *Rp ${formatRp(sisaSaldo)}*\n-----------------------------------------\nMohon melakukan pembayaran tepat waktu demi kelancaran dan kesinambungan dana bergulir kelompok. Terima kasih. 🙏`;
+            
+            const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`;
+            window.open(url, '_blank');
         }
 
         function renderJatuhTempoTable() {
@@ -1204,7 +1257,7 @@
             let totalTodayJasa = 0;
 
             if (allData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="11" class="text-center py-3" style="color: var(--text-muted);">Belum ada data peminjam.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center py-3" style="color: var(--text-muted);">Belum ada data peminjam.</td></tr>';
                 document.getElementById('todayRealPokokDisplay').textContent = 'Rp 0';
                 document.getElementById('todayRealJasaDisplay').textContent = 'Rp 0';
                 return;
@@ -1224,14 +1277,12 @@
                 const targetPokokRT = bulanBerjalan >= tenor ? plafon : bulatkan(pokokPerBulan * bulanBerjalan);
                 const targetJasaRT = bulatkan(bungaPerBulan * bulanBerjalan);
 
-                const realTotPokok = parseNum(item.realTotPokok);
-                const realTotBunga = parseNum(item.realTotBunga);
                 const realIniPokok = parseNum(item.realIniPokok);
                 const realIniBunga = parseNum(item.realIniBunga);
 
                 let bayarHariIniPokok = 0;
                 let bayarHariIniJasa = 0;
-                let statusBayarHariIni = '<span class="badge bg-secondary py-1">Belum Bayar Hari Ini</span>';
+                let statusBayarHariIni = '<span class="badge bg-secondary py-1 px-2">Belum Bayar</span>';
 
                 if (item.history && item.history.length > 0) {
                     item.history.forEach(h => {
@@ -1243,9 +1294,9 @@
                 }
 
                 if (bayarHariIniPokok > 0 || bayarHariIniJasa > 0) {
-                    statusBayarHariIni = `<span class="badge bg-success py-1 text-dark" style="background-color: var(--neon-green) !important;"><i class="bi bi-check-circle me-1"></i> Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)}, J: Rp ${formatRp(bayarHariIniJasa)})</span>`;
+                    statusBayarHariIni = `<span class="badge bg-success py-1 px-2 text-dark" style="background-color: var(--neon-green) !important;"><i class="bi bi-check-circle me-1"></i> Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)})</span>`;
                 } else if (realIniPokok > 0 || realIniBunga > 0) {
-                    statusBayarHariIni = `<span class="badge bg-info text-dark py-1"><i class="bi bi-check2-all me-1"></i> Terisi Bln Ini (P: Rp ${formatRp(realIniPokok)}, J: Rp ${formatRp(realIniBunga)})</span>`;
+                    statusBayarHariIni = `<span class="badge bg-info text-dark py-1 px-2"><i class="bi bi-check2-all me-1"></i> Terisi LPP (P: Rp ${formatRp(realIniPokok)})</span>`;
                 }
 
                 totalTodayPokok += bayarHariIniPokok > 0 ? bayarHariIniPokok : realIniPokok;
@@ -1256,16 +1307,16 @@
                         <td class="text-center">${index + 1}</td>
                         <td class="fw-semibold" style="color: var(--text-main);">${item.nama}</td>
                         <td>${item.desa}</td>
-                        <td class="text-center">${formatTanggalTampil(item.tglCair)}</td>
                         <td class="text-center fw-bold text-info">${bulanBerjalan} Bln</td>
                         <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">Rp ${formatRp(targetPokokRT)}</td>
                         <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">Rp ${formatRp(targetJasaRT)}</td>
-                        <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">Rp ${formatRp(realTotPokok)}</td>
-                        <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">Rp ${formatRp(realTotBunga)}</td>
                         <td class="text-center">${statusBayarHariIni}</td>
                         <td class="text-center no-print">
-                            <button class="btn btn-sm btn-success py-0 px-2 fw-semibold text-dark" style="font-size:0.7rem; background-color: var(--neon-green); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
+                            <button class="btn btn-sm btn-success py-0 px-2 fw-semibold text-dark me-1" style="font-size:0.7rem; background-color: var(--neon-green); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
                                 <i class="bi bi-cash me-1"></i> Kasir
+                            </button>
+                            <button class="btn btn-sm btn-outline-success py-0 px-2" style="font-size:0.7rem;" onclick="kirimPesanJatuhTempoWA('${item.nama}', '${item.desa}', '${item.noHp}', ${item.saldo})">
+                                <i class="bi bi-whatsapp"></i> WA
                             </button>
                         </td>
                     </tr>
@@ -1274,6 +1325,53 @@
 
             document.getElementById('todayRealPokokDisplay').textContent = 'Rp ' + formatRp(totalTodayPokok);
             document.getElementById('todayRealJasaDisplay').textContent = 'Rp ' + formatRp(totalTodayJasa);
+        }
+
+        function renderLaporanRekapitulasi() {
+            const allData = getLPPData();
+            let totalPlafon = 0;
+            let totalRealisasi = 0;
+            let totalSaldo = 0;
+
+            const desaMap = {};
+
+            allData.forEach(item => {
+                const p = parseNum(item.plafon);
+                const r = parseNum(item.realTotPokok);
+                const s = parseNum(item.saldo);
+                const d = (item.desa || 'Lainnya').trim().toUpperCase();
+
+                totalPlafon += p;
+                totalRealisasi += r;
+                totalSaldo += s;
+
+                if (!desaMap[d]) {
+                    desaMap[d] = { count: 0, plafon: 0, saldo: 0 };
+                }
+                desaMap[d].count += 1;
+                desaMap[d].plafon += p;
+                desaMap[d].saldo += s;
+            });
+
+            document.getElementById('repTotalPlafon').textContent = 'Rp ' + formatRp(totalPlafon);
+            document.getElementById('repTotalRealisasi').textContent = 'Rp ' + formatRp(totalRealisasi);
+            document.getElementById('repTotalSaldo').textContent = 'Rp ' + formatRp(totalSaldo);
+
+            const tbody = document.getElementById('rekapDesaTableBody');
+            tbody.innerHTML = '';
+
+            let idx = 1;
+            for (const [desaName, val] of Object.entries(desaMap).sort()) {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${idx++}</td>
+                        <td class="fw-semibold text-start">${desaName}</td>
+                        <td>${val.count} Peminjam</td>
+                        <td class="text-end text-info">Rp ${formatRp(val.plafon)}</td>
+                        <td class="text-end text-danger">Rp ${formatRp(val.saldo)}</td>
+                    </tr>
+                `;
+            }
         }
 
         function updateDasborKeuangan() {
@@ -1601,6 +1699,15 @@
             document.getElementById('tellerInputJasa').value = '';
 
             const plafon = parseNum(n.plafon);
+            const saldo = parseNum(n.saldo);
+            const alertLunas = document.getElementById('nasabahLunasAlert');
+
+            if (saldo <= 0) {
+                alertLunas.classList.remove('d-none');
+            } else {
+                alertLunas.classList.add('d-none');
+            }
+
             const tenor = parseInt(n.tenor) || 12;
             const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
             const realTotPokok = parseNum(n.realTotPokok);
@@ -1733,7 +1840,15 @@
             if (!n) return;
 
             const bayarP = parseNum(document.getElementById('tellerInputPokok').value);
-            const estimasiSisa = Math.max(0, parseNum(n.saldo) - bayarP);
+            const saldoAktif = parseNum(n.saldo);
+
+            if (bayarP > saldoAktif) {
+                alert(`⚠️ Peringatan: Setoran pokok (Rp ${formatRp(bayarP)}) melebihi sisa saldo piutang nasabah (Rp ${formatRp(saldoAktif)})! Nominal disesuaikan.`);
+                document.getElementById('tellerInputPokok').value = saldoAktif;
+            }
+
+            const bayarPFinal = parseNum(document.getElementById('tellerInputPokok').value);
+            const estimasiSisa = Math.max(0, saldoAktif - bayarPFinal);
             document.getElementById('tellerEstimasiSisa').textContent = `Rp ${formatRp(estimasiSisa)}`;
         }
 
