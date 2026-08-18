@@ -1226,7 +1226,7 @@
             }
         }
 
-        // Perbaikan Mutlak & Universal untuk Semua Tombol WhatsApp
+        // Perbaikan Mutlak & Universal untuk Semua Tombol WhatsApp (Disesuaikan untuk Tunggakan)
         function kirimPesanJatuhTempoWA(nama, desa, noHp, sisaSaldo) {
             let phone = (noHp || '').toString().replace(/[^0-9]/g, '');
             
@@ -1240,7 +1240,7 @@
                 phone = '62' + phone.substring(1);
             }
 
-            const pesan = `🏛️ *PENGINGAT ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. Bpk/Ibu *${nama}*\nKelurahan/Desa: ${desa}\n-----------------------------------------\nKami informasikan bahwa jadwal angsuran dana bergulir Anda telah tiba / mendekati jatuh tempo.\nSisa Saldo Pokok Anda saat ini: *Rp ${formatRp(sisaSaldo)}*\n-----------------------------------------\nMohon melakukan pembayaran tepat waktu demi kelancaran dan kesinambungan dana bergulir kelompok. Terima kasih. 🙏`;
+            const pesan = `🚨 *PENGINGAT TUNGGAKAN ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. Bpk/Ibu *${nama}*\nKelurahan/Desa: ${desa}\n-----------------------------------------\nKami informasikan bahwa jadwal angsuran dana bergulir Anda saat ini telah melewati batas waktu jatuh tempo (menunggak).\nSisa Saldo Pokok Anda saat ini: *Rp ${formatRp(sisaSaldo)}*\n-----------------------------------------\nMohon segera melakukan pembayaran tepat waktu demi kelancaran dan kesinambungan dana bergulir kelompok. Terima kasih. 🙏`;
             
             const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`;
             window.open(url, '_blank');
