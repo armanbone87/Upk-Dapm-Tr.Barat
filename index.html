@@ -103,7 +103,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-bottom: 1.25rem;
         }
         .logo-glow {
@@ -115,6 +115,17 @@
             background: var(--card-bg);
             border: 2px solid rgba(139, 92, 246, 0.4);
             box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+        }
+        .logo-divider {
+            color: var(--neon-purple);
+            font-size: 1.5rem;
+            animation: pulseIcon 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseIcon {
+            0% { opacity: 0.4; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.15); }
+            100% { opacity: 0.4; transform: scale(0.95); }
         }
 
         @media print {
@@ -186,8 +197,11 @@
     <div id="publicContent" class="container py-5 text-center" style="max-width: 650px;">
         <div class="card-custom p-4 p-md-5 mt-4 shadow-lg border-0">
             <div class="logo-container">
-                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" title="Logo UPK">
-                <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" title="Logo DAPM">
+                <img src="logo-pnpm.png" alt="Logo PNPM" class="logo-glow" title="Logo PNPM Mandiri">
+                <div class="logo-divider">
+                    <i class="bi bi-arrow-left-right"></i>
+                </div>
+                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" title="Logo DAPM Tr. Barat">
             </div>
             <h4 class="fw-bold mb-2" style="color: var(--text-main);">UPK DAPM TANETE RIATTANG BARAT</h4>
             <p class="small mb-4 text-muted">Sistem Informasi Keuangan, Manajemen Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan Terpadu.</p>
@@ -256,8 +270,9 @@
                     <div class="col-md-4 text-center mt-4 mt-md-0">
                         <div class="p-4 card-light-custom rounded-4 border">
                             <div class="logo-container mb-2">
-                                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" style="width: 50px; height: 50px;">
-                                <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" style="width: 50px; height: 50px;">
+                                <img src="logo-pnpm.png" alt="Logo PNPM" class="logo-glow" style="width: 45px; height: 45px;">
+                                <i class="bi bi-arrow-left-right text-muted fs-5"></i>
+                                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" style="width: 45px; height: 45px;">
                             </div>
                             <h6 class="fw-bold mb-1 text-white">SISKEU UPK</h6>
                             <p class="small mb-0 text-muted">Laporan Perkembangan Pinjaman & Kas</p>
@@ -2283,7 +2298,7 @@
             if (confirm('Hapus transaksi?')) {
                 localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
                 renderKas();
-                updateDasborNeon();
+                updateDasborKeuangan();
                 backupKeGoogleSheet(true);
             }
         }
@@ -2321,7 +2336,7 @@
                 bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
                 checkAuthUI();
             } else {
-                document.getElementById('loginError').classList.add('d-none');
+                document.getElementById('loginError').classList.remove('d-none');
             }
         });
 
