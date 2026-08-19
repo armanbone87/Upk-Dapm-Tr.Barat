@@ -2413,6 +2413,8 @@
             }
 
             const nominalTerbilang = item.nominal ? (terbilang(item.nominal) + " Rupiah") : "Nol Rupiah";
+            const isMasuk = item.tipe === 'Masuk';
+            const teksPemberi = isMasuk ? `Sudah terima dari <strong>${item.nama}</strong>` : `Sudah terima dari Bendahara Keuangan DAPM Tr. Barat`;
 
             const printWindow = window.open('', '_blank', 'width=850,height=650');
             printWindow.document.write(`
@@ -2456,12 +2458,12 @@
 
                         <table class="table table-bordered table-detail mb-3">
                             <tr>
-                                <th>Sudah Terima Dari / Untuk Pembayaran:</th>
-                                <td><strong>${item.nama}</strong></td>
+                                <th>Keterangan Pihak:</th>
+                                <td>${teksPemberi}</td>
                             </tr>
                             <tr>
-                                <th>Desa / Kelurahan:</th>
-                                <td>${item.kelurahan}</td>
+                                <th>Untuk Keperluan:</th>
+                                <td><strong>${item.nama}</strong></td>
                             </tr>
                             <tr>
                                 <th>Jumlah Uang:</th>
@@ -2472,16 +2474,16 @@
                             </tr>
                         </table>
 
-                        <div class="row mt-5 pt-3 text-center align-items-end">
+                        <div class="row mt-5 pt-2 text-center align-items-end">
                             <div class="col-6">
-                                <p class="mb-5">Mengetahui / Menyetujui,<br><strong>Pengurus UPK TR. Barat</strong></p>
+                                <p class="mb-5">Mengetahui,<br><strong>Kepala Unit Pengelola DAPM Tr. Barat</strong></p>
                                 <br><br>
-                                <p class="mb-0 fw-bold border-top d-inline-block pt-1 px-4" style="border-top: 1px solid #000 !important;">( ........................................... )</p>
+                                <p class="mb-0 fw-bold border-top d-inline-block pt-1 px-4" style="border-top: 1px solid #000 !important;">( <strong>H. Jadjdji Irfan</strong> )</p>
                             </div>
                             <div class="col-6">
                                 <p class="mb-5">Penerima / Pemohon,<br><br></p>
                                 <br><br>
-                                <p class="mb-0 fw-bold border-top d-inline-block pt-1 px-4" style="border-top: 1px solid #000 !important;">( <strong>${item.nama}</strong> )</p>
+                                <p class="mb-0 fw-bold border-top d-inline-block pt-1 px-4" style="border-top: 1px solid #000 !important;">( ........................................... )</p>
                             </div>
                         </div>
 
