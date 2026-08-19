@@ -1392,12 +1392,17 @@
             const allData = getLPPData();
             const tbody = document.getElementById('jatuhTempoTableBody');
             tbody.innerHTML = '';
+
             const selectedDateInput = document.getElementById('filterTglJatuhTempo').value;
             const formattedSelectedDate = selectedDateInput ? formatTanggalID(new Date(selectedDateInput)) : formatTanggalID(new Date());
 
-            let totalTodayPokok = 0, totalTodayJasa = 0;
+            let totalTodayPokok = 0;
+            let totalTodayJasa = 0;
+
             if (allData.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="8" class="text-center py-3 text-muted">Belum ada data peminjam.</td></tr>';
+                document.getElementById('todayRealPokokDisplay').textContent = 'Rp 0';
+                document.getElementById('todayRealJasaDisplay').textContent = 'Rp 0';
                 return;
             }
 
@@ -1406,17 +1411,23 @@
                 const plafon = parseNum(item.plafon);
                 const tenor = parseInt(item.tenor) || 12;
                 const persenJasa = item.persenJasa !== undefined ? parseFloat(item.persenJasa) : 1.5;
+                
                 const bulanBerjalan = hitungBulanBerjalan(item.tglCair, tenor);
 
                 const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
                 const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
+
                 const targetPokokRT = bulanBerjalan >= tenor ? plafon : bulatkan(pokokPerBulan * bulanBerjalan);
                 const targetJasaRT = bulatkan(bungaPerBulan * bulanBerjalan);
 
-                let bayarHariIniPokok = 0, bayarHariIniJasa = 0;
+                const realIniPokok = parseNum(item.realIniPokok);
+                const realIniBunga = parseNum(item.realIniBunga);
+
+                let bayarHariIniPokok = 0;
+                let bayarHariIniJasa = 0;
                 let statusBayarHariIni = '<span class="badge bg-light text-dark border py-1 px-2">Belum Bayar</span>';
 
-                if (item.history) {
+                if (item.history && item.history.length > 0) {
                     item.history.forEach(h => {
                         if (h.tanggal === formattedSelectedDate) {
                             bayarHariIniPokok += parseNum(h.pokok);
@@ -1426,28 +1437,39 @@
                 }
 
                 if (bayarHariIniPokok > 0 || bayarHariIniJasa > 0) {
-                    statusBayarHariIni = `<span class="badge py-1 px-2 text-white bg-dark">Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)})</span>`;
+                    statusBayarHariIni = `<span class="badge py-1 px-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle me-1"></i> Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)})</span>`;
+                } else if (realIniPokok > 0 || realIniBunga > 0) {
+                    statusBayarHariIni = `<span class="badge bg-secondary text-white py-1 px-2 fw-semibold"><i class="bi bi-check2-all me-1"></i> Terisi LPP (P: Rp ${formatRp(realIniPokok)})</span>`;
                 }
 
-                totalTodayPokok += bayarHariIniPokok > 0 ? bayarHariIniPokok : parseNum(item.realIniPokok);
-                totalTodayJasa += bayarHariIniJasa > 0 ? bayarHariIniJasa : parseNum(item.realIniBunga);
+                if (parseNum(item.saldo) <= 0) {
+                    statusBayarHariIni = '<span class="badge bg-secondary text-white py-1 px-2 fw-semibold">LUNAS</span>';
+                }
+
+                totalTodayPokok += bayarHariIniPokok > 0 ? bayarHariIniPokok : realIniPokok;
+                totalTodayJasa += bayarHariIniJasa > 0 ? bayarHariIniJasa : realIniBunga;
 
                 tbody.innerHTML += `
                     <tr>
                         <td class="text-center">${index + 1}</td>
                         <td class="fw-semibold text-dark">${item.nama}</td>
                         <td>${item.desa}</td>
-                        <td class="text-center">${bulanBerjalan} Bln</td>
-                        <td class="text-end fw-bold">Rp ${formatRp(targetPokokRT)}</td>
-                        <td class="text-end fw-bold">Rp ${formatRp(targetJasaRT)}</td>
+                        <td class="text-center fw-bold">${bulanBerjalan} Bln</td>
+                        <td class="text-end fw-bold" style="background: #f8f9fa;">Rp ${formatRp(targetPokokRT)}</td>
+                        <td class="text-end fw-bold" style="background: #f8f9fa;">Rp ${formatRp(targetJasaRT)}</td>
                         <td class="text-center">${statusBayarHariIni}</td>
                         <td class="text-center no-print">
-                            <button class="btn btn-sm py-1 px-2 text-white bg-dark border-0 me-1 shadow-sm" onclick="langsungBayarDariLPP(${realIndex})"><i class="bi bi-cash me-1"></i> Kasir</button>
-                            <button class="btn btn-sm btn-outline-dark py-1 px-2 shadow-sm" onclick="kirimPesanJatuhTempoWA('${item.nama.replace(/'/g, "\\'")}', '${item.desa.replace(/'/g, "\\'")}', '${item.noHp || ''}', ${item.saldo})"><i class="bi bi-whatsapp"></i> WA</button>
+                            <button class="btn btn-sm py-1 px-2 fw-semibold text-white me-1 shadow-sm bg-dark border-0" style="font-size:0.75rem;" onclick="langsungBayarDariLPP(${realIndex})">
+                                <i class="bi bi-cash me-1"></i> Kasir
+                            </button>
+                            <button class="btn btn-sm btn-outline-dark py-1 px-2 shadow-sm" style="font-size:0.75rem;" onclick="kirimPesanJatuhTempoWA('${item.nama.replace(/'/g, "\\'")}', '${item.desa.replace(/'/g, "\\'")}', '${item.noHp || ''}', ${item.saldo})">
+                                <i class="bi bi-whatsapp"></i> WA
+                            </button>
                         </td>
                     </tr>
                 `;
             });
+
             document.getElementById('todayRealPokokDisplay').textContent = 'Rp ' + formatRp(totalTodayPokok);
             document.getElementById('todayRealJasaDisplay').textContent = 'Rp ' + formatRp(totalTodayJasa);
         }
