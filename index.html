@@ -7,8 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         :root {
@@ -60,7 +66,6 @@
         .customer-item { transition: all 0.2s ease; cursor: pointer; border-left: 4px solid transparent; background-color: var(--card-bg); color: var(--text-main); border-bottom: 1px solid var(--border-color); }
         .customer-item:hover, .customer-item.active { background-color: #e2e8f0 !important; border-left-color: #000000; transform: translateX(2px); }
         
-        /* Minimalisasi Tabel LPP agar muat dalam 1 layar */
         .table-lpp-compact th { 
             background-color: var(--table-th-bg); 
             color: var(--table-th-color); 
@@ -356,6 +361,17 @@
                 </div>
             </div>
 
+            <div class="row g-3 mb-3">
+                <div class="col-lg-12">
+                    <div class="card-custom p-3 p-md-4">
+                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-bar-chart-line me-1"></i> Grafik Tren Pembayaran Angsuran per Bulan</h6>
+                        <div style="position: relative; height:280px; width:100%">
+                            <canvas id="trenAngsuranChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row g-3">
                 <div class="col-lg-8">
                     <div class="card-custom p-3 p-md-4 h-100">
@@ -457,7 +473,7 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
                     <div class="d-flex gap-2 align-items-center">
-                        <input type="text" id="peminjamSearchInput" class="form-control form-control-compact text-dark" style="width: 220px;" placeholder="Cari nama peminjam/desa..." onkeyup="renderDataPeminjamTable()">
+                        <input type="text" id="peminjamSearchInput" class="form-control form-control-compact text-dark" style="width: 220px;" placeholder="Cari nama peminjam/desa..." oninput="onPeminjamSearchInput()">
                         <select id="peminjamDesaFilter" class="form-select form-select-compact text-dark" style="width: 170px;" onchange="renderDataPeminjamTable()">
                             <option value="">Semua Desa/Kelurahan</option>
                         </select>
@@ -469,7 +485,7 @@
                     </div>
                 </div>
 
-                <div class="table-responsive overflow-auto shadow-sm rounded-3 border" style="max-height: 520px;">
+                <div class="table-responsive overflow-auto shadow-sm rounded-3 border" style="max-height: 420px;">
                     <table class="table table-bordered table-hover table-compact mb-0">
                         <thead>
                             <tr>
@@ -489,6 +505,15 @@
                         <tbody id="peminjamTableBody"></tbody>
                     </table>
                 </div>
+                <!-- Pagination Controls for Peminjam -->
+                <div class="d-flex justify-content-between align-items-center mt-3 no-print">
+                    <div class="small text-muted" id="peminjamPaginationInfo">Menampilkan data...</div>
+                    <nav>
+                        <ul class="pagination pagination-sm mb-0" id="peminjamPaginationContainer">
+                            <!-- Rendered dynamically -->
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
 
@@ -498,7 +523,7 @@
                     <div class="card-custom p-3 h-100">
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text border-end-0 bg-white text-dark"><i class="bi bi-search"></i></span>
-                            <input type="text" id="tellerSearchInput" class="form-control form-control-compact border-start-0 text-dark" placeholder="Cari peminjam..." onkeyup="renderTellerCustomerList()">
+                            <input type="text" id="tellerSearchInput" class="form-control form-control-compact border-start-0 text-dark" placeholder="Cari peminjam..." oninput="renderTellerCustomerList()">
                         </div>
                         <div class="d-flex justify-content-between align-items-center small mb-2 text-muted">
                             <span>Daftar Nasabah:</span>
@@ -723,7 +748,7 @@
                         <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-dark btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
-                        <input type="text" id="searchInput" class="form-control form-control-compact text-dark" style="width: 180px;" placeholder="Cari peminjam..." onkeyup="filterLPPTable()">
+                        <input type="text" id="searchInput" class="form-control form-control-compact text-dark" style="width: 180px;" placeholder="Cari peminjam..." oninput="filterLPPTable()">
                         <select id="desaFilter" class="form-select form-select-compact text-dark" style="width: 150px;" onchange="filterLPPTable()">
                             <option value="">Semua Desa/Kelurahan</option>
                         </select>
@@ -738,7 +763,7 @@
                 </div>
 
                 <!-- Tabel LPP Minimalis agar pas 1 layar -->
-                <div id="areaCetakLPP" class="table-responsive overflow-auto rounded-3 border shadow-sm">
+                <div id="areaCetakLPP" class="table-responsive overflow-auto rounded-3 border shadow-sm" style="max-height: 450px;">
                     <table class="table table-bordered table-hover table-lpp-compact mb-0" id="mainLPPTable">
                         <thead>
                             <tr>
@@ -772,6 +797,15 @@
                         <tbody id="lppTableBody"></tbody>
                         <tfoot class="fw-bold" id="lppTableFoot"></tfoot>
                     </table>
+                </div>
+                <!-- Pagination Controls for LPP Table -->
+                <div class="d-flex justify-content-between align-items-center mt-3 no-print">
+                    <div class="small text-muted" id="lppPaginationInfo">Menampilkan data...</div>
+                    <nav>
+                        <ul class="pagination pagination-sm mb-0" id="lppPaginationContainer">
+                            <!-- Rendered dynamically -->
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -1010,6 +1044,99 @@
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfWRbo6751T2bvAIp-CVHEoXQ4wabnzGieMAjF0cT_0J4o6waldAgfeuW_NOxlP-5b8Q/exec";
 
+        // Global Toast Notification Helper using SweetAlert2
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        function showToast(icon, title) {
+            Toast.fire({
+                icon: icon,
+                title: title
+            });
+        }
+
+        // Global Chart Instance for Financial Dashboard
+        let trenAngsuranChartInstance = null;
+
+        function renderTrenAngsuranChart() {
+            const ctx = document.getElementById('trenAngsuranChart');
+            if (!ctx) return;
+
+            const allData = getLPPData();
+            // Aggregate history payment totals per month or generate trend based on history
+            const monthlyData = {};
+            
+            allData.forEach(item => {
+                if (item.history && item.history.length > 0) {
+                    item.history.forEach(h => {
+                        // h.tanggal format: DD/MM/YYYY
+                        if (h.tanggal && h.tanggal.includes('/')) {
+                            const parts = h.tanggal.split('/');
+                            if (parts.length === 3) {
+                                const mKey = `${parts[1]}/${parts[2]}`; // MM/YYYY
+                                if (!monthlyData[mKey]) monthlyData[mKey] = 0;
+                                monthlyData[mKey] += parseNum(h.total);
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Fallback or sorted keys
+            let labels = Object.keys(monthlyData).sort();
+            let dataValues = labels.map(l => monthlyData[l]);
+
+            if (labels.length === 0) {
+                labels = ['Bulan Ini'];
+                dataValues = [0];
+            }
+
+            if (trenAngsuranChartInstance) {
+                trenAngsuranChartInstance.destroy();
+            }
+
+            trenAngsuranChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total Pembayaran Angsuran (Rp)',
+                        data: dataValues,
+                        backgroundColor: 'rgba(33, 37, 41, 0.8)',
+                        borderColor: '#212529',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return 'Rp ' + formatRp(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
         function bulatkan(num) {
             return Math.round(num / 1000) * 1000;
         }
@@ -1021,7 +1148,7 @@
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 if (idleTimer) clearTimeout(idleTimer);
                 idleTimer = setTimeout(() => {
-                    alert("⚠️ Sesi Anda telah berakhir kerana tiada aktiviti selama 5 minit.");
+                    showToast('warning', '⚠️ Sesi Anda telah berakhir kerana tiada aktiviti.');
                     logout();
                 }, IDLE_TIMEOUT_MS);
             }
@@ -1168,12 +1295,12 @@
                     badge.className = "badge bg-dark text-white small me-1 px-2 py-1 shadow-sm";
                 }
                 if (!silent) {
-                    alert("✅ Data LPP dan Buku Kas BERHASIL disinkronkan ke Google Sheet!");
+                    showToast('success', 'Data LPP & Buku Kas berhasil disinkronkan!');
                 }
             } catch (err) {
                 console.error("Gagal sinkronisasi:", err);
                 if (!silent) {
-                    alert("⚠️ Gagal mengirim data ke Google Sheet.");
+                    showToast('error', 'Gagal mengirim data ke Google Sheet.');
                 }
             } finally {
                 if (btn && !silent) {
@@ -1242,17 +1369,30 @@
             let phone = (noHp || '').toString().replace(/[^0-9]/g, '');
             
             if (!phone || phone.length < 9) {
-                let inputNo = prompt(`Nomor WhatsApp untuk nasabah "${nama}" belum terdaftar atau kosong.\nSila masukkan nombor telefon aktif (Contoh: 08123456789):`);
-                if (!inputNo) return;
-                phone = inputNo.replace(/[^0-9]/g, '');
+                Swal.fire({
+                    title: 'Nomor WhatsApp Kosong',
+                    text: `Masukkan nomor telepon aktif untuk "${nama}" (Contoh: 08123456789):`,
+                    input: 'text',
+                    inputPlaceholder: '0812...',
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.value) {
+                        phone = result.value.replace(/[^0-9]/g, '');
+                        if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+                        bukaWaUrl(phone, nama, desa, sisaSaldo);
+                    }
+                });
+                return;
             }
 
             if (phone.startsWith('0')) {
                 phone = '62' + phone.substring(1);
             }
+            bukaWaUrl(phone, nama, desa, sisaSaldo);
+        }
 
+        function bukaWaUrl(phone, nama, desa, sisaSaldo) {
             const pesan = `🚨 *PENGINGAT TUNGGAKAN ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. Bpk/Ibu *${nama}*\nKelurahan/Desa: ${desa}\n-----------------------------------------\nKami informasikan bahwa jadwal angsuran dana bergulir Anda saat ini telah melewati batas waktu jatuh tempo (menunggak).\nSisa Saldo Pokok Anda saat ini: *Rp ${formatRp(sisaSaldo)}*\n-----------------------------------------\nMohon segera melakukan pembayaran tepat waktu demi kelancaran dan kesinambungan dana bergulir kelompok. Terima kasih. 🙏`;
-            
             const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`;
             window.open(url, '_blank');
         }
@@ -1433,6 +1573,18 @@
             const persenKolektibilitas = tTargetPokok > 0 ? Math.min(100, Math.round((tRealPokok / tTargetPokok) * 100)) : 100;
             document.getElementById('dashFinTingkatPengembalian').textContent = `${persenKolektibilitas}% Kolektibilitas`;
             document.getElementById('dashFinProgressBar').style.width = `${persenKolektibilitas}%`;
+
+            // Render Chart.js
+            renderTrenAngsuranChart();
+        }
+
+        // Pagination State for Data Peminjam
+        let currentPeminjamPage = 1;
+        const peminjamItemsPerPage = 10;
+
+        function onPeminjamSearchInput() {
+            currentPeminjamPage = 1;
+            renderDataPeminjamTable();
         }
 
         function renderDataPeminjamTable() {
@@ -1459,12 +1611,20 @@
                 return matchQ && matchD;
             });
 
-            if (filtered.length === 0) {
+            // Pagination logic
+            const totalPages = Math.ceil(filtered.length / peminjamItemsPerPage) || 1;
+            if (currentPeminjamPage > totalPages) currentPeminjamPage = totalPages;
+            const startIdx = (currentPeminjamPage - 1) * peminjamItemsPerPage;
+            const paginatedItems = filtered.slice(startIdx, startIdx + peminjamItemsPerPage);
+
+            if (paginatedItems.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="11" class="text-center py-3 text-muted">Data peminjam tidak ditemukan.</td></tr>';
+                document.getElementById('peminjamPaginationInfo').textContent = 'Menampilkan 0 dari 0 data';
+                document.getElementById('peminjamPaginationContainer').innerHTML = '';
                 return;
             }
 
-            filtered.forEach((item, index) => {
+            paginatedItems.forEach((item, index) => {
                 const realIndex = allData.indexOf(item);
                 const plafon = parseNum(item.plafon);
                 const saldo = parseNum(item.saldo);
@@ -1473,7 +1633,7 @@
 
                 tbody.innerHTML += `
                     <tr>
-                        <td class="text-center text-dark">${item.no || (index + 1)}</td>
+                        <td class="text-center text-dark">${startIdx + index + 1}</td>
                         <td class="fw-semibold text-dark">${item.nama}</td>
                         <td class="text-dark">${item.desa}</td>
                         <td class="text-end fw-semibold text-dark">Rp ${formatRp(plafon)}</td>
@@ -1499,6 +1659,22 @@
                     </tr>
                 `;
             });
+
+            document.getElementById('peminjamPaginationInfo').textContent = `Menampilkan ${startIdx + 1} - ${Math.min(startIdx + peminjamItemsPerPage, filtered.length)} dari ${filtered.length} data`;
+            
+            // Render Pagination UI
+            const pagContainer = document.getElementById('peminjamPaginationContainer');
+            pagContainer.innerHTML = '';
+            pagContainer.innerHTML += `<li class="page-item ${currentPeminjamPage === 1 ? 'disabled' : ''}"><a class="page-link text-dark" href="#" onclick="changePeminjamPage(${currentPeminjamPage - 1}); return false;">Sebelumnya</a></li>`;
+            for (let i = 1; i <= totalPages; i++) {
+                pagContainer.innerHTML += `<li class="page-item ${currentPeminjamPage === i ? 'active' : ''}"><a class="page-link ${currentPeminjamPage === i ? 'bg-dark border-dark text-white' : 'text-dark'}" href="#" onclick="changePeminjamPage(${i}); return false;">${i}</a></li>`;
+            }
+            pagContainer.innerHTML += `<li class="page-item ${currentPeminjamPage === totalPages ? 'disabled' : ''}"><a class="page-link text-dark" href="#" onclick="changePeminjamPage(${currentPeminjamPage + 1}); return false;">Selanjutnya</a></li>`;
+        }
+
+        function changePeminjamPage(page) {
+            currentPeminjamPage = page;
+            renderDataPeminjamTable();
         }
 
         function hitungSimulasiPeminjamBaru() {
@@ -1564,7 +1740,7 @@
             const noHp = document.getElementById('newNoHp').value.trim();
 
             if (plafon <= 0) {
-                alert('Plafon pinjaman harus lebih dari 0!');
+                showToast('warning', 'Plafon pinjaman harus lebih dari 0!');
                 return;
             }
 
@@ -1592,7 +1768,7 @@
                 if (modalObj) modalObj.hide();
 
                 backupKeGoogleSheet(true);
-                alert(`✅ Data peminjam "${nama}" berhasil diperbarui!`);
+                showToast('success', `Data peminjam "${nama}" berhasil diperbarui!`);
                 bukaView('panelDataPeminjam');
             } else {
                 const newBorrower = {
@@ -1636,7 +1812,7 @@
                 if (modalObj) modalObj.hide();
 
                 backupKeGoogleSheet(true);
-                alert(`✅ Peminjam baru "${nama}" berhasil ditambahkan!`);
+                showToast('success', `Peminjam baru "${nama}" berhasil ditambahkan!`);
                 bukaView('panelDataPeminjam');
             }
         });
@@ -1646,14 +1822,25 @@
             const n = allData[idx];
             if (!n) return;
 
-            if (confirm(`Apakah Anda yakin ingin menghapus data peminjam "${n.nama}"?`)) {
-                allData.splice(idx, 1);
-                allData.forEach((item, i) => item.no = i + 1);
-                saveLPPData(allData);
-                renderDataPeminjamTable();
-                updateDasborKeuangan();
-                backupKeGoogleSheet(true);
-            }
+            Swal.fire({
+                title: 'Hapus Peminjam?',
+                text: `Apakah Anda yakin ingin menghapus data peminjam "${n.nama}"?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#212529',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    allData.splice(idx, 1);
+                    allData.forEach((item, i) => item.no = i + 1);
+                    saveLPPData(allData);
+                    renderDataPeminjamTable();
+                    updateDasborKeuangan();
+                    backupKeGoogleSheet(true);
+                    showToast('success', 'Data peminjam berhasil dihapus.');
+                }
+            });
         }
 
         let currentActiveNasabahIdx = null;
@@ -1856,7 +2043,7 @@
             const saldoAktif = parseNum(n.saldo);
 
             if (bayarP > saldoAktif) {
-                alert(`⚠️ Peringatan: Setoran pokok melebihi baki piutang nasabah!`);
+                showToast('warning', '⚠️ Setoran pokok melebihi baki piutang nasabah!');
                 document.getElementById('tellerInputPokok').value = saldoAktif;
             }
 
@@ -1893,42 +2080,48 @@
             });
         }
 
-        // PERBAIKAN UTAMA: Sinkronisasi rollback LPP saat riwayat angsuran dihapus
         function hapusRiwayatPembayaran(nasabahIdx, historyIdx) {
             const allData = getLPPData();
             const nasabah = allData[nasabahIdx];
             if (!nasabah || !nasabah.history || !nasabah.history[historyIdx]) return;
 
-            if (confirm(`Hapus riwayat angsuran ke-${nasabah.history[historyIdx].angsuranKe}? Target pokok dan jasa di tabel LPP akan dikembalikan ke data sebelum transaksi ini ditambahkan.`)) {
-                const deleted = nasabah.history.splice(historyIdx, 1)[0];
-                
-                // Kurangi realisasi total dengan nominal yang dihapus
-                nasabah.realTotPokok = Math.max(0, parseNum(nasabah.realTotPokok) - parseNum(deleted.pokok));
-                nasabah.realTotBunga = Math.max(0, parseNum(nasabah.realTotBunga) - parseNum(deleted.jasa));
-                
-                // Kembalikan saldo ke nilai sebelum ditambah transaksi bayar
-                nasabah.saldo = parseNum(nasabah.plafon) - parseNum(nasabah.realTotPokok);
-                nasabah.angsuranKe = Math.max(1, parseNum(nasabah.angsuranKe) - 1);
+            Swal.fire({
+                title: 'Hapus Riwayat Angsuran?',
+                text: `Target pokok dan jasa di tabel LPP akan dikembalikan ke data sebelum transaksi ini ditambahkan.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#212529',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const deleted = nasabah.history.splice(historyIdx, 1)[0];
+                    
+                    nasabah.realTotPokok = Math.max(0, parseNum(nasabah.realTotPokok) - parseNum(deleted.pokok));
+                    nasabah.realTotBunga = Math.max(0, parseNum(nasabah.realTotBunga) - parseNum(deleted.jasa));
+                    
+                    nasabah.saldo = parseNum(nasabah.plafon) - parseNum(nasabah.realTotPokok);
+                    nasabah.angsuranKe = Math.max(1, parseNum(nasabah.angsuranKe) - 1);
 
-                // Perbarui realIniPokok dan realIniBunga berdasarkan history yang tersisa (jika ada pada tanggal yang sama) atau set ke 0
-                let sisaPokokHariIni = 0;
-                let sisaBungaHariIni = 0;
-                if (nasabah.history.length > 0) {
-                    const latestH = nasabah.history[0];
-                    sisaPokokHariIni = parseNum(latestH.pokok);
-                    sisaBungaHariIni = parseNum(latestH.jasa);
+                    let sisaPokokHariIni = 0;
+                    let sisaBungaHariIni = 0;
+                    if (nasabah.history.length > 0) {
+                        const latestH = nasabah.history[0];
+                        sisaPokokHariIni = parseNum(latestH.pokok);
+                        sisaBungaHariIni = parseNum(latestH.jasa);
+                    }
+                    nasabah.realIniPokok = sisaPokokHariIni;
+                    nasabah.realIniBunga = sisaBungaHariIni;
+                    nasabah.realLaluPokok = Math.max(0, parseNum(nasabah.realTotPokok) - sisaPokokHariIni);
+                    nasabah.realLaluBunga = Math.max(0, parseNum(nasabah.realTotBunga) - sisaBungaHariIni);
+                    
+                    saveLPPData(allData);
+                    pilihNasabahTeller(nasabahIdx);
+                    updateDasborKeuangan();
+                    backupKeGoogleSheet(true);
+                    showToast('success', 'Riwayat angsuran berhasil dihapus.');
                 }
-                nasabah.realIniPokok = sisaPokokHariIni;
-                nasabah.realIniBunga = sisaBungaHariIni;
-                nasabah.realLaluPokok = Math.max(0, parseNum(nasabah.realTotPokok) - sisaPokokHariIni);
-                nasabah.realLaluBunga = Math.max(0, parseNum(nasabah.realTotBunga) - sisaBungaHariIni);
-                
-                saveLPPData(allData);
-                pilihNasabahTeller(nasabahIdx);
-                updateDasborKeuangan();
-                backupKeGoogleSheet(true);
-                alert("✅ Riwayat angsuran berhasil dihapus dan data LPP telah disinkronkan kembali.");
-            }
+            });
         }
 
         function resetTellerForm() {
@@ -1954,7 +2147,7 @@
             const tglBayar = document.getElementById('tellerInputTgl').value;
 
             if (bayarPokok <= 0 && bayarJasa <= 0) {
-                alert('Masukkan setoran pokok atau bunga!');
+                showToast('warning', 'Masukkan setoran pokok atau bunga!');
                 return;
             }
 
@@ -2035,6 +2228,7 @@
             updateDasborKeuangan();
 
             backupKeGoogleSheet(true);
+            showToast('success', 'Pembayaran berhasil disimpan!');
         });
 
         function kirimBuktiWA() {
@@ -2042,13 +2236,26 @@
             let phone = (lastPaymentReceipt.noHp || '').toString().replace(/[^0-9]/g, '');
 
             if (!phone || phone.length < 9) {
-                let inputNo = prompt(`Nomor WhatsApp untuk nasabah "${lastPaymentReceipt.nama}" belum valid.\nSila masukkan nombor telefon yang benar:`);
-                if (!inputNo) return;
-                phone = inputNo.replace(/[^0-9]/g, '');
+                Swal.fire({
+                    title: 'Nomor WhatsApp Kosong',
+                    text: `Masukkan nomor telepon aktif untuk "${lastPaymentReceipt.nama}":`,
+                    input: 'text',
+                    showCancelButton: true
+                }).then((res) => {
+                    if (res.value) {
+                        phone = res.value.replace(/[^0-9]/g, '');
+                        if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+                        bukaWaKwitansiUrl(phone);
+                    }
+                });
+                return;
             }
 
             if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+            bukaWaKwitansiUrl(phone);
+        }
 
+        function bukaWaKwitansiUrl(phone) {
             const pesan = `🏛️ *BUKTI SETORAN RESMI UPK DAPM TR. BARAT*\n-----------------------------------------\nNo Transaksi: ${lastPaymentReceipt.noKwt}\nTanggal: ${lastPaymentReceipt.tanggal}\nNama Peminjam: *${lastPaymentReceipt.nama}*\nDesa/Kelurahan: ${lastPaymentReceipt.desa}\n-----------------------------------------\n🔹 Setoran Pokok (Angs Ke-${lastPaymentReceipt.angsuranKe}): Rp ${formatRp(lastPaymentReceipt.pokok)}\n🔹 Setoran Jasa/Bunga: Rp ${formatRp(lastPaymentReceipt.jasa)}\n💰 *TOTAL PEMBAYARAN: Rp ${formatRp(lastPaymentReceipt.total)}*\n-----------------------------------------\n📌 *INFORMASI SISA TAGIHAN*:\n- Sisa Saldo Pokok: Rp ${formatRp(lastPaymentReceipt.sisaSaldo)}\n- Sisa Saldo Jasa: Rp ${formatRp(lastPaymentReceipt.sisaJasa)}\n-----------------------------------------\n_Terima kasih atas kedisiplinan Anda. Bukti setoran ini sah dan tercatat otomatis di LPP._`;
             const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`;
             window.open(url, '_blank');
@@ -2069,6 +2276,10 @@
             select.value = currentVal;
         }
 
+        // Pagination State for LPP Table
+        let currentLPPPage = 1;
+        const lppItemsPerPage = 15;
+
         function renderLPPTable(filterData = null) {
             const allData = getLPPData();
             const data = filterData !== null ? filterData : allData;
@@ -2079,13 +2290,8 @@
 
             let tPlafon = 0, tTarP = 0, tTarB = 0, tLaluP = 0, tLaluB = 0, tIniP = 0, tIniB = 0, tTotP = 0, tTotB = 0, tSaldo = 0, tTungP = 0, tTungB = 0;
 
-            if (data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="18" class="text-center py-3 text-muted">Data kosong.</td></tr>`;
-                tfoot.innerHTML = '';
-                return;
-            }
-
-            data.forEach((r, idx) => {
+            // Calculate overall footer totals from full filtered data
+            data.forEach((r) => {
                 const plafon = parseNum(r.plafon);
                 const tenor = parseInt(r.tenor) || 12;
                 const persenJasa = r.persenJasa !== undefined ? parseFloat(r.persenJasa) : 1.5;
@@ -2094,12 +2300,7 @@
                 const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
                 const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
 
-                let tarP = 0;
-                if (bulanBerjalan >= tenor) {
-                    tarP = plafon;
-                } else {
-                    tarP = bulatkan(pokokPerBulan * bulanBerjalan);
-                }
+                let tarP = bulanBerjalan >= tenor ? plafon : bulatkan(pokokPerBulan * bulanBerjalan);
                 const tarB = bulatkan(bungaPerBulan * bulanBerjalan);
 
                 const lP = parseNum(r.realLaluPokok), lB = parseNum(r.realLaluBunga);
@@ -2113,10 +2314,46 @@
                 tPlafon += plafon; tTarP += tarP; tTarB += tarB; tLaluP += lP; tLaluB += lB;
                 tIniP += iP; tIniB += iB; tTotP += totP; tTotB += totB; tSaldo += saldo;
                 tTungP += tungP; tTungB += tungB;
+            });
+
+            // Pagination for LPP Table
+            const totalPages = Math.ceil(data.length / lppItemsPerPage) || 1;
+            if (currentLPPPage > totalPages) currentLPPPage = totalPages;
+            const startIdx = (currentLPPPage - 1) * lppItemsPerPage;
+            const paginatedLPP = data.slice(startIdx, startIdx + lppItemsPerPage);
+
+            if (paginatedLPP.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="18" class="text-center py-3 text-muted">Data kosong.</td></tr>`;
+                tfoot.innerHTML = '';
+                document.getElementById('lppPaginationInfo').textContent = 'Menampilkan 0 dari 0 data';
+                document.getElementById('lppPaginationContainer').innerHTML = '';
+                return;
+            }
+
+            paginatedLPP.forEach((r, idx) => {
+                const realIndex = allData.indexOf(r);
+                const plafon = parseNum(r.plafon);
+                const tenor = parseInt(r.tenor) || 12;
+                const persenJasa = r.persenJasa !== undefined ? parseFloat(r.persenJasa) : 1.5;
+                const bulanBerjalan = hitungBulanBerjalan(r.tglCair, tenor);
+
+                const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
+                const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
+
+                let tarP = bulanBerjalan >= tenor ? plafon : bulatkan(pokokPerBulan * bulanBerjalan);
+                const tarB = bulatkan(bungaPerBulan * bulanBerjalan);
+
+                const lP = parseNum(r.realLaluPokok), lB = parseNum(r.realLaluBunga);
+                const iP = parseNum(r.realIniPokok), iB = parseNum(r.realIniBunga);
+                const totP = parseNum(r.realTotPokok), totB = parseNum(r.realTotBunga);
+                const saldo = parseNum(r.saldo);
+                
+                let tungP = Math.max(0, tarP - totP);
+                let tungB = Math.max(0, tarB - totB);
 
                 tbody.innerHTML += `
                     <tr>
-                        <td class="text-center">${r.no || (idx + 1)}</td>
+                        <td class="text-center">${startIdx + idx + 1}</td>
                         <td class="fw-semibold text-dark text-start" style="max-width: 130px; overflow: hidden; text-overflow: ellipsis;" title="${r.nama || '-'}">${r.nama || '-'}</td>
                         <td style="max-width: 90px; overflow: hidden; text-overflow: ellipsis;">${r.desa || '-'}</td>
                         <td class="text-end">${formatRp(plafon)}</td>
@@ -2140,7 +2377,7 @@
 
             tfoot.innerHTML = `
                 <tr class="text-end bg-light text-dark">
-                    <td colspan="3" class="text-center">TOTAL</td>
+                    <td colspan="3" class="text-center">TOTAL KESELURUHAN</td>
                     <td>${formatRp(tPlafon)}</td>
                     <td></td><td></td>
                     <td>${formatRp(tTarP)}</td>
@@ -2157,6 +2394,21 @@
                     <td class="text-danger">${formatRp(tTungB)}</td>
                 </tr>
             `;
+
+            document.getElementById('lppPaginationInfo').textContent = `Menampilkan ${startIdx + 1} - ${Math.min(startIdx + lppItemsPerPage, data.length)} dari ${data.length} data`;
+
+            const lppPagContainer = document.getElementById('lppPaginationContainer');
+            lppPagContainer.innerHTML = '';
+            lppPagContainer.innerHTML += `<li class="page-item ${currentLPPPage === 1 ? 'disabled' : ''}"><a class="page-link text-dark" href="#" onclick="changeLPPPage(${currentLPPPage - 1}); return false;">Sebelumnya</a></li>`;
+            for (let i = 1; i <= totalPages; i++) {
+                lppPagContainer.innerHTML += `<li class="page-item ${currentLPPPage === i ? 'active' : ''}"><a class="page-link ${currentLPPPage === i ? 'bg-dark border-dark text-white' : 'text-dark'}" href="#" onclick="changeLPPPage(${i}); return false;">${i}</a></li>`;
+            }
+            lppPagContainer.innerHTML += `<li class="page-item ${currentLPPPage === totalPages ? 'disabled' : ''}"><a class="page-link text-dark" href="#" onclick="changeLPPPage(${currentLPPPage + 1}); return false;">Selanjutnya</a></li>`;
+        }
+
+        function changeLPPPage(page) {
+            currentLPPPage = page;
+            filterLPPTable();
         }
 
         function langsungBayarDariLPP(index) {
@@ -2239,7 +2491,7 @@
                     saveLPPData(mappedData);
                     bukaView('panelDasborKeuangan');
                     backupKeGoogleSheet(true);
-                    alert(`✅ Berhasil mengimpor ${mappedData.length} data LPP!`);
+                    showToast('success', `Berhasil mengimpor ${mappedData.length} data LPP!`);
                 }
             };
             if (isCSV) reader.readAsText(file, 'ISO-8859-1'); else reader.readAsArrayBuffer(file);
@@ -2257,13 +2509,24 @@
         }
 
         function resetToSample() {
-            if (confirm('Kembalikan ke data default?')) {
-                localStorage.removeItem('upk_lpp_master');
-                renderLPPTable();
-                renderTellerCustomerList();
-                renderDataPeminjamTable();
-                updateDasborKeuangan();
-            }
+            Swal.fire({
+                title: 'Reset Data?',
+                text: 'Kembalikan ke data default?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#212529',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Reset'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    localStorage.removeItem('upk_lpp_master');
+                    renderLPPTable();
+                    renderTellerCustomerList();
+                    renderDataPeminjamTable();
+                    updateDasborKeuangan();
+                    showToast('success', 'Data direset ke default.');
+                }
+            });
         }
 
         const defaultKas = [{ id: 1, tanggal: new Date().toISOString().split('T')[0], nama: 'Operasional Kantor UPK', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
@@ -2307,15 +2570,26 @@
             renderKas();
             updateDasborKeuangan();
             backupKeGoogleSheet(true);
+            showToast('success', 'Mutasi kas berhasil disimpan!');
         });
 
         function hapusKas(id) {
-            if (confirm('Hapus transaksi?')) {
-                localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
-                renderKas();
-                updateDasborKeuangan();
-                backupKeGoogleSheet(true);
-            }
+            Swal.fire({
+                title: 'Hapus Transaksi?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#212529',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
+                    renderKas();
+                    updateDasborKeuangan();
+                    backupKeGoogleSheet(true);
+                    showToast('success', 'Transaksi kas dihapus.');
+                }
+            });
         }
 
         function checkAuthUI() {
@@ -2350,8 +2624,10 @@
                 localStorage.setItem('userName', 'Admin UPK DAPM TR. Barat');
                 bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
                 checkAuthUI();
+                showToast('success', 'Berhasil masuk ke dalam sistem.');
             } else {
                 document.getElementById('loginError').classList.remove('d-none');
+                showToast('error', 'Username atau password salah!');
             }
         });
 
@@ -2359,6 +2635,7 @@
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userName');
             checkAuthUI();
+            showToast('info', 'Anda telah keluar dari sistem.');
         }
 
         window.onload = async function() {
