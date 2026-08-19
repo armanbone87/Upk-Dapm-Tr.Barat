@@ -17,8 +17,8 @@
             --card-bg: #151d2e;
             --card-light-bg: #1e293b;
             --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --text-muted: #cbd5e1; /* Dibuat lebih terang agar jelas terlihat */
+            --border-color: rgba(255, 255, 255, 0.15);
             --neon-purple: #8b5cf6;
             --neon-purple-glow: rgba(139, 92, 246, 0.25);
             --table-th-bg: #162032;
@@ -40,6 +40,8 @@
             min-height: 100vh;
         }
 
+        .text-muted { color: var(--text-muted) !important; }
+
         .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 1px solid var(--border-color); }
         .card-custom { border: 1px solid var(--border-color); border-radius: 1rem; background: var(--card-bg); color: var(--text-main); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4); }
         .card-light-custom { background: var(--card-light-bg); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 0.75rem; }
@@ -48,6 +50,10 @@
         .form-control-compact, .form-select-compact { 
             font-size: 0.85rem; padding: 0.45rem 0.75rem; border-radius: 0.5rem; 
             background-color: var(--card-light-bg); border: 1px solid var(--border-color); color: var(--text-main);
+        }
+        .form-control-compact::placeholder, .form-select-compact::placeholder {
+            color: #94a3b8 !important;
+            opacity: 1;
         }
         .form-control-compact:focus, .form-select-compact:focus {
             background-color: var(--card-light-bg);
@@ -115,7 +121,6 @@
             body { background: #ffffff !important; color: #000 !important; }
             body * { visibility: hidden; }
             
-            /* Memastikan seluruh kontainer tabel/laporan tampil penuh saat dicetak */
             #areaCetakLPP, #areaCetakLPP *, 
             #areaCetakKwitansi, #areaCetakKwitansi *, 
             #areaCetakLaporan, #areaCetakLaporan *,
@@ -147,7 +152,7 @@
 
             .table-compact th, .table-compact td {
                 padding: 4px !important;
-                white-space: normal !important; /* Mencegah teks terpotong ke samping */
+                white-space: normal !important;
                 color: #000 !important;
                 background-color: #fff !important;
             }
@@ -185,7 +190,7 @@
                 <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" title="Logo DAPM">
             </div>
             <h4 class="fw-bold mb-2" style="color: var(--text-main);">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="small mb-4 text-muted" style="color: var(--text-muted) !important;">Sistem Informasi Keuangan, Manajemen Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan Terpadu.</p>
+            <p class="small mb-4 text-muted">Sistem Informasi Keuangan, Manajemen Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan Terpadu.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
                 <button class="btn btn-compact py-2 fw-bold shadow text-white" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: var(--neon-purple); border: none;">
@@ -199,25 +204,25 @@
         
         <div class="d-flex flex-wrap justify-content-between align-items-center card-custom p-2 px-3 mb-3 no-print">
             <div class="btn-group flex-wrap gap-1" role="group">
-                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnProfil" onclick="bukaView('panelProfil')">
+                <button type="button" class="btn btn-compact btn-outline-secondary text-light" id="tabBtnProfil" onclick="bukaView('panelProfil')">
                     <i class="bi bi-info-circle me-1"></i> Profil
                 </button>
                 <button type="button" class="btn btn-compact fw-semibold text-white" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')" style="background-color: var(--neon-purple); border: none;">
                     <i class="bi bi-speedometer2 me-1"></i> Dasbor
                 </button>
-                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnJatuhTempo" onclick="bukaView('panelJatuhTempo')">
+                <button type="button" class="btn btn-compact btn-outline-secondary text-light" id="tabBtnJatuhTempo" onclick="bukaView('panelJatuhTempo')">
                     <i class="bi bi-calendar-check me-1"></i> Jatuh Tempo
                 </button>
-                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnDataPeminjam" onclick="bukaView('panelDataPeminjam')">
+                <button type="button" class="btn btn-compact btn-outline-secondary text-light" id="tabBtnDataPeminjam" onclick="bukaView('panelDataPeminjam')">
                     <i class="bi bi-people-fill me-1"></i> Peminjam
                 </button>
-                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnBayar" onclick="bukaView('panelBayarAngsuran')">
+                <button type="button" class="btn btn-compact btn-outline-secondary text-light" id="tabBtnBayar" onclick="bukaView('panelBayarAngsuran')">
                     <i class="bi bi-receipt-cutoff me-1"></i> Kasir & Bayar
                 </button>
-                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnLPP" onclick="bukaView('panelLPP')">
+                <button type="button" class="btn btn-compact btn-outline-secondary text-light" id="tabBtnLPP" onclick="bukaView('panelLPP')">
                     <i class="bi bi-table me-1"></i> Tabel LPP
                 </button>
-                <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnKas" onclick="bukaView('panelKas')">
+                <button type="button" class="btn btn-compact btn-outline-secondary text-light" id="tabBtnKas" onclick="bukaView('panelKas')">
                     <i class="bi bi-journal-text me-1"></i> Buku Kas
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary text-info fw-semibold" id="tabBtnLaporan" onclick="bukaView('panelLaporan')">
@@ -240,9 +245,9 @@
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <span class="badge mb-2 text-white fw-semibold px-2 py-1" style="background-color: var(--neon-purple) !important;">Kelembagaan Resmi</span>
-                        <h3 class="fw-bold mb-2" style="color: var(--text-main);">UPK DAPM TANETE RIATTANG BARAT</h3>
-                        <p class="small mb-3 text-muted" style="color: var(--text-muted) !important;">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
-                        <div class="d-flex gap-3 small text-muted" style="color: var(--text-muted) !important;">
+                        <h3 class="fw-bold mb-2 text-white">UPK DAPM TANETE RIATTANG BARAT</h3>
+                        <p class="small mb-3 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
+                        <div class="d-flex gap-3 small text-muted">
                             <div><i class="bi bi-geo-alt-fill text-danger me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone</div>
                             <div><i class="bi bi-shield-lock-fill text-success me-1"></i> Sistem Keuangan Terintegrasi LPP</div>
                         </div>
@@ -253,8 +258,8 @@
                                 <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" style="width: 50px; height: 50px;">
                                 <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" style="width: 50px; height: 50px;">
                             </div>
-                            <h6 class="fw-bold mb-1" style="color: var(--text-main);">SISKEU UPK</h6>
-                            <p class="small mb-0 text-muted" style="color: var(--text-muted) !important;">Laporan Perkembangan Pinjaman & Kas</p>
+                            <h6 class="fw-bold mb-1 text-white">SISKEU UPK</h6>
+                            <p class="small mb-0 text-muted">Laporan Perkembangan Pinjaman & Kas</p>
                         </div>
                     </div>
                 </div>
@@ -265,29 +270,29 @@
             <div class="row g-3 mb-3">
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3 border-start border-4 border-info">
-                        <span class="small d-block text-muted" style="color: var(--text-muted) !important;">Total Plafon Tersalurkan</span>
+                        <span class="small d-block text-muted">Total Plafon Tersalurkan</span>
                         <h5 class="fw-bold text-info mb-0 mt-1" id="dashFinPlafon">Rp 0</h5>
-                        <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;"><span id="dashFinTotalNasabah" class="fw-bold">0</span> Peminjam Aktif</small>
+                        <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;"><span id="dashFinTotalNasabah" class="fw-bold text-white">0</span> Peminjam Aktif</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3 border-start border-4" style="border-color: var(--neon-purple) !important;">
-                        <span class="small d-block text-muted" style="color: var(--text-muted) !important;">Total Realisasi Pokok Masuk</span>
+                        <span class="small d-block text-muted">Total Realisasi Pokok Masuk</span>
                         <h5 class="fw-bold mb-0 mt-1" style="color: #c4b5fd;" id="dashFinRealPokok">Rp 0</h5>
                         <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;">Jasa: <span id="dashFinRealBunga" class="fw-bold" style="color: #c4b5fd;">Rp 0</span></small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3 border-start border-4 border-danger">
-                        <span class="small d-block text-muted" style="color: var(--text-muted) !important;">Sisa Saldo Piutang (Outs.)</span>
+                        <span class="small d-block text-muted">Sisa Saldo Piutang (Outs.)</span>
                         <h5 class="fw-bold text-danger mb-0 mt-1" id="dashFinSaldoOuts">Rp 0</h5>
                         <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;">Dana masih bergulir</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="card-custom p-3 border-start border-4 border-warning">
-                        <span class="small d-block text-muted" style="color: var(--text-muted) !important;">Saldo Kas Operasional</span>
-                        <h5 class="fw-bold mb-0 mt-1" style="color: var(--text-main);" id="dashFinSaldoKas">Rp 0</h5>
+                        <span class="small d-block text-muted">Saldo Kas Operasional</span>
+                        <h5 class="fw-bold mb-0 mt-1 text-white" id="dashFinSaldoKas">Rp 0</h5>
                         <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;">Kas Masuk - Keluar</small>
                     </div>
                 </div>
@@ -297,7 +302,7 @@
                 <div class="col-lg-8">
                     <div class="card-custom p-3 p-md-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="fw-bold mb-0" style="color: var(--text-main);"><i class="bi bi-graph-up-arrow me-1" style="color: var(--neon-purple);"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
+                            <h6 class="fw-bold mb-0 text-white"><i class="bi bi-graph-up-arrow me-1" style="color: var(--neon-purple);"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
                             <span class="badge text-white fw-bold px-2 py-1" id="dashFinTingkatPengembalian" style="background-color: var(--neon-purple) !important;">0%</span>
                         </div>
                         <div class="progress mb-3 bg-secondary bg-opacity-25 rounded-pill overflow-hidden" style="height: 12px;">
@@ -306,7 +311,7 @@
                         <div class="row g-2 text-center small pt-2">
                             <div class="col-4 border-end" style="border-color: var(--border-color) !important;">
                                 <span class="d-block text-muted" style="font-size: 0.75rem;">Target Pokok s/d Bln Ini:</span>
-                                <strong style="color: var(--text-main);" id="dashFinTargetPokok">Rp 0</strong>
+                                <strong class="text-white" id="dashFinTargetPokok">Rp 0</strong>
                             </div>
                             <div class="col-4 border-end" style="border-color: var(--border-color) !important;">
                                 <span class="d-block text-muted" style="font-size: 0.75rem;">Realisasi Pokok:</span>
@@ -323,8 +328,8 @@
                 <div class="col-lg-4">
                     <div class="card-custom p-3 p-md-4 h-100 d-flex flex-column justify-content-between">
                         <div>
-                            <h6 class="fw-bold mb-2" style="color: var(--text-main);"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Aksi Cepat UPK</h6>
-                            <p class="small mb-3 text-muted" style="color: var(--text-muted) !important;">Pilih modul operasional untuk mempercepat pelayanan nasabah:</p>
+                            <h6 class="fw-bold mb-2 text-white"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Aksi Cepat UPK</h6>
+                            <p class="small mb-3 text-muted">Pilih modul operasional untuk mempercepat pelayanan nasabah:</p>
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-outline-warning btn-compact text-start fw-semibold py-2" onclick="bukaView('panelJatuhTempo')">
@@ -346,12 +351,12 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-3 border-bottom" style="border-color: var(--border-color) !important;">
                     <div>
-                        <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-calendar-check text-warning me-2"></i> Panel Jatuh Tempo & Pengingat Penagihan</h5>
-                        <p class="small mb-0 text-muted" style="color: var(--text-muted) !important;">Pantau target pembayaran real-time dan kirim pesan pengingat tagihan langsung ke WhatsApp nasabah.</p>
+                        <h5 class="fw-bold mb-1 text-white"><i class="bi bi-calendar-check text-warning me-2"></i> Panel Jatuh Tempo & Pengingat Penagihan</h5>
+                        <p class="small mb-0 text-muted">Pantau target pembayaran real-time dan kirim pesan pengingat tagihan langsung ke WhatsApp nasabah.</p>
                     </div>
                     <div class="d-flex gap-2 align-items-center">
                         <label class="small fw-semibold text-muted">Tanggal Pantau:</label>
-                        <input type="date" id="filterTglJatuhTempo" class="form-control form-control-compact" onchange="renderJatuhTempoTable()">
+                        <input type="date" id="filterTglJatuhTempo" class="form-control form-control-compact text-white" onchange="renderJatuhTempoTable()">
                     </div>
                 </div>
 
@@ -394,8 +399,8 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
                     <div class="d-flex gap-2 align-items-center">
-                        <input type="text" id="peminjamSearchInput" class="form-control form-control-compact" style="width: 220px;" placeholder="Cari nama peminjam/desa..." onkeyup="renderDataPeminjamTable()">
-                        <select id="peminjamDesaFilter" class="form-select form-select-compact" style="width: 170px;" onchange="renderDataPeminjamTable()">
+                        <input type="text" id="peminjamSearchInput" class="form-control form-control-compact text-white" style="width: 220px;" placeholder="Cari nama peminjam/desa..." onkeyup="renderDataPeminjamTable()">
+                        <select id="peminjamDesaFilter" class="form-select form-select-compact text-white" style="width: 170px;" onchange="renderDataPeminjamTable()">
                             <option value="">Semua Desa/Kelurahan</option>
                         </select>
                     </div>
@@ -435,11 +440,11 @@
                     <div class="card-custom p-3 h-100">
                         <div class="input-group input-group-sm mb-2">
                             <span class="input-group-text border-end-0" style="background: var(--card-light-bg); color: var(--text-main); border-color: var(--border-color);"><i class="bi bi-search"></i></span>
-                            <input type="text" id="tellerSearchInput" class="form-control form-control-compact border-start-0" placeholder="Cari peminjam..." onkeyup="renderTellerCustomerList()">
+                            <input type="text" id="tellerSearchInput" class="form-control form-control-compact border-start-0 text-white" placeholder="Cari peminjam..." onkeyup="renderTellerCustomerList()">
                         </div>
                         <div class="d-flex justify-content-between align-items-center small mb-2 text-muted">
                             <span>Daftar Nasabah:</span>
-                            <span id="tellerCountBadge" class="fw-bold text-main" style="color: var(--text-main);">0</span>
+                            <span id="tellerCountBadge" class="fw-bold text-white">0</span>
                         </div>
                         <div class="list-group rounded-2 overflow-auto border" id="tellerCustomerList" style="max-height: 480px;"></div>
                     </div>
@@ -449,8 +454,8 @@
                     <div id="tellerEmptyState" class="card-custom p-5 text-center h-100 d-flex justify-content-center align-items-center">
                         <div>
                             <i class="bi bi-person-lines-fill fs-1 mb-3 text-muted"></i>
-                            <h6 class="fw-bold" style="color: var(--text-main);">Pilih Nasabah di Sebelah Kiri</h6>
-                            <p class="small text-muted mb-0" style="color: var(--text-muted) !important;">Sistem dilengkapi proteksi validasi pelunasan otomatis & pencegahan input melebihi sisa piutang.</p>
+                            <h6 class="fw-bold text-white">Pilih Nasabah di Sebelah Kiri</h6>
+                            <p class="small text-muted mb-0">Sistem dilengkapi proteksi validasi pelunasan otomatis & pencegahan input melebihi sisa piutang.</p>
                         </div>
                     </div>
 
@@ -471,12 +476,12 @@
 
                         <div class="row g-2 mb-3 card-light-custom p-2 rounded-2 border">
                             <div class="col-md-6">
-                                <label class="small fw-semibold mb-1" style="color: var(--text-main);">Pembayaran Angsuran Ke-</label>
-                                <select id="selectAngsuranKe" class="form-select form-select-compact fw-semibold" onchange="onAngsuranKeChanged()"></select>
+                                <label class="small fw-semibold mb-1 text-white">Pembayaran Angsuran Ke-</label>
+                                <select id="selectAngsuranKe" class="form-select form-select-compact fw-semibold text-white" onchange="onAngsuranKeChanged()"></select>
                             </div>
                             <div class="col-md-6">
-                                <label class="small fw-semibold mb-1" style="color: var(--text-main);">Tanggal Transaksi</label>
-                                <input type="date" id="tellerInputTgl" class="form-control form-control-compact" onchange="onTanggalBayarChanged()">
+                                <label class="small fw-semibold mb-1 text-white">Tanggal Transaksi</label>
+                                <input type="date" id="tellerInputTgl" class="form-control form-control-compact text-white" onchange="onTanggalBayarChanged()">
                             </div>
                         </div>
 
@@ -492,18 +497,18 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-start text-muted">Target Akumulatif (s/d Bln Ini)</td>
-                                        <td class="text-end fw-bold" style="color: var(--text-main);" id="posTargetPokok">0</td>
-                                        <td class="text-end fw-bold" style="color: var(--text-main);" id="posTargetBunga">0</td>
+                                        <td class="text-start text-white">Target Akumulatif (s/d Bln Ini)</td>
+                                        <td class="text-end fw-bold text-white" id="posTargetPokok">0</td>
+                                        <td class="text-end fw-bold text-white" id="posTargetBunga">0</td>
                                         <td class="text-end fw-bold text-danger table-danger align-middle" rowspan="2">
                                             <span id="tellerTotalSisaGabungan" class="fs-6">Rp 0</span><br>
                                             <small class="fw-normal text-muted" style="font-size: 0.68rem;">(Pokok: <span id="tellerSisaPokok">0</span> + Jasa: <span id="tellerSisaJasa">0</span>)</small>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-start text-muted">Realisasi s/d Bulan Lalu (Dari LPP)</td>
-                                        <td class="text-end fw-semibold text-muted" id="posRealLaluPokok">0</td>
-                                        <td class="text-end fw-semibold text-muted" id="posRealLaluBunga">0</td>
+                                        <td class="text-start text-white">Realisasi s/d Bulan Lalu (Dari LPP)</td>
+                                        <td class="text-end fw-semibold text-white" id="posRealLaluPokok">0</td>
+                                        <td class="text-end fw-semibold text-white" id="posRealLaluBunga">0</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -511,10 +516,10 @@
 
                         <form id="tellerPaymentForm">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <label class="small fw-bold mb-0" style="color: var(--text-main);">Input Setoran Bulan Ini:</label>
+                                <label class="small fw-bold mb-0 text-white">Input Setoran Bulan Ini:</label>
                                 <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-outline-secondary py-0 px-2" style="color: var(--text-main);" onclick="quickFillAngsuran('target')">Sesuai Target</button>
-                                    <button type="button" class="btn btn-outline-secondary py-0 px-2" style="color: var(--text-main);" onclick="quickFillAngsuran('normal')">1x Angsuran</button>
+                                    <button type="button" class="btn btn-outline-secondary py-0 px-2 text-white" onclick="quickFillAngsuran('target')">Sesuai Target</button>
+                                    <button type="button" class="btn btn-outline-secondary py-0 px-2 text-white" onclick="quickFillAngsuran('normal')">1x Angsuran</button>
                                     <button type="button" class="btn btn-outline-danger py-0 px-2" onclick="quickFillAngsuran('lunas')">Pelunasan</button>
                                 </div>
                             </div>
@@ -523,7 +528,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text fw-bold" style="background: var(--card-light-bg); border-color: var(--border-color); color: #c4b5fd;">Pokok</span>
-                                        <input type="text" id="tellerInputPokok" class="form-control form-control-compact text-end fw-bold" style="color: #c4b5fd;" placeholder="0" required oninput="hitungTellerSisaRealtime()">
+                                        <input type="text" id="tellerInputPokok" class="form-control form-control-compact text-end fw-bold text-white" placeholder="0" required oninput="hitungTellerSisaRealtime()">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -536,16 +541,16 @@
 
                             <div class="row g-2 align-items-center mb-3">
                                 <div class="col-md-6">
-                                    <input type="text" id="tellerInputWA" class="form-control form-control-compact" placeholder="WhatsApp Nasabah (0812...)">
+                                    <input type="text" id="tellerInputWA" class="form-control form-control-compact text-white" placeholder="WhatsApp Nasabah (0812...)">
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <span class="small me-2 text-muted">Estimasi Sisa Pokok:</span>
+                                    <span class="small me-2 text-white">Estimasi Sisa Pokok:</span>
                                     <strong class="text-danger small" id="tellerEstimasiSisa">Rp 0</strong>
                                 </div>
                             </div>
 
                             <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
-                                <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="resetTellerForm()">Batal</button>
+                                <button type="button" class="btn btn-outline-secondary btn-compact text-white" onclick="resetTellerForm()">Batal</button>
                                 <button type="submit" id="btnSubmitPembayaran" class="btn btn-compact fw-semibold text-white shadow-sm" style="background-color: var(--neon-purple); border: none;">
                                     <i class="bi bi-check2-circle me-1"></i> Simpan Pembayaran & Buat Bukti WA
                                 </button>
@@ -553,7 +558,7 @@
                         </form>
 
                         <div class="mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
-                            <h6 class="fw-bold mb-2" style="font-size: 0.82rem; color: var(--text-main);"><i class="bi bi-clock-history me-1" style="color: var(--neon-purple);"></i> Riwayat Pembayaran Angsuran</h6>
+                            <h6 class="fw-bold mb-2 text-white" style="font-size: 0.82rem;"><i class="bi bi-clock-history me-1" style="color: var(--neon-purple);"></i> Riwayat Pembayaran Angsuran</h6>
                             <div class="table-responsive rounded-2 border" style="max-height: 180px;">
                                 <table class="table table-sm table-bordered table-compact mb-0 text-center">
                                     <thead>
@@ -568,7 +573,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tellerHistoryTableBody">
-                                        <tr><td colspan="7" class="text-muted">Belum ada riwayat tercatat.</td></tr>
+                                        <tr><td colspan="7" class="text-white">Belum ada riwayat tercatat.</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -578,7 +583,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="badge p-2 text-white fw-semibold" style="background-color: var(--neon-purple) !important;"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di LPP</span>
                                 <div class="d-flex gap-2 no-print">
-                                    <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Kwitansi</button>
+                                    <button class="btn btn-outline-secondary btn-compact text-white" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Kwitansi</button>
                                     <button class="btn btn-compact fw-semibold text-white shadow-sm" onclick="kirimBuktiWA()" style="background-color: var(--neon-purple); border: none;"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti ke WhatsApp</button>
                                 </div>
                             </div>
@@ -598,11 +603,11 @@
                                 <div class="row g-2 mb-3 small card-light-custom p-2 rounded border">
                                     <div class="col-6">
                                         <span class="d-block text-muted">Nama Peminjam:</span>
-                                        <strong class="fs-6" style="color: var(--text-main);" id="kwtNamaNasabah">-</strong>
+                                        <strong class="fs-6 text-white" id="kwtNamaNasabah">-</strong>
                                     </div>
                                     <div class="col-6 text-end">
                                         <span class="d-block text-muted">Desa / Kelurahan:</span>
-                                        <strong style="color: var(--text-main);" id="kwtDesa">-</strong>
+                                        <strong class="text-white" id="kwtDesa">-</strong>
                                     </div>
                                 </div>
 
@@ -616,16 +621,16 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="text-start">Setoran Angsuran Pokok (Ke-<span id="kwtAngsPokokKe">-</span>)</td>
+                                                <td class="text-start text-white">Setoran Angsuran Pokok (Ke-<span id="kwtAngsPokokKe">-</span>)</td>
                                                 <td class="text-end fw-bold" style="color: #c4b5fd;" id="kwtPokok">Rp 0</td>
                                             </tr>
                                             <tr>
-                                                <td class="text-start">Setoran Jasa / Bunga Pinjaman</td>
+                                                <td class="text-start text-white">Setoran Jasa / Bunga Pinjaman</td>
                                                 <td class="text-end fw-bold text-info" id="kwtJasa">Rp 0</td>
                                             </tr>
                                             <tr class="table-active fw-bold">
-                                                <td class="text-start">TOTAL PEMBAYARAN BULAN INI</td>
-                                                <td class="text-end fs-6" style="color: var(--neon-purple);" id="kwtTotal">Rp 0</td>
+                                                <td class="text-start text-white">TOTAL PEMBAYARAN BULAN INI</td>
+                                                <td class="text-end fs-6 text-white" id="kwtTotal">Rp 0</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -660,16 +665,16 @@
                         <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-light btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
-                        <input type="text" id="searchInput" class="form-control form-control-compact" style="width: 200px;" placeholder="Cari peminjam..." onkeyup="filterLPPTable()">
-                        <select id="desaFilter" class="form-select form-select-compact" style="width: 170px;" onchange="filterLPPTable()">
+                        <input type="text" id="searchInput" class="form-control form-control-compact text-white" style="width: 200px;" placeholder="Cari peminjam..." onkeyup="filterLPPTable()">
+                        <select id="desaFilter" class="form-select form-select-compact text-white" style="width: 170px;" onchange="filterLPPTable()">
                             <option value="">Semua Desa/Kelurahan</option>
                         </select>
                     </div>
                     <div class="d-flex gap-2">
                         <input type="file" id="csvFileInput" accept=".csv, .xlsx, .xls" class="d-none" onchange="handleLPPFileUpload(event)">
                         <button class="btn btn-outline-light btn-compact" onclick="document.getElementById('csvFileInput').click()"><i class="bi bi-upload me-1"></i> Import</button>
-                        <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="downloadCurrentDataCSV()"><i class="bi bi-download me-1"></i> Export</button>
-                        <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
+                        <button class="btn btn-outline-secondary btn-compact text-white" onclick="downloadCurrentDataCSV()"><i class="bi bi-download me-1"></i> Export</button>
+                        <button class="btn btn-outline-secondary btn-compact text-white" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
                         <button class="btn btn-outline-danger btn-compact" onclick="resetToSample()"><i class="bi bi-arrow-counterclockwise"></i></button>
                     </div>
                 </div>
@@ -719,7 +724,7 @@
                         <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-light btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
-                        <h6 class="fw-bold mb-0" style="color: var(--text-main);">Buku Kas Masuk & Keluar</h6>
+                        <h6 class="fw-bold mb-0 text-white">Buku Kas Masuk & Keluar</h6>
                     </div>
                     <button class="btn btn-compact text-white fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#transaksiModal" style="background-color: var(--neon-purple); border: none;">
                         <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
@@ -748,17 +753,17 @@
             <div class="card-custom p-4 p-md-5">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom" style="border-color: var(--border-color) !important;">
                     <div>
-                        <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-file-earmark-bar-graph me-2" style="color: var(--neon-purple);"></i> Laporan Rekapitulasi Keuangan & Piutang UPK</h5>
-                        <p class="small mb-0 text-muted" style="color: var(--text-muted) !important;">Ringkasan resmi bulanan dan tahunan untuk kebutuhan pengurus serta musyawarah.</p>
+                        <h5 class="fw-bold mb-1 text-white"><i class="bi bi-file-earmark-bar-graph me-2" style="color: var(--neon-purple);"></i> Laporan Rekapitulasi Keuangan & Piutang UPK</h5>
+                        <p class="small mb-0 text-muted">Ringkasan resmi bulanan dan tahunan untuk kebutuhan pengurus serta musyawarah.</p>
                     </div>
                     <div class="d-flex gap-2 no-print">
-                        <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Laporan</button>
+                        <button class="btn btn-outline-secondary btn-compact text-white" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Laporan</button>
                     </div>
                 </div>
 
                 <div id="areaCetakLaporan">
                     <div class="text-center mb-4">
-                        <h5 class="fw-bold mb-1" style="color: var(--text-main);">REKAPITULASI PERKEMBANGAN DANA BERGULIR (SPP)</h5>
+                        <h5 class="fw-bold mb-1 text-white">REKAPITULASI PERKEMBANGAN DANA BERGULIR (SPP)</h5>
                         <p class="small text-muted mb-0">UPK DAPM Kecamatan Tanete Riattang Barat - Kabupaten Bone</p>
                         <hr class="w-25 mx-auto my-3 opacity-25">
                     </div>
@@ -809,27 +814,27 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3" style="border-color: var(--border-color) !important;">
-                    <h6 class="fw-bold mb-0" style="color: #c4b5fd;" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru</h6>
+                    <h6 class="fw-bold mb-0 text-white" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru</h6>
                     <button type="button" class="btn-close btn-sm btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formTambahPeminjam">
                     <input type="hidden" id="editIndex" value="">
                     <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-muted">Nama Lengkap Peminjam</label>
-                        <input type="text" id="newNama" class="form-control form-control-compact" placeholder="Contoh: SURIANI, S.Pd" required>
+                        <label class="small fw-semibold mb-1 text-white">Nama Lengkap Peminjam</label>
+                        <input type="text" id="newNama" class="form-control form-control-compact text-white" placeholder="Contoh: SURIANI, S.Pd" required>
                     </div>
                     <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-muted">Desa / Kelurahan</label>
-                        <input type="text" id="newDesa" class="form-control form-control-compact" placeholder="Contoh: WATANG PALAKKA" required>
+                        <label class="small fw-semibold mb-1 text-white">Desa / Kelurahan</label>
+                        <input type="text" id="newDesa" class="form-control form-control-compact text-white" placeholder="Contoh: WATANG PALAKKA" required>
                     </div>
                     <div class="row g-2 mb-2">
                         <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-muted">Plafon Pinjaman (Rp)</label>
-                            <input type="number" id="newPlafon" class="form-control form-control-compact" placeholder="Contoh: 10000000" required oninput="hitungSimulasiPeminjamBaru()">
+                            <label class="small fw-semibold mb-1 text-white">Plafon Pinjaman (Rp)</label>
+                            <input type="number" id="newPlafon" class="form-control form-control-compact text-white" placeholder="Contoh: 10000000" required oninput="hitungSimulasiPeminjamBaru()">
                         </div>
                         <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-muted">Tenor (Bulan)</label>
-                            <select id="newTenor" class="form-select form-select-compact" onchange="hitungSimulasiPeminjamBaru()">
+                            <label class="small fw-semibold mb-1 text-white">Tenor (Bulan)</label>
+                            <select id="newTenor" class="form-select form-select-compact text-white" onchange="hitungSimulasiPeminjamBaru()">
                                 <option value="12">12 Bulan</option>
                                 <option value="18">18 Bulan</option>
                                 <option value="24">24 Bulan</option>
@@ -840,40 +845,40 @@
 
                     <div class="row g-2 mb-2">
                         <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-muted">Persen Jasa (% per Bulan)</label>
+                            <label class="small fw-semibold mb-1 text-white">Persen Jasa (% per Bulan)</label>
                             <div class="input-group input-group-sm">
-                                <input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact fw-bold" style="color: #c4b5fd;" value="1.5" placeholder="1.5" required oninput="hitungSimulasiPeminjamBaru()">
-                                <span class="input-group-text text-muted" style="background: var(--card-light-bg); border-color: var(--border-color);">% / Bln</span>
+                                <input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact fw-bold text-white" value="1.5" placeholder="1.5" required oninput="hitungSimulasiPeminjamBaru()">
+                                <span class="input-group-text text-white" style="background: var(--card-light-bg); border-color: var(--border-color);">% / Bln</span>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-muted">Tanggal Pencairan</label>
-                            <input type="date" id="newTglCair" class="form-control form-control-compact" required>
+                            <label class="small fw-semibold mb-1 text-white">Tanggal Pencairan</label>
+                            <input type="date" id="newTglCair" class="form-control form-control-compact text-white" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="small fw-semibold mb-1 text-muted">No. WhatsApp Nasabah</label>
-                        <input type="text" id="newNoHp" class="form-control form-control-compact" placeholder="Contoh: 081234567890">
+                        <label class="small fw-semibold mb-1 text-white">No. WhatsApp Nasabah</label>
+                        <input type="text" id="newNoHp" class="form-control form-control-compact text-white" placeholder="Contoh: 081234567890">
                     </div>
 
                     <div class="card-light-custom py-2 px-3 small rounded-2 mb-3 border">
                         <div class="d-flex justify-content-between mb-1">
-                            <span class="text-muted">Angsuran Pokok / Bulan:</span>
-                            <strong style="color: var(--text-main);" id="simulasiPokokPerBulan">Rp 0</strong>
+                            <span class="text-white">Angsuran Pokok / Bulan:</span>
+                            <strong class="text-white" id="simulasiPokokPerBulan">Rp 0</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-1">
-                            <span class="text-muted">Jasa / Bunga per Bulan:</span>
+                            <span class="text-white">Jasa / Bunga per Bulan:</span>
                             <strong style="color: #c4b5fd;" id="simulasiJasaPerBulan">Rp 0</strong>
                         </div>
                         <div class="d-flex justify-content-between border-top pt-1 fw-bold" style="border-color: var(--border-color) !important;">
-                            <span class="text-muted">Total Setoran / Bulan:</span>
+                            <span class="text-white">Total Setoran / Bulan:</span>
                             <strong class="text-success" id="simulasiTotalPerBulan">Rp 0</strong>
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
-                        <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-outline-secondary btn-compact text-white" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-compact fw-semibold text-white shadow-sm" id="btnSimpanPeminjamText" style="background-color: var(--neon-purple); border: none;">
                             <i class="bi bi-save me-1"></i> Simpan Peminjam
                         </button>
@@ -887,7 +892,7 @@
         <div class="modal-dialog modal-dialog-centered" style="max-width: 360px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <div class="text-center mb-3">
-                    <h6 class="fw-bold mb-1" style="color: var(--text-main);">Login SISKEU UPK</h6>
+                    <h6 class="fw-bold mb-1 text-white">Login SISKEU UPK</h6>
                     <small class="text-muted">Tanete Riattang Barat - Bone</small>
                 </div>
                 <div id="loginError" class="alert alert-danger py-1 small text-center d-none border-0">
@@ -895,10 +900,10 @@
                 </div>
                 <form id="loginForm">
                     <div class="mb-2">
-                        <input type="text" id="username" class="form-control form-control-compact" placeholder="Username (admin)" required autocomplete="off">
+                        <input type="text" id="username" class="form-control form-control-compact text-white" placeholder="Username (admin)" required autocomplete="off">
                     </div>
                     <div class="mb-3">
-                        <input type="password" id="password" class="form-control form-control-compact" placeholder="Password (admin123)" required>
+                        <input type="password" id="password" class="form-control form-control-compact text-white" placeholder="Password (admin123)" required>
                     </div>
                     <button type="submit" class="btn btn-compact w-100 fw-semibold text-white shadow-sm" style="background-color: var(--neon-purple); border: none;">
                         Masuk Sistem
@@ -911,29 +916,29 @@
     <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
-                <h6 class="fw-bold mb-3" style="color: var(--text-main);">Tambah Mutasi Kas</h6>
+                <h6 class="fw-bold mb-3 text-white">Tambah Mutasi Kas</h6>
                 <form id="transaksiForm">
                     <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-muted">Tanggal Transaksi</label>
-                        <input type="date" id="tTanggal" class="form-control form-control-compact" required>
+                        <label class="small fw-semibold mb-1 text-white">Tanggal Transaksi</label>
+                        <input type="date" id="tTanggal" class="form-control form-control-compact text-white" required>
                     </div>
                     <div class="mb-2">
-                        <input type="text" id="tNama" class="form-control form-control-compact" placeholder="Keterangan / Transaksi" required>
+                        <input type="text" id="tNama" class="form-control form-control-compact text-white" placeholder="Keterangan / Transaksi" required>
                     </div>
                     <div class="mb-2">
-                        <input type="text" id="tKelurahan" class="form-control form-control-compact" placeholder="Kelurahan / Desa" required>
+                        <input type="text" id="tKelurahan" class="form-control form-control-compact text-white" placeholder="Kelurahan / Desa" required>
                     </div>
                     <div class="mb-2">
-                        <select id="tTipe" class="form-select form-select-compact" required>
+                        <select id="tTipe" class="form-select form-select-compact text-white" required>
                             <option value="Masuk">Kas Masuk</option>
                             <option value="Keluar">Kas Keluar</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <input type="number" id="tNominal" class="form-control form-control-compact" placeholder="Nominal (Rp)" required>
+                        <input type="number" id="tNominal" class="form-control form-control-compact text-white" placeholder="Nominal (Rp)" required>
                     </div>
                     <div class="d-flex justify-content-end gap-2">
-                        <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-outline-secondary btn-compact text-white" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-compact fw-semibold text-white shadow-sm" style="background-color: var(--neon-purple); border: none;">Simpan</button>
                     </div>
                 </form>
@@ -1126,7 +1131,7 @@
             const allBtns = ['tabBtnProfil', 'tabBtnDasborKeuangan', 'tabBtnJatuhTempo', 'tabBtnDataPeminjam', 'tabBtnBayar', 'tabBtnLPP', 'tabBtnKas', 'tabBtnLaporan'];
             allBtns.forEach(b => {
                 const el = document.getElementById(b);
-                if (el) el.className = 'btn btn-compact btn-outline-secondary';
+                if (el) el.className = 'btn btn-compact btn-outline-secondary text-light';
             });
 
             if (viewName === 'panelProfil') {
@@ -1246,7 +1251,7 @@
 
                 let bayarHariIniPokok = 0;
                 let bayarHariIniJasa = 0;
-                let statusBayarHariIni = '<span class="badge bg-secondary py-1 px-2">Belum Bayar</span>';
+                let statusBayarHariIni = '<span class="badge bg-secondary py-1 px-2 text-white">Belum Bayar</span>';
 
                 if (item.history && item.history.length > 0) {
                     item.history.forEach(h => {
@@ -1329,8 +1334,8 @@
                 tbody.innerHTML += `
                     <tr>
                         <td>${idx++}</td>
-                        <td class="fw-semibold text-start">${desaName}</td>
-                        <td>${val.count} Peminjam</td>
+                        <td class="fw-semibold text-start text-white">${desaName}</td>
+                        <td class="text-white">${val.count} Peminjam</td>
                         <td class="text-end text-info fw-semibold">Rp ${formatRp(val.plafon)}</td>
                         <td class="text-end text-danger fw-semibold">Rp ${formatRp(val.saldo)}</td>
                     </tr>
@@ -1425,18 +1430,18 @@
 
                 tbody.innerHTML += `
                     <tr>
-                        <td class="text-center">${item.no || (index + 1)}</td>
-                        <td class="fw-semibold" style="color: var(--text-main);">${item.nama}</td>
-                        <td>${item.desa}</td>
+                        <td class="text-center text-white">${item.no || (index + 1)}</td>
+                        <td class="fw-semibold text-white">${item.nama}</td>
+                        <td class="text-white">${item.desa}</td>
                         <td class="text-end fw-semibold text-info">Rp ${formatRp(plafon)}</td>
-                        <td class="text-center">${item.tenor} Bln</td>
+                        <td class="text-center text-white">${item.tenor} Bln</td>
                         <td class="text-center fw-bold text-warning">${persenTampil}%</td>
-                        <td class="text-center">${formatTanggalTampil(item.tglCair)}</td>
+                        <td class="text-center text-white">${formatTanggalTampil(item.tglCair)}</td>
                         <td class="text-end fw-bold text-danger">Rp ${formatRp(saldo)}</td>
                         <td class="text-center">
                             <span class="badge ${isLunas ? 'bg-primary' : 'text-white'} py-1 px-2 fw-semibold" ${!isLunas ? 'style="background-color: var(--neon-purple) !important;"' : ''}>${isLunas ? 'Lunas' : 'Aktif'}</span>
                         </td>
-                        <td class="text-center">${item.noHp || '-'}</td>
+                        <td class="text-center text-white">${item.noHp || '-'}</td>
                         <td class="text-center no-print">
                             <button class="btn btn-sm py-1 px-2 fw-semibold text-white me-1 shadow-sm" style="font-size:0.75rem; background-color: var(--neon-purple); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
                                 <i class="bi bi-cash me-1"></i> Bayar
@@ -1822,18 +1827,18 @@
             tbody.innerHTML = '';
 
             if (!nasabah.history || nasabah.history.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="text-muted small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="text-white small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
                 return;
             }
 
             nasabah.history.forEach((h, hIdx) => {
                 tbody.innerHTML += `
                     <tr>
-                        <td>Ke-${h.angsuranKe}</td>
-                        <td>${h.tanggal}</td>
+                        <td class="text-white">Ke-${h.angsuranKe}</td>
+                        <td class="text-white">${h.tanggal}</td>
                         <td class="text-end" style="color: #c4b5fd;">Rp ${formatRp(h.pokok)}</td>
                         <td class="text-end text-info">Rp ${formatRp(h.jasa)}</td>
-                        <td class="text-end fw-semibold" style="color: var(--text-main);">Rp ${formatRp(h.total)}</td>
+                        <td class="text-end fw-semibold text-white">Rp ${formatRp(h.total)}</td>
                         <td class="text-end text-danger">Rp ${formatRp(h.sisaSaldo)}</td>
                         <td>
                             <button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" style="font-size:0.75rem;" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${hIdx})">
@@ -2015,7 +2020,7 @@
             let tPlafon = 0, tTarP = 0, tTarB = 0, tLaluP = 0, tLaluB = 0, tIniP = 0, tIniB = 0, tTotP = 0, tTotB = 0, tSaldo = 0, tTungP = 0, tTungB = 0;
 
             if (data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="18" class="text-center py-3 text-muted">Data kosong.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="18" class="text-center py-3 text-white">Data kosong.</td></tr>`;
                 tfoot.innerHTML = '';
                 return;
             }
@@ -2051,16 +2056,16 @@
 
                 tbody.innerHTML += `
                     <tr>
-                        <td class="text-center">${r.no || (idx + 1)}</td>
-                        <td class="fw-semibold" style="color: var(--text-main);">${r.nama || '-'}</td>
-                        <td>${r.desa || '-'}</td>
+                        <td class="text-center text-white">${r.no || (idx + 1)}</td>
+                        <td class="fw-semibold text-white">${r.nama || '-'}</td>
+                        <td class="text-white">${r.desa || '-'}</td>
                         <td class="text-end text-info">${formatRp(plafon)}</td>
-                        <td class="text-center">${tenor} Bln</td>
-                        <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
+                        <td class="text-center text-white">${tenor} Bln</td>
+                        <td class="text-center text-white">${formatTanggalTampil(r.tglCair)}</td>
                         <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">${formatRp(tarP)}</td>
                         <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">${formatRp(tarB)}</td>
-                        <td class="text-end" style="color: #cbd5e1;">${formatRp(lP)}</td>
-                        <td class="text-end" style="color: #cbd5e1;">${formatRp(lB)}</td>
+                        <td class="text-end text-white">${formatRp(lP)}</td>
+                        <td class="text-end text-white">${formatRp(lB)}</td>
                         <td class="text-end fw-semibold" style="color: #c4b5fd;">${formatRp(iP)}</td>
                         <td class="text-end fw-semibold" style="color: #c4b5fd;">${formatRp(iB)}</td>
                         <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">${formatRp(totP)}</td>
@@ -2075,19 +2080,19 @@
 
             tfoot.innerHTML = `
                 <tr class="text-end" style="background: var(--card-light-bg); color: var(--text-main);">
-                    <td colspan="3" class="text-center">TOTAL</td>
+                    <td colspan="3" class="text-center text-white">TOTAL</td>
                     <td class="text-info">${formatRp(tPlafon)}</td>
-                    <td></td><td></td>
+                    <td class="text-white"></td><td class="text-white"></td>
                     <td style="color: var(--col-target-color);">${formatRp(tTarP)}</td>
                     <td style="color: var(--col-target-color);">${formatRp(tTarB)}</td>
-                    <td style="color: #cbd5e1;">${formatRp(tLaluP)}</td>
-                    <td style="color: #cbd5e1;">${formatRp(tLaluB)}</td>
+                    <td class="text-white">${formatRp(tLaluP)}</td>
+                    <td class="text-white">${formatRp(tLaluB)}</td>
                     <td style="color: #c4b5fd;">${formatRp(tIniP)}</td>
                     <td style="color: #c4b5fd;">${formatRp(tIniB)}</td>
                     <td style="color: var(--col-real-color);">${formatRp(tTotP)}</td>
                     <td style="color: var(--col-real-color);">${formatRp(tTotB)}</td>
                     <td class="text-danger">${formatRp(tSaldo)}</td>
-                    <td></td>
+                    <td class="text-white"></td>
                     <td style="color: var(--col-tung-color); font-weight: bold;">${formatRp(tTungP)}</td>
                     <td style="color: var(--col-tung-color); font-weight: bold;">${formatRp(tTungB)}</td>
                 </tr>
@@ -2213,10 +2218,10 @@
                 const tanggalTampil = item.tanggal ? formatTanggalTampil(item.tanggal) : '-';
                 tbody.innerHTML += `
                     <tr>
-                        <td>${index + 1}</td>
-                        <td>${tanggalTampil}</td>
-                        <td class="fw-semibold" style="color: var(--text-main);">${item.nama}</td>
-                        <td>${item.kelurahan}</td>
+                        <td class="text-white">${index + 1}</td>
+                        <td class="text-white">${tanggalTampil}</td>
+                        <td class="fw-semibold text-white">${item.nama}</td>
+                        <td class="text-white">${item.kelurahan}</td>
                         <td><span class="badge ${isMasuk ? 'text-white fw-semibold' : 'bg-danger fw-semibold'} py-1 px-2" ${isMasuk ? 'style="background-color: var(--neon-purple) !important;"' : ''}>${item.tipe}</span></td>
                         <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold">Rp ${formatRp(item.nominal)}</td>
                         <td><button class="btn btn-outline-danger btn-sm py-0 px-2 shadow-sm" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button></td>
@@ -2291,7 +2296,6 @@
         });
 
         function logout() {
-            localStorage.removeItem('isLabelLoggedIn');
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userName');
             checkAuthUI();
