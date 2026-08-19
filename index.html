@@ -17,7 +17,7 @@
             --card-bg: #151d2e;
             --card-light-bg: #1e293b;
             --text-main: #f8fafc;
-            --text-muted: #cbd5e1; /* Dibuat lebih terang agar jelas terlihat */
+            --text-muted: #cbd5e1;
             --border-color: rgba(255, 255, 255, 0.15);
             --neon-purple: #8b5cf6;
             --neon-purple-glow: rgba(139, 92, 246, 0.25);
@@ -242,14 +242,15 @@
 
         <div id="viewPanelProfil" class="d-none">
             <div class="card-custom p-4 p-md-5 mb-3">
-                <div class="row align-items-center">
+                <div class="row align-items-center mb-4">
                     <div class="col-md-8">
                         <span class="badge mb-2 text-white fw-semibold px-2 py-1" style="background-color: var(--neon-purple) !important;">Kelembagaan Resmi</span>
                         <h3 class="fw-bold mb-2 text-white">UPK DAPM TANETE RIATTANG BARAT</h3>
-                        <p class="small mb-3 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
-                        <div class="d-flex gap-3 small text-muted">
+                        <p class="small mb-2 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
+                        <p class="small mb-3 text-muted">UPK DAPM TR. Barat adalah wujud transformasi dari Program Nasional Pemberdayaan Masyarakat Mandiri Perdesaan (PNPM-MPd) di Juni 2009 yang kemudian program berakhir di Desember 2014 menjadi dana bergulir Dana Amanah Pemberdayaan Masyarakat Kecamatan Tanete Riattang Barat Kabupaten Bone Sulawesi Selatan.</p>
+                        <div class="d-flex flex-wrap gap-3 small text-muted">
                             <div><i class="bi bi-geo-alt-fill text-danger me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone</div>
-                            <div><i class="bi bi-shield-lock-fill text-success me-1"></i> Sistem Keuangan Terintegrasi LPP</div>
+                            <div><i class="bi bi-file-text-fill text-warning me-1"></i> No. SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b></div>
                         </div>
                     </div>
                     <div class="col-md-4 text-center mt-4 mt-md-0">
@@ -260,6 +261,35 @@
                             </div>
                             <h6 class="fw-bold mb-1 text-white">SISKEU UPK</h6>
                             <p class="small mb-0 text-muted">Laporan Perkembangan Pinjaman & Kas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-secondary opacity-25 my-4">
+
+                <h5 class="fw-bold mb-3 text-white"><i class="bi bi-people-fill me-2" style="color: var(--neon-purple);"></i> Susunan Pengurus & Pengawas</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card-light-custom p-3 rounded-3 border h-100">
+                            <h6 class="fw-bold text-primary mb-3" style="color: #c4b5fd !important;"><i class="bi bi-shield-check me-1"></i> Pengurus Perkumpulan & UPK</h6>
+                            <ul class="list-unstyled small mb-0 d-flex flex-column gap-2">
+                                <li><strong class="text-white">Ketua Badan Koordinasi Pengurus Perkumpulan:</strong> <span class="text-muted">Hamzah Najad</span></li>
+                                <li><strong class="text-white">Sekretaris:</strong> <span class="text-muted">H. Abd. Mannang, S.IP</span></li>
+                                <li><strong class="text-white">Bendahara:</strong> <span class="text-muted">Evi Nasriyanti, S.Pd</span></li>
+                                <li><strong class="text-white">Kepala Unit Pengelola DAPM Tr. Barat:</strong> <span class="text-muted">H. Jadjdji Irfan</span></li>
+                                <li><strong class="text-white">Staf Administrasi:</strong> <span class="text-muted">Syapriadi, S.H</span></li>
+                                <li><strong class="text-white">Bendahara Keuangan:</strong> <span class="text-muted">Harman, S.M</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-light-custom p-3 rounded-3 border h-100">
+                            <h6 class="fw-bold text-warning mb-3"><i class="bi bi-eye-fill me-1"></i> Badan Pengawas</h6>
+                            <ul class="list-unstyled small mb-0 d-flex flex-column gap-2">
+                                <li><strong class="text-white">Ketua:</strong> <span class="text-muted">Drs. Muh. Idris</span></li>
+                                <li><strong class="text-white">Anggota:</strong> <span class="text-muted">A. Mappangerang</span></li>
+                                <li><strong class="text-white">Anggota:</strong> <span class="text-muted">Mahmud Agsan, S.Ag</span></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1333,7 +1363,7 @@
             for (const [desaName, val] of Object.entries(desaMap).sort()) {
                 tbody.innerHTML += `
                     <tr>
-                        <td>${idx++}</td>
+                        <td class="text-white">${idx++}</td>
                         <td class="fw-semibold text-start text-white">${desaName}</td>
                         <td class="text-white">${val.count} Peminjam</td>
                         <td class="text-end text-info fw-semibold">Rp ${formatRp(val.plafon)}</td>
@@ -2253,7 +2283,7 @@
             if (confirm('Hapus transaksi?')) {
                 localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
                 renderKas();
-                updateDasborKeuangan();
+                updateDasborNeon();
                 backupKeGoogleSheet(true);
             }
         }
@@ -2291,7 +2321,7 @@
                 bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
                 checkAuthUI();
             } else {
-                document.getElementById('loginError').classList.remove('d-none');
+                document.getElementById('loginError').classList.add('d-none');
             }
         });
 
