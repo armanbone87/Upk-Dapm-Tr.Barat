@@ -25,17 +25,11 @@
             --table-th-color: #ffffff;
             --table-td-bg: #ffffff;
             --table-td-color: #212529;
-            --col-target-bg: #f1f3f5;
-            --col-target-color: #212529;
-            --col-real-bg: #e2e8f0;
-            --col-real-color: #0f172a;
-            --col-tung-bg: #f8d7da;
-            --col-tung-color: #842029;
         }
 
         body { 
             font-family: 'Inter', sans-serif; 
-            font-size: 0.85rem; 
+            font-size: 0.82rem; 
             background: var(--bg-body);
             color: var(--text-main); 
             min-height: 100vh;
@@ -47,9 +41,9 @@
         .card-custom { border: 1px solid var(--border-color); border-radius: 1rem; background: var(--card-bg); color: var(--text-main); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
         .card-light-custom { background: var(--card-light-bg); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 0.75rem; }
 
-        .btn-compact { padding: 0.4rem 0.85rem; font-size: 0.82rem; border-radius: 0.5rem; font-weight: 500; }
+        .btn-compact { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 0.5rem; font-weight: 500; }
         .form-control-compact, .form-select-compact { 
-            font-size: 0.85rem; padding: 0.45rem 0.75rem; border-radius: 0.5rem; 
+            font-size: 0.82rem; padding: 0.35rem 0.6rem; border-radius: 0.5rem; 
             background-color: #ffffff; border: 1px solid var(--border-color); color: var(--text-main);
         }
         .form-control-compact::placeholder, .form-select-compact::placeholder {
@@ -66,24 +60,49 @@
         .customer-item { transition: all 0.2s ease; cursor: pointer; border-left: 4px solid transparent; background-color: var(--card-bg); color: var(--text-main); border-bottom: 1px solid var(--border-color); }
         .customer-item:hover, .customer-item.active { background-color: #e2e8f0 !important; border-left-color: #000000; transform: translateX(2px); }
         
+        /* Minimalisasi Tabel LPP agar muat dalam 1 layar */
+        .table-lpp-compact th { 
+            background-color: var(--table-th-bg); 
+            color: var(--table-th-color); 
+            font-size: 0.65rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.2px; 
+            vertical-align: middle; 
+            white-space: nowrap; 
+            padding: 0.4rem 0.25rem; 
+            text-align: center; 
+            border-color: var(--border-color); 
+            font-weight: 700;
+        }
+        .table-lpp-compact td { 
+            font-size: 0.7rem; 
+            vertical-align: middle; 
+            white-space: nowrap; 
+            padding: 0.35rem 0.25rem; 
+            color: var(--table-td-color); 
+            border-color: var(--border-color); 
+            background-color: var(--table-td-bg);
+            font-weight: 500;
+        }
+
         .table-compact th { 
             background-color: var(--table-th-bg); 
             color: var(--table-th-color); 
-            font-size: 0.75rem; 
+            font-size: 0.72rem; 
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
             vertical-align: middle; 
             white-space: nowrap; 
-            padding: 0.65rem; 
+            padding: 0.5rem; 
             text-align: center; 
             border-color: var(--border-color); 
             font-weight: 700;
         }
         .table-compact td { 
-            font-size: 0.78rem; 
+            font-size: 0.75rem; 
             vertical-align: middle; 
             white-space: nowrap; 
-            padding: 0.6rem; 
+            padding: 0.5rem; 
             color: var(--table-td-color); 
             border-color: var(--border-color); 
             background-color: var(--table-td-bg);
@@ -152,11 +171,11 @@
 
             table {
                 width: 100% !important;
-                font-size: 9px !important;
+                font-size: 8px !important;
             }
 
-            .table-compact th, .table-compact td {
-                padding: 4px !important;
+            .table-lpp-compact th, .table-lpp-compact td {
+                padding: 3px !important;
                 white-space: normal !important;
                 color: #000 !important;
                 background-color: #fff !important;
@@ -165,7 +184,7 @@
             #areaCetakKwitansi { position: absolute; left: 10%; top: 20px; width: 80%; background: #fff; color: #000; }
             #areaCetakLaporan { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; }
             .no-print { display: none !important; }
-            @page { size: landscape; margin: 8mm; }
+            @page { size: landscape; margin: 6mm; }
         }
     </style>
 </head>
@@ -175,7 +194,7 @@
         <div class="container-fluid px-3 px-md-4">
             <div class="d-flex align-items-center">
                 <span class="navbar-brand fw-bold fs-6 mb-0 d-flex align-items-center text-light" style="cursor: pointer;" onclick="handleBrandClick()">
-                    <img src="logo-dapm.png" alt="Logo" style="width: 32px; height: 32px; object-fit: contain;" class="me-2"> SISKEU UPK <span class="badge ms-2 fw-semibold text-dark bg-light shadow-sm" style="font-size: 0.68rem;">DAPM TR. BARAT</span>
+                    <img src="logo-dapm.png" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;" class="me-2"> SISKEU UPK <span class="badge ms-2 fw-semibold text-dark bg-light shadow-sm" style="font-size: 0.65rem;">DAPM TR. BARAT</span>
                 </span>
             </div>
             <div class="d-flex align-items-center gap-2">
@@ -208,7 +227,7 @@
         </div>
     </div>
 
-    <div id="privateDashboard" class="container-fluid px-3 px-md-4 py-3 d-none">
+    <div id="privateDashboard" class="container-fluid px-2 px-md-3 py-3 d-none">
         
         <div class="d-flex flex-wrap justify-content-between align-items-center card-custom p-2 px-3 mb-3 no-print">
             <div class="btn-group flex-wrap gap-1" role="group">
@@ -704,8 +723,8 @@
                         <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-dark btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
-                        <input type="text" id="searchInput" class="form-control form-control-compact text-dark" style="width: 200px;" placeholder="Cari peminjam..." onkeyup="filterLPPTable()">
-                        <select id="desaFilter" class="form-select form-select-compact text-dark" style="width: 170px;" onchange="filterLPPTable()">
+                        <input type="text" id="searchInput" class="form-control form-control-compact text-dark" style="width: 180px;" placeholder="Cari peminjam..." onkeyup="filterLPPTable()">
+                        <select id="desaFilter" class="form-select form-select-compact text-dark" style="width: 150px;" onchange="filterLPPTable()">
                             <option value="">Semua Desa/Kelurahan</option>
                         </select>
                     </div>
@@ -718,8 +737,9 @@
                     </div>
                 </div>
 
-                <div id="areaCetakLPP" class="table-responsive overflow-auto rounded-3 border shadow-sm" style="max-height: 520px;">
-                    <table class="table table-bordered table-hover table-compact mb-0" id="mainLPPTable">
+                <!-- Tabel LPP Minimalis agar pas 1 layar -->
+                <div id="areaCetakLPP" class="table-responsive overflow-auto rounded-3 border shadow-sm">
+                    <table class="table table-bordered table-hover table-lpp-compact mb-0" id="mainLPPTable">
                         <thead>
                             <tr>
                                 <th rowspan="2">No</th>
@@ -1873,24 +1893,41 @@
             });
         }
 
+        // PERBAIKAN UTAMA: Sinkronisasi rollback LPP saat riwayat angsuran dihapus
         function hapusRiwayatPembayaran(nasabahIdx, historyIdx) {
             const allData = getLPPData();
             const nasabah = allData[nasabahIdx];
             if (!nasabah || !nasabah.history || !nasabah.history[historyIdx]) return;
 
-            if (confirm(`Hapus riwayat angsuran ke-${nasabah.history[historyIdx].angsuranKe}?`)) {
+            if (confirm(`Hapus riwayat angsuran ke-${nasabah.history[historyIdx].angsuranKe}? Target pokok dan jasa di tabel LPP akan dikembalikan ke data sebelum transaksi ini ditambahkan.`)) {
                 const deleted = nasabah.history.splice(historyIdx, 1)[0];
                 
+                // Kurangi realisasi total dengan nominal yang dihapus
                 nasabah.realTotPokok = Math.max(0, parseNum(nasabah.realTotPokok) - parseNum(deleted.pokok));
                 nasabah.realTotBunga = Math.max(0, parseNum(nasabah.realTotBunga) - parseNum(deleted.jasa));
                 
+                // Kembalikan saldo ke nilai sebelum ditambah transaksi bayar
                 nasabah.saldo = parseNum(nasabah.plafon) - parseNum(nasabah.realTotPokok);
                 nasabah.angsuranKe = Math.max(1, parseNum(nasabah.angsuranKe) - 1);
+
+                // Perbarui realIniPokok dan realIniBunga berdasarkan history yang tersisa (jika ada pada tanggal yang sama) atau set ke 0
+                let sisaPokokHariIni = 0;
+                let sisaBungaHariIni = 0;
+                if (nasabah.history.length > 0) {
+                    const latestH = nasabah.history[0];
+                    sisaPokokHariIni = parseNum(latestH.pokok);
+                    sisaBungaHariIni = parseNum(latestH.jasa);
+                }
+                nasabah.realIniPokok = sisaPokokHariIni;
+                nasabah.realIniBunga = sisaBungaHariIni;
+                nasabah.realLaluPokok = Math.max(0, parseNum(nasabah.realTotPokok) - sisaPokokHariIni);
+                nasabah.realLaluBunga = Math.max(0, parseNum(nasabah.realTotBunga) - sisaBungaHariIni);
                 
                 saveLPPData(allData);
                 pilihNasabahTeller(nasabahIdx);
                 updateDasborKeuangan();
                 backupKeGoogleSheet(true);
+                alert("✅ Riwayat angsuran berhasil dihapus dan data LPP telah disinkronkan kembali.");
             }
         }
 
@@ -2080,10 +2117,10 @@
                 tbody.innerHTML += `
                     <tr>
                         <td class="text-center">${r.no || (idx + 1)}</td>
-                        <td class="fw-semibold text-dark">${r.nama || '-'}</td>
-                        <td>${r.desa || '-'}</td>
+                        <td class="fw-semibold text-dark text-start" style="max-width: 130px; overflow: hidden; text-overflow: ellipsis;" title="${r.nama || '-'}">${r.nama || '-'}</td>
+                        <td style="max-width: 90px; overflow: hidden; text-overflow: ellipsis;">${r.desa || '-'}</td>
                         <td class="text-end">${formatRp(plafon)}</td>
-                        <td class="text-center">${tenor} Bln</td>
+                        <td class="text-center">${tenor}B</td>
                         <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
                         <td class="text-end fw-bold" style="background: #f8f9fa;">${formatRp(tarP)}</td>
                         <td class="text-end fw-bold" style="background: #f8f9fa;">${formatRp(tarB)}</td>
