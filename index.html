@@ -819,18 +819,20 @@
                         </button>
                         <h6 class="fw-bold mb-0 text-dark">Buku Kas Masuk & Keluar</h6>
                     </div>
-                    <button class="btn btn-dark btn-compact text-white fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#transaksiModal">
+                    <button class="btn btn-dark btn-compact text-white fw-semibold shadow-sm" onclick="bukaModalTambahKas()">
                         <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
                     </button>
                 </div>
-                <div class="table-responsive rounded-3 border shadow-sm">
+                <div class="table-responsive rounded-3 border shadow-sm" style="max-height: 480px;">
                     <table class="table table-hover table-compact align-middle mb-0">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal Transaksi</th>
+                                <th>Tanggal</th>
+                                <th>No Kwitansi</th>
                                 <th>Keterangan</th>
                                 <th>Desa/Kelurahan</th>
+                                <th>Kategori</th>
                                 <th>Tipe</th>
                                 <th>Nominal</th>
                                 <th>Aksi</th>
@@ -1007,32 +1009,54 @@
     </div>
 
     <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
-                <h6 class="fw-bold mb-3 text-dark">Tambah Mutasi Kas</h6>
+                <h6 class="fw-bold mb-3 text-dark" id="modalKasTitle"><i class="bi bi-journal-plus me-1"></i> Tambah Mutasi Kas</h6>
                 <form id="transaksiForm">
+                    <input type="hidden" id="editKasId" value="">
                     <div class="mb-2">
                         <label class="small fw-semibold mb-1 text-dark">Tanggal Transaksi</label>
                         <input type="date" id="tTanggal" class="form-control form-control-compact text-dark" required>
                     </div>
                     <div class="mb-2">
-                        <input type="text" id="tNama" class="form-control form-control-compact text-dark" placeholder="Keterangan / Transaksi" required>
+                        <label class="small fw-semibold mb-1 text-dark">Keterangan Transaksi</label>
+                        <input type="text" id="tNama" class="form-control form-control-compact text-dark" placeholder="Contoh: Pembayaran Honor Staf" required>
                     </div>
                     <div class="mb-2">
-                        <input type="text" id="tKelurahan" class="form-control form-control-compact text-dark" placeholder="Kelurahan / Desa" required>
+                        <label class="small fw-semibold mb-1 text-dark">Desa / Kelurahan</label>
+                        <input type="text" id="tKelurahan" class="form-control form-control-compact text-dark" placeholder="Contoh: Tanete Riattang Barat" required>
+                    </div>
+                    <div class="row g-2 mb-2">
+                        <div class="col-md-6">
+                            <label class="small fw-semibold mb-1 text-dark">Tipe Kas</label>
+                            <select id="tTipe" class="form-select form-select-compact text-dark" required>
+                                <option value="Masuk">Kas Masuk</option>
+                                <option value="Keluar">Kas Keluar</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small fw-semibold mb-1 text-dark">Kategori Kas</label>
+                            <select id="tKategori" class="form-select form-select-compact text-dark" required>
+                                <option value="Honor">Honor</option>
+                                <option value="Transport">Transport</option>
+                                <option value="Adm & Umum">Adm & Umum</option>
+                                <option value="Lain-lain Operasional">Lain-lain Operasional</option>
+                                <option value="Lain-lain Non Ops">Lain-lain Non Ops</option>
+                                <option value="Lain-lain Non Biaya">Lain-lain Non Biaya</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="mb-2">
-                        <select id="tTipe" class="form-select form-select-compact text-dark" required>
-                            <option value="Masuk">Kas Masuk</option>
-                            <option value="Keluar">Kas Keluar</option>
-                        </select>
+                        <label class="small fw-semibold mb-1 text-dark">Nominal (Rp)</label>
+                        <input type="number" id="tNominal" class="form-control form-control-compact text-dark" placeholder="Contoh: 150000" required>
                     </div>
                     <div class="mb-3">
-                        <input type="number" id="tNominal" class="form-control form-control-compact text-dark" placeholder="Nominal (Rp)" required>
+                        <label class="small fw-semibold mb-1 text-dark">No Kwitansi (Opsional)</label>
+                        <input type="text" id="tKwitansi" class="form-control form-control-compact text-dark" placeholder="Contoh: KWT-001">
                     </div>
                     <div class="d-flex justify-content-end gap-2">
                         <button type="button" class="btn btn-outline-dark btn-compact" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-dark btn-compact fw-semibold text-white shadow-sm">Simpan</button>
+                        <button type="submit" class="btn btn-dark btn-compact fw-semibold text-white shadow-sm" id="btnSimpanKasText">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -1043,6 +1067,7 @@
 
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXnNVMKLpmVfF6oPoG4Q2cQ-dmtjaH-jZXQdOkX7Gcj0uJVg6FfuYhOwPhreQzRVDj5g/exec";
+
         // Global Toast Notification Helper using SweetAlert2
         const Toast = Swal.mixin({
             toast: true,
@@ -1071,17 +1096,15 @@
             if (!ctx) return;
 
             const allData = getLPPData();
-            // Aggregate history payment totals per month or generate trend based on history
             const monthlyData = {};
             
             allData.forEach(item => {
                 if (item.history && item.history.length > 0) {
                     item.history.forEach(h => {
-                        // h.tanggal format: DD/MM/YYYY
                         if (h.tanggal && h.tanggal.includes('/')) {
                             const parts = h.tanggal.split('/');
                             if (parts.length === 3) {
-                                const mKey = `${parts[1]}/${parts[2]}`; // MM/YYYY
+                                const mKey = `${parts[1]}/${parts[2]}`;
                                 if (!monthlyData[mKey]) monthlyData[mKey] = 0;
                                 monthlyData[mKey] += parseNum(h.total);
                             }
@@ -1090,7 +1113,6 @@
                 }
             });
 
-            // Fallback or sorted keys
             let labels = Object.keys(monthlyData).sort();
             let dataValues = labels.map(l => monthlyData[l]);
 
@@ -1573,11 +1595,9 @@
             document.getElementById('dashFinTingkatPengembalian').textContent = `${persenKolektibilitas}% Kolektibilitas`;
             document.getElementById('dashFinProgressBar').style.width = `${persenKolektibilitas}%`;
 
-            // Render Chart.js
             renderTrenAngsuranChart();
         }
 
-        // Pagination State for Data Peminjam
         let currentPeminjamPage = 1;
         const peminjamItemsPerPage = 10;
 
@@ -1610,7 +1630,6 @@
                 return matchQ && matchD;
             });
 
-            // Pagination logic
             const totalPages = Math.ceil(filtered.length / peminjamItemsPerPage) || 1;
             if (currentPeminjamPage > totalPages) currentPeminjamPage = totalPages;
             const startIdx = (currentPeminjamPage - 1) * peminjamItemsPerPage;
@@ -1661,7 +1680,6 @@
 
             document.getElementById('peminjamPaginationInfo').textContent = `Menampilkan ${startIdx + 1} - ${Math.min(startIdx + peminjamItemsPerPage, filtered.length)} dari ${filtered.length} data`;
             
-            // Render Pagination UI
             const pagContainer = document.getElementById('peminjamPaginationContainer');
             pagContainer.innerHTML = '';
             pagContainer.innerHTML += `<li class="page-item ${currentPeminjamPage === 1 ? 'disabled' : ''}"><a class="page-link text-dark" href="#" onclick="changePeminjamPage(${currentPeminjamPage - 1}); return false;">Sebelumnya</a></li>`;
@@ -1800,8 +1818,10 @@
                     tanggal: tglCairInput || new Date().toISOString().split('T')[0],
                     nama: `Pencairan Pinjaman Baru (${nama})`,
                     kelurahan: desa,
+                    kategori: 'Adm & Umum',
                     tipe: 'Keluar',
-                    nominal: plafon
+                    nominal: plafon,
+                    noKwitansi: 'KWT-CAIR-' + Math.floor(100000 + Math.random() * 900000)
                 });
                 localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
 
@@ -2192,8 +2212,10 @@
                 tanggal: tglBayar || new Date().toISOString().split('T')[0],
                 nama: `Angsuran Ke-${keX} (${n.nama}) - P:${formatRp(bayarPokok)}, J:${formatRp(bayarJasa)}`,
                 kelurahan: n.desa,
+                kategori: 'Adm & Umum',
                 tipe: 'Masuk',
-                nominal: totalBayar
+                nominal: totalBayar,
+                noKwitansi: 'KWT-' + Math.floor(100000 + Math.random() * 900000)
             });
             localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
 
@@ -2275,7 +2297,6 @@
             select.value = currentVal;
         }
 
-        // Pagination State for LPP Table
         let currentLPPPage = 1;
         const lppItemsPerPage = 15;
 
@@ -2289,7 +2310,6 @@
 
             let tPlafon = 0, tTarP = 0, tTarB = 0, tLaluP = 0, tLaluB = 0, tIniP = 0, tIniB = 0, tTotP = 0, tTotB = 0, tSaldo = 0, tTungP = 0, tTungB = 0;
 
-            // Calculate overall footer totals from full filtered data
             data.forEach((r) => {
                 const plafon = parseNum(r.plafon);
                 const tenor = parseInt(r.tenor) || 12;
@@ -2315,7 +2335,6 @@
                 tTungP += tungP; tTungB += tungB;
             });
 
-            // Pagination for LPP Table
             const totalPages = Math.ceil(data.length / lppItemsPerPage) || 1;
             if (currentLPPPage > totalPages) currentLPPPage = totalPages;
             const startIdx = (currentLPPPage - 1) * lppItemsPerPage;
@@ -2330,7 +2349,6 @@
             }
 
             paginatedLPP.forEach((r, idx) => {
-                const realIndex = allData.indexOf(r);
                 const plafon = parseNum(r.plafon);
                 const tenor = parseInt(r.tenor) || 12;
                 const persenJasa = r.persenJasa !== undefined ? parseFloat(r.persenJasa) : 1.5;
@@ -2528,13 +2546,19 @@
             });
         }
 
-        const defaultKas = [{ id: 1, tanggal: new Date().toISOString().split('T')[0], nama: 'Operasional Kantor UPK', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
+        const defaultKas = [{ id: 1, tanggal: new Date().toISOString().split('T')[0], nama: 'Operasional Kantor UPK', kelurahan: 'Tanete Riattang Barat', kategori: 'Adm & Umum', tipe: 'Keluar', nominal: 250000, noKwitansi: 'KWT-KAS-01' }];
         function getKasData() { const d = localStorage.getItem('upk_kas_data'); return d ? JSON.parse(d) : defaultKas; }
 
         function renderKas() {
             const data = getKasData();
             const tbody = document.getElementById('transaksiTableBody');
             tbody.innerHTML = '';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-3">Belum ada mutasi kas tercatat.</td></tr>';
+                return;
+            }
+
             data.forEach((item, index) => {
                 const isMasuk = item.tipe === 'Masuk';
                 const tanggalTampil = item.tanggal ? formatTanggalTampil(item.tanggal) : '-';
@@ -2542,51 +2566,133 @@
                     <tr>
                         <td>${index + 1}</td>
                         <td>${tanggalTampil}</td>
-                        <td class="fw-semibold text-dark">${item.nama}</td>
+                        <td class="fw-bold text-dark">${item.noKwitansi || '-'}</td>
+                        <td class="fw-semibold text-dark text-start">${item.nama}</td>
                         <td>${item.kelurahan}</td>
+                        <td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
                         <td><span class="badge ${isMasuk ? 'bg-dark' : 'bg-danger'} text-white fw-semibold">${item.tipe}</span></td>
-                        <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold">Rp ${formatRp(item.nominal)}</td>
-                        <td><button class="btn btn-outline-danger btn-sm py-0 px-2 shadow-sm" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button></td>
+                        <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold text-end">Rp ${formatRp(item.nominal)}</td>
+                        <td class="text-center">
+                            <button class="btn btn-outline-dark btn-sm py-0 px-1 shadow-sm me-1" title="Edit" onclick="bukaModalEditKas(${item.id})"><i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-outline-dark btn-sm py-0 px-1 shadow-sm me-1" title="Cetak Kwitansi" onclick="cetakKwitansiKas(${item.id})"><i class="bi bi-printer"></i></button>
+                            <button class="btn btn-outline-danger btn-sm py-0 px-1 shadow-sm" title="Hapus" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button>
+                        </td>
                     </tr>
                 `;
             });
         }
 
+        function bukaModalTambahKas() {
+            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-journal-plus me-1"></i> Tambah Mutasi Kas';
+            document.getElementById('btnSimpanKasText').textContent = 'Simpan';
+            document.getElementById('editKasId').value = '';
+            document.getElementById('transaksiForm').reset();
+            document.getElementById('tTanggal').value = new Date().toISOString().split('T')[0];
+            document.getElementById('tKwitansi').value = 'KWT-KAS-' + Math.floor(100000 + Math.random() * 900000);
+            
+            let modalEl = document.getElementById('transaksiModal');
+            let myModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            myModal.show();
+        }
+
+        function bukaModalEditKas(id) {
+            const data = getKasData();
+            const item = data.find(i => i.id === id);
+            if (!item) return;
+
+            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-pencil-square me-1"></i> Edit Mutasi Kas';
+            document.getElementById('btnSimpanKasText').textContent = 'Update Perubahan';
+            document.getElementById('editKasId').value = item.id;
+
+            document.getElementById('tTanggal').value = convertToInputDate(item.tanggal);
+            document.getElementById('tNama').value = item.nama;
+            document.getElementById('tKelurahan').value = item.kelurahan;
+            document.getElementById('tTipe').value = item.tipe;
+            document.getElementById('tKategori').value = item.kategori || 'Honor';
+            document.getElementById('tNominal').value = item.nominal;
+            document.getElementById('tKwitansi').value = item.noKwitansi || '';
+
+            let modalEl = document.getElementById('transaksiModal');
+            let myModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            myModal.show();
+        }
+
         document.getElementById('transaksiForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const data = getKasData();
-            data.unshift({
-                id: Date.now(), 
-                tanggal: document.getElementById('tTanggal').value,
-                nama: document.getElementById('tNama').value,
-                kelurahan: document.getElementById('tKelurahan').value, 
-                tipe: document.getElementById('tTipe').value,
-                nominal: Number(document.getElementById('tNominal').value)
-            });
+            const editId = document.getElementById('editKasId').value;
+
+            const tanggal = document.getElementById('tTanggal').value;
+            const nama = document.getElementById('tNama').value;
+            const kelurahan = document.getElementById('tKelurahan').value;
+            const tipe = document.getElementById('tTipe').value;
+            const kategori = document.getElementById('tKategori').value;
+            const nominal = Number(document.getElementById('tNominal').value);
+            const noKwitansi = document.getElementById('tKwitansi').value || ('KWT-KAS-' + Math.floor(100000 + Math.random() * 900000));
+
+            if (editId !== "") {
+                const idx = data.findIndex(i => i.id == editId);
+                if (idx !== -1) {
+                    data[idx] = { id: Number(editId), tanggal, nama, kelurahan, tipe, kategori, nominal, noKwitansi };
+                }
+                showToast('success', 'Mutasi kas berhasil diperbarui!');
+            } else {
+                data.unshift({ id: Date.now(), tanggal, nama, kelurahan, tipe, kategori, nominal, noKwitansi });
+                showToast('success', 'Mutasi kas baru berhasil disimpan!');
+            }
+
             localStorage.setItem('upk_kas_data', JSON.stringify(data));
             this.reset();
             bootstrap.Modal.getInstance(document.getElementById('transaksiModal')).hide();
             renderKas();
             updateDasborKeuangan();
             backupKeGoogleSheet(true);
-            showToast('success', 'Mutasi kas berhasil disimpan!');
         });
 
         function hapusKas(id) {
             Swal.fire({
                 title: 'Hapus Transaksi?',
+                text: 'Data transaksi kas ini akan dihapus permanen.',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#212529',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya'
+                confirmButtonText: 'Ya, Hapus'
             }).then((res) => {
                 if (res.isConfirmed) {
                     localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
                     renderKas();
                     updateDasborKeuangan();
                     backupKeGoogleSheet(true);
-                    showToast('success', 'Transaksi kas dihapus.');
+                    showToast('success', 'Transaksi kas berhasil dihapus.');
+                }
+            });
+        }
+
+        function cetakKwitansiKas(id) {
+            const data = getKasData();
+            const item = data.find(i => i.id === id);
+            if (!item) return;
+
+            Swal.fire({
+                title: `<strong>Kwitansi: ${item.noKwitansi || '-'}</strong>`,
+                html: `
+                    <div class="text-start border p-3 rounded bg-light small">
+                        <p class="mb-1"><strong>Tanggal:</strong> ${formatTanggalTampil(item.tanggal)}</p>
+                        <p class="mb-1"><strong>Keterangan:</strong> ${item.nama}</p>
+                        <p class="mb-1"><strong>Desa/Kelurahan:</strong> ${item.kelurahan}</p>
+                        <p class="mb-1"><strong>Kategori:</strong> ${item.kategori || '-'}</p>
+                        <p class="mb-1"><strong>Tipe:</strong> Kas ${item.tipe}</p>
+                        <hr class="my-2">
+                        <h5 class="text-dark fw-bold mb-0 text-end">Nominal: Rp ${formatRp(item.nominal)}</h5>
+                    </div>
+                `,
+                showCloseButton: true,
+                confirmButtonText: '<i class="bi bi-printer me-1"></i> Cetak Kwitansi Ini',
+                confirmButtonColor: '#212529'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.print();
                 }
             });
         }
