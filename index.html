@@ -12,92 +12,52 @@
 
     <style>
         :root {
-            --bg-body-gradient: linear-gradient(135deg, #060913 0%, #0f172a 50%, #090d16 100%);
-            --navbar-bg: #0b1120;
-            --card-bg: #111c33;
-            --card-light-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --neon-green: #10b981;
-            --neon-green-glow: rgba(16, 185, 129, 0.3);
-            --table-th-bg: #0b1120;
-            --table-td-bg: #111c33;
-            --table-td-color: #f8fafc;
-            --col-target-bg: rgba(234, 179, 8, 0.15);
-            --col-target-color: #fde047;
-            --col-real-bg: rgba(16, 185, 129, 0.18);
-            --col-real-color: #6ee7b7;
-            --col-tung-bg: rgba(239, 68, 68, 0.18);
-            --col-tung-color: #fca5a5;
-        }
-
-        [data-theme="light"] {
-            --bg-body-gradient: #f1f5f9;
-            --navbar-bg: #0f172a;
+            --bg-body: #f8fafc;
+            --navbar-bg: #1e293b;
             --card-bg: #ffffff;
-            --card-light-bg: #f8fafc;
+            --card-light-bg: #f1f5f9;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --border-color: #e2e8f0;
+            --border-color: #cbd5e1;
             --neon-green: #059669;
             --neon-green-glow: rgba(5, 150, 105, 0.2);
             --table-th-bg: #e2e8f0;
             --table-td-bg: #ffffff;
             --table-td-color: #0f172a;
-            --col-target-bg: rgba(202, 138, 4, 0.1);
+            --col-target-bg: rgba(202, 138, 4, 0.12);
             --col-target-color: #854d0e;
-            --col-real-bg: rgba(5, 150, 105, 0.1);
+            --col-real-bg: rgba(5, 150, 105, 0.12);
             --col-real-color: #065f46;
-            --col-tung-bg: rgba(220, 38, 38, 0.1);
+            --col-tung-bg: rgba(220, 38, 38, 0.12);
             --col-tung-color: #991b1b;
         }
 
         body { 
             font-family: 'Inter', sans-serif; 
             font-size: 0.85rem; 
-            background: var(--bg-body-gradient);
+            background: var(--bg-body);
             color: var(--text-main); 
             min-height: 100vh;
-            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 1px solid var(--border-color); backdrop-filter: blur(10px); }
-        
-        .card-custom { 
-            border: 1px solid var(--border-color); 
-            border-radius: 1rem; 
-            background: var(--card-bg); 
-            color: var(--text-main);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card-light-custom {
-            background: var(--card-light-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            border-radius: 0.75rem;
-        }
+        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 1px solid var(--border-color); }
+        .card-custom { border: 1px solid var(--border-color); border-radius: 1rem; background: var(--card-bg); color: var(--text-main); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
+        .card-light-custom { background: var(--card-light-bg); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 0.75rem; }
 
         .btn-compact { padding: 0.4rem 0.85rem; font-size: 0.82rem; border-radius: 0.5rem; font-weight: 500; }
         .form-control-compact, .form-select-compact { 
-            font-size: 0.85rem; 
-            padding: 0.45rem 0.75rem; 
-            border-radius: 0.5rem; 
-            background-color: var(--card-light-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
+            font-size: 0.85rem; padding: 0.45rem 0.75rem; border-radius: 0.5rem; 
+            background-color: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-main);
         }
         .form-control-compact:focus, .form-select-compact:focus {
-            background-color: var(--card-light-bg);
+            background-color: var(--card-bg);
             color: var(--text-main);
             border-color: var(--neon-green);
             box-shadow: 0 0 0 0.25rem var(--neon-green-glow);
         }
         
         .customer-item { transition: all 0.2s ease; cursor: pointer; border-left: 4px solid transparent; background-color: var(--card-bg); color: var(--text-main); border-bottom: 1px solid var(--border-color); }
-        .customer-item:hover, .customer-item.active { background-color: rgba(16, 185, 129, 0.12) !important; border-left-color: var(--neon-green); transform: translateX(2px); }
+        .customer-item:hover, .customer-item.active { background-color: rgba(5, 150, 105, 0.08) !important; border-left-color: var(--neon-green); transform: translateX(2px); }
         
         .table-compact th { 
             background-color: var(--table-th-bg); 
@@ -122,14 +82,14 @@
             background-color: var(--table-td-bg);
             font-weight: 500;
         }
-        .table-hover tbody tr:hover td { background-color: rgba(16, 185, 129, 0.06); }
+        .table-hover tbody tr:hover td { background-color: rgba(5, 150, 105, 0.04); }
 
         .kwitansi-profesional { 
             background: var(--card-bg);
             border: 2px solid var(--border-color); 
             border-radius: 1rem; 
             padding: 1.5rem; 
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             color: var(--text-main);
         }
 
@@ -147,17 +107,8 @@
             border-radius: 50%;
             padding: 6px;
             background: var(--card-bg);
-            border: 2px solid rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
-            animation: pulseGlow 3s infinite ease-in-out;
-            transition: transform 0.3s ease;
-        }
-        .logo-glow:hover { transform: scale(1.08); }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
-            50% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.45); }
-            100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+            border: 2px solid rgba(5, 150, 105, 0.3);
+            box-shadow: 0 0 15px rgba(5, 150, 105, 0.15);
         }
 
         @media print {
@@ -172,19 +123,16 @@
         }
     </style>
 </head>
-<body data-theme="dark">
+<body>
 
     <nav class="navbar navbar-dark navbar-custom py-2 shadow-sm no-print sticky-top">
         <div class="container-fluid px-3 px-md-4">
             <div class="d-flex align-items-center">
                 <span class="navbar-brand fw-bold fs-6 mb-0 d-flex align-items-center text-light" style="cursor: pointer;" onclick="handleBrandClick()">
-                    <img src="logo-dapm.png" alt="Logo" style="width: 32px; height: 32px; object-fit: contain;" class="me-2"> SISKEU UPK <span class="badge bg-success ms-2 fw-semibold text-dark shadow-sm" style="font-size: 0.68rem; background-color: var(--neon-green) !important;">DAPM TR. BARAT</span>
+                    <img src="logo-dapm.png" alt="Logo" style="width: 32px; height: 32px; object-fit: contain;" class="me-2"> SISKEU UPK <span class="badge bg-success ms-2 fw-semibold text-white shadow-sm" style="font-size: 0.68rem; background-color: var(--neon-green) !important;">DAPM TR. BARAT</span>
                 </span>
             </div>
             <div class="d-flex align-items-center gap-2">
-                <button class="btn btn-outline-secondary btn-compact text-light border-0" id="themeToggleBtn" onclick="toggleTheme()" title="Ganti Mode Siang / Malam">
-                    <i class="bi bi-moon-stars-fill fs-5" id="themeIcon"></i>
-                </button>
                 <span id="syncStatusBadge" class="badge bg-warning text-dark small me-1 px-2 py-1 shadow-sm">Memuat Cloud...</span>
                 <span id="adminGreeting" class="text-light small me-2 d-none d-md-inline fw-medium text-opacity-75"></span>
                 <button id="btnNavAuth" class="btn btn-outline-light btn-compact shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -195,7 +143,7 @@
     </nav>
 
     <div id="publicContent" class="container py-5 text-center" style="max-width: 650px;">
-        <div class="card-custom p-4 p-md-5 mt-4 shadow-lg border-0">
+        <div class="card-custom p-4 p-md-5 mt-4 shadow-lg border">
             <div class="logo-container">
                 <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" title="Logo UPK">
                 <img src="LOGO UPK BARU.png" alt="Logo UPK" class="logo-glow" title="Logo DAPM">
@@ -204,7 +152,7 @@
             <p class="small mb-4 text-muted" style="color: var(--text-muted) !important;">Sistem Informasi Keuangan, Manajemen Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan Terpadu.</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
-                <button class="btn btn-success btn-compact py-2 fw-bold shadow text-dark" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: var(--neon-green); border: none;">
+                <button class="btn btn-success btn-compact py-2 fw-bold shadow text-white" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: var(--neon-green); border: none;">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Buka Dasbor Keuangan & LPP
                 </button>
             </div>
@@ -218,7 +166,7 @@
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnProfil" onclick="bukaView('panelProfil')">
                     <i class="bi bi-info-circle me-1"></i> Profil
                 </button>
-                <button type="button" class="btn btn-compact btn-success fw-semibold text-dark" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')" style="background-color: var(--neon-green); border: none;">
+                <button type="button" class="btn btn-compact btn-success fw-semibold text-white" id="tabBtnDasborKeuangan" onclick="bukaView('panelDasborKeuangan')" style="background-color: var(--neon-green); border: none;">
                     <i class="bi bi-speedometer2 me-1"></i> Dasbor
                 </button>
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnJatuhTempo" onclick="bukaView('panelJatuhTempo')">
@@ -236,7 +184,7 @@
                 <button type="button" class="btn btn-compact btn-outline-secondary" id="tabBtnKas" onclick="bukaView('panelKas')">
                     <i class="bi bi-journal-text me-1"></i> Buku Kas
                 </button>
-                <button type="button" class="btn btn-compact btn-outline-secondary text-info fw-semibold" id="tabBtnLaporan" onclick="bukaView('panelLaporan')">
+                <button type="button" class="btn btn-compact btn-outline-secondary text-primary fw-semibold" id="tabBtnLaporan" onclick="bukaView('panelLaporan')">
                     <i class="bi bi-file-earmark-bar-graph me-1"></i> Laporan
                 </button>
             </div>
@@ -245,7 +193,7 @@
                 <button class="btn btn-outline-success btn-compact fw-semibold shadow-sm" id="btnSyncGSheet" onclick="backupKeGoogleSheet()">
                     <i class="bi bi-file-earmark-spreadsheet me-1"></i> Sinkron Cloud
                 </button>
-                <button class="btn btn-success btn-compact fw-semibold text-dark shadow-sm" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()" style="background-color: var(--neon-green); border: none;">
+                <button class="btn btn-success btn-compact fw-semibold text-white shadow-sm" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()" style="background-color: var(--neon-green); border: none;">
                     <i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam
                 </button>
             </div>
@@ -255,7 +203,7 @@
             <div class="card-custom p-4 p-md-5 mb-3">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <span class="badge bg-success mb-2 text-dark fw-semibold px-2 py-1" style="background-color: var(--neon-green) !important;">Kelembagaan Resmi</span>
+                        <span class="badge bg-success mb-2 text-white fw-semibold px-2 py-1" style="background-color: var(--neon-green) !important;">Kelembagaan Resmi</span>
                         <h3 class="fw-bold mb-2" style="color: var(--text-main);">UPK DAPM TANETE RIATTANG BARAT</h3>
                         <p class="small mb-3 text-muted" style="color: var(--text-muted) !important;">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
                         <div class="d-flex gap-3 small text-muted" style="color: var(--text-muted) !important;">
@@ -314,7 +262,7 @@
                     <div class="card-custom p-3 p-md-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="fw-bold mb-0" style="color: var(--text-main);"><i class="bi bi-graph-up-arrow me-1 text-success"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
-                            <span class="badge bg-success text-dark fw-bold px-2 py-1" id="dashFinTingkatPengembalian" style="background-color: var(--neon-green) !important;">0%</span>
+                            <span class="badge bg-success text-white fw-bold px-2 py-1" id="dashFinTingkatPengembalian" style="background-color: var(--neon-green) !important;">0%</span>
                         </div>
                         <div class="progress mb-3 bg-secondary bg-opacity-25 rounded-pill overflow-hidden" style="height: 12px;">
                             <div class="progress-bar progress-bar-striped progress-bar-animated" id="dashFinProgressBar" role="progressbar" style="width: 0%; background-color: var(--neon-green);"></div>
@@ -349,7 +297,7 @@
                             <button class="btn btn-outline-success btn-compact text-start fw-semibold py-2" onclick="bukaView('panelBayarAngsuran')">
                                 <i class="bi bi-receipt-cutoff me-2"></i> Kasir Pembayaran Angsuran
                             </button>
-                            <button class="btn btn-outline-info btn-compact text-start fw-semibold py-2" onclick="bukaView('panelLaporan')">
+                            <button class="btn btn-outline-primary btn-compact text-start fw-semibold py-2" onclick="bukaView('panelLaporan')">
                                 <i class="bi bi-file-earmark-bar-graph me-2"></i> Lihat Laporan Rekapitulasi
                             </button>
                         </div>
@@ -416,7 +364,7 @@
                         </select>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-success btn-compact text-dark fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()" style="background-color: var(--neon-green); border: none;">
+                        <button class="btn btn-success btn-compact text-white fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#tambahPeminjamModal" onclick="bukaModalTambahPeminjam()" style="background-color: var(--neon-green); border: none;">
                             <i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru
                         </button>
                     </div>
@@ -473,7 +421,7 @@
                     <div id="tellerActiveForm" class="card-custom p-3 p-md-4 d-none">
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3" style="border-color: var(--border-color) !important;">
                             <div>
-                                <h6 class="fw-bold text-info mb-0" id="tellerNamaNasabah">-</h6>
+                                <h6 class="fw-bold text-primary mb-0" id="tellerNamaNasabah">-</h6>
                                 <small class="text-muted" id="tellerDesaNasabah">-</small>
                             </div>
                             <div class="text-end">
@@ -562,14 +510,14 @@
 
                             <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
                                 <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="resetTellerForm()">Batal</button>
-                                <button type="submit" id="btnSubmitPembayaran" class="btn btn-success btn-compact fw-semibold text-dark shadow-sm" style="background-color: var(--neon-green); border: none;">
+                                <button type="submit" id="btnSubmitPembayaran" class="btn btn-success btn-compact fw-semibold text-white shadow-sm" style="background-color: var(--neon-green); border: none;">
                                     <i class="bi bi-check2-circle me-1"></i> Simpan Pembayaran & Buat Bukti WA
                                 </button>
                             </div>
                         </form>
 
                         <div class="mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
-                            <h6 class="fw-bold mb-2" style="font-size: 0.82rem; color: var(--text-main);"><i class="bi bi-clock-history me-1 text-info"></i> Riwayat Pembayaran Angsuran</h6>
+                            <h6 class="fw-bold mb-2" style="font-size: 0.82rem; color: var(--text-main);"><i class="bi bi-clock-history me-1 text-primary"></i> Riwayat Pembayaran Angsuran</h6>
                             <div class="table-responsive rounded-2 border" style="max-height: 180px;">
                                 <table class="table table-sm table-bordered table-compact mb-0 text-center">
                                     <thead>
@@ -592,17 +540,17 @@
 
                         <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none" style="border-color: var(--border-color) !important;">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-success p-2 text-dark fw-semibold" style="background-color: var(--neon-green) !important;"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di LPP</span>
+                                <span class="badge bg-success p-2 text-white fw-semibold" style="background-color: var(--neon-green) !important;"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat di LPP</span>
                                 <div class="d-flex gap-2 no-print">
                                     <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Kwitansi</button>
-                                    <button class="btn btn-success btn-compact fw-semibold text-dark shadow-sm" onclick="kirimBuktiWA()" style="background-color: var(--neon-green); border: none;"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti ke WhatsApp</button>
+                                    <button class="btn btn-success btn-compact fw-semibold text-white shadow-sm" onclick="kirimBuktiWA()" style="background-color: var(--neon-green); border: none;"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti ke WhatsApp</button>
                                 </div>
                             </div>
 
                             <div id="areaCetakKwitansi" class="kwitansi-profesional">
                                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3" style="border-color: var(--border-color) !important;">
                                     <div>
-                                        <h6 class="fw-bold text-info mb-0"><i class="bi bi-patch-check-fill text-success me-1"></i> BUKTI SETORAN RESMI UPK</h6>
+                                        <h6 class="fw-bold text-primary mb-0"><i class="bi bi-patch-check-fill text-success me-1"></i> BUKTI SETORAN RESMI UPK</h6>
                                         <small class="text-muted">DAPM Tanete Riattang Barat - Kab. Bone</small>
                                     </div>
                                     <div class="text-end">
@@ -673,7 +621,7 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
                     <div class="d-flex gap-2 align-items-center">
-                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-info btn-compact fw-semibold">
+                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-primary btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
                         <input type="text" id="searchInput" class="form-control form-control-compact" style="width: 200px;" placeholder="Cari peminjam..." onkeyup="filterLPPTable()">
@@ -683,7 +631,7 @@
                     </div>
                     <div class="d-flex gap-2">
                         <input type="file" id="csvFileInput" accept=".csv, .xlsx, .xls" class="d-none" onchange="handleLPPFileUpload(event)">
-                        <button class="btn btn-outline-info btn-compact" onclick="document.getElementById('csvFileInput').click()"><i class="bi bi-upload me-1"></i> Import</button>
+                        <button class="btn btn-outline-primary btn-compact" onclick="document.getElementById('csvFileInput').click()"><i class="bi bi-upload me-1"></i> Import</button>
                         <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="downloadCurrentDataCSV()"><i class="bi bi-download me-1"></i> Export</button>
                         <button class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
                         <button class="btn btn-outline-danger btn-compact" onclick="resetToSample()"><i class="bi bi-arrow-counterclockwise"></i></button>
@@ -700,25 +648,25 @@
                                 <th rowspan="2">Plafon</th>
                                 <th rowspan="2">Tenor</th>
                                 <th rowspan="2">Cair</th>
-                                <th colspan="2" style="background-color: #334155; color: #fde047;">Target s/d Bln Ini</th>
+                                <th colspan="2" style="background-color: #cbd5e1; color: #0f172a;">Target s/d Bln Ini</th>
                                 <th colspan="2">Realisasi s/d Bln Lalu</th>
                                 <th colspan="2">Realisasi Bln Ini</th>
-                                <th colspan="2" style="background-color: #065f46; color: #a7f3d0;">Realisasi Total</th>
+                                <th colspan="2" style="background-color: #d1fae5; color: #065f46;">Realisasi Total</th>
                                 <th rowspan="2">Saldo</th>
                                 <th rowspan="2">%</th>
-                                <th colspan="2" style="background-color: #991b1b; color: #fecaca;">Tunggakan</th>
+                                <th colspan="2" style="background-color: #fee2e2; color: #991b1b;">Tunggakan</th>
                             </tr>
                             <tr>
-                                <th style="background-color: #334155; color: #fde047;">Pokok</th>
-                                <th style="background-color: #334155; color: #fde047;">Bunga</th>
+                                <th style="background-color: #cbd5e1; color: #0f172a;">Pokok</th>
+                                <th style="background-color: #cbd5e1; color: #0f172a;">Bunga</th>
                                 <th>Pokok</th>
                                 <th>Bunga</th>
-                                <th style="color: #6fffe9;">Pokok</th>
-                                <th style="color: #6fffe9;">Bunga</th>
-                                <th style="background-color: #065f46; color: #a7f3d0;">Pokok</th>
-                                <th style="background-color: #065f46; color: #a7f3d0;">Bunga</th>
-                                <th style="background-color: #991b1b; color: #fecaca;">Pokok</th>
-                                <th style="background-color: #991b1b; color: #fecaca;">Bunga</th>
+                                <th style="color: #059669;">Pokok</th>
+                                <th style="color: #059669;">Bunga</th>
+                                <th style="background-color: #d1fae5; color: #065f46;">Pokok</th>
+                                <th style="background-color: #d1fae5; color: #065f46;">Bunga</th>
+                                <th style="background-color: #fee2e2; color: #991b1b;">Pokok</th>
+                                <th style="background-color: #fee2e2; color: #991b1b;">Bunga</th>
                             </tr>
                         </thead>
                         <tbody id="lppTableBody"></tbody>
@@ -732,12 +680,12 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex align-items-center gap-2">
-                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-info btn-compact fw-semibold">
+                        <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-primary btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
                         <h6 class="fw-bold mb-0" style="color: var(--text-main);">Buku Kas Masuk & Keluar</h6>
                     </div>
-                    <button class="btn btn-success btn-compact text-dark fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#transaksiModal" style="background-color: var(--neon-green); border: none;">
+                    <button class="btn btn-success btn-compact text-white fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#transaksiModal" style="background-color: var(--neon-green); border: none;">
                         <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
                     </button>
                 </div>
@@ -746,6 +694,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Tanggal Transaksi</th>
                                 <th>Keterangan</th>
                                 <th>Desa/Kelurahan</th>
                                 <th>Tipe</th>
@@ -763,7 +712,7 @@
             <div class="card-custom p-4 p-md-5">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom" style="border-color: var(--border-color) !important;">
                     <div>
-                        <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-file-earmark-bar-graph text-info me-2"></i> Laporan Rekapitulasi Keuangan & Piutang UPK</h5>
+                        <h5 class="fw-bold mb-1" style="color: var(--text-main);"><i class="bi bi-file-earmark-bar-graph text-primary me-2"></i> Laporan Rekapitulasi Keuangan & Piutang UPK</h5>
                         <p class="small mb-0 text-muted" style="color: var(--text-muted) !important;">Ringkasan resmi bulanan dan tahunan untuk kebutuhan pengurus serta musyawarah.</p>
                     </div>
                     <div class="d-flex gap-2 no-print">
@@ -799,7 +748,7 @@
                         </div>
                     </div>
 
-                    <h6 class="fw-bold mb-3 text-info"><i class="bi bi-pie-chart me-1"></i> Rekapitulasi per Desa / Kelurahan</h6>
+                    <h6 class="fw-bold mb-3 text-primary"><i class="bi bi-pie-chart me-1"></i> Rekapitulasi per Desa / Kelurahan</h6>
                     <div class="table-responsive mb-4 rounded-3 border shadow-sm">
                         <table class="table table-bordered table-compact mb-0 text-center">
                             <thead>
@@ -824,7 +773,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3" style="border-color: var(--border-color) !important;">
-                    <h6 class="fw-bold text-info mb-0" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru</h6>
+                    <h6 class="fw-bold text-primary mb-0" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru</h6>
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formTambahPeminjam">
@@ -857,7 +806,7 @@
                         <div class="col-md-6">
                             <label class="small fw-semibold mb-1 text-muted">Persen Jasa (% per Bulan)</label>
                             <div class="input-group input-group-sm">
-                                <input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact fw-bold text-info" value="1.5" placeholder="1.5" required oninput="hitungSimulasiPeminjamBaru()">
+                                <input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact fw-bold text-primary" value="1.5" placeholder="1.5" required oninput="hitungSimulasiPeminjamBaru()">
                                 <span class="input-group-text text-muted" style="background: var(--card-light-bg); border-color: var(--border-color);">% / Bln</span>
                             </div>
                         </div>
@@ -879,7 +828,7 @@
                         </div>
                         <div class="d-flex justify-content-between mb-1">
                             <span class="text-muted">Jasa / Bunga per Bulan:</span>
-                            <strong class="text-info" id="simulasiJasaPerBulan">Rp 0</strong>
+                            <strong class="text-primary" id="simulasiJasaPerBulan">Rp 0</strong>
                         </div>
                         <div class="d-flex justify-content-between border-top pt-1 fw-bold" style="border-color: var(--border-color) !important;">
                             <span class="text-muted">Total Setoran / Bulan:</span>
@@ -889,7 +838,7 @@
 
                     <div class="d-flex justify-content-end gap-2 border-top pt-3" style="border-color: var(--border-color) !important;">
                         <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success btn-compact fw-semibold text-dark shadow-sm" id="btnSimpanPeminjamText" style="background-color: var(--neon-green); border: none;">
+                        <button type="submit" class="btn btn-success btn-compact fw-semibold text-white shadow-sm" id="btnSimpanPeminjamText" style="background-color: var(--neon-green); border: none;">
                             <i class="bi bi-save me-1"></i> Simpan Peminjam
                         </button>
                     </div>
@@ -915,7 +864,7 @@
                     <div class="mb-3">
                         <input type="password" id="password" class="form-control form-control-compact" placeholder="Password (admin123)" required>
                     </div>
-                    <button type="submit" class="btn btn-success btn-compact w-100 fw-semibold text-dark shadow-sm" style="background-color: var(--neon-green); border: none;">
+                    <button type="submit" class="btn btn-success btn-compact w-100 fw-semibold text-white shadow-sm" style="background-color: var(--neon-green); border: none;">
                         Masuk Sistem
                     </button>
                 </form>
@@ -928,6 +877,10 @@
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <h6 class="fw-bold mb-3" style="color: var(--text-main);">Tambah Mutasi Kas</h6>
                 <form id="transaksiForm">
+                    <div class="mb-2">
+                        <label class="small fw-semibold mb-1 text-muted">Tanggal Transaksi</label>
+                        <input type="date" id="tTanggal" class="form-control form-control-compact" required>
+                    </div>
                     <div class="mb-2">
                         <input type="text" id="tNama" class="form-control form-control-compact" placeholder="Keterangan / Transaksi" required>
                     </div>
@@ -945,7 +898,7 @@
                     </div>
                     <div class="d-flex justify-content-end gap-2">
                         <button type="button" class="btn btn-outline-secondary btn-compact" style="color: var(--text-main);" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success btn-compact text-dark fw-semibold shadow-sm" style="background-color: var(--neon-green); border: none;">Simpan</button>
+                        <button type="submit" class="btn btn-success btn-compact text-white fw-semibold shadow-sm" style="background-color: var(--neon-green); border: none;">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -977,31 +930,6 @@
         ['mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart', 'click'].forEach(event => {
             window.addEventListener(event, resetIdleTimer, true);
         });
-
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('themeIcon');
-            const currentTheme = body.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                themeIcon.className = 'bi bi-sun-fill text-warning fs-5';
-                localStorage.setItem('upk_theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.className = 'bi bi-moon-stars-fill fs-5';
-                localStorage.setItem('upk_theme', 'dark');
-            }
-        }
-
-        function initTheme() {
-            const savedTheme = localStorage.getItem('upk_theme') || 'dark';
-            document.body.setAttribute('data-theme', savedTheme);
-            const themeIcon = document.getElementById('themeIcon');
-            if (themeIcon) {
-                themeIcon.className = savedTheme === 'light' ? 'bi bi-sun-fill text-warning fs-5' : 'bi bi-moon-stars-fill fs-5';
-            }
-        }
 
         const sampleLPPData = [
             { no: 1, nama: "ERNAWATI", desa: "MACANANG", plafon: 10000000, tenor: "12", tglCair: "14/08/2025", realLaluPokok: 9350000, realLaluBunga: 1650000, realIniPokok: 650000, realIniBunga: 150000, realTotPokok: 10000000, realTotBunga: 1800000, saldo: 0, persen: "100%", angsuranKe: 13, noHp: "", persenJasa: 1.5, history: [] },
@@ -1167,18 +1095,18 @@
 
             if (viewName === 'panelProfil') {
                 document.getElementById('viewPanelProfil').classList.remove('d-none');
-                document.getElementById('tabBtnProfil').className = 'btn btn-compact btn-success fw-semibold text-dark shadow-sm';
+                document.getElementById('tabBtnProfil').className = 'btn btn-compact btn-success fw-semibold text-white shadow-sm';
                 document.getElementById('tabBtnProfil').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnProfil').style.border = 'none';
             } else if (viewName === 'panelDasborKeuangan') {
                 document.getElementById('viewPanelDasborKeuangan').classList.remove('d-none');
-                document.getElementById('tabBtnDasborKeuangan').className = 'btn btn-compact btn-success fw-semibold text-dark shadow-sm';
+                document.getElementById('tabBtnDasborKeuangan').className = 'btn btn-compact btn-success fw-semibold text-white shadow-sm';
                 document.getElementById('tabBtnDasborKeuangan').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnDasborKeuangan').style.border = 'none';
                 updateDasborKeuangan();
             } else if (viewName === 'panelJatuhTempo') {
                 document.getElementById('viewPanelJatuhTempo').classList.remove('d-none');
-                document.getElementById('tabBtnJatuhTempo').className = 'btn btn-compact btn-success fw-semibold text-dark shadow-sm';
+                document.getElementById('tabBtnJatuhTempo').className = 'btn btn-compact btn-success fw-semibold text-white shadow-sm';
                 document.getElementById('tabBtnJatuhTempo').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnJatuhTempo').style.border = 'none';
                 if (!document.getElementById('filterTglJatuhTempo').value) {
@@ -1187,31 +1115,31 @@
                 renderJatuhTempoTable();
             } else if (viewName === 'panelDataPeminjam') {
                 document.getElementById('viewPanelDataPeminjam').classList.remove('d-none');
-                document.getElementById('tabBtnDataPeminjam').className = 'btn btn-compact btn-success fw-semibold text-dark shadow-sm';
+                document.getElementById('tabBtnDataPeminjam').className = 'btn btn-compact btn-success fw-semibold text-white shadow-sm';
                 document.getElementById('tabBtnDataPeminjam').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnDataPeminjam').style.border = 'none';
                 renderDataPeminjamTable();
             } else if (viewName === 'panelBayarAngsuran') {
                 document.getElementById('viewPanelBayarAngsuran').classList.remove('d-none');
-                document.getElementById('tabBtnBayar').className = 'btn btn-compact btn-success fw-semibold text-dark shadow-sm';
+                document.getElementById('tabBtnBayar').className = 'btn btn-compact btn-success fw-semibold text-white shadow-sm';
                 document.getElementById('tabBtnBayar').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnBayar').style.border = 'none';
                 renderTellerCustomerList();
             } else if (viewName === 'panelLPP') {
                 document.getElementById('viewPanelLPP').classList.remove('d-none');
-                document.getElementById('tabBtnLPP').className = 'btn btn-compact btn-success fw-semibold text-dark shadow-sm';
+                document.getElementById('tabBtnLPP').className = 'btn btn-compact btn-success fw-semibold text-white shadow-sm';
                 document.getElementById('tabBtnLPP').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnLPP').style.border = 'none';
                 renderLPPTable();
             } else if (viewName === 'panelKas') {
                 document.getElementById('viewPanelKas').classList.remove('d-none');
-                document.getElementById('tabBtnKas').className = 'btn btn-compact btn-success fw-semibold text-dark shadow-sm';
+                document.getElementById('tabBtnKas').className = 'btn btn-compact btn-success fw-semibold text-white shadow-sm';
                 document.getElementById('tabBtnKas').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnKas').style.border = 'none';
                 renderKas();
             } else if (viewName === 'panelLaporan') {
                 document.getElementById('viewPanelLaporan').classList.remove('d-none');
-                document.getElementById('tabBtnLaporan').className = 'btn btn-compact btn-success fw-semibold text-dark shadow-sm';
+                document.getElementById('tabBtnLaporan').className = 'btn btn-compact btn-success fw-semibold text-white shadow-sm';
                 document.getElementById('tabBtnLaporan').style.backgroundColor = 'var(--neon-green)';
                 document.getElementById('tabBtnLaporan').style.border = 'none';
                 renderLaporanRekapitulasi();
@@ -1226,7 +1154,6 @@
             }
         }
 
-        // Perbaikan Mutlak & Universal untuk Semua Tombol WhatsApp (Disesuaikan untuk Tunggakan)
         function kirimPesanJatuhTempoWA(nama, desa, noHp, sisaSaldo) {
             let phone = (noHp || '').toString().replace(/[^0-9]/g, '');
             
@@ -1295,7 +1222,7 @@
                 }
 
                 if (bayarHariIniPokok > 0 || bayarHariIniJasa > 0) {
-                    statusBayarHariIni = `<span class="badge bg-success py-1 px-2 text-dark fw-semibold" style="background-color: var(--neon-green) !important;"><i class="bi bi-check-circle me-1"></i> Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)})</span>`;
+                    statusBayarHariIni = `<span class="badge bg-success py-1 px-2 text-white fw-semibold" style="background-color: var(--neon-green) !important;"><i class="bi bi-check-circle me-1"></i> Sudah Setor (P: Rp ${formatRp(bayarHariIniPokok)})</span>`;
                 } else if (realIniPokok > 0 || realIniBunga > 0) {
                     statusBayarHariIni = `<span class="badge bg-info text-dark py-1 px-2 fw-semibold"><i class="bi bi-check2-all me-1"></i> Terisi LPP (P: Rp ${formatRp(realIniPokok)})</span>`;
                 }
@@ -1313,7 +1240,7 @@
                         <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">Rp ${formatRp(targetJasaRT)}</td>
                         <td class="text-center">${statusBayarHariIni}</td>
                         <td class="text-center no-print">
-                            <button class="btn btn-sm btn-success py-1 px-2 fw-semibold text-dark me-1 shadow-sm" style="font-size:0.75rem; background-color: var(--neon-green); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
+                            <button class="btn btn-sm btn-success py-1 px-2 fw-semibold text-white me-1 shadow-sm" style="font-size:0.75rem; background-color: var(--neon-green); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
                                 <i class="bi bi-cash me-1"></i> Kasir
                             </button>
                             <button class="btn btn-sm btn-outline-success py-1 px-2 shadow-sm" style="font-size:0.75rem;" onclick="kirimPesanJatuhTempoWA('${item.nama.replace(/'/g, "\\'")}', '${item.desa.replace(/'/g, "\\'")}', '${item.noHp || ''}', ${item.saldo})">
@@ -1471,14 +1398,14 @@
                         <td class="text-center">${formatTanggalTampil(item.tglCair)}</td>
                         <td class="text-end fw-bold text-danger">Rp ${formatRp(saldo)}</td>
                         <td class="text-center">
-                            <span class="badge ${isLunas ? 'bg-primary' : 'bg-success text-dark'} py-1 px-2 fw-semibold" ${!isLunas ? 'style="background-color: var(--neon-green) !important;"' : ''}>${isLunas ? 'Lunas' : 'Aktif'}</span>
+                            <span class="badge ${isLunas ? 'bg-primary' : 'bg-success text-white'} py-1 px-2 fw-semibold" ${!isLunas ? 'style="background-color: var(--neon-green) !important;"' : ''}>${isLunas ? 'Lunas' : 'Aktif'}</span>
                         </td>
                         <td class="text-center">${item.noHp || '-'}</td>
                         <td class="text-center no-print">
-                            <button class="btn btn-sm btn-success py-1 px-2 fw-semibold text-dark me-1 shadow-sm" style="font-size:0.75rem; background-color: var(--neon-green); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
+                            <button class="btn btn-sm btn-success py-1 px-2 fw-semibold text-white me-1 shadow-sm" style="font-size:0.75rem; background-color: var(--neon-green); border: none;" onclick="langsungBayarDariLPP(${realIndex})">
                                 <i class="bi bi-cash me-1"></i> Bayar
                             </button>
-                            <button class="btn btn-sm btn-info text-dark py-1 px-2 fw-semibold me-1 shadow-sm" style="font-size:0.75rem;" onclick="bukaModalEditPeminjam(${realIndex})">
+                            <button class="btn btn-sm btn-info text-white py-1 px-2 fw-semibold me-1 shadow-sm" style="font-size:0.75rem;" onclick="bukaModalEditPeminjam(${realIndex})">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                             <button class="btn btn-sm btn-outline-danger py-1 px-2 shadow-sm" style="font-size:0.75rem;" onclick="hapusPeminjam(${realIndex})">
@@ -1611,6 +1538,7 @@
                 const kasData = getKasData();
                 kasData.unshift({
                     id: Date.now(),
+                    tanggal: tglCairInput || new Date().toISOString().split('T')[0],
                     nama: `Pencairan Pinjaman Baru (${nama})`,
                     kelurahan: desa,
                     tipe: 'Keluar',
@@ -1673,7 +1601,7 @@
                 itemBtn.innerHTML = `
                     <div class="d-flex justify-content-between align-items-center">
                         <strong style="color: var(--text-main);">${item.nama}</strong>
-                        <span class="badge ${isLunas ? 'bg-primary' : 'bg-success text-dark'} py-0 px-2 fw-semibold" style="font-size: 0.68rem; ${!isLunas ? 'background-color: var(--neon-green) !important;' : ''}">${isLunas ? 'Lunas' : 'Aktif'}</span>
+                        <span class="badge ${isLunas ? 'bg-primary' : 'bg-success text-white'} py-0 px-2 fw-semibold" style="font-size: 0.68rem; ${!isLunas ? 'background-color: var(--neon-green) !important;' : ''}">${isLunas ? 'Lunas' : 'Aktif'}</span>
                     </div>
                     <div class="d-flex justify-content-between align-items-center small mt-1" style="font-size: 0.75rem; color: var(--text-muted);">
                         <span>${item.desa}</span>
@@ -1968,6 +1896,7 @@
             const kasData = getKasData();
             kasData.unshift({
                 id: Date.now(),
+                tanggal: tglBayar || new Date().toISOString().split('T')[0],
                 nama: `Angsuran Ke-${keX} (${n.nama}) - P:${formatRp(bayarPokok)}, J:${formatRp(bayarJasa)}`,
                 kelurahan: n.desa,
                 tipe: 'Masuk',
@@ -2089,15 +2018,15 @@
                         <td class="text-center">${r.no || (idx + 1)}</td>
                         <td class="fw-semibold" style="color: var(--text-main);">${r.nama || '-'}</td>
                         <td>${r.desa || '-'}</td>
-                        <td class="text-end text-info">${formatRp(plafon)}</td>
+                        <td class="text-end text-primary">${formatRp(plafon)}</td>
                         <td class="text-center">${tenor} Bln</td>
                         <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
                         <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">${formatRp(tarP)}</td>
                         <td class="text-end fw-bold" style="background: var(--col-target-bg); color: var(--col-target-color);">${formatRp(tarB)}</td>
                         <td class="text-end text-muted">${formatRp(lP)}</td>
                         <td class="text-end text-muted">${formatRp(lB)}</td>
-                        <td class="text-end text-info fw-semibold">${formatRp(iP)}</td>
-                        <td class="text-end text-info fw-semibold">${formatRp(iB)}</td>
+                        <td class="text-end text-success fw-semibold">${formatRp(iP)}</td>
+                        <td class="text-end text-success fw-semibold">${formatRp(iB)}</td>
                         <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">${formatRp(totP)}</td>
                         <td class="text-end fw-bold" style="background: var(--col-real-bg); color: var(--col-real-color);">${formatRp(totB)}</td>
                         <td class="text-end fw-bold text-danger">${formatRp(saldo)}</td>
@@ -2111,14 +2040,14 @@
             tfoot.innerHTML = `
                 <tr class="text-end" style="background: var(--card-light-bg); color: var(--text-main);">
                     <td colspan="3" class="text-center">TOTAL</td>
-                    <td class="text-info">${formatRp(tPlafon)}</td>
+                    <td class="text-primary">${formatRp(tPlafon)}</td>
                     <td></td><td></td>
                     <td style="color: var(--col-target-color);">${formatRp(tTarP)}</td>
                     <td style="color: var(--col-target-color);">${formatRp(tTarB)}</td>
                     <td>${formatRp(tLaluP)}</td>
                     <td>${formatRp(tLaluB)}</td>
-                    <td class="text-info">${formatRp(tIniP)}</td>
-                    <td class="text-info">${formatRp(tIniB)}</td>
+                    <td class="text-success">${formatRp(tIniP)}</td>
+                    <td class="text-success">${formatRp(tIniB)}</td>
                     <td style="color: var(--col-real-color);">${formatRp(tTotP)}</td>
                     <td style="color: var(--col-real-color);">${formatRp(tTotB)}</td>
                     <td class="text-danger">${formatRp(tSaldo)}</td>
@@ -2236,7 +2165,7 @@
             }
         }
 
-        const defaultKas = [{ id: 1, nama: 'Operasional Kantor UPK', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
+        const defaultKas = [{ id: 1, tanggal: new Date().toISOString().split('T')[0], nama: 'Operasional Kantor UPK', kelurahan: 'Tanete Riattang Barat', tipe: 'Keluar', nominal: 250000 }];
         function getKasData() { const d = localStorage.getItem('upk_kas_data'); return d ? JSON.parse(d) : defaultKas; }
 
         function renderKas() {
@@ -2245,12 +2174,14 @@
             tbody.innerHTML = '';
             data.forEach((item, index) => {
                 const isMasuk = item.tipe === 'Masuk';
+                const tanggalTampil = item.tanggal ? formatTanggalTampil(item.tanggal) : '-';
                 tbody.innerHTML += `
                     <tr>
                         <td>${index + 1}</td>
+                        <td>${tanggalTampil}</td>
                         <td class="fw-semibold" style="color: var(--text-main);">${item.nama}</td>
                         <td>${item.kelurahan}</td>
-                        <td><span class="badge ${isMasuk ? 'bg-success text-dark fw-semibold' : 'bg-danger fw-semibold'} py-1 px-2" ${isMasuk ? 'style="background-color: var(--neon-green) !important;"' : ''}>${item.tipe}</span></td>
+                        <td><span class="badge ${isMasuk ? 'bg-success text-white fw-semibold' : 'bg-danger fw-semibold'} py-1 px-2" ${isMasuk ? 'style="background-color: var(--neon-green) !important;"' : ''}>${item.tipe}</span></td>
                         <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold">Rp ${formatRp(item.nominal)}</td>
                         <td><button class="btn btn-outline-danger btn-sm py-0 px-2 shadow-sm" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button></td>
                     </tr>
@@ -2262,8 +2193,11 @@
             e.preventDefault();
             const data = getKasData();
             data.unshift({
-                id: Date.now(), nama: document.getElementById('tNama').value,
-                kelurahan: document.getElementById('tKelurahan').value, tipe: document.getElementById('tTipe').value,
+                id: Date.now(), 
+                tanggal: document.getElementById('tTanggal').value,
+                nama: document.getElementById('tNama').value,
+                kelurahan: document.getElementById('tKelurahan').value, 
+                tipe: document.getElementById('tTipe').value,
                 nominal: Number(document.getElementById('tNominal').value)
             });
             localStorage.setItem('upk_kas_data', JSON.stringify(data));
@@ -2327,7 +2261,7 @@
         }
 
         window.onload = async function() {
-            initTheme();
+            document.getElementById('tTanggal').value = new Date().toISOString().split('T')[0];
             await loadDataDariGoogleSheet();
             checkAuthUI();
         };
