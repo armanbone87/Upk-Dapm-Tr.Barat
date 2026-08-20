@@ -652,11 +652,12 @@
                                             <th>Jasa (Rp)</th>
                                             <th>Total (Rp)</th>
                                             <th>Sisa Pokok (Rp)</th>
+                                            <th>Sisa Jasa</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tellerHistoryTableBody">
-                                        <tr><td colspan="7" class="text-muted">Belum ada riwayat tercatat.</td></tr>
+                                        <tr><td colspan="8" class="text-muted">Belum ada riwayat tercatat.</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -725,8 +726,8 @@
                                         <strong class="text-danger fs-6" id="kwtSisaSaldo">Rp 0</strong>
                                     </div>
                                     <div class="col-6">
-                                        <span class="d-block text-muted">Sisa Saldo Jasa</span>
-                                        <strong class="text-dark fs-6" id="kwtSisaJasaKwt">Rp 0</strong>
+                                        <span class="d-block text-muted">Sisa Jasa</span>
+                                        <strong class="text-dark fs-6" id="kwtSisaJasaKwt">0x (Rp 0)</strong>
                                     </div>
                                 </div>
 
@@ -819,6 +820,29 @@
                         <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
                     </button>
                 </div>
+
+                <!-- Rekapan Total Kas Masuk, Keluar, dan Saldo Kas -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="card-light-custom p-3 rounded-3 border border-success border-opacity-25">
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-arrow-down-circle text-success me-1"></i> Total Kas Masuk</span>
+                            <h5 class="fw-bold text-success mb-0" id="rekapKasMasuk">Rp 0</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-light-custom p-3 rounded-3 border border-danger border-opacity-25">
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-arrow-up-circle text-danger me-1"></i> Total Kas Keluar</span>
+                            <h5 class="fw-bold text-danger mb-0" id="rekapKasKeluar">Rp 0</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-custom p-3 rounded-3 border border-dark">
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-wallet2 text-dark me-1"></i> Saldo Kas Akhir</span>
+                            <h5 class="fw-bold text-dark mb-0" id="rekapSaldoKas">Rp 0</h5>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="table-responsive rounded-3 border shadow-sm" style="max-height: 480px;">
                     <table class="table table-hover table-compact align-middle mb-0">
                         <thead>
@@ -901,7 +925,7 @@
 
     </div>
 
-    <!-- MODAL TAMBAH PEMINJAM (DENGAN TOMBOL BUKTI PENCAIRAN DI TABEL PEMINJAM) -->
+    <!-- MODAL TAMBAH PEMINJAM -->
     <div class="modal fade" id="tambahPeminjamModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
@@ -1501,7 +1525,6 @@
 
         function changePeminjamPage(page) { currentPeminjamPage = page; renderDataPeminjamTable(); }
 
-        // --- FUNGSI BUKTI PENCAIRAN DI TABEL PEMINJAM ---
         let currentCairData = null;
         function bukaModalBuktiCairPeminjam(idx) {
             const allData = getLPPData();
@@ -1751,7 +1774,8 @@
             const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
             let bungaPerBulan = bulatkan(plafon * ((n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5) / 100));
 
-            let sisaJasaTotal = Math.max(0, (bungaPerBulan * tenor) - parseNum(n.realTotBunga));
+            const totalJasaSeharusnya = bungaPerBulan * tenor;
+            let sisaJasaTotal = Math.max(0, totalJasaSeharusnya - parseNum(n.realTotBunga));
             let sisaPokokTotal = Math.max(0, plafon - parseNum(n.realTotPokok));
 
             document.getElementById('posTargetPokok').textContent = formatRp(Math.min(plafon, pokokPerBulan * keX));
@@ -1783,7 +1807,8 @@
                 document.getElementById('tellerInputJasa').value = bungaPerBulan;
             } else if (type === 'lunas') {
                 document.getElementById('tellerInputPokok').value = saldo;
-                document.getElementById('tellerInputJasa').value = Math.max(0, (bungaPerBulan * tenor) - parseNum(n.realTotBunga));
+                const totalJasaSeharusnya = bungaPerBulan * tenor;
+                document.getElementById('tellerInputJasa').value = Math.max(0, totalJasaSeharusnya - parseNum(n.realTotBunga));
             }
             hitungTellerSisaRealtime();
         }
@@ -1805,11 +1830,36 @@
             const tbody = document.getElementById('tellerHistoryTableBody');
             tbody.innerHTML = '';
             if (!nasabah.history || nasabah.history.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="text-muted small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" class="text-muted small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
                 return;
             }
+            
+            const tenor = parseInt(nasabah.tenor) || 12;
+            const plafon = parseNum(nasabah.plafon);
+            const persenJasa = nasabah.persenJasa !== undefined ? parseFloat(nasabah.persenJasa) : 1.5;
+            const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
+
             nasabah.history.forEach((h, hIdx) => {
-                tbody.innerHTML += `<tr><td>Ke-${h.angsuranKe}</td><td>${h.tanggal}</td><td class="text-end">Rp ${formatRp(h.pokok)}</td><td class="text-end">Rp ${formatRp(h.jasa)}</td><td class="text-end fw-semibold">Rp ${formatRp(h.total)}</td><td class="text-end text-danger">Rp ${formatRp(h.sisaSaldo)}</td><td><button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${hIdx})"><i class="bi bi-trash"></i></button></td></tr>`;
+                // Hitung sisa berapa kali berdasarkan (Tenor - Angsuran Ke yang baru dibayarkan)
+                let sisaKaliBayar = tenor - h.angsuranKe;
+                if (sisaKaliBayar < 0) sisaKaliBayar = 0;
+
+                // Sisa nominal jasa = sisa kali bayar dikali besar jasa per bulan (misal 5 x 150.000 = 750.000)
+                let sisaJasaTotalNominal = sisaKaliBayar * bungaPerBulan;
+
+                const tampilSisaJasa = `${sisaKaliBayar}x (Rp ${formatRp(sisaJasaTotalNominal)})`;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>Ke-${h.angsuranKe}</td>
+                        <td>${h.tanggal}</td>
+                        <td class="text-end">Rp ${formatRp(h.pokok)}</td>
+                        <td class="text-end">Rp ${formatRp(h.jasa)}</td>
+                        <td class="text-end fw-semibold">Rp ${formatRp(h.total)}</td>
+                        <td class="text-end text-danger">Rp ${formatRp(h.sisaSaldo)}</td>
+                        <td class="text-end text-dark fw-semibold">${tampilSisaJasa}</td>
+                        <td><button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${hIdx})"><i class="bi bi-trash"></i></button></td>
+                    </tr>`;
             });
         }
 
@@ -1864,6 +1914,8 @@
 
             const plafon = parseNum(n.plafon), tenor = parseInt(n.tenor) || 12;
             const targetP = Math.min(plafon, bulatkan(Math.ceil(plafon / tenor)) * keX);
+            const persenJasa = n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5;
+            const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
 
             n.realLaluPokok = parseNum(n.realTotPokok);
             n.realLaluBunga = parseNum(n.realTotBunga);
@@ -1872,6 +1924,11 @@
             n.realTotPokok = parseNum(n.realLaluPokok) + bayarPokok;
             n.realTotBunga = parseNum(n.realLaluBunga) + bayarJasa;
             n.saldo = Math.max(0, plafon - n.realTotPokok);
+            
+            let sisaKaliBayarKwt = tenor - keX;
+            if (sisaKaliBayarKwt < 0) sisaKaliBayarKwt = 0;
+            const sisaJasaAktif = sisaKaliBayarKwt * bungaPerBulan;
+
             n.persen = `${Math.min(100, Math.round((n.realTotPokok / (targetP || 1)) * 100))}%`;
             n.noHp = noWA;
             n.angsuranKe = keX + 1;
@@ -1879,7 +1936,7 @@
             if (!n.history) n.history = [];
             n.history.unshift({
                 angsuranKe: keX, tanggal: tglBayar ? formatTanggalID(new Date(tglBayar)) : formatTanggalID(new Date()),
-                pokok: bayarPokok, jasa: bayarJasa, total: bayarPokok + bayarJasa, sisaSaldo: n.saldo
+                pokok: bayarPokok, jasa: bayarJasa, total: bayarPokok + bayarJasa, sisaSaldo: n.saldo, sisaJasa: sisaJasaAktif
             });
 
             saveLPPData(allData);
@@ -1896,7 +1953,7 @@
 
             lastPaymentReceipt = {
                 noKwt: kwitansiOtomatis, nama: n.nama, desa: n.desa, pokok: bayarPokok, jasa: bayarJasa,
-                total: totalBayar, sisaSaldo: n.saldo, angsuranKe: keX,
+                total: totalBayar, sisaSaldo: n.saldo, sisaJasa: sisaJasaAktif, sisaKali: sisaKaliBayarKwt, angsuranKe: keX,
                 tanggal: tglBayar ? formatTanggalID(new Date(tglBayar)) : formatTanggalID(new Date()), noHp: noWA
             };
 
@@ -1909,6 +1966,7 @@
             document.getElementById('kwtJasa').textContent = `Rp ${formatRp(lastPaymentReceipt.jasa)}`;
             document.getElementById('kwtTotal').textContent = `Rp ${formatRp(lastPaymentReceipt.total)}`;
             document.getElementById('kwtSisaSaldo').textContent = `Rp ${formatRp(lastPaymentReceipt.sisaSaldo)}`;
+            document.getElementById('kwtSisaJasaKwt').textContent = `${lastPaymentReceipt.sisaKali}x (Rp ${formatRp(lastPaymentReceipt.sisaJasa)})`;
 
             document.getElementById('kwitansiSuccessBox').classList.remove('d-none');
             renderRiwayatPembayaran(n); updateDasborKeuangan(); backupKeGoogleSheet(true);
@@ -1929,7 +1987,7 @@
         }
 
         function bukaWaKwitansiUrl(phone) {
-            const pesan = `🏛️ *BUKTI SETORAN RESMI UPK DAPM TR. BARAT*\n-----------------------------------------\nNo: ${lastPaymentReceipt.noKwt}\nTgl: ${lastPaymentReceipt.tanggal}\nNama: *${lastPaymentReceipt.nama}*\nDesa: ${lastPaymentReceipt.desa}\n-----------------------------------------\n🔹 Pokok (Ke-${lastPaymentReceipt.angsuranKe}): Rp ${formatRp(lastPaymentReceipt.pokok)}\n🔹 Jasa: Rp ${formatRp(lastPaymentReceipt.jasa)}\n💰 *TOTAL: Rp ${formatRp(lastPaymentReceipt.total)}*\n-----------------------------------------\n- Sisa Saldo Pokok: Rp ${formatRp(lastPaymentReceipt.sisaSaldo)}`;
+            const pesan = `🏛️ *BUKTI SETORAN RESMI UPK DAPM TR. BARAT*\n-----------------------------------------\nNo: ${lastPaymentReceipt.noKwt}\nTgl: ${lastPaymentReceipt.tanggal}\nNama: *${lastPaymentReceipt.nama}*\nDesa: ${lastPaymentReceipt.desa}\n-----------------------------------------\n🔹 Pokok (Ke-${lastPaymentReceipt.angsuranKe}): Rp ${formatRp(lastPaymentReceipt.pokok)}\n🔹 Jasa: Rp ${formatRp(lastPaymentReceipt.jasa)}\n💰 *TOTAL: Rp ${formatRp(lastPaymentReceipt.total)}*\n-----------------------------------------\n- Sisa Saldo Pokok: Rp ${formatRp(lastPaymentReceipt.sisaSaldo)}\n- Sisa Jasa: ${lastPaymentReceipt.sisaKali}x (Rp ${formatRp(lastPaymentReceipt.sisaJasa)})`;
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
@@ -2105,6 +2163,25 @@
             const data = getKasData();
             const tbody = document.getElementById('transaksiTableBody');
             tbody.innerHTML = '';
+            
+            let totalMasuk = 0;
+            let totalKeluar = 0;
+
+            data.forEach(item => {
+                const nom = Number(item.nominal) || 0;
+                if (item.tipe === 'Masuk') {
+                    totalMasuk += nom;
+                } else if (item.tipe === 'Keluar') {
+                    totalKeluar += nom;
+                }
+            });
+
+            const saldoKas = totalMasuk - totalKeluar;
+
+            document.getElementById('rekapKasMasuk').textContent = 'Rp ' + formatRp(totalMasuk);
+            document.getElementById('rekapKasKeluar').textContent = 'Rp ' + formatRp(totalKeluar);
+            document.getElementById('rekapSaldoKas').textContent = 'Rp ' + formatRp(saldoKas);
+
             if (data.length === 0) { tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-3">Belum ada mutasi kas tercatat.</td></tr>'; return; }
 
             data.forEach((item, index) => {
