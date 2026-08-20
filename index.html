@@ -1826,7 +1826,7 @@
             document.getElementById('tellerEstimasiSisa').textContent = `Rp ${formatRp(Math.max(0, saldoAktif - parseNum(document.getElementById('tellerInputPokok').value)))}`;
         }
 
-        function renderRiwayatPembayaran(nasabah) {
+function renderRiwayatPembayaran(nasabah) {
             const tbody = document.getElementById('tellerHistoryTableBody');
             tbody.innerHTML = '';
             if (!nasabah.history || nasabah.history.length === 0) {
@@ -1838,16 +1838,25 @@
             const plafon = parseNum(nasabah.plafon);
             const persenJasa = nasabah.persenJasa !== undefined ? parseFloat(nasabah.persenJasa) : 1.5;
             const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
+            const totalTargetJasa = bulatkan(plafon * (persenJasa / 100) * tenor);
 
-            nasabah.history.forEach((h, hIdx) => {
-                // Hitung sisa berapa kali berdasarkan (Tenor - Angsuran Ke yang baru dibayarkan)
-                let sisaKaliBayar = tenor - h.angsuranKe;
-                if (sisaKaliBayar < 0) sisaKaliBayar = 0;
+            // Urutkan riwayat dari yang terlama ke terbaru untuk melacak akumulasi pembayaran jasa
+            const sortedHistory = [...nasabah.history].sort((a, b) => a.angsuranKe - b.angsuranKe);
+            
+            let kumulatifJasa = 0;
+            const mappedHistory = sortedHistory.map(h => {
+                kumulatifJasa += parseNum(h.jasa);
+                let sisaJasaRow = Math.max(0, totalTargetJasa - kumulatifJasa);
+                let sisaKali = bungaPerBulan > 0 ? Math.round(sisaJasaRow / bungaPerBulan) : 0;
+                return {
+                    ...h,
+                    sisaJasaNominal: sisaJasaRow,
+                    sisaJasaKali: sisaKali
+                };
+            }).reverse(); // Balikkan lagi agar urutan tampilan di tabel tetap terbaru di atas
 
-                // Sisa nominal jasa = sisa kali bayar dikali besar jasa per bulan (misal 5 x 150.000 = 750.000)
-                let sisaJasaTotalNominal = sisaKaliBayar * bungaPerBulan;
-
-                const tampilSisaJasa = `${sisaKaliBayar}x (Rp ${formatRp(sisaJasaTotalNominal)})`;
+            mappedHistory.forEach((h, hIdx) => {
+                const tampilSisaJasa = `${h.sisaJasaKali}x (Rp ${formatRp(h.sisaJasaNominal)})`;
 
                 tbody.innerHTML += `
                     <tr>
@@ -1858,7 +1867,7 @@
                         <td class="text-end fw-semibold">Rp ${formatRp(h.total)}</td>
                         <td class="text-end text-danger">Rp ${formatRp(h.sisaSaldo)}</td>
                         <td class="text-end text-dark fw-semibold">${tampilSisaJasa}</td>
-                        <td><button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${hIdx})"><i class="bi bi-trash"></i></button></td>
+                        <td><button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${nasabah.history.indexOf(h)})"><i class="bi bi-trash"></i></button></td>
                     </tr>`;
             });
         }
