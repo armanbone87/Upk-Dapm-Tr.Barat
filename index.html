@@ -1826,7 +1826,7 @@
             document.getElementById('tellerEstimasiSisa').textContent = `Rp ${formatRp(Math.max(0, saldoAktif - parseNum(document.getElementById('tellerInputPokok').value)))}`;
         }
 
-function renderRiwayatPembayaran(nasabah) {
+        function renderRiwayatPembayaran(nasabah) {
             const tbody = document.getElementById('tellerHistoryTableBody');
             tbody.innerHTML = '';
             if (!nasabah.history || nasabah.history.length === 0) {
