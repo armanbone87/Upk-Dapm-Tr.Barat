@@ -455,7 +455,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Peminjam</th>
-                                <th>Desa / Kelurahan</th>
+                                <th>Kelurahan</th>
                                 <th>Bln Berjalan</th>
                                 <th style="background-color: #e9ecef; color: #212529;">Target Pokok</th>
                                 <th style="background-color: #e9ecef; color: #212529;">Target Jasa</th>
@@ -473,9 +473,9 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
                     <div class="d-flex gap-2 align-items-center">
-                        <input type="text" id="peminjamSearchInput" class="form-control form-control-compact text-dark" style="width: 220px;" placeholder="Cari nama peminjam/desa..." oninput="onPeminjamSearchInput()">
+                        <input type="text" id="peminjamSearchInput" class="form-control form-control-compact text-dark" style="width: 220px;" placeholder="Cari nama peminjam/kelurahan..." oninput="onPeminjamSearchInput()">
                         <select id="peminjamDesaFilter" class="form-select form-select-compact text-dark" style="width: 170px;" onchange="renderDataPeminjamTable()">
-                            <option value="">Semua Desa/Kelurahan</option>
+                            <option value="">Semua Kelurahan</option>
                         </select>
                     </div>
                     <div class="d-flex gap-2">
@@ -491,7 +491,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Peminjam</th>
-                                <th>Desa / Kelurahan</th>
+                                <th>Kelurahan</th>
                                 <th>Plafon (Rp)</th>
                                 <th>Tenor</th>
                                 <th>% Jasa</th>
@@ -652,12 +652,11 @@
                                             <th>Jasa (Rp)</th>
                                             <th>Total (Rp)</th>
                                             <th>Sisa Pokok (Rp)</th>
-                                            <th>Sisa Jasa</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tellerHistoryTableBody">
-                                        <tr><td colspan="8" class="text-muted">Belum ada riwayat tercatat.</td></tr>
+                                        <tr><td colspan="7" class="text-muted">Belum ada riwayat tercatat.</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -690,7 +689,7 @@
                                         <strong class="fs-6 text-dark" id="kwtNamaNasabah">-</strong>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <span class="d-block text-muted">Desa / Kelurahan:</span>
+                                        <span class="d-block text-muted">Kelurahan:</span>
                                         <strong class="text-dark" id="kwtDesa">-</strong>
                                     </div>
                                 </div>
@@ -751,7 +750,7 @@
                         </button>
                         <input type="text" id="searchInput" class="form-control form-control-compact text-dark" style="width: 180px;" placeholder="Cari peminjam..." oninput="filterLPPTable()">
                         <select id="desaFilter" class="form-select form-select-compact text-dark" style="width: 150px;" onchange="filterLPPTable()">
-                            <option value="">Semua Desa/Kelurahan</option>
+                            <option value="">Semua Kelurahan</option>
                         </select>
                     </div>
                     <div class="d-flex gap-2">
@@ -769,7 +768,7 @@
                             <tr>
                                 <th rowspan="2">No</th>
                                 <th rowspan="2">Nama Peminjam</th>
-                                <th rowspan="2">Desa</th>
+                                <th rowspan="2">Kelurahan</th>
                                 <th rowspan="2">Plafon</th>
                                 <th rowspan="2">Tenor</th>
                                 <th rowspan="2">Cair</th>
@@ -851,7 +850,7 @@
                                 <th>Tanggal</th>
                                 <th>No Kwitansi</th>
                                 <th>Keterangan</th>
-                                <th>Desa/Kelurahan</th>
+                                <th>Kelurahan</th>
                                 <th>Kategori</th>
                                 <th>Tipe</th>
                                 <th>Nominal</th>
@@ -904,13 +903,13 @@
                         </div>
                     </div>
 
-                    <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-pie-chart me-1"></i> Rekapitulasi per Desa / Kelurahan</h6>
+                    <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-pie-chart me-1"></i> Rekapitulasi per Kelurahan</h6>
                     <div class="table-responsive mb-4 rounded-3 border shadow-sm">
                         <table class="table table-bordered table-compact mb-0 text-center">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Desa / Kelurahan</th>
+                                    <th>Kelurahan</th>
                                     <th>Jumlah Kelompok/Peminjam</th>
                                     <th>Total Plafon (Rp)</th>
                                     <th>Total Saldo Piutang (Rp)</th>
@@ -940,7 +939,7 @@
                         <input type="text" id="newNama" class="form-control form-control-compact text-dark" placeholder="Contoh: SURIANI, S.Pd" required>
                     </div>
                     <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-dark">Desa / Kelurahan</label>
+                        <label class="small fw-semibold mb-1 text-dark">Kelurahan</label>
                         <input type="text" id="newDesa" class="form-control form-control-compact text-dark" placeholder="Contoh: WATANG PALAKKA" required>
                     </div>
                     <div class="row g-2 mb-2">
@@ -1018,7 +1017,7 @@
                         <span class="text-muted" style="font-size:0.7rem;">INFORMASI VALIDASI PENCAIRAN DANA PINJAMAN</span>
                     </div>
                     <div class="d-flex justify-content-between mb-1"><span>Nama Peminjam:</span><strong class="text-dark" id="cairNama">-</strong></div>
-                    <div class="d-flex justify-content-between mb-1"><span>Desa / Kelurahan:</span><strong class="text-dark" id="cairDesa">-</strong></div>
+                    <div class="d-flex justify-content-between mb-1"><span>Kelurahan:</span><strong class="text-dark" id="cairDesa">-</strong></div>
                     <div class="d-flex justify-content-between mb-1"><span>Plafon Ditransfer:</span><strong class="text-success font-monospace" id="cairPlafon">Rp 0</strong></div>
                     <div class="d-flex justify-content-between mb-1"><span>Tanggal Cair:</span><strong class="text-dark" id="cairTgl">-</strong></div>
                     <div class="d-flex justify-content-between"><span>No. Rekening WA:</span><strong class="text-dark" id="cairWa">-</strong></div>
@@ -1073,7 +1072,7 @@
                         <input type="text" id="tNama" class="form-control form-control-compact text-dark" placeholder="Contoh: Pembayaran Honor Staf" required>
                     </div>
                     <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-dark">Desa / Kelurahan</label>
+                        <label class="small fw-semibold mb-1 text-dark">Kelurahan</label>
                         <input type="text" id="tKelurahan" class="form-control form-control-compact text-dark" placeholder="Contoh: Tanete Riattang Barat" required>
                     </div>
                     <div class="row g-2 mb-2">
@@ -1325,7 +1324,7 @@
         }
 
         function bukaWaUrl(phone, nama, desa, sisaSaldo) {
-            const pesan = `🚨 *PENGINGAT TUNGGAKAN ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. Bpk/Ibu *${nama}*\nKelurahan/Desa: ${desa}\n-----------------------------------------\nSisa Saldo Pokok: *Rp ${formatRp(sisaSaldo)}*\n-----------------------------------------\nMohon segera melakukan pembayaran tepat waktu. Terima kasih. 🙏`;
+            const pesan = `🚨 *PENGINGAT TUNGGAKAN ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. Bpk/Ibu *${nama}*\nKelurahan: ${desa}\n-----------------------------------------\nSisa Saldo Pokok: *Rp ${formatRp(sisaSaldo)}*\n-----------------------------------------\nMohon segera melakukan pembayaran tepat waktu. Terima kasih atas kerja samanya. 🙏`;
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
@@ -1465,7 +1464,7 @@
             const selectDesa = document.getElementById('peminjamDesaFilter');
             const currentVal = selectDesa.value;
             const uniqueDesa = [...new Set(allData.map(item => (item.desa || '').trim()).filter(d => d))].sort();
-            selectDesa.innerHTML = '<option value="">Semua Desa/Kelurahan</option>';
+            selectDesa.innerHTML = '<option value="">Semua Kelurahan</option>';
             uniqueDesa.forEach(d => { const opt = document.createElement('option'); opt.value = d; opt.textContent = d; selectDesa.appendChild(opt); });
             selectDesa.value = currentVal;
 
@@ -1559,7 +1558,7 @@
         }
 
         function bukaWaCairUrl(phone, item) {
-            const pesan = `🏛️ *BUKTI PENCAIRAN PINJAMAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. *${item.nama}*\nKelurahan/Desa: ${item.desa}\n-----------------------------------------\nDana pinjaman plafon sebesar *Rp ${formatRp(item.plafon)}* telah sukses ditransfer ke rekening Anda pada tanggal ${formatTanggalTampil(item.tglCair)}. Terima kasih. 🙏`;
+            const pesan = `🏛️ *BUKTI PENCAIRAN PINJAMAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. *${item.nama}*\nKelurahan: ${item.desa}\n-----------------------------------------\nDana pinjaman plafon sebesar *Rp ${formatRp(item.plafon)}* telah sukses ditransfer ke rekening Anda pada tanggal ${formatTanggalTampil(item.tglCair)}. Terima kasih atas kepercayaan Anda. 🙏`;
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
@@ -1738,7 +1737,7 @@
             }
 
             document.getElementById('tellerNamaNasabah').textContent = n.nama;
-            document.getElementById('tellerDesaNasabah').textContent = `Kel/Desa: ${n.desa} | Jasa: ${n.persenJasa || 1.5}%/bln | Cair: ${formatTanggalTampil(n.tglCair)}`;
+            document.getElementById('tellerDesaNasabah').textContent = `Kelurahan: ${n.desa} | Jasa: ${n.persenJasa || 1.5}%/bln | Cair: ${formatTanggalTampil(n.tglCair)}`;
             document.getElementById('tellerPlafonTenor').textContent = `Plafon: Rp ${formatRp(plafon)} (${tenor} Bln)`;
             document.getElementById('tellerInputTgl').value = new Date().toISOString().split('T')[0];
             document.getElementById('tellerInputWA').value = n.noHp || '';
@@ -1774,14 +1773,10 @@
             const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
             const persenJasaVal = n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5;
             
-            // Total target jasa dari plafon pinjaman dikali % jasa (dikalikan tenor total)
             const totalTargetJasa = bulatkan(plafon * (persenJasaVal / 100) * tenor);
             const bungaPerBulan = bulatkan(plafon * (persenJasaVal / 100));
-
-            // Realisasi jasa bulan lalu (realTotBunga saat ini)
             const realisasiJasaBulanLalu = parseNum(n.realTotBunga);
 
-            // Sisa jasa = Total target jasa dari plafon pinjaman dikali % jasa kurang dari realisasi jasa bulan lalu
             let sisaJasaTotal = Math.max(0, totalTargetJasa - realisasiJasaBulanLalu);
             let sisaPokokTotal = Math.max(0, plafon - parseNum(n.realTotPokok));
 
@@ -1837,34 +1832,11 @@
             const tbody = document.getElementById('tellerHistoryTableBody');
             tbody.innerHTML = '';
             if (!nasabah.history || nasabah.history.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" class="text-muted small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="text-muted small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
                 return;
             }
             
-            const tenor = parseInt(nasabah.tenor) || 12;
-            const plafon = parseNum(nasabah.plafon);
-            const persenJasa = nasabah.persenJasa !== undefined ? parseFloat(nasabah.persenJasa) : 1.5;
-            const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
-            const totalTargetJasa = bulatkan(plafon * (persenJasa / 100) * tenor);
-
-            // Urutkan riwayat dari yang terlama ke terbaru untuk kalkulasi kumulatif yang akurat
-            const sortedHistory = [...nasabah.history].sort((a, b) => a.angsuranKe - b.angsuranKe);
-            
-            let kumulatifJasa = 0;
-            const mappedHistory = sortedHistory.map(h => {
-                kumulatifJasa += parseNum(h.jasa);
-                let sisaJasaRow = Math.max(0, totalTargetJasa - kumulatifJasa);
-                let sisaKali = bungaPerBulan > 0 ? Math.round(sisaJasaRow / bungaPerBulan) : 0;
-                return {
-                    ...h,
-                    sisaJasaNominal: sisaJasaRow,
-                    sisaJasaKali: sisaKali
-                };
-            }).reverse(); // Balikkan kembali agar transaksi terbaru berada di baris paling atas tabel
-
-            mappedHistory.forEach((h, hIdx) => {
-                const tampilSisaJasa = `${h.sisaJasaKali}x (Rp ${formatRp(h.sisaJasaNominal)})`;
-
+            nasabah.history.forEach((h, hIdx) => {
                 tbody.innerHTML += `
                     <tr>
                         <td>Ke-${h.angsuranKe}</td>
@@ -1873,8 +1845,7 @@
                         <td class="text-end">Rp ${formatRp(h.jasa)}</td>
                         <td class="text-end fw-semibold">Rp ${formatRp(h.total)}</td>
                         <td class="text-end text-danger">Rp ${formatRp(h.sisaSaldo)}</td>
-                        <td class="text-end text-dark fw-semibold">${tampilSisaJasa}</td>
-                        <td><button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${nasabah.history.indexOf(h)})"><i class="bi bi-trash"></i></button></td>
+                        <td><button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${hIdx})"><i class="bi bi-trash"></i></button></td>
                     </tr>`;
             });
         }
@@ -2003,7 +1974,7 @@
         }
 
         function bukaWaKwitansiUrl(phone) {
-            const pesan = `🏛️ *BUKTI SETORAN RESMI UPK DAPM TR. BARAT*\n-----------------------------------------\nNo: ${lastPaymentReceipt.noKwt}\nTgl: ${lastPaymentReceipt.tanggal}\nNama: *${lastPaymentReceipt.nama}*\nDesa: ${lastPaymentReceipt.desa}\n-----------------------------------------\n🔹 Pokok (Ke-${lastPaymentReceipt.angsuranKe}): Rp ${formatRp(lastPaymentReceipt.pokok)}\n🔹 Jasa: Rp ${formatRp(lastPaymentReceipt.jasa)}\n💰 *TOTAL: Rp ${formatRp(lastPaymentReceipt.total)}*\n-----------------------------------------\n- Sisa Saldo Pokok: Rp ${formatRp(lastPaymentReceipt.sisaSaldo)}\n- Sisa Jasa: ${lastPaymentReceipt.sisaKali}x (Rp ${formatRp(lastPaymentReceipt.sisaJasa)})`;
+            const pesan = `🏛️ *BUKTI SETORAN RESMI UPK DAPM TR. BARAT*\n-----------------------------------------\nNo: ${lastPaymentReceipt.noKwt}\nTgl: ${lastPaymentReceipt.tanggal}\nNama: *${lastPaymentReceipt.nama}*\nKelurahan: ${lastPaymentReceipt.desa}\n-----------------------------------------\n🔹 Pokok (Ke-${lastPaymentReceipt.angsuranKe}): Rp ${formatRp(lastPaymentReceipt.pokok)}\n🔹 Jasa: Rp ${formatRp(lastPaymentReceipt.jasa)}\n💰 *TOTAL: Rp ${formatRp(lastPaymentReceipt.total)}*\n-----------------------------------------\n- Sisa Saldo Pokok: Rp ${formatRp(lastPaymentReceipt.sisaSaldo)}\n- Sisa Jasa: ${lastPaymentReceipt.sisaKali}x (Rp ${formatRp(lastPaymentReceipt.sisaJasa)})\n-----------------------------------------\nTerima kasih atas kedisiplinan dan kepercayaan Anda. 🙏`;
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
@@ -2011,7 +1982,7 @@
             const select = document.getElementById('desaFilter');
             const currentVal = select.value;
             const uniqueDesa = [...new Set(data.map(item => (item.desa || '').trim()).filter(d => d))].sort();
-            select.innerHTML = '<option value="">Semua Desa/Kelurahan</option>';
+            select.innerHTML = '<option value="">Semua Kelurahan</option>';
             uniqueDesa.forEach(d => { const opt = document.createElement('option'); opt.value = d; opt.textContent = d; select.appendChild(opt); });
             select.value = currentVal;
         }
