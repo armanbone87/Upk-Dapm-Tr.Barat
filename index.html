@@ -1772,16 +1772,23 @@
 
             const plafon = parseNum(n.plafon), tenor = parseInt(n.tenor) || 12;
             const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
-            let bungaPerBulan = bulatkan(plafon * ((n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5) / 100));
+            const persenJasaVal = n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5;
+            
+            // Total target jasa dari plafon pinjaman dikali % jasa (dikalikan tenor total)
+            const totalTargetJasa = bulatkan(plafon * (persenJasaVal / 100) * tenor);
+            const bungaPerBulan = bulatkan(plafon * (persenJasaVal / 100));
 
-            const totalJasaSeharusnya = bungaPerBulan * tenor;
-            let sisaJasaTotal = Math.max(0, totalJasaSeharusnya - parseNum(n.realTotBunga));
+            // Realisasi jasa bulan lalu (realTotBunga saat ini)
+            const realisasiJasaBulanLalu = parseNum(n.realTotBunga);
+
+            // Sisa jasa = Total target jasa dari plafon pinjaman dikali % jasa kurang dari realisasi jasa bulan lalu
+            let sisaJasaTotal = Math.max(0, totalTargetJasa - realisasiJasaBulanLalu);
             let sisaPokokTotal = Math.max(0, plafon - parseNum(n.realTotPokok));
 
             document.getElementById('posTargetPokok').textContent = formatRp(Math.min(plafon, pokokPerBulan * keX));
             document.getElementById('posTargetBunga').textContent = formatRp(bungaPerBulan * keX);
             document.getElementById('posRealLaluPokok').textContent = formatRp(parseNum(n.realTotPokok));
-            document.getElementById('posRealLaluBunga').textContent = formatRp(parseNum(n.realTotBunga));
+            document.getElementById('posRealLaluBunga').textContent = formatRp(realisasiJasaBulanLalu);
             document.getElementById('tellerSisaPokok').textContent = formatRp(sisaPokokTotal);
             document.getElementById('tellerSisaJasa').textContent = formatRp(sisaJasaTotal);
             document.getElementById('tellerTotalSisaGabungan').textContent = 'Rp ' + formatRp(sisaPokokTotal + sisaJasaTotal);
@@ -1807,8 +1814,8 @@
                 document.getElementById('tellerInputJasa').value = bungaPerBulan;
             } else if (type === 'lunas') {
                 document.getElementById('tellerInputPokok').value = saldo;
-                const totalJasaSeharusnya = bungaPerBulan * tenor;
-                document.getElementById('tellerInputJasa').value = Math.max(0, totalJasaSeharusnya - parseNum(n.realTotBunga));
+                const totalTargetJasa = bulatkan(plafon * ((n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5) / 100) * tenor);
+                document.getElementById('tellerInputJasa').value = Math.max(0, totalTargetJasa - parseNum(n.realTotBunga));
             }
             hitungTellerSisaRealtime();
         }
@@ -1840,7 +1847,7 @@
             const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
             const totalTargetJasa = bulatkan(plafon * (persenJasa / 100) * tenor);
 
-            // Urutkan riwayat dari yang terlama ke terbaru untuk melacak akumulasi pembayaran jasa
+            // Urutkan riwayat dari yang terlama ke terbaru untuk kalkulasi kumulatif yang akurat
             const sortedHistory = [...nasabah.history].sort((a, b) => a.angsuranKe - b.angsuranKe);
             
             let kumulatifJasa = 0;
@@ -1853,7 +1860,7 @@
                     sisaJasaNominal: sisaJasaRow,
                     sisaJasaKali: sisaKali
                 };
-            }).reverse(); // Balikkan lagi agar urutan tampilan di tabel tetap terbaru di atas
+            }).reverse(); // Balikkan kembali agar transaksi terbaru berada di baris paling atas tabel
 
             mappedHistory.forEach((h, hIdx) => {
                 const tampilSisaJasa = `${h.sisaJasaKali}x (Rp ${formatRp(h.sisaJasaNominal)})`;
@@ -1924,6 +1931,7 @@
             const plafon = parseNum(n.plafon), tenor = parseInt(n.tenor) || 12;
             const targetP = Math.min(plafon, bulatkan(Math.ceil(plafon / tenor)) * keX);
             const persenJasa = n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5;
+            const totalTargetJasa = bulatkan(plafon * (persenJasa / 100) * tenor);
             const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
 
             n.realLaluPokok = parseNum(n.realTotPokok);
@@ -1934,9 +1942,8 @@
             n.realTotBunga = parseNum(n.realLaluBunga) + bayarJasa;
             n.saldo = Math.max(0, plafon - n.realTotPokok);
             
-            let sisaKaliBayarKwt = tenor - keX;
-            if (sisaKaliBayarKwt < 0) sisaKaliBayarKwt = 0;
-            const sisaJasaAktif = sisaKaliBayarKwt * bungaPerBulan;
+            const sisaJasaAktif = Math.max(0, totalTargetJasa - n.realTotBunga);
+            let sisaKaliBayarKwt = bungaPerBulan > 0 ? Math.round(sisaJasaAktif / bungaPerBulan) : 0;
 
             n.persen = `${Math.min(100, Math.round((n.realTotPokok / (targetP || 1)) * 100))}%`;
             n.noHp = noWA;
