@@ -18,19 +18,19 @@
 
     <style>
         :root {
-            --bg-body: #ffffff;
-            --navbar-bg: #111111;
-            --card-bg: #f8f9fa;
-            --card-light-bg: #e9ecef;
-            --text-main: #212529;
+            --bg-body: #fcfcfc;
+            --navbar-bg: #800020; /* Burgundy / Red Wine Premium */
+            --card-bg: #ffffff;
+            --card-light-bg: #fff5f5;
+            --text-main: #2b2b2b;
             --text-muted: #6c757d;
-            --border-color: #dee2e6;
-            --accent-color: #000000;
-            --accent-glow: rgba(0, 0, 0, 0.15);
-            --table-th-bg: #212529;
+            --border-color: #f1d3d3;
+            --accent-color: #a71d2a; /* Premium Red Accent */
+            --accent-glow: rgba(167, 29, 42, 0.15);
+            --table-th-bg: #800020;
             --table-th-color: #ffffff;
             --table-td-bg: #ffffff;
-            --table-td-color: #212529;
+            --table-td-color: #2b2b2b;
         }
 
         body { 
@@ -43,14 +43,14 @@
 
         .text-muted { color: var(--text-muted) !important; }
 
-        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 1px solid var(--border-color); }
-        .card-custom { border: 1px solid var(--border-color); border-radius: 1rem; background: var(--card-bg); color: var(--text-main); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 2px solid #600018; box-shadow: 0 2px 10px rgba(128, 0, 32, 0.2); }
+        .card-custom { border: 1px solid var(--border-color); border-radius: 1rem; background: var(--card-bg); color: var(--text-main); box-shadow: 0 6px 18px rgba(167, 29, 42, 0.04); }
         .card-light-custom { background: var(--card-light-bg); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 0.75rem; }
 
         .btn-compact { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 0.5rem; font-weight: 500; }
         .form-control-compact, .form-select-compact { 
             font-size: 0.82rem; padding: 0.35rem 0.6rem; border-radius: 0.5rem; 
-            background-color: #ffffff; border: 1px solid var(--border-color); color: var(--text-main);
+            background-color: #ffffff; border: 1px solid #dcdcdc; color: var(--text-main);
         }
         .form-control-compact::placeholder, .form-select-compact::placeholder {
             color: #adb5bd !important;
@@ -59,12 +59,12 @@
         .form-control-compact:focus, .form-select-compact:focus {
             background-color: #ffffff;
             color: var(--text-main);
-            border-color: #000000;
-            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(167, 29, 42, 0.15);
         }
         
         .customer-item { transition: all 0.2s ease; cursor: pointer; border-left: 4px solid transparent; background-color: var(--card-bg); color: var(--text-main); border-bottom: 1px solid var(--border-color); }
-        .customer-item:hover, .customer-item.active { background-color: #e2e8f0 !important; border-left-color: #000000; transform: translateX(2px); }
+        .customer-item:hover, .customer-item.active { background-color: #fdf2f2 !important; border-left-color: var(--accent-color); transform: translateX(2px); color: var(--accent-color); }
         
         .table-lpp-compact th { 
             background-color: var(--table-th-bg); 
@@ -76,7 +76,7 @@
             white-space: nowrap; 
             padding: 0.4rem 0.25rem; 
             text-align: center; 
-            border-color: var(--border-color); 
+            border-color: #600018; 
             font-weight: 700;
         }
         .table-lpp-compact td { 
@@ -100,7 +100,7 @@
             white-space: nowrap; 
             padding: 0.5rem; 
             text-align: center; 
-            border-color: var(--border-color); 
+            border-color: #600018; 
             font-weight: 700;
         }
         .table-compact td { 
@@ -113,14 +113,14 @@
             background-color: var(--table-td-bg);
             font-weight: 500;
         }
-        .table-hover tbody tr:hover td { background-color: #f1f3f5; }
+        .table-hover tbody tr:hover td { background-color: #faf2f2; }
 
         .kwitansi-profesional { 
             background: #ffffff;
-            border: 2px solid #000000; 
+            border: 2px solid var(--accent-color); 
             border-radius: 1rem; 
             padding: 1.5rem; 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 15px rgba(167, 29, 42, 0.08);
             color: #000000;
         }
 
@@ -138,12 +138,42 @@
             border-radius: 50%;
             padding: 4px;
             background: #ffffff;
-            border: 2px solid #000000;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 12px rgba(167, 29, 42, 0.2);
         }
         .logo-divider {
-            color: #000000;
+            color: var(--accent-color);
             font-size: 1.5rem;
+        }
+
+        .btn-dark {
+            background-color: #800020 !important;
+            border-color: #600018 !important;
+        }
+        .btn-dark:hover {
+            background-color: #600018 !important;
+            border-color: #4a0012 !important;
+        }
+        .btn-outline-dark {
+            color: #800020 !important;
+            border-color: #d1a1a7 !important;
+        }
+        .btn-outline-dark:hover {
+            background-color: #800020 !important;
+            color: #ffffff !important;
+            border-color: #800020 !important;
+        }
+        .bg-dark {
+            background-color: #800020 !important;
+        }
+        .border-dark {
+            border-color: #800020 !important;
+        }
+        .text-dark {
+            color: #2b2b2b !important;
+        }
+        .badge.bg-dark {
+            background-color: #800020 !important;
         }
 
         @media print {
@@ -154,40 +184,20 @@
             #areaCetakKwitansi, #areaCetakKwitansi *, 
             #areaCetakLaporan, #areaCetakLaporan *,
             #viewPanelLPP, #viewPanelLPP *,
-            #mainLPPTable, #mainLPPTable * { 
+            #mainLPPTable, #mainLPPTable *,
+            #areaCetakBukuKas, #areaCetakBukuKas * { 
                 visibility: visible !important; 
             }
             
             #areaCetakLPP { 
-                position: absolute; 
-                left: 0; 
-                top: 0; 
-                width: 100% !important; 
-                max-height: none !important;
-                overflow: visible !important;
-                color: #000; 
-                background: #fff; 
+                position: absolute; left: 0; top: 0; width: 100% !important; max-height: none !important; overflow: visible !important; color: #000; background: #fff; 
+            }
+            #areaCetakBukuKas {
+                position: absolute; left: 0; top: 0; width: 100% !important; max-height: none !important; overflow: visible !important; color: #000; background: #fff;
             }
 
-            .table-responsive {
-                overflow: visible !important;
-                max-height: none !important;
-            }
-
-            table {
-                width: 100% !important;
-                font-size: 8px !important;
-            }
-
-            .table-lpp-compact th, .table-lpp-compact td {
-                padding: 3px !important;
-                white-space: normal !important;
-                color: #000 !important;
-                background-color: #fff !important;
-            }
-
-            #areaCetakKwitansi { position: absolute; left: 10%; top: 20px; width: 80%; background: #fff; color: #000; }
-            #areaCetakLaporan { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; }
+            .table-responsive { overflow: visible !important; max-height: none !important; }
+            table { width: 100% !important; font-size: 8px !important; }
             .no-print { display: none !important; }
             @page { size: landscape; margin: 6mm; }
         }
@@ -199,11 +209,11 @@
         <div class="container-fluid px-3 px-md-4">
             <div class="d-flex align-items-center">
                 <span class="navbar-brand fw-bold fs-6 mb-0 d-flex align-items-center text-light" style="cursor: pointer;" onclick="handleBrandClick()">
-                    <img src="logo-dapm.png" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;" class="me-2"> SISKEU UPK <span class="badge ms-2 fw-semibold text-dark bg-light shadow-sm" style="font-size: 0.65rem;">DAPM TR. BARAT</span>
+                    <img src="logo-dapm.png" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;" class="me-2"> SISKEU UPK <span class="badge ms-2 fw-semibold text-danger bg-white shadow-sm" style="font-size: 0.65rem;">DAPM TR. BARAT</span>
                 </span>
             </div>
             <div class="d-flex align-items-center gap-2">
-                <span id="syncStatusBadge" class="badge bg-secondary text-light small me-1 px-2 py-1 shadow-sm">Memuat Cloud...</span>
+                <span id="syncStatusBadge" class="badge bg-light text-danger small me-1 px-2 py-1 shadow-sm fw-semibold">Memuat Cloud...</span>
                 <span id="adminGreeting" class="text-light small me-2 d-none d-md-inline fw-medium text-opacity-75"></span>
                 <button id="btnNavAuth" class="btn btn-outline-light btn-compact shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Masuk
@@ -221,8 +231,8 @@
                 </div>
                 <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" title="Logo DAPM Tr. Barat">
             </div>
-            <h4 class="fw-bold mb-2 text-dark">UPK DAPM TANETE RIATTANG BARAT</h4>
-            <p class="small mb-4 text-muted">Sistem Informasi Keuangan, Manajemen Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan Terpadu.</p>
+            <h4 class="fw-bold mb-2 text-dark" style="color: #800020 !important;">UPK DAPM TANETE RIATTANG BARAT</h4>
+            <p class="small mb-4 text-muted">Sistem Informasi Keuangan, Manajemen Data Peminjam & Laporan Perkembangan Pinjaman (LPP) Perorangan Terpadu[cite: 1].</p>
             
             <div class="d-grid gap-2 col-md-8 mx-auto">
                 <button class="btn btn-dark btn-compact py-2 fw-bold shadow" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -272,17 +282,18 @@
             </div>
         </div>
 
+        <!-- PANEL PROFIL -->
         <div id="viewPanelProfil" class="d-none">
             <div class="card-custom p-4 p-md-5 mb-3">
                 <div class="row align-items-center mb-4">
                     <div class="col-md-8">
-                        <span class="badge mb-2 text-dark bg-light border fw-semibold px-2 py-1">Kelembagaan Resmi</span>
-                        <h3 class="fw-bold mb-2 text-dark">UPK DAPM TANETE RIATTANG BARAT</h3>
-                        <p class="small mb-2 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
-                        <p class="small mb-3 text-muted">UPK DAPM TR. Barat adalah wujud transformasi dari Program Nasional Pemberdayaan Masyarakat Mandiri Perdesaan (PNPM-MPd) di Juni 2009 yang kemudian program berakhir di Desember 2014 menjadi dana bergulir Dana Amanah Pemberdayaan Masyarakat Kecamatan Tanete Riattang Barat Kabupaten Bone Sulawesi Selatan.</p>
+                        <span class="badge mb-2 text-danger bg-light border fw-semibold px-2 py-1">Kelembagaan Resmi</span>
+                        <h3 class="fw-bold mb-2 text-dark" style="color: #800020 !important;">UPK DAPM TANETE RIATTANG BARAT</h3>
+                        <p class="small mb-2 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan[cite: 1].</p>
+                        <p class="small mb-3 text-muted">UPK DAPM TR. Barat adalah wujud transformasi dari Program Nasional Pemberdayaan Masyarakat Mandiri Perdesaan (PNPM-MPd) di Juni 2009 yang kemudian program berakhir di Desember 2014 menjadi dana bergulir[cite: 1].</p>
                         <div class="d-flex flex-wrap gap-3 small text-muted">
-                            <div><i class="bi bi-geo-alt-fill text-dark me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone</div>
-                            <div><i class="bi bi-file-text-fill text-dark me-1"></i> No. SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b></div>
+                            <div><i class="bi bi-geo-alt-fill text-danger me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone[cite: 1]</div>
+                            <div><i class="bi bi-file-text-fill text-danger me-1"></i> No. SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b></div>
                         </div>
                     </div>
                     <div class="col-md-4 text-center mt-4 mt-md-0">
@@ -292,7 +303,7 @@
                                 <i class="bi bi-arrow-left-right text-muted fs-5"></i>
                                 <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" style="width: 45px; height: 45px;">
                             </div>
-                            <h6 class="fw-bold mb-1 text-dark">SISKEU UPK</h6>
+                            <h6 class="fw-bold mb-1 text-dark" style="color: #800020 !important;">SISKEU UPK</h6>
                             <p class="small mb-0 text-muted">Laporan Perkembangan Pinjaman & Kas</p>
                         </div>
                     </div>
@@ -300,7 +311,7 @@
 
                 <hr class="border-secondary opacity-25 my-4">
 
-                <h5 class="fw-bold mb-3 text-dark"><i class="bi bi-people-fill me-2"></i> Susunan Pengurus & Pengawas</h5>
+                <h5 class="fw-bold mb-3 text-dark" style="color: #800020 !important;"><i class="bi bi-people-fill me-2"></i> Susunan Pengurus & Pengawas</h5>
                 <div class="row g-3">
                     <div class="col-md-6">
                         <div class="card-light-custom p-3 rounded-3 border h-100">
@@ -329,31 +340,32 @@
             </div>
         </div>
 
+        <!-- PANEL DASBOR -->
         <div id="viewPanelDasborKeuangan">
             <div class="row g-3 mb-3">
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-3 border-start border-4 border-dark">
+                    <div class="card-custom p-3 border-start border-4 border-danger">
                         <span class="small d-block text-muted">Total Plafon Tersalurkan</span>
                         <h5 class="fw-bold text-dark mb-0 mt-1" id="dashFinPlafon">Rp 0</h5>
                         <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;"><span id="dashFinTotalNasabah" class="fw-bold text-dark">0</span> Peminjam Aktif</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-3 border-start border-4 border-dark">
+                    <div class="card-custom p-3 border-start border-4 border-danger">
                         <span class="small d-block text-muted">Total Realisasi Pokok Masuk</span>
                         <h5 class="fw-bold text-dark mb-0 mt-1" id="dashFinRealPokok">Rp 0</h5>
                         <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;">Jasa: <span id="dashFinRealBunga" class="fw-bold text-dark">Rp 0</span></small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-3 border-start border-4 border-dark">
+                    <div class="card-custom p-3 border-start border-4 border-danger">
                         <span class="small d-block text-muted">Sisa Saldo Piutang (Outs.)</span>
                         <h5 class="fw-bold text-dark mb-0 mt-1" id="dashFinSaldoOuts">Rp 0</h5>
                         <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;">Dana masih bergulir</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-3 border-start border-4 border-dark">
+                    <div class="card-custom p-3 border-start border-4 border-danger">
                         <span class="small d-block text-muted">Saldo Kas Operasional</span>
                         <h5 class="fw-bold mb-0 mt-1 text-dark" id="dashFinSaldoKas">Rp 0</h5>
                         <small class="small text-muted mt-1 d-block" style="font-size: 0.72rem;">Kas Masuk - Keluar</small>
@@ -364,7 +376,7 @@
             <div class="row g-3 mb-3">
                 <div class="col-lg-12">
                     <div class="card-custom p-3 p-md-4">
-                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-bar-chart-line me-1"></i> Grafik Tren Pembayaran Angsuran per Bulan</h6>
+                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-bar-chart-line text-danger me-1"></i> Grafik Tren Pembayaran Angsuran per Bulan</h6>
                         <div style="position: relative; height:280px; width:100%">
                             <canvas id="trenAngsuranChart"></canvas>
                         </div>
@@ -376,7 +388,7 @@
                 <div class="col-lg-8">
                     <div class="card-custom p-3 p-md-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up-arrow me-1"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
+                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up-arrow text-danger me-1"></i> Tingkat Pengembalian Pinjaman (Kolektibilitas)</h6>
                             <span class="badge text-white fw-bold px-2 py-1 bg-dark" id="dashFinTingkatPengembalian">0%</span>
                         </div>
                         <div class="progress mb-3 bg-secondary bg-opacity-25 rounded-pill overflow-hidden" style="height: 12px;">
@@ -402,18 +414,18 @@
                 <div class="col-lg-4">
                     <div class="card-custom p-3 p-md-4 h-100 d-flex flex-column justify-content-between">
                         <div>
-                            <h6 class="fw-bold mb-2 text-dark"><i class="bi bi-lightning-charge-fill me-1"></i> Aksi Cepat UPK</h6>
+                            <h6 class="fw-bold mb-2 text-dark"><i class="bi bi-lightning-charge-fill text-danger me-1"></i> Aksi Cepat UPK</h6>
                             <p class="small mb-3 text-muted">Pilih modul operasional untuk mempercepat pelayanan nasabah:</p>
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelJatuhTempo')">
-                                <i class="bi bi-calendar-check me-2"></i> Panel Jatuh Tempo & Target
+                                <i class="bi bi-calendar-check text-danger me-2"></i> Panel Jatuh Tempo & Target
                             </button>
                             <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelBayarAngsuran')">
-                                <i class="bi bi-receipt-cutoff me-2"></i> Kasir Pembayaran Angsuran
+                                <i class="bi bi-receipt-cutoff text-danger me-2"></i> Kasir Pembayaran Angsuran
                             </button>
                             <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelLaporan')">
-                                <i class="bi bi-file-earmark-bar-graph me-2"></i> Lihat Laporan Rekapitulasi
+                                <i class="bi bi-file-earmark-bar-graph text-danger me-2"></i> Lihat Laporan Rekapitulasi
                             </button>
                         </div>
                     </div>
@@ -421,11 +433,12 @@
             </div>
         </div>
 
+        <!-- PANEL JATUH TEMPO -->
         <div id="viewPanelJatuhTempo" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-3 border-bottom">
                     <div>
-                        <h5 class="fw-bold mb-1 text-dark"><i class="bi bi-calendar-check me-2"></i> Panel Jatuh Tempo & Pengingat Penagihan</h5>
+                        <h5 class="fw-bold mb-1 text-dark" style="color: #800020 !important;"><i class="bi bi-calendar-check me-2"></i> Panel Jatuh Tempo & Pengingat Penagihan</h5>
                         <p class="small mb-0 text-muted">Pantau target pembayaran real-time dan kirim pesan pengingat tagihan langsung ke WhatsApp nasabah.</p>
                     </div>
                     <div class="d-flex gap-2 align-items-center">
@@ -437,13 +450,13 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <div class="card-light-custom p-3 rounded-3 border">
-                            <span class="small d-block text-muted mb-1"><i class="bi bi-cash-stack me-1"></i> Realisasi Pokok Dibayarkan Hari Ini</span>
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-cash-stack text-danger me-1"></i> Realisasi Pokok Dibayarkan Hari Ini</span>
                             <h4 class="fw-bold mb-0 text-dark" id="todayRealPokokDisplay">Rp 0</h4>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card-light-custom p-3 rounded-3 border">
-                            <span class="small d-block text-muted mb-1"><i class="bi bi-percent me-1"></i> Realisasi Jasa Dibayarkan Hari Ini</span>
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-percent text-danger me-1"></i> Realisasi Jasa Dibayarkan Hari Ini</span>
                             <h4 class="fw-bold text-dark mb-0" id="todayRealJasaDisplay">Rp 0</h4>
                         </div>
                     </div>
@@ -457,8 +470,8 @@
                                 <th>Nama Peminjam</th>
                                 <th>Kelurahan</th>
                                 <th>Bln Berjalan</th>
-                                <th style="background-color: #e9ecef; color: #212529;">Target Pokok</th>
-                                <th style="background-color: #e9ecef; color: #212529;">Target Jasa</th>
+                                <th style="background-color: #fce8e8; color: #800020;">Target Pokok</th>
+                                <th style="background-color: #fce8e8; color: #800020;">Target Jasa</th>
                                 <th>Status Pembayaran</th>
                                 <th class="no-print">Aksi & Reminder WA</th>
                             </tr>
@@ -469,6 +482,7 @@
             </div>
         </div>
 
+        <!-- PANEL DATA PEMINJAM -->
         <div id="viewPanelDataPeminjam" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
@@ -505,24 +519,20 @@
                         <tbody id="peminjamTableBody"></tbody>
                     </table>
                 </div>
-                <!-- Pagination Controls for Peminjam -->
                 <div class="d-flex justify-content-between align-items-center mt-3 no-print">
                     <div class="small text-muted" id="peminjamPaginationInfo">Menampilkan data...</div>
-                    <nav>
-                        <ul class="pagination pagination-sm mb-0" id="peminjamPaginationContainer">
-                            <!-- Rendered dynamically -->
-                        </ul>
-                    </nav>
+                    <nav><ul class="pagination pagination-sm mb-0" id="peminjamPaginationContainer"></ul></nav>
                 </div>
             </div>
         </div>
 
+        <!-- PANEL KASIR & PEMBAYARAN -->
         <div id="viewPanelBayarAngsuran" class="d-none">
             <div class="row g-3">
                 <div class="col-lg-4 col-xl-3">
                     <div class="card-custom p-3 h-100">
                         <div class="input-group input-group-sm mb-2">
-                            <span class="input-group-text border-end-0 bg-white text-dark"><i class="bi bi-search"></i></span>
+                            <span class="input-group-text border-end-0 bg-white text-danger"><i class="bi bi-search"></i></span>
                             <input type="text" id="tellerSearchInput" class="form-control form-control-compact border-start-0 text-dark" placeholder="Cari peminjam..." oninput="renderTellerCustomerList()">
                         </div>
                         <div class="d-flex justify-content-between align-items-center small mb-2 text-muted">
@@ -536,7 +546,7 @@
                 <div class="col-lg-8 col-xl-9">
                     <div id="tellerEmptyState" class="card-custom p-5 text-center h-100 d-flex justify-content-center align-items-center">
                         <div>
-                            <i class="bi bi-person-lines-fill fs-1 mb-3 text-muted"></i>
+                            <i class="bi bi-person-lines-fill fs-1 mb-3 text-danger opacity-75"></i>
                             <h6 class="fw-bold text-dark">Pilih Nasabah di Sebelah Kiri</h6>
                             <p class="small text-muted mb-0">Sistem dilengkapi proteksi validasi pelunasan otomatis & pencegahan input melebihi sisa piutang.</p>
                         </div>
@@ -545,16 +555,16 @@
                     <div id="tellerActiveForm" class="card-custom p-3 p-md-4 d-none">
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                             <div>
-                                <h6 class="fw-bold mb-0 text-dark" id="tellerNamaNasabah">-</h6>
+                                <h6 class="fw-bold mb-0 text-dark" style="color: #800020 !important;" id="tellerNamaNasabah">-</h6>
                                 <small class="text-muted" id="tellerDesaNasabah">-</small>
                             </div>
                             <div class="text-end">
-                                <span class="badge border py-1 px-2 bg-light text-dark" id="tellerPlafonTenor">-</span>
+                                <span class="badge border py-1 px-2 bg-light text-danger fw-semibold" id="tellerPlafonTenor">-</span>
                             </div>
                         </div>
 
                         <div id="nasabahLunasAlert" class="alert alert-secondary py-2 small d-none mb-3 border-0 shadow-sm text-dark bg-light border">
-                            <i class="bi bi-info-circle-fill me-1 text-dark"></i> Nasabah ini status pinjamannya sudah <b>LUNAS</b>. Transaksi pembayaran baru tidak diperlukan kecuali koreksi riwayat.
+                            <i class="bi bi-info-circle-fill me-1 text-danger"></i> Nasabah ini status pinjamannya sudah <b>LUNAS</b>.
                         </div>
 
                         <div class="row g-2 mb-3 card-light-custom p-2 rounded-2 border">
@@ -584,12 +594,12 @@
                                         <td class="text-end fw-bold text-dark" id="posTargetPokok">0</td>
                                         <td class="text-end fw-bold text-dark" id="posTargetBunga">0</td>
                                         <td class="text-end fw-bold text-dark table-secondary align-middle" rowspan="2">
-                                            <span id="tellerTotalSisaGabungan" class="fs-6">Rp 0</span><br>
+                                            <span id="tellerTotalSisaGabungan" class="fs-6 text-danger">Rp 0</span><br>
                                             <small class="fw-normal text-muted" style="font-size: 0.68rem;">(Pokok: <span id="tellerSisaPokok">0</span> + Jasa: <span id="tellerSisaJasa">0</span>)</small>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-start text-dark">Realisasi s/d Bulan Lalu (Dari LPP)</td>
+                                        <td class="text-start text-dark">Realisasi s/d Bulan Lalu</td>
                                         <td class="text-end fw-semibold text-dark" id="posRealLaluPokok">0</td>
                                         <td class="text-end fw-semibold text-dark" id="posRealLaluBunga">0</td>
                                     </tr>
@@ -610,13 +620,13 @@
                             <div class="row g-2 mb-3">
                                 <div class="col-md-6">
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-text fw-bold bg-light text-dark">Pokok</span>
+                                        <span class="input-group-text fw-bold bg-light text-danger">Pokok</span>
                                         <input type="text" id="tellerInputPokok" class="form-control form-control-compact text-end fw-bold text-dark" placeholder="0" required oninput="hitungTellerSisaRealtime()">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-text fw-bold bg-light text-dark">Bunga</span>
+                                        <span class="input-group-text fw-bold bg-light text-danger">Bunga</span>
                                         <input type="text" id="tellerInputJasa" class="form-control form-control-compact text-end fw-bold text-dark" placeholder="0" required oninput="hitungTellerSisaRealtime()">
                                     </div>
                                 </div>
@@ -641,23 +651,13 @@
                         </form>
 
                         <div class="mt-4 pt-3 border-top">
-                            <h6 class="fw-bold mb-2 text-dark" style="font-size: 0.82rem;"><i class="bi bi-clock-history me-1"></i> Riwayat Pembayaran Angsuran</h6>
+                            <h6 class="fw-bold mb-2 text-dark" style="font-size: 0.82rem;"><i class="bi bi-clock-history text-danger me-1"></i> Riwayat Pembayaran Angsuran</h6>
                             <div class="table-responsive rounded-2 border" style="max-height: 180px;">
                                 <table class="table table-sm table-bordered table-compact mb-0 text-center">
                                     <thead>
-                                        <tr>
-                                            <th>Bln/Ke</th>
-                                            <th>Tanggal</th>
-                                            <th>Pokok (Rp)</th>
-                                            <th>Jasa (Rp)</th>
-                                            <th>Total (Rp)</th>
-                                            <th>Sisa Pokok (Rp)</th>
-                                            <th>Aksi</th>
-                                        </tr>
+                                        <tr><th>Bln/Ke</th><th>Tanggal</th><th>Pokok (Rp)</th><th>Jasa (Rp)</th><th>Total (Rp)</th><th>Sisa Pokok (Rp)</th><th>Aksi</th></tr>
                                     </thead>
-                                    <tbody id="tellerHistoryTableBody">
-                                        <tr><td colspan="7" class="text-muted">Belum ada riwayat tercatat.</td></tr>
-                                    </tbody>
+                                    <tbody id="tellerHistoryTableBody"><tr><td colspan="7" class="text-muted">Belum ada riwayat tercatat.</td></tr></tbody>
                                 </table>
                             </div>
                         </div>
@@ -674,64 +674,31 @@
                             <div id="areaCetakKwitansi" class="kwitansi-profesional">
                                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                                     <div>
-                                        <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-patch-check-fill me-1"></i> BUKTI SETORAN RESMI UPK</h6>
+                                        <h6 class="fw-bold mb-0 text-dark" style="color: #800020 !important;"><i class="bi bi-patch-check-fill text-danger me-1"></i> BUKTI SETORAN RESMI UPK</h6>
                                         <small class="text-muted">DAPM Tanete Riattang Barat - Kab. Bone</small>
                                     </div>
                                     <div class="text-end">
-                                        <span class="badge border py-1 px-2 bg-light text-dark" id="kwtNoTransaksi">No: -</span><br>
+                                        <span class="badge border py-1 px-2 bg-light text-danger fw-semibold" id="kwtNoTransaksi">No: -</span><br>
                                         <small class="text-muted" id="kwtTglTransaksi">-</small>
                                     </div>
                                 </div>
-
                                 <div class="row g-2 mb-3 small card-light-custom p-2 rounded border">
-                                    <div class="col-6">
-                                        <span class="d-block text-muted">Nama Peminjam:</span>
-                                        <strong class="fs-6 text-dark" id="kwtNamaNasabah">-</strong>
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <span class="d-block text-muted">Kelurahan:</span>
-                                        <strong class="text-dark" id="kwtDesa">-</strong>
-                                    </div>
+                                    <div class="col-6"><span class="d-block text-muted">Nama Peminjam:</span><strong class="fs-6 text-dark" id="kwtNamaNasabah">-</strong></div>
+                                    <div class="col-6 text-end"><span class="d-block text-muted">Kelurahan:</span><strong class="text-dark" id="kwtDesa">-</strong></div>
                                 </div>
-
                                 <div class="table-responsive mb-3 rounded border">
                                     <table class="table table-sm table-bordered mb-0 text-center small">
-                                        <thead>
-                                            <tr>
-                                                <th>Keterangan Pembayaran</th>
-                                                <th>Nominal (Rp)</th>
-                                            </tr>
-                                        </thead>
+                                        <thead><tr><th>Keterangan Pembayaran</th><th>Nominal (Rp)</th></tr></thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="text-start text-dark">Setoran Angsuran Pokok (Ke-<span id="kwtAngsPokokKe">-</span>)</td>
-                                                <td class="text-end fw-bold text-dark" id="kwtPokok">Rp 0</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-start text-dark">Setoran Jasa / Bunga Pinjaman</td>
-                                                <td class="text-end fw-bold text-dark" id="kwtJasa">Rp 0</td>
-                                            </tr>
-                                            <tr class="table-active fw-bold">
-                                                <td class="text-start text-dark">TOTAL PEMBAYARAN BULAN INI</td>
-                                                <td class="text-end fs-6 text-dark" id="kwtTotal">Rp 0</td>
-                                            </tr>
+                                            <tr><td class="text-start text-dark">Setoran Angsuran Pokok (Ke-<span id="kwtAngsPokokKe">-</span>)</td><td class="text-end fw-bold text-dark" id="kwtPokok">Rp 0</td></tr>
+                                            <tr><td class="text-start text-dark">Setoran Jasa / Bunga Pinjaman</td><td class="text-end fw-bold text-dark" id="kwtJasa">Rp 0</td></tr>
+                                            <tr class="table-active fw-bold" style="background-color: #fce8e8 !important;"><td class="text-start text-danger">TOTAL PEMBAYARAN BULAN INI</td><td class="text-end fs-6 text-danger" id="kwtTotal">Rp 0</td></tr>
                                         </tbody>
                                     </table>
                                 </div>
-
                                 <div class="row g-2 card-light-custom p-2 rounded border small text-center">
-                                    <div class="col-6 border-end">
-                                        <span class="d-block text-muted">Sisa Saldo Pokok</span>
-                                        <strong class="text-danger fs-6" id="kwtSisaSaldo">Rp 0</strong>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="d-block text-muted">Sisa Jasa</span>
-                                        <strong class="text-dark fs-6" id="kwtSisaJasaKwt">0x (Rp 0)</strong>
-                                    </div>
-                                </div>
-
-                                <div class="text-center mt-3 pt-2 border-top" style="font-size: 0.75rem; color: var(--text-muted);">
-                                    <span>Terima kasih atas kedisiplinan Anda membayar angsuran tepat waktu. Berkelanjutan untuk kesejahteraan bersama.</span>
+                                    <div class="col-6 border-end"><span class="d-block text-muted">Sisa Saldo Pokok</span><strong class="text-danger fs-6" id="kwtSisaSaldo">Rp 0</strong></div>
+                                    <div class="col-6"><span class="d-block text-muted">Sisa Jasa</span><strong class="text-dark fs-6" id="kwtSisaJasaKwt">0x (Rp 0)</strong></div>
                                 </div>
                             </div>
                         </div>
@@ -741,6 +708,7 @@
             </div>
         </div>
 
+        <!-- PANEL TABEL LPP -->
         <div id="viewPanelLPP" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
@@ -766,31 +734,20 @@
                     <table class="table table-bordered table-hover table-lpp-compact mb-0" id="mainLPPTable">
                         <thead>
                             <tr>
-                                <th rowspan="2">No</th>
-                                <th rowspan="2">Nama Peminjam</th>
-                                <th rowspan="2">Kelurahan</th>
-                                <th rowspan="2">Plafon</th>
-                                <th rowspan="2">Tenor</th>
-                                <th rowspan="2">Cair</th>
-                                <th colspan="2" style="background-color: #343a40; color: #ffffff;">Target s/d Bln Ini</th>
-                                <th colspan="2" style="background-color: #495057; color: #ffffff;">Realisasi s/d Bln Lalu</th>
-                                <th colspan="2" style="background-color: #495057; color: #ffffff;">Realisasi Bln Ini</th>
-                                <th colspan="2" style="background-color: #212529; color: #ffffff;">Realisasi Total</th>
-                                <th rowspan="2">Saldo</th>
-                                <th rowspan="2">%</th>
-                                <th colspan="2" style="background-color: #842029; color: #ffffff;">Tunggakan</th>
+                                <th rowspan="2">No</th><th rowspan="2">Nama Peminjam</th><th rowspan="2">Kelurahan</th><th rowspan="2">Plafon</th><th rowspan="2">Tenor</th><th rowspan="2">Cair</th>
+                                <th colspan="2" style="background-color: #600018; color: #ffffff;">Target s/d Bln Ini</th>
+                                <th colspan="2" style="background-color: #800020; color: #ffffff;">Realisasi s/d Bln Lalu</th>
+                                <th colspan="2" style="background-color: #800020; color: #ffffff;">Realisasi Bln Ini</th>
+                                <th colspan="2" style="background-color: #500010; color: #ffffff;">Realisasi Total</th>
+                                <th rowspan="2">Saldo</th><th rowspan="2">%</th>
+                                <th colspan="2" style="background-color: #a71d2a; color: #ffffff;">Tunggakan</th>
                             </tr>
                             <tr>
-                                <th style="background-color: #343a40; color: #ffffff;">Pokok</th>
-                                <th style="background-color: #343a40; color: #ffffff;">Bunga</th>
-                                <th style="background-color: #495057; color: #ffffff;">Pokok</th>
-                                <th style="background-color: #495057; color: #ffffff;">Bunga</th>
-                                <th style="background-color: #495057; color: #ffffff;">Pokok</th>
-                                <th style="background-color: #495057; color: #ffffff;">Bunga</th>
-                                <th style="background-color: #212529; color: #ffffff;">Pokok</th>
-                                <th style="background-color: #212529; color: #ffffff;">Bunga</th>
-                                <th style="background-color: #842029; color: #ffffff;">Pokok</th>
-                                <th style="background-color: #842029; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #600018; color: #ffffff;">Pokok</th><th style="background-color: #600018; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #800020; color: #ffffff;">Pokok</th><th style="background-color: #800020; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #800020; color: #ffffff;">Pokok</th><th style="background-color: #800020; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #500010; color: #ffffff;">Pokok</th><th style="background-color: #500010; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #a71d2a; color: #ffffff;">Pokok</th><th style="background-color: #a71d2a; color: #ffffff;">Bunga</th>
                             </tr>
                         </thead>
                         <tbody id="lppTableBody"></tbody>
@@ -799,122 +756,121 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-3 no-print">
                     <div class="small text-muted" id="lppPaginationInfo">Menampilkan data...</div>
-                    <nav>
-                        <ul class="pagination pagination-sm mb-0" id="lppPaginationContainer"></ul>
-                    </nav>
+                    <nav><ul class="pagination pagination-sm mb-0" id="lppPaginationContainer"></ul></nav>
                 </div>
             </div>
         </div>
 
+        <!-- PANEL BUKU KAS -->
         <div id="viewPanelKas" class="d-none">
             <div class="card-custom p-3 p-md-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2 no-print">
                     <div class="d-flex align-items-center gap-2">
                         <button onclick="bukaView('panelBayarAngsuran')" class="btn btn-outline-dark btn-compact fw-semibold">
                             <i class="bi bi-arrow-left me-1"></i> Ke Dasbor / Kasir
                         </button>
-                        <h6 class="fw-bold mb-0 text-dark">Buku Kas Masuk & Keluar</h6>
+                        <h6 class="fw-bold mb-0 text-dark" style="color: #800020 !important;"><i class="bi bi-journal-text me-1"></i> Buku Kas Masuk & Keluar</h6>
                     </div>
-                    <button class="btn btn-dark btn-compact text-white fw-semibold shadow-sm" onclick="bukaModalTambahKas()">
-                        <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
-                    </button>
+                    
+                    <div class="d-flex align-items-center gap-2">
+                        <select id="filterBulanKas" class="form-select form-select-compact text-dark" style="width: 130px;" onchange="renderKas()">
+                            <option value="">Semua Bulan</option>
+                            <option value="01">Januari</option>
+                            <option value="02">Februari</option>
+                            <option value="03">Maret</option>
+                            <option value="04">April</option>
+                            <option value="05">Mei</option>
+                            <option value="06">Juni</option>
+                            <option value="07">Juli</option>
+                            <option value="08">Agustus</option>
+                            <option value="09">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+                        <select id="filterTahunKas" class="form-select form-select-compact text-dark" style="width: 95px;" onchange="renderKas()">
+                            <option value="2026">2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                        </select>
+                        <button class="btn btn-outline-dark btn-compact shadow-sm" onclick="cetakBukuKas()"><i class="bi bi-printer me-1"></i> Cetak Kas</button>
+                        <button class="btn btn-dark btn-compact text-white fw-semibold shadow-sm" onclick="bukaModalTambahKas()">
+                            <i class="bi bi-plus-circle me-1"></i> Tambah Transaksi Kas
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Rekapan Total Kas Masuk, Keluar, dan Saldo Kas -->
                 <div class="row g-3 mb-3">
                     <div class="col-md-4">
                         <div class="card-light-custom p-3 rounded-3 border border-success border-opacity-25">
-                            <span class="small d-block text-muted mb-1"><i class="bi bi-arrow-down-circle text-success me-1"></i> Total Kas Masuk</span>
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-arrow-down-circle text-success me-1"></i> Total Kas Masuk (Periode Ini)</span>
                             <h5 class="fw-bold text-success mb-0" id="rekapKasMasuk">Rp 0</h5>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card-light-custom p-3 rounded-3 border border-danger border-opacity-25">
-                            <span class="small d-block text-muted mb-1"><i class="bi bi-arrow-up-circle text-danger me-1"></i> Total Kas Keluar</span>
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-arrow-up-circle text-danger me-1"></i> Total Kas Keluar (Periode Ini)</span>
                             <h5 class="fw-bold text-danger mb-0" id="rekapKasKeluar">Rp 0</h5>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card-custom p-3 rounded-3 border border-dark">
-                            <span class="small d-block text-muted mb-1"><i class="bi bi-wallet2 text-dark me-1"></i> Saldo Kas Akhir</span>
+                        <div class="card-custom p-3 rounded-3 border border-danger">
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-wallet2 text-danger me-1"></i> Saldo Kas Akhir (Kumulatif)</span>
                             <h5 class="fw-bold text-dark mb-0" id="rekapSaldoKas">Rp 0</h5>
                         </div>
                     </div>
                 </div>
 
-                <div class="table-responsive rounded-3 border shadow-sm" style="max-height: 480px;">
-                    <table class="table table-hover table-compact align-middle mb-0">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Tanggal</th>
-                                <th>No Kwitansi</th>
-                                <th>Keterangan</th>
-                                <th>Kelurahan</th>
-                                <th>Kategori</th>
-                                <th>Tipe</th>
-                                <th>Nominal</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transaksiTableBody"></tbody>
-                    </table>
+                <div id="areaCetakBukuKas">
+                    <div class="text-center mb-3 d-none d-print-block">
+                        <h5 class="fw-bold m-0" style="color: #800020;">REKAPITULASI BUKU KAS & SALDO KUMULATIF</h5>
+                        <small class="text-muted" id="labelPeriodeCetakKas">Periode: Semua Waktu</small>
+                    </div>
+                    <div class="table-responsive rounded-3 border shadow-sm" style="max-height: 480px;">
+                        <table class="table table-hover table-compact align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>No Kwitansi</th>
+                                    <th>Keterangan</th>
+                                    <th>Kelurahan</th>
+                                    <th>Kategori</th>
+                                    <th>Tipe</th>
+                                    <th>Nominal</th>
+                                    <th class="no-print">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaksiTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- PANEL LAPORAN -->
         <div id="viewPanelLaporan" class="d-none">
             <div class="card-custom p-4 p-md-5">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
                     <div>
-                        <h5 class="fw-bold mb-1 text-dark"><i class="bi bi-file-earmark-bar-graph me-2"></i> Laporan Rekapitulasi Keuangan & Piutang UPK</h5>
+                        <h5 class="fw-bold mb-1 text-dark" style="color: #800020 !important;"><i class="bi bi-file-earmark-bar-graph text-danger me-2"></i> Laporan Rekapitulasi Keuangan & Piutang UPK</h5>
                         <p class="small mb-0 text-muted">Ringkasan resmi bulanan dan tahunan untuk kebutuhan pengurus serta musyawarah.</p>
                     </div>
                     <div class="d-flex gap-2 no-print">
                         <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak Laporan</button>
                     </div>
                 </div>
-
                 <div id="areaCetakLaporan">
-                    <div class="text-center mb-4">
-                        <h5 class="fw-bold mb-1 text-dark">REKAPITULASI PERKEMBANGAN DANA BERGULIR (SPP)</h5>
-                        <p class="small text-muted mb-0">UPK DAPM Kecamatan Tanete Riattang Barat - Kabupaten Bone</p>
-                        <hr class="w-25 mx-auto my-3 opacity-25">
-                    </div>
-
                     <div class="row g-3 mb-4">
-                        <div class="col-md-4">
-                            <div class="card-light-custom p-3 rounded-3 border">
-                                <span class="small d-block text-muted mb-1">Total Plafon Aktif</span>
-                                <h4 class="fw-bold text-dark mb-0" id="repTotalPlafon">Rp 0</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card-light-custom p-3 rounded-3 border">
-                                <span class="small d-block text-muted mb-1">Total Realisasi Piutang Masuk</span>
-                                <h4 class="fw-bold text-dark mb-0" id="repTotalRealisasi">Rp 0</h4>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card-light-custom p-3 rounded-3 border">
-                                <span class="small d-block text-muted mb-1">Total Sisa Saldo Piutang</span>
-                                <h4 class="fw-bold text-danger mb-0" id="repTotalSaldo">Rp 0</h4>
-                            </div>
-                        </div>
+                        <div class="col-md-4"><div class="card-light-custom p-3 rounded-3 border"><span class="small d-block text-muted mb-1">Total Plafon Aktif</span><h4 class="fw-bold text-dark mb-0" id="repTotalPlafon">Rp 0</h4></div></div>
+                        <div class="col-md-4"><div class="card-light-custom p-3 rounded-3 border"><span class="small d-block text-muted">Total Realisasi Piutang Masuk</span><h4 class="fw-bold text-dark mb-0" id="repTotalRealisasi">Rp 0</h4></div></div>
+                        <div class="col-md-4"><div class="card-light-custom p-3 rounded-3 border"><span class="small d-block text-muted">Total Sisa Saldo Piutang</span><h4 class="fw-bold text-danger mb-0" id="repTotalSaldo">Rp 0</h4></div></div>
                     </div>
-
-                    <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-pie-chart me-1"></i> Rekapitulasi per Kelurahan</h6>
+                    <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-pie-chart text-danger me-1"></i> Rekapitulasi per Kelurahan</h6>
                     <div class="table-responsive mb-4 rounded-3 border shadow-sm">
                         <table class="table table-bordered table-compact mb-0 text-center">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Kelurahan</th>
-                                    <th>Jumlah Kelompok/Peminjam</th>
-                                    <th>Total Plafon (Rp)</th>
-                                    <th>Total Saldo Piutang (Rp)</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>No</th><th>Kelurahan</th><th>Jumlah Kelompok/Peminjam</th><th>Total Plafon (Rp)</th><th>Total Saldo Piutang (Rp)</th></tr></thead>
                             <tbody id="rekapDesaTableBody"></tbody>
                         </table>
                     </div>
@@ -929,182 +885,80 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                    <h6 class="fw-bold mb-0 text-dark" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru</h6>
+                    <h6 class="fw-bold mb-0 text-dark" style="color: #800020 !important;" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill text-danger me-1"></i> Tambah Peminjam Baru</h6>
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formTambahPeminjam">
                     <input type="hidden" id="editIndex" value="">
-                    <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-dark">Nama Lengkap Peminjam</label>
-                        <input type="text" id="newNama" class="form-control form-control-compact text-dark" placeholder="Contoh: SURIANI, S.Pd" required>
-                    </div>
-                    <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-dark">Kelurahan</label>
-                        <input type="text" id="newDesa" class="form-control form-control-compact text-dark" placeholder="Contoh: WATANG PALAKKA" required>
+                    <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Nama Lengkap Peminjam</label><input type="text" id="newNama" class="form-control form-control-compact text-dark" placeholder="Contoh: SURIANI, S.Pd" required></div>
+                    <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Kelurahan</label><input type="text" id="newDesa" class="form-control form-control-compact text-dark" placeholder="Contoh: WATANG PALAKKA" required></div>
+                    <div class="row g-2 mb-2">
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Plafon Pinjaman (Rp)</label><input type="number" id="newPlafon" class="form-control form-control-compact text-dark" required oninput="hitungSimulasiPeminjamBaru()"></div>
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Tenor (Bulan)</label><select id="newTenor" class="form-select form-select-compact text-dark" onchange="hitungSimulasiPeminjamBaru()"><option value="12">12 Bulan</option><option value="18">18 Bulan</option><option value="24">24 Bulan</option></select></div>
                     </div>
                     <div class="row g-2 mb-2">
-                        <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-dark">Plafon Pinjaman (Rp)</label>
-                            <input type="number" id="newPlafon" class="form-control form-control-compact text-dark" placeholder="Contoh: 10000000" required oninput="hitungSimulasiPeminjamBaru()">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-dark">Tenor (Bulan)</label>
-                            <select id="newTenor" class="form-select form-select-compact text-dark" onchange="hitungSimulasiPeminjamBaru()">
-                                <option value="12">12 Bulan</option>
-                                <option value="18">18 Bulan</option>
-                                <option value="24">24 Bulan</option>
-                                <option value="6">6 Bulan</option>
-                            </select>
-                        </div>
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Persen Jasa (%/bln)</label><input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact fw-bold text-dark" value="1.5" required oninput="hitungSimulasiPeminjamBaru()"></div>
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Tanggal Pencairan</label><input type="date" id="newTglCair" class="form-control form-control-compact text-dark" required></div>
                     </div>
-
-                    <div class="row g-2 mb-2">
-                        <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-dark">Persen Jasa (% per Bulan)</label>
-                            <div class="input-group input-group-sm">
-                                <input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact fw-bold text-dark" value="1.5" placeholder="1.5" required oninput="hitungSimulasiPeminjamBaru()">
-                                <span class="input-group-text bg-light text-dark">% / Bln</span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-dark">Tanggal Pencairan</label>
-                            <input type="date" id="newTglCair" class="form-control form-control-compact text-dark" required>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="small fw-semibold mb-1 text-dark">No. WhatsApp Nasabah</label>
-                        <input type="text" id="newNoHp" class="form-control form-control-compact text-dark" placeholder="Contoh: 081234567890">
-                    </div>
-
-                    <div class="card-light-custom py-2 px-3 small rounded-2 mb-3 border">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span class="text-dark">Angsuran Pokok / Bulan:</span>
-                            <strong class="text-dark" id="simulasiPokokPerBulan">Rp 0</strong>
-                        </div>
-                        <div class="d-flex justify-content-between mb-1">
-                            <span class="text-dark">Jasa / Bunga per Bulan:</span>
-                            <strong class="text-dark" id="simulasiJasaPerBulan">Rp 0</strong>
-                        </div>
-                        <div class="d-flex justify-content-between border-top pt-1 fw-bold">
-                            <span class="text-dark">Total Setoran / Bulan:</span>
-                            <strong class="text-dark" id="simulasiTotalPerBulan">Rp 0</strong>
-                        </div>
-                    </div>
-
+                    <div class="mb-3"><label class="small fw-semibold mb-1 text-dark">No. WhatsApp Nasabah</label><input type="text" id="newNoHp" class="form-control form-control-compact text-dark" placeholder="0812..."></div>
                     <div class="d-flex justify-content-end gap-2 border-top pt-3">
                         <button type="button" class="btn btn-outline-dark btn-compact" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-dark btn-compact fw-semibold text-white shadow-sm" id="btnSimpanPeminjamText">
-                            <i class="bi bi-save me-1"></i> Simpan Peminjam
-                        </button>
+                        <button type="submit" class="btn btn-dark btn-compact fw-semibold text-white shadow-sm" id="btnSimpanPeminjamText"><i class="bi bi-save me-1"></i> Simpan Peminjam</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- MODAL BUKTI PENCAIRAN & TRANSFER REKENING PEMINJAM -->
+    <!-- MODAL BUKTI PENCAIRAN -->
     <div class="modal fade" id="modalBuktiCairPeminjam" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
-                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-receipt-cutoff me-1"></i> Bukti Pencairan / Transfer Peminjam</h6>
-                    <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
-                </div>
-                <div id="areaCetakBuktiCair" class="p-3 card-light-custom rounded-3 border mb-3 small">
-                    <div class="text-center border-bottom pb-2 mb-2">
-                        <strong class="d-block text-dark">UPK DAPM TANETE RIATTANG BARAT</strong>
-                        <span class="text-muted" style="font-size:0.7rem;">INFORMASI VALIDASI PENCAIRAN DANA PINJAMAN</span>
-                    </div>
+                <h6 class="fw-bold mb-3 text-dark" style="color: #800020 !important;">Bukti Pencairan / Transfer Peminjam</h6>
+                <div class="p-3 card-light-custom rounded-3 border mb-3 small">
                     <div class="d-flex justify-content-between mb-1"><span>Nama Peminjam:</span><strong class="text-dark" id="cairNama">-</strong></div>
                     <div class="d-flex justify-content-between mb-1"><span>Kelurahan:</span><strong class="text-dark" id="cairDesa">-</strong></div>
                     <div class="d-flex justify-content-between mb-1"><span>Plafon Ditransfer:</span><strong class="text-success font-monospace" id="cairPlafon">Rp 0</strong></div>
-                    <div class="d-flex justify-content-between mb-1"><span>Tanggal Cair:</span><strong class="text-dark" id="cairTgl">-</strong></div>
-                    <div class="d-flex justify-content-between"><span>No. Rekening WA:</span><strong class="text-dark" id="cairWa">-</strong></div>
                 </div>
                 <div class="d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-outline-dark btn-compact" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-dark btn-compact text-white fw-semibold shadow-sm" onclick="kirimWAPencairanPeminjam()">
-                        <i class="bi bi-whatsapp me-1"></i> Kirim Bukti Transfer WA
-                    </button>
+                    <button type="button" class="btn btn-dark btn-compact text-white fw-semibold shadow-sm" onclick="kirimWAPencairanPeminjam()"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti Transfer WA</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL LOGIN -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 360px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
-                <div class="text-center mb-3">
-                    <h6 class="fw-bold mb-1 text-dark">Login SISKEU UPK</h6>
-                    <small class="text-muted">Tanete Riattang Barat - Bone</small>
-                </div>
-                <div id="loginError" class="alert alert-danger py-1 small text-center d-none border-0">
-                    Username / password salah!
-                </div>
+                <div class="text-center mb-3"><h6 class="fw-bold mb-1 text-dark" style="color: #800020 !important;">Login SISKEU UPK</h6><small class="text-muted">Tanete Riattang Barat - Bone</small></div>
+                <div id="loginError" class="alert alert-danger py-1 small text-center d-none border-0">Username / password salah!</div>
                 <form id="loginForm">
-                    <div class="mb-2">
-                        <input type="text" id="username" class="form-control form-control-compact text-dark" placeholder="Username (******)" required autocomplete="off">
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" id="password" class="form-control form-control-compact text-dark" placeholder="Password (******)" required>
-                    </div>
-                    <button type="submit" class="btn btn-dark btn-compact w-100 fw-semibold text-white shadow-sm">
-                        Masuk Sistem
-                    </button>
+                    <div class="mb-2"><input type="text" id="username" class="form-control form-control-compact text-dark" placeholder="Username" required autocomplete="off"></div>
+                    <div class="mb-3"><input type="password" id="password" class="form-control form-control-compact text-dark" placeholder="Password" required></div>
+                    <button type="submit" class="btn btn-dark btn-compact w-100 fw-semibold text-white shadow-sm">Masuk Sistem</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <!-- MODAL TRANSAKSI KAS -->
     <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
-                <h6 class="fw-bold mb-3 text-dark" id="modalKasTitle"><i class="bi bi-journal-plus me-1"></i> Tambah Mutasi Kas</h6>
+                <h6 class="fw-bold mb-3 text-dark" style="color: #800020 !important;" id="modalKasTitle"><i class="bi bi-journal-plus text-danger me-1"></i> Tambah Mutasi Kas</h6>
                 <form id="transaksiForm">
                     <input type="hidden" id="editKasId" value="">
-                    <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-dark">Tanggal Transaksi</label>
-                        <input type="date" id="tTanggal" class="form-control form-control-compact text-dark" required>
-                    </div>
-                    <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-dark">Keterangan Transaksi</label>
-                        <input type="text" id="tNama" class="form-control form-control-compact text-dark" placeholder="Contoh: Pembayaran Honor Staf" required>
-                    </div>
-                    <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-dark">Kelurahan</label>
-                        <input type="text" id="tKelurahan" class="form-control form-control-compact text-dark" placeholder="Contoh: Tanete Riattang Barat" required>
-                    </div>
+                    <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Tanggal Transaksi</label><input type="date" id="tTanggal" class="form-control form-control-compact text-dark" required></div>
+                    <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Keterangan Transaksi</label><input type="text" id="tNama" class="form-control form-control-compact text-dark" placeholder="Contoh: Pembayaran Honor Staf" required></div>
+                    <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Kelurahan</label><input type="text" id="tKelurahan" class="form-control form-control-compact text-dark" placeholder="Contoh: Tanete Riattang Barat" required></div>
                     <div class="row g-2 mb-2">
-                        <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-dark">Tipe Kas</label>
-                            <select id="tTipe" class="form-select form-select-compact text-dark" required>
-                                <option value="Masuk">Kas Masuk</option>
-                                <option value="Keluar">Kas Keluar</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small fw-semibold mb-1 text-dark">Kategori Kas</label>
-                            <select id="tKategori" class="form-select form-select-compact text-dark" required>
-                                <option value="Angsuran">Angsuran</option>
-                                <option value="Perguliran">Perguliran</option>
-                                <option value="Honor">Honor</option>
-                                <option value="Transport">Transport</option>
-                                <option value="Adm & Umum">Adm & Umum</option>
-                                <option value="Lain-lain Operasional">Lain-lain Operasional</option>
-                                <option value="Lain-lain Non Ops">Lain-lain Non Ops</option>
-                                <option value="Lain-lain Non Biaya">Lain-lain Non Biaya</option>
-                            </select>
-                        </div>
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Tipe Kas</label><select id="tTipe" class="form-select form-select-compact text-dark" required><option value="Masuk">Kas Masuk</option><option value="Keluar">Kas Keluar</option></select></div>
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Kategori Kas</label><select id="tKategori" class="form-select form-select-compact text-dark" required><option value="Angsuran">Angsuran</option><option value="Perguliran">Perguliran</option><option value="Honor">Honor</option><option value="Transport">Transport</option><option value="Adm & Umum">Adm & Umum</option><option value="Lain-lain Operasional">Lain-lain Operasional</option></select></div>
                     </div>
-                    <div class="mb-2">
-                        <label class="small fw-semibold mb-1 text-dark">Nominal (Rp)</label>
-                        <input type="number" id="tNominal" class="form-control form-control-compact text-dark" placeholder="Contoh: 150000" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="small fw-semibold mb-1 text-dark">No Kwitansi (Opsional)</label>
-                        <input type="text" id="tKwitansi" class="form-control form-control-compact text-dark" placeholder="Contoh: KWT-001">
-                    </div>
+                    <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Nominal (Rp)</label><input type="number" id="tNominal" class="form-control form-control-compact text-dark" placeholder="Contoh: 150000" required></div>
+                    <div class="mb-3"><label class="small fw-semibold mb-1 text-dark">No Kwitansi</label><input type="text" id="tKwitansi" class="form-control form-control-compact text-dark" placeholder="Contoh: KWT-001"></div>
                     <div class="d-flex justify-content-end gap-2">
                         <button type="button" class="btn btn-outline-dark btn-compact" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-dark btn-compact fw-semibold text-white shadow-sm" id="btnSimpanKasText">Simpan</button>
@@ -1159,7 +1013,7 @@
                 type: 'bar',
                 data: {
                     labels: labels,
-                    datasets: [{ label: 'Total Pembayaran Angsuran (Rp)', data: dataValues, backgroundColor: 'rgba(33, 37, 41, 0.8)', borderColor: '#212529', borderWidth: 1, borderRadius: 6 }]
+                    datasets: [{ label: 'Total Pembayaran Angsuran (Rp)', data: dataValues, backgroundColor: 'rgba(128, 0, 32, 0.85)', borderColor: '#800020', borderWidth: 1, borderRadius: 6 }]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false,
@@ -1249,12 +1103,12 @@
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
-                if (badge) { badge.textContent = "Sinkronisasi Cloud..."; badge.className = "badge bg-secondary text-light small me-1 px-2 py-1 shadow-sm"; }
+                if (badge) { badge.textContent = "Sinkronisasi Cloud..."; badge.className = "badge bg-light text-danger small me-1 px-2 py-1 shadow-sm fw-semibold"; }
                 const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=get_all`);
                 const result = await response.json();
                 if (result && result.lpp && result.lpp.length > 0) localStorage.setItem('upk_lpp_master', JSON.stringify(result.lpp));
                 if (result && result.kas && result.kas.length > 0) localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
-                if (badge) { badge.textContent = "Terhubung Cloud"; badge.className = "badge bg-dark text-white small me-1 px-2 py-1 shadow-sm"; }
+                if (badge) { badge.textContent = "Terhubung Cloud"; badge.className = "badge bg-light text-success small me-1 px-2 py-1 shadow-sm fw-semibold"; }
             } catch (err) {
                 if (badge) { badge.textContent = "Mode Offline"; badge.className = "badge bg-secondary text-white small me-1 px-2 py-1 shadow-sm"; }
             }
@@ -1270,7 +1124,7 @@
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload)
                 });
-                if (badge) { badge.textContent = "Terhubung Cloud"; badge.className = "badge bg-dark text-white small me-1 px-2 py-1 shadow-sm"; }
+                if (badge) { badge.textContent = "Terhubung Cloud"; badge.className = "badge bg-light text-success small me-1 px-2 py-1 shadow-sm fw-semibold"; }
                 if (!silent) showToast('success', 'Data LPP & Buku Kas berhasil disinkronkan!');
             } catch (err) {
                 if (!silent) showToast('error', 'Gagal mengirim data ke Google Sheet.');
@@ -1300,7 +1154,11 @@
             } else if (viewName === 'panelLPP') {
                 document.getElementById('viewPanelLPP').classList.remove('d-none'); document.getElementById('tabBtnLPP').className = 'btn btn-compact fw-semibold text-white bg-dark'; renderLPPTable();
             } else if (viewName === 'panelKas') {
-                document.getElementById('viewPanelKas').classList.remove('d-none'); document.getElementById('tabBtnKas').className = 'btn btn-compact fw-semibold text-white bg-dark'; renderKas();
+                document.getElementById('viewPanelKas').classList.remove('d-none'); document.getElementById('tabBtnKas').className = 'btn btn-compact fw-semibold text-white bg-dark'; 
+                const currentMonth = String(new Date().getMonth() + 1).padStart(2, '0');
+                const selectBulan = document.getElementById('filterBulanKas');
+                if (selectBulan && !selectBulan.value) selectBulan.value = currentMonth;
+                renderKas();
             } else if (viewName === 'panelLaporan') {
                 document.getElementById('viewPanelLaporan').classList.remove('d-none'); document.getElementById('tabBtnLaporan').className = 'btn btn-compact fw-semibold text-white bg-dark'; renderLaporanRekapitulasi();
             }
@@ -1377,8 +1235,8 @@
                         <td class="fw-semibold text-dark">${item.nama}</td>
                         <td>${item.desa}</td>
                         <td class="text-center fw-bold">${bulanBerjalan} Bln</td>
-                        <td class="text-end fw-bold" style="background: #f8f9fa;">Rp ${formatRp(targetPokokRT)}</td>
-                        <td class="text-end fw-bold" style="background: #f8f9fa;">Rp ${formatRp(targetJasaRT)}</td>
+                        <td class="text-end fw-bold" style="background: #fff5f5;">Rp ${formatRp(targetPokokRT)}</td>
+                        <td class="text-end fw-bold" style="background: #fff5f5;">Rp ${formatRp(targetJasaRT)}</td>
                         <td class="text-center">${statusBayarHariIni}</td>
                         <td class="text-center no-print">
                             <button class="btn btn-sm py-1 px-2 fw-semibold text-white me-1 shadow-sm bg-dark border-0" onclick="langsungBayarDariLPP(${realIndex})"><i class="bi bi-cash me-1"></i> Kasir</button>
@@ -1575,7 +1433,7 @@
         }
 
         function bukaModalTambahPeminjam() {
-            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam Baru';
+            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-person-plus-fill text-danger me-1"></i> Tambah Peminjam Baru';
             document.getElementById('btnSimpanPeminjamText').innerHTML = '<i class="bi bi-save me-1"></i> Simpan Peminjam';
             document.getElementById('editIndex').value = '';
             document.getElementById('formTambahPeminjam').reset();
@@ -1588,7 +1446,7 @@
             const allData = getLPPData();
             const n = allData[idx];
             if (!n) return;
-            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-pencil-square me-1"></i> Edit Data Peminjam';
+            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-pencil-square text-danger me-1"></i> Edit Data Peminjam';
             document.getElementById('btnSimpanPeminjamText').innerHTML = '<i class="bi bi-save me-1"></i> Update Perubahan';
             document.getElementById('editIndex').value = idx;
             document.getElementById('newNama').value = n.nama || '';
@@ -1659,7 +1517,7 @@
             if (!n) return;
             Swal.fire({
                 title: 'Hapus Peminjam?', text: `Apakah Anda yakin ingin menghapus data "${n.nama}"?`, icon: 'warning',
-                showCancelButton: true, confirmButtonColor: '#212529', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus!'
+                showCancelButton: true, confirmButtonColor: '#800020', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus!'
             }).then((res) => {
                 if (res.isConfirmed) {
                     allData.splice(idx, 1);
@@ -1857,7 +1715,7 @@
 
             Swal.fire({
                 title: 'Hapus Riwayat Angsuran?', text: 'Data target dan realisasi LPP akan disesuaikan kembali.', icon: 'warning',
-                showCancelButton: true, confirmButtonColor: '#212529', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus!'
+                showCancelButton: true, confirmButtonColor: '#800020', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus!'
             }).then((res) => {
                 if (res.isConfirmed) {
                     const deleted = nasabah.history.splice(historyIdx, 1)[0];
@@ -2034,14 +1892,14 @@
                         <td class="text-end">${formatRp(plafon)}</td>
                         <td class="text-center">${tenor}B</td>
                         <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
-                        <td class="text-end fw-bold" style="background: #f8f9fa;">${formatRp(tarP)}</td>
-                        <td class="text-end fw-bold" style="background: #f8f9fa;">${formatRp(tarB)}</td>
+                        <td class="text-end fw-bold" style="background: #fff5f5;">${formatRp(tarP)}</td>
+                        <td class="text-end fw-bold" style="background: #fff5f5;">${formatRp(tarB)}</td>
                         <td class="text-end">${formatRp(r.realLaluPokok)}</td>
                         <td class="text-end">${formatRp(r.realLaluBunga)}</td>
                         <td class="text-end fw-semibold">${formatRp(r.realIniPokok)}</td>
                         <td class="text-end fw-semibold">${formatRp(r.realIniBunga)}</td>
-                        <td class="text-end fw-bold" style="background: #e9ecef;">${formatRp(r.realTotPokok)}</td>
-                        <td class="text-end fw-bold" style="background: #e9ecef;">${formatRp(r.realTotBunga)}</td>
+                        <td class="text-end fw-bold" style="background: #fce8e8;">${formatRp(r.realTotPokok)}</td>
+                        <td class="text-end fw-bold" style="background: #fce8e8;">${formatRp(r.realTotBunga)}</td>
                         <td class="text-end fw-bold text-danger">${formatRp(r.saldo)}</td>
                         <td class="text-center">${r.persen || '0%'}</td>
                         <td class="text-end fw-bold text-danger" style="background: #f8d7da;">${formatRp(Math.max(0, tarP - parseNum(r.realTotPokok)))}</td>
@@ -2133,7 +1991,7 @@
         function resetToSample() {
             Swal.fire({
                 title: 'Reset Data?', text: 'Kembalikan ke data default?', icon: 'question',
-                showCancelButton: true, confirmButtonColor: '#212529', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Reset'
+                showCancelButton: true, confirmButtonColor: '#800020', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Reset'
             }).then((res) => {
                 if (res.isConfirmed) {
                     localStorage.removeItem('upk_lpp_master');
@@ -2148,40 +2006,108 @@
 
         function renderKas() {
             const data = getKasData();
+            const filterBulan = document.getElementById('filterBulanKas').value;
+            const filterTahun = document.getElementById('filterTahunKas').value;
+
+            data.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+
             const tbody = document.getElementById('transaksiTableBody');
             tbody.innerHTML = '';
             
-            let totalMasuk = 0;
-            let totalKeluar = 0;
+            let totalMasukGlobal = 0;
+            let totalKeluarGlobal = 0;
+            let saldoKumulatifSebelumnya = 0;
+            let filteredData = [];
 
             data.forEach(item => {
+                if (!item.tanggal) return;
+                const parts = item.tanggal.split('T')[0].split('-');
+                const itemThn = parts[0];
+                const itemBln = parts[1];
+
+                const isMasuk = item.tipe === 'Masuk';
                 const nom = Number(item.nominal) || 0;
-                if (item.tipe === 'Masuk') {
-                    totalMasuk += nom;
-                } else if (item.tipe === 'Keluar') {
-                    totalKeluar += nom;
+
+                const matchesYear = !filterTahun || itemThn === filterTahun;
+                
+                if (matchesYear) {
+                    if (!filterBulan) {
+                        filteredData.push(item);
+                    } else {
+                        if (itemBln === filterBulan) {
+                            filteredData.push(item);
+                        } else if (itemBln < filterBulan) {
+                            if (isMasuk) saldoKumulatifSebelumnya += nom;
+                            else saldoKumulatifSebelumnya -= nom;
+                        }
+                    }
+                } else if (itemThn < (filterTahun || '2026')) {
+                    if (isMasuk) saldoKumulatifSebelumnya += nom;
+                    else saldoKumulatifSebelumnya -= nom;
                 }
             });
 
-            const saldoKas = totalMasuk - totalKeluar;
+            filteredData.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
 
-            document.getElementById('rekapKasMasuk').textContent = 'Rp ' + formatRp(totalMasuk);
-            document.getElementById('rekapKasKeluar').textContent = 'Rp ' + formatRp(totalKeluar);
-            document.getElementById('rekapSaldoKas').textContent = 'Rp ' + formatRp(saldoKas);
+            let totalMasukPeriode = 0;
+            let totalKeluarPeriode = 0;
 
-            if (data.length === 0) { tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-3">Belum ada mutasi kas tercatat.</td></tr>'; return; }
+            filteredData.forEach(item => {
+                const nom = Number(item.nominal) || 0;
+                if (item.tipe === 'Masuk') totalMasukPeriode += nom;
+                if (item.tipe === 'Keluar') totalKeluarPeriode += nom;
+            });
 
-            data.forEach((item, index) => {
+            data.forEach(item => {
+                const nom = Number(item.nominal) || 0;
+                if (item.tipe === 'Masuk') totalMasukGlobal += nom;
+                if (item.tipe === 'Keluar') totalKeluarGlobal += nom;
+            });
+            const saldoKasAkhirGlobal = totalMasukGlobal - totalKeluarGlobal;
+
+            document.getElementById('rekapKasMasuk').textContent = 'Rp ' + formatRp(totalMasukPeriode);
+            document.getElementById('rekapKasKeluar').textContent = 'Rp ' + formatRp(totalKeluarPeriode);
+            document.getElementById('rekapSaldoKas').textContent = 'Rp ' + formatRp(saldoKasAkhirGlobal);
+
+            const labelPeriode = document.getElementById('labelPeriodeCetakKas');
+            if (labelPeriode) {
+                labelPeriode.textContent = `Periode: ${filterBulan ? 'Bulan ' + filterBulan : 'Semua Bulan'} ${filterTahun || ''}`;
+            }
+
+            if (filterBulan && saldoKumulatifSebelumnya !== 0) {
+                tbody.innerHTML += `
+                    <tr class="table-secondary fw-semibold">
+                        <td>-</td>
+                        <td>01/${filterBulan}/${filterTahun || '2026'}</td>
+                        <td>-</td>
+                        <td class="text-start">Saldo Pindahan / Akumulasi Bulan Lalu</td>
+                        <td>Kantor UPK</td>
+                        <td><span class="badge bg-dark text-white">Saldo Awal</span></td>
+                        <td><span class="badge bg-success text-white">Masuk</span></td>
+                        <td class="text-success text-end">Rp ${formatRp(saldoKumulatifSebelumnya)}</td>
+                        <td class="text-center no-print">-</td>
+                    </tr>`;
+                totalMasukPeriode += saldoKumulatifSebelumnya;
+            }
+
+            if (filteredData.length === 0 && saldoKumulatifSebelumnya === 0) { 
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-3">Belum ada mutasi kas tercatat pada periode ini.</td></tr>'; 
+                return; 
+            }
+
+            filteredData.forEach((item, index) => {
                 const isMasuk = item.tipe === 'Masuk';
                 tbody.innerHTML += `
                     <tr>
-                        <td>${index + 1}</td><td>${formatTanggalTampil(item.tanggal)}</td>
+                        <td>${index + 1}</td>
+                        <td>${formatTanggalTampil(item.tanggal)}</td>
                         <td class="fw-bold text-dark">${item.noKwitansi || '-'}</td>
                         <td class="fw-semibold text-dark text-start">${item.nama}</td>
-                        <td>${item.kelurahan}</td><td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
+                        <td>${item.kelurahan}</td>
+                        <td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
                         <td><span class="badge ${isMasuk ? 'bg-dark' : 'bg-danger'} text-white">${item.tipe}</span></td>
                         <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold text-end">Rp ${formatRp(item.nominal)}</td>
-                        <td class="text-center">
+                        <td class="text-center no-print">
                             <button class="btn btn-outline-dark btn-sm py-0 px-1 me-1 shadow-sm" title="Edit" onclick="bukaModalEditKas(${item.id})"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-outline-dark btn-sm py-0 px-1 me-1 shadow-sm" title="Cetak Kwitansi" onclick="cetakKwitansiKas(${item.id})"><i class="bi bi-printer"></i></button>
                             <button class="btn btn-outline-danger btn-sm py-0 px-1 shadow-sm" title="Hapus" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button>
@@ -2190,8 +2116,12 @@
             });
         }
 
+        function cetakBukuKas() {
+            window.print();
+        }
+
         function bukaModalTambahKas() {
-            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-journal-plus me-1"></i> Tambah Mutasi Kas';
+            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-journal-plus text-danger me-1"></i> Tambah Mutasi Kas';
             document.getElementById('btnSimpanKasText').textContent = 'Simpan';
             document.getElementById('editKasId').value = '';
             document.getElementById('transaksiForm').reset();
@@ -2204,7 +2134,7 @@
             const data = getKasData();
             const item = data.find(i => i.id === id);
             if (!item) return;
-            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-pencil-square me-1"></i> Edit Mutasi Kas';
+            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-pencil-square text-danger me-1"></i> Edit Mutasi Kas';
             document.getElementById('btnSimpanKasText').textContent = 'Update Perubahan';
             document.getElementById('editKasId').value = item.id;
             document.getElementById('tTanggal').value = convertToInputDate(item.tanggal);
@@ -2247,7 +2177,7 @@
         function hapusKas(id) {
             Swal.fire({
                 title: 'Hapus Transaksi?', text: 'Data transaksi kas ini akan dihapus permanen.', icon: 'warning',
-                showCancelButton: true, confirmButtonColor: '#212529', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus'
+                showCancelButton: true, confirmButtonColor: '#800020', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus'
             }).then((res) => {
                 if (res.isConfirmed) {
                     localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
@@ -2285,13 +2215,13 @@
                 <!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Kwitansi - ${item.noKwitansi}</title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
                 <style>body { font-family: 'Inter', sans-serif; padding: 25px; color: #000; background: #fff; font-size: 0.85rem; }
-                .kwitansi-container { border: 2px solid #000; border-radius: 12px; padding: 30px; max-width: 700px; margin: auto; }</style></head>
+                .kwitansi-container { border: 2px solid #800020; border-radius: 12px; padding: 30px; max-width: 700px; margin: auto; }</style></head>
                 <body><div class="kwitansi-container">
                     <div class="d-flex justify-content-between border-bottom pb-3 mb-4">
-                        <div><h6 class="fw-bold m-0">UPK DAPM TANETE RIATTANG BARAT</h6><small>Kabupaten Bone, Sulawesi Selatan</small></div>
+                        <div><h6 class="fw-bold m-0" style="color: #800020;">UPK DAPM TANETE RIATTANG BARAT</h6><small>Kabupaten Bone, Sulawesi Selatan</small></div>
                         <div class="text-end"><strong>No: ${item.noKwitansi}</strong><br><small>Tgl: ${formatTanggalTampil(item.tanggal)}</small></div>
                     </div>
-                    <h5 class="text-center fw-bold text-uppercase text-decoration-underline mb-4">BUKTI KAS ${item.tipe}</h5>
+                    <h5 class="text-center fw-bold text-uppercase text-decoration-underline mb-4" style="color: #800020;">BUKTI KAS ${item.tipe}</h5>
                     <table class="table table-bordered mb-3">
                         <tr><th style="width:30%;">Pihak:</th><td>${teksPemberi}</td></tr>
                         <tr><th>Keperluan:</th><td><strong>${item.nama}</strong></td></tr>
