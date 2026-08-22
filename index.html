@@ -86,6 +86,11 @@
 
         .kwitansi-profesional { background: #ffffff; border: 2px solid var(--accent-color); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 15px rgba(167, 29, 42, 0.08); color: #000000; }
 
+        .pengurus-avatar {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--card-light-bg); color: var(--accent-color);
+            display: flex; align-items: center; justify-content: center; font-size: 1.1rem; border: 1px solid var(--border-color); flex-shrink: 0;
+        }
+
         body.dark-mode .modal-content { background-color: var(--card-bg); color: var(--text-main); border-color: var(--border-color); }
         body.dark-mode .modal-header, body.dark-mode .modal-footer { border-color: var(--border-color); }
         body.dark-mode .btn-close { filter: invert(1); }
@@ -150,6 +155,7 @@
 
     <div id="privateDashboard" class="container-fluid px-2 px-md-3 py-3 d-none">
         
+        <!-- Tab Navigation Bar -->
         <div class="d-flex flex-wrap justify-content-between align-items-center card-custom p-2 px-3 mb-3 no-print">
             <div class="btn-group flex-wrap gap-1" role="group">
                 <button type="button" class="btn btn-compact btn-outline-dark" id="tabBtnProfil" onclick="bukaView('panelProfil')"><i class="bi bi-info-circle me-1"></i> Profil</button>
@@ -174,18 +180,96 @@
             </div>
         </div>
 
-        <!-- PANEL PROFIL -->
         <div id="viewPanelProfil" class="d-none">
-            <div class="card-custom p-4 p-md-5 mb-3">
-                <div class="row align-items-center mb-4">
-                    <div class="col-md-8">
-                        <span class="badge mb-2 text-danger bg-light border fw-semibold px-2 py-1">Kelembagaan Resmi</span>
+            <div class="card-custom p-4 p-md-5 mb-3 border shadow-sm">
+                <div class="row align-items-center mb-4 g-4">
+                    <div class="col-lg-8">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="badge text-white fw-bold px-3 py-1 bg-dark rounded-pill"><i class="bi bi-shield-check me-1"></i> Kelembagaan Resmi</span>
+                            <span class="badge text-danger bg-light border fw-semibold px-2 py-1 rounded-pill">Status: Aktif & Terverifikasi</span>
+                        </div>
                         <h3 class="fw-bold mb-2 text-dark" style="color: var(--accent-color) !important;">UPK DAPM TANETE RIATTANG BARAT</h3>
                         <p class="small mb-2 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
-                        <p class="small mb-3 text-muted">Transformasi dari Program Nasional Pemberdayaan Masyarakat Mandiri Perdesaan (PNPM-MPd) sejak Juni 2009 hingga Desember 2014 menjadi pengelolaan dana bergulir terpadu berkelanjutan.</p>
+                        <p class="small mb-3 text-muted">Aplikasi SISKEU UPK merupakan wujud transformasi dan keberlanjutan dari Program Nasional Pemberdayaan Masyarakat Mandiri Perdesaan (PNPM-MPd) sejak Juni 2009 hingga berakhir di Desember 2014, kini dikelola secara mandiri & akuntabel sebagai dana bergulir pemberdayaan masyarakat.</p>
                         <div class="d-flex flex-wrap gap-3 small text-muted">
-                            <div><i class="bi bi-geo-alt-fill text-danger me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone</div>
-                            <div><i class="bi bi-file-text-fill text-danger me-1"></i> SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b></div>
+                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone</div>
+                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-file-text-fill text-danger me-1"></i> SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <div class="p-4 card-light-custom rounded-4 border shadow-sm">
+                            <div class="logo-container mb-3">
+                                <img src="logo-pnpm.png" alt="Logo PNPM" class="logo-glow" style="width: 55px; height: 55px;" onerror="this.src='https://placehold.co/55x55/800020/ffffff?text=P'">
+                                <i class="bi bi-arrow-left-right text-danger fs-4 mx-2"></i>
+                                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" style="width: 55px; height: 55px;" onerror="this.src='https://placehold.co/55x55/800020/ffffff?text=D'">
+                            </div>
+                            <h6 class="fw-bold mb-1 text-dark">SISKEU UPK DAPM</h6>
+                            <p class="small mb-0 text-muted">Sistem LPP Terpadu & Kas Operasional</p>
+                            <span class="badge bg-dark text-white mt-2 px-3 py-1">Versi Ultimate 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-secondary opacity-25 my-4">
+
+                <h5 class="fw-bold mb-3 text-dark d-flex align-items-center"><i class="bi bi-people-fill me-2 text-danger"></i> Susunan Pengurus & Pengawas Lembaga</h5>
+                
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="card-light-custom p-3 p-md-4 rounded-3 border h-100 shadow-sm">
+                            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-shield-lock-fill text-danger me-2"></i> Pengurus Perkumpulan & UPK</h6>
+                                <span class="badge bg-dark text-white">Eksekutif</span>
+                            </div>
+                            <ul class="list-unstyled small mb-0 d-flex flex-column gap-3">
+                                <li class="d-flex align-items-center gap-3">
+                                    <div class="pengurus-avatar"><i class="bi bi-person-badge-fill"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Ketua BKPP:</span><strong class="text-dark fs-6">Hamzah Najad</strong></div>
+                                </li>
+                                <li class="d-flex align-items-center gap-3">
+                                    <div class="pengurus-avatar"><i class="bi bi-file-earmark-person-fill"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Sekretaris:</span><strong class="text-dark fs-6">H. Abd. Mannang, S.IP</strong></div>
+                                </li>
+                                <li class="d-flex align-items-center gap-3">
+                                    <div class="pengurus-avatar"><i class="bi bi-cash-stack"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Bendahara:</span><strong class="text-dark fs-6">Evi Nasriyanti, S.Pd</strong></div>
+                                </li>
+                                <li class="d-flex align-items-center gap-3 border-top pt-2">
+                                    <div class="pengurus-avatar" style="background:var(--navbar-bg); color:white;"><i class="bi bi-person-check-fill"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Kepala Unit Pengelola (UPK):</span><strong class="text-danger fs-6 fw-bold">H. Jadjdji Irfan</strong></div>
+                                </li>
+                                <li class="d-flex align-items-center gap-3">
+                                    <div class="pengurus-avatar"><i class="bi bi-briefcase-fill"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Staf Administrasi:</span><strong class="text-dark fs-6">Syapriadi, S.H</strong></div>
+                                </li>
+                                <li class="d-flex align-items-center gap-3">
+                                    <div class="pengurus-avatar"><i class="bi bi-wallet2"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Bendahara Keuangan UPK:</span><strong class="text-dark fs-6">Harman, S.M</strong></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card-light-custom p-3 p-md-4 rounded-3 border h-100 shadow-sm">
+                            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-eye-fill text-danger me-2"></i> Badan Pengawas (BP)</h6>
+                                <span class="badge bg-secondary text-white">Pengawas</span>
+                            </div>
+                            <ul class="list-unstyled small mb-0 d-flex flex-column gap-3">
+                                <li class="d-flex align-items-center gap-3">
+                                    <div class="pengurus-avatar"><i class="bi bi-award-fill"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Ketua Badan Pengawas:</span><strong class="text-dark fs-6">Drs. Muh. Idris</strong></div>
+                                </li>
+                                <li class="d-flex align-items-center gap-3">
+                                    <div class="pengurus-avatar"><i class="bi bi-person-fill-check"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Anggota Pengawas 1:</span><strong class="text-dark fs-6">A. Mappangerang</strong></div>
+                                </li>
+                                <li class="d-flex align-items-center gap-3">
+                                    <div class="pengurus-avatar"><i class="bi bi-person-fill-check"></i></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Anggota Pengawas 2:</span><strong class="text-dark fs-6">Mahmud Agsan, S.Ag</strong></div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -227,7 +311,7 @@
             <div class="row g-3 mb-3">
                 <div class="col-lg-8">
                     <div class="card-custom p-3 p-md-4 h-100">
-                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-bar-chart-line text-danger me-1"></i> Grafik Tren Pembayaran Angsuran</h6>
+                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-bar-chart-line text-danger me-1"></i> Grafik Tren Pembayaran Angsuran per Bulan</h6>
                         <div style="position: relative; height:280px; width:100%">
                             <canvas id="trenAngsuranChart"></canvas>
                         </div>
@@ -239,7 +323,54 @@
                         <div style="position: relative; height:220px; width:100%">
                             <canvas id="kolektibilitasPieChart"></canvas>
                         </div>
-                        <div class="text-center mt-2 small fw-bold" id="dashFinTingkatPengembalian">0% Kolektibilitas</div>
+                        <div class="text-center mt-2 small fw-bold" id="dashFinTingkatPengembalian">0% Kolektibilitas Total</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-lg-8">
+                    <div class="card-custom p-3 p-md-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up-arrow text-danger me-1"></i> Target vs Realisasi Pokok Pinjaman</h6>
+                        </div>
+                        <div class="progress mb-3 bg-secondary bg-opacity-25 rounded-pill overflow-hidden" style="height: 14px;">
+                            <div class="progress-bar bg-dark" id="dashFinProgressBar" role="progressbar" style="width: 0%;"></div>
+                        </div>
+                        <div class="row g-2 text-center small pt-2">
+                            <div class="col-4 border-end">
+                                <span class="d-block text-muted">Target Pokok s/d Bln Ini:</span>
+                                <strong class="text-dark" id="dashFinTargetPokok">Rp 0</strong>
+                            </div>
+                            <div class="col-4 border-end">
+                                <span class="d-block text-muted">Realisasi Pokok Masuk:</span>
+                                <strong class="text-dark" id="dashFinRealPokok2">Rp 0</strong>
+                            </div>
+                            <div class="col-4">
+                                <span class="d-block text-muted">Total Tunggakan Pokok:</span>
+                                <strong class="text-danger" id="dashFinTunggakan">Rp 0</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card-custom p-3 p-md-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <h6 class="fw-bold mb-2 text-dark"><i class="bi bi-lightning-charge-fill text-danger me-1"></i> Aksi Cepat UPK</h6>
+                            <p class="small mb-3 text-muted">Pilih modul operasional untuk mempercepat pelayanan:</p>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelJatuhTempo')">
+                                <i class="bi bi-calendar-check text-danger me-2"></i> Panel Penagihan & SP
+                            </button>
+                            <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelBayarAngsuran')">
+                                <i class="bi bi-receipt-cutoff text-danger me-2"></i> Loket Kasir Angsuran
+                            </button>
+                            <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelKalkulator')">
+                                <i class="bi bi-calculator text-danger me-2"></i> Kalkulator Simulasi Pinjaman
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -249,12 +380,27 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-3 border-bottom">
                     <div>
-                        <h5 class="fw-bold mb-1 text-dark"><i class="bi bi-calendar-check me-2 text-danger"></i> Panel Jatuh Tempo & SP</h5>
-                        <p class="small mb-0 text-muted">Pantau nasabah menunggak dan cetak Surat Peringatan (SP) resmi.</p>
+                        <h5 class="fw-bold mb-1 text-dark" style="color: var(--accent-color) !important;"><i class="bi bi-calendar-check me-2"></i> Panel Penagihan, Jatuh Tempo & Surat Peringatan</h5>
+                        <p class="small mb-0 text-muted">Pantau target tagihan real-time, cetak PDF Surat Peringatan (SP), atau kirim pengingat WhatsApp.</p>
                     </div>
                     <div class="d-flex gap-2 align-items-center">
                         <label class="small fw-semibold text-muted">Tanggal Pantau:</label>
                         <input type="date" id="filterTglJatuhTempo" class="form-control form-control-compact text-dark" onchange="renderJatuhTempoTable()">
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="card-light-custom p-3 rounded-3 border">
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-cash-stack text-danger me-1"></i> Realisasi Pokok Bulan Ini (LPP)</span>
+                            <h4 class="fw-bold mb-0 text-dark" id="todayRealPokokDisplay">Rp 0</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-light-custom p-3 rounded-3 border">
+                            <span class="small d-block text-muted mb-1"><i class="bi bi-percent text-danger me-1"></i> Realisasi Jasa Bulan Ini (LPP)</span>
+                            <h4 class="fw-bold text-dark mb-0" id="todayRealJasaDisplay">Rp 0</h4>
+                        </div>
                     </div>
                 </div>
 
@@ -268,7 +414,7 @@
                                 <th>Bln Berjalan</th>
                                 <th style="background-color: var(--card-light-bg);">Tunggakan Pokok</th>
                                 <th style="background-color: var(--card-light-bg);">Tunggakan Jasa</th>
-                                <th>Status</th>
+                                <th>Status Pembayaran</th>
                                 <th class="no-print">Aksi (WA & SP)</th>
                             </tr>
                         </thead>
@@ -281,10 +427,16 @@
         <div id="viewPanelDataPeminjam" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
-                    <div class="d-flex gap-2 align-items-center">
+                    <div class="d-flex gap-2 align-items-center flex-wrap">
                         <input type="text" id="peminjamSearchInput" class="form-control form-control-compact text-dark" style="width: 220px;" placeholder="Cari peminjam..." oninput="onPeminjamSearchInput()">
                         <select id="peminjamDesaFilter" class="form-select form-select-compact text-dark" style="width: 170px;" onchange="renderDataPeminjamTable()">
                             <option value="">Semua Kelurahan</option>
+                        </select>
+                        <select id="peminjamPageSizeSelect" class="form-select form-select-compact text-dark" style="width: 140px;" onchange="currentPeminjamPage=1; renderDataPeminjamTable()">
+                            <option value="10">10 / Halaman</option>
+                            <option value="25">25 / Halaman</option>
+                            <option value="50">50 / Halaman</option>
+                            <option value="0">Tampilkan Semua</option>
                         </select>
                     </div>
                     <div class="d-flex gap-2">
@@ -294,7 +446,7 @@
                     </div>
                 </div>
 
-                <div class="table-responsive overflow-auto shadow-sm rounded-3 border" style="max-height: 450px;">
+                <div class="table-responsive overflow-auto shadow-sm rounded-3 border" style="max-height: 480px;">
                     <table class="table table-bordered table-hover table-compact mb-0">
                         <thead>
                             <tr>
@@ -303,6 +455,11 @@
                         </thead>
                         <tbody id="peminjamTableBody"></tbody>
                     </table>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-between align-items-center mt-3 no-print gap-2">
+                    <div class="small text-muted" id="peminjamPaginationInfo">Menampilkan 0 data</div>
+                    <nav><ul class="pagination pagination-sm mb-0" id="peminjamPaginationContainer"></ul></nav>
                 </div>
             </div>
         </div>
@@ -338,7 +495,6 @@
                             </div>
                         </div>
 
-                        <!-- ALERT LUNAS -->
                         <div id="nasabahLunasAlert" class="alert alert-secondary py-2 small d-none mb-3 border-0 shadow-sm text-dark bg-light border">
                             <i class="bi bi-info-circle-fill me-1 text-danger"></i> Status pinjaman nasabah ini sudah <b>LUNAS</b>.
                         </div>
@@ -433,7 +589,6 @@
                             </div>
                         </div>
 
-                        <!-- KWITANSI PRINT / WA PROOF BOX -->
                         <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="badge p-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Sukses & Tercatat</span>
@@ -649,7 +804,6 @@
         </div>
     </div>
 
-    <!-- MODAL LOGIN -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 350px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
@@ -661,7 +815,7 @@
                 <form id="loginForm">
                     <div class="mb-2">
                         <label class="small fw-semibold mb-1 text-dark">Username</label>
-                        <input type="text" id="username" class="form-control form-control-compact text-dark" placeholder="Username (misal: admin)" required autocomplete="off">
+                        <input type="text" id="username" class="form-control form-control-compact text-dark" placeholder="Username" required autocomplete="off">
                     </div>
                     <div class="mb-3">
                         <label class="small fw-semibold mb-1 text-dark">Password</label>
@@ -681,7 +835,6 @@
         </div>
     </div>
 
-    <!-- MODAL TAMBAH PEMINJAM -->
     <div class="modal fade" id="tambahPeminjamModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
@@ -716,25 +869,6 @@
         </div>
     </div>
 
-    <!-- MODAL BUKTI PENCAIRAN -->
-    <div class="modal fade" id="modalBuktiCairPeminjam" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content card-custom p-4 border">
-                <h6 class="fw-bold text-dark mb-3">Bukti Pencairan / Transfer Peminjam</h6>
-                <div class="p-3 card-light-custom rounded-3 border mb-3 small">
-                    <div class="d-flex justify-content-between mb-1"><span>Nama Peminjam:</span><strong class="text-dark" id="cairNama">-</strong></div>
-                    <div class="d-flex justify-content-between mb-1"><span>Kelurahan:</span><strong class="text-dark" id="cairDesa">-</strong></div>
-                    <div class="d-flex justify-content-between mb-1"><span>Plafon Ditransfer:</span><strong class="text-success" id="cairPlafon">Rp 0</strong></div>
-                </div>
-                <div class="d-flex justify-content-end gap-2">
-                    <button type="button" class="btn btn-outline-dark btn-compact" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-dark btn-compact fw-semibold" onclick="kirimWAPencairanPeminjam()"><i class="bi bi-whatsapp me-1"></i> Kirim Bukti Transfer WA</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL TRANSAKSI KAS -->
     <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
@@ -807,6 +941,15 @@
             return strDate;
         }
 
+        function convertToInputDate(strDate) {
+            if (!strDate) return new Date().toISOString().split('T')[0];
+            if (strDate.includes('T')) return strDate.split('T')[0];
+            if (strDate.includes('/')) {
+                const p = strDate.split('/'); return `${p[2]}-${p[1].padStart(2, '0')}-${p[0].padStart(2, '0')}`;
+            }
+            return strDate;
+        }
+
         function hitungBulanBerjalan(tglCairStr, tenorMax) {
             if (!tglCairStr) return 0;
             const cair = parseTanggal(tglCairStr), now = new Date();
@@ -817,15 +960,49 @@
             return diff > maxT ? maxT : diff;
         }
 
+        const sampleLPPData = [
+            { no: 1, nama: "RISMAWATI,S.PD", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", angsuranKe: 6, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 5, tanggal: "05/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 5750000 }] },
+            { no: 2, nama: "MAHMUD AGSAN(MASYITA)", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "08/10/2025", realLaluPokok: 7650000, realLaluBunga: 1350000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 8500000, realTotBunga: 1500000, saldo: 1500000, persen: "100%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 10, tanggal: "03/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 1500000 }] },
+            { no: 3, nama: "INDRAWATI", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/02/2026", realLaluPokok: 4254000, realLaluBunga: 750000, realIniPokok: 851000, realIniBunga: 150000, realTotPokok: 5105000, realTotBunga: 900000, saldo: 4895000, persen: "100%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 6, tanggal: "05/08/2026", pokok: 851000, jasa: 150000, denda: 0, total: 1001000, sisaSaldo: 4895000 }] },
+            { no: 4, nama: "JUHERIAH,SE", desa: "WATANG PALAKKA", plafon: 2000000, tenor: "12", tglCair: "07/04/2026", realLaluPokok: 510000, realLaluBunga: 90000, realIniPokok: 170000, realIniBunga: 30000, realTotPokok: 680000, realTotBunga: 120000, saldo: 1320000, persen: "100%", angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 4, tanggal: "02/08/2026", pokok: 170000, jasa: 30000, denda: 0, total: 200000, sisaSaldo: 1320000 }] },
+            { no: 5, nama: "SUMARNI", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "16/07/2026", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 835000, realIniBunga: 175000, realTotPokok: 835000, realTotBunga: 175000, saldo: 9165000, persen: "100%", angsuranKe: 2, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 1, tanggal: "16/08/2026", pokok: 835000, jasa: 175000, denda: 0, total: 1010000, sisaSaldo: 9165000 }] },
+            { no: 6, nama: "SYATIR AL", desa: "WATANG PALAKKA", plafon: 15000000, tenor: "12", tglCair: "21/07/2026", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 1250000, realIniBunga: 263000, realTotPokok: 1250000, realTotBunga: 263000, saldo: 13750000, persen: "100%", angsuranKe: 2, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 1, tanggal: "16/08/2026", pokok: 1250000, jasa: 263000, denda: 0, total: 1513000, sisaSaldo: 13750000 }] },
+            { no: 7, nama: "IRFANI VIRZAN PUTRI", desa: "BULU TEMPE", plafon: 8000000, tenor: "12", tglCair: "22/07/2019", realLaluPokok: 7085000, realLaluBunga: 1440000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 7085000, realTotBunga: 1440000, saldo: 915000, persen: "89%", angsuranKe: 12, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 8, nama: "TANTI WAHYUNI", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "19/11/2019", realLaluPokok: 7870000, realLaluBunga: 1800000, realIniPokok: 300000, realIniBunga: 0, realTotPokok: 8170000, realTotBunga: 1800000, saldo: 1830000, persen: "82%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 10, tanggal: "05/08/2026", pokok: 300000, jasa: 0, denda: 0, total: 300000, sisaSaldo: 1830000 }] },
+            { no: 9, nama: "DRA NURJANNAH TINGGI", desa: "BULU TEMPE", plafon: 15000000, tenor: "12", tglCair: "15/03/2021", realLaluPokok: 8000000, realLaluBunga: 2700000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 8000000, realTotBunga: 2700000, saldo: 7000000, persen: "53%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 10, nama: "DRA NURJANNAH TINGGI 2", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "25/01/2021", realLaluPokok: 8300000, realLaluBunga: 1800000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 8300000, realTotBunga: 1800000, saldo: 1700000, persen: "83%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 11, nama: "A.MAPPANGERANG", desa: "BULU TEMPE", plafon: 14850000, tenor: "18", tglCair: "09/12/2022", realLaluPokok: 13600000, realLaluBunga: 4300000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 13600000, realTotBunga: 4300000, saldo: 1250000, persen: "100%", angsuranKe: 17, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 12, nama: "DARMAWATI", desa: "BULU TEMPE", plafon: 20000000, tenor: "12", tglCair: "20/09/2022", realLaluPokok: 16815000, realLaluBunga: 3600000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 16815000, realTotBunga: 3600000, saldo: 3185000, persen: "84%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 13, nama: "DARMAWATI 2", desa: "BULU TEMPE", plafon: 7000000, tenor: "12", tglCair: "20/12/2022", realLaluPokok: 4046000, realLaluBunga: 1260000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 4046000, realTotBunga: 1260000, saldo: 2954000, persen: "58%", angsuranKe: 8, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 14, nama: "DARMAWATI 3", desa: "BULU TEMPE", plafon: 7000000, tenor: "12", tglCair: "18/04/2023", realLaluPokok: 1295000, realLaluBunga: 1260000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 1295000, realTotBunga: 1260000, saldo: 5705000, persen: "19%", angsuranKe: 3, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 15, nama: "RIRIN", desa: "BULU TEMPE", plafon: 3000000, tenor: "12", tglCair: "28/04/2023", realLaluPokok: 1270000, realLaluBunga: 225000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 1270000, realTotBunga: 225000, saldo: 1730000, persen: "42%", angsuranKe: 6, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 16, nama: "HJ.HASNI BULAN", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "12/01/2024", realLaluPokok: 8950000, realLaluBunga: 1800000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 8950000, realTotBunga: 1800000, saldo: 1050000, persen: "90%", angsuranKe: 12, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 17, nama: "HJ.HASNI BULAN 2", desa: "BULU TEMPE", plafon: 5000000, tenor: "12", tglCair: "21/08/2024", realLaluPokok: 950000, realLaluBunga: 900000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 950000, realTotBunga: 900000, saldo: 4050000, persen: "19%", angsuranKe: 3, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 18, nama: "RAHMI,S.PD", desa: "BULU TEMPE", plafon: 30000000, tenor: "24", tglCair: "01/08/2024", realLaluPokok: 7200000, realLaluBunga: 4800000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 7200000, realTotBunga: 4800000, saldo: 22800000, persen: "100%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 19, nama: "A.AFIP MUPADDAL", desa: "BULU TEMPE", plafon: 10000000, tenor: "24", tglCair: "11/02/2025", realLaluPokok: 7650000, realLaluBunga: 2550000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 7650000, realTotBunga: 2550000, saldo: 2350000, persen: "100%", angsuranKe: 19, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 20, nama: "NURHAYATI C", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "06/08/2025", realLaluPokok: 9350000, realLaluBunga: 1650000, realIniPokok: 650000, realIniBunga: 150000, realTotPokok: 10000000, realTotBunga: 1800000, saldo: 0, persen: "100%", angsuranKe: 13, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 12, tanggal: "05/08/2026", pokok: 650000, jasa: 150000, denda: 0, total: 800000, sisaSaldo: 0 }] },
+            { no: 21, nama: "RAHMI,S.SOS", desa: "BULU TEMPE", plafon: 5000000, tenor: "12", tglCair: "15/09/2025", realLaluPokok: 4250000, realLaluBunga: 750000, realIniPokok: 375000, realIniBunga: 75000, realTotPokok: 4625000, realTotBunga: 825000, saldo: 375000, persen: "99%", angsuranKe: 12, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 11, tanggal: "05/08/2026", pokok: 375000, jasa: 75000, denda: 0, total: 450000, sisaSaldo: 375000 }] },
+            { no: 22, nama: "A.TAKWA", desa: "BULU TEMPE", plafon: 5000000, tenor: "12", tglCair: "26/10/2025", realLaluPokok: 3753000, realLaluBunga: 675000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 3753000, realTotBunga: 675000, saldo: 1247000, persen: "100%", angsuranKe: 10, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 23, nama: "ASIRAH", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "02/11/2025", realLaluPokok: 6800000, realLaluBunga: 1200000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 7650000, realTotBunga: 1350000, saldo: 2350000, persen: "100%", angsuranKe: 10, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 9, tanggal: "05/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 2350000 }] },
+            { no: 24, nama: "PARIDA", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "03/11/2025", realLaluPokok: 6800000, realLaluBunga: 1200000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 6800000, realTotBunga: 1200000, saldo: 3200000, persen: "100%", angsuranKe: 9, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 25, nama: "SUHAEMA", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", realLaluPokok: 4250000, realLaluBunga: 750000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 5100000, realTotBunga: 900000, saldo: 4900000, persen: "100%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 6, tanggal: "03/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 4900000 }] }
+        ];
+
         function getLPPData() {
             const data = localStorage.getItem('upk_lpp_master');
-            return data ? JSON.parse(data) : [];
+            return data ? JSON.parse(data) : sampleLPPData;
         }
 
         function saveLPPData(data) { localStorage.setItem('upk_lpp_master', JSON.stringify(data)); }
 
-        const defaultKas = [{ id: 1, tanggal: new Date().toISOString().split('T')[0], nama: 'Saldo Kas Operasional', kelurahan: 'Tanete Riattang Barat', kategori: 'Adm & Umum', tipe: 'Masuk', nominal: 2500000, noKwitansi: 'KWT-KAS-01' }];
-        function getKasData() { const d = localStorage.getItem('upk_kas_data'); return d ? JSON.parse(d) : defaultKas; }
+        const defaultKas = [
+            { id: 1, tanggal: new Date().toISOString().split('T')[0], nama: 'Saldo Kas Operasional awal', kelurahan: 'Tanete Riattang Barat', kategori: 'Adm & Umum', tipe: 'Masuk', nominal: 2500000, noKwitansi: 'KWT-KAS-01' }
+        ];
+
+        function getKasData() { 
+            const d = localStorage.getItem('upk_kas_data'); 
+            return d ? JSON.parse(d) : defaultKas; 
+        }
 
         function logAktivitas(kategori, detail) {
             let logs = JSON.parse(localStorage.getItem('upk_logs') || '[]');
@@ -846,39 +1023,14 @@
         async function loadDataDariGoogleSheet() {
             const badge = document.getElementById('syncStatusBadge');
             try {
-                if (badge) { 
-                    badge.textContent = "Sinkron Cloud..."; 
-                    badge.className = "badge bg-light text-danger small me-1 px-2 py-1 shadow-sm fw-semibold"; 
-                }
+                if (badge) { badge.textContent = "Sinkronisasi Cloud..."; badge.className = "badge bg-light text-danger small me-1 px-2 py-1 shadow-sm fw-semibold"; }
                 const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=get_all`);
                 const result = await response.json();
-                if (result && result.status === "success") {
-                    if (result.lpp && Array.isArray(result.lpp) && result.lpp.length > 0) {
-                        saveLPPData(result.lpp);
-                    }
-                    if (result.kas && Array.isArray(result.kas) && result.kas.length > 0) {
-                        localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
-                    }
-                    if (badge) { 
-                        badge.textContent = "Terhubung Cloud"; 
-                        badge.className = "badge bg-light text-success small me-1 px-2 py-1 shadow-sm fw-semibold"; 
-                    }
-                } else if (result && result.lpp && Array.isArray(result.lpp)) {
-                    if (result.lpp.length > 0) saveLPPData(result.lpp);
-                    if (result.kas && Array.isArray(result.kas) && result.kas.length > 0) {
-                        localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
-                    }
-                    if (badge) { 
-                        badge.textContent = "Terhubung Cloud"; 
-                        badge.className = "badge bg-light text-success small me-1 px-2 py-1 shadow-sm fw-semibold"; 
-                    }
-                }
+                if (result && result.lpp && result.lpp.length > 0) saveLPPData(result.lpp);
+                if (result && result.kas && result.kas.length > 0) localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
+                if (badge) { badge.textContent = "Terhubung Cloud"; badge.className = "badge bg-light text-success small me-1 px-2 py-1 shadow-sm fw-semibold"; }
             } catch (err) {
-                console.warn('Google Sheet fetch skipped or offline mode:', err);
-                if (badge) { 
-                    badge.textContent = "Mode Offline"; 
-                    badge.className = "badge bg-secondary text-white small me-1 px-2 py-1 shadow-sm"; 
-                }
+                if (badge) { badge.textContent = "Mode Offline"; badge.className = "badge bg-secondary text-white small me-1 px-2 py-1 shadow-sm"; }
             }
         }
 
@@ -897,94 +1049,6 @@
             } finally {
                 if (btn && !silent) { btn.innerHTML = '<i class="bi bi-file-earmark-spreadsheet me-1"></i> Sinkron Cloud'; btn.disabled = false; }
             }
-        }
-
-        function bukaModalLogin() {
-            const uEl = document.getElementById('username');
-            const pEl = document.getElementById('password');
-            const errEl = document.getElementById('loginError');
-            if (uEl) uEl.value = '';
-            if (pEl) pEl.value = '';
-            if (errEl) errEl.classList.add('d-none');
-
-            const modalEl = document.getElementById('loginModal');
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                bootstrap.Modal.getOrCreateInstance(modalEl).show();
-            }
-        }
-
-        function loginInstan(role) {
-            if (role === 'admin') {
-                localStorage.setItem('userRole', 'admin');
-                localStorage.setItem('userName', 'Admin UPK DAPM');
-                localStorage.setItem('isLoggedIn', 'true');
-            } else {
-                localStorage.setItem('userRole', 'teller');
-                localStorage.setItem('userName', 'Teller Kasir');
-                localStorage.setItem('isLoggedIn', 'true');
-            }
-            logAktivitas('Sistem', 'Login instan sukses (' + role + ')');
-
-            const modalEl = document.getElementById('loginModal');
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-            }
-            const backdrops = document.querySelectorAll('.modal-backdrop');
-            backdrops.forEach(b => b.remove());
-            document.body.classList.remove('modal-open');
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-
-            checkAuthUI();
-            showToast('success', 'Selamat datang!');
-        }
-
-        function checkAuthUI() {
-            const role = localStorage.getItem('userRole');
-            const theme = localStorage.getItem('theme');
-            if (theme === 'dark') document.body.classList.add('dark-mode');
-
-            const btnAuth = document.getElementById('btnNavAuth');
-            const greeting = document.getElementById('adminGreeting');
-            const roleBadge = document.getElementById('roleBadge');
-
-            if (role) {
-                const publicEl = document.getElementById('publicContent'); if (publicEl) publicEl.classList.add('d-none');
-                const privateEl = document.getElementById('privateDashboard'); if (privateEl) privateEl.classList.remove('d-none');
-                if (greeting) greeting.textContent = 'User: ' + (localStorage.getItem('userName') || 'Admin');
-                if (roleBadge) { roleBadge.textContent = role.toUpperCase(); roleBadge.classList.remove('d-none'); }
-
-                if (btnAuth) {
-                    btnAuth.innerHTML = '<i class="bi bi-box-arrow-right me-1"></i> Keluar';
-                    btnAuth.removeAttribute('data-bs-toggle');
-                    btnAuth.removeAttribute('data-bs-target');
-                    btnAuth.onclick = logout;
-                }
-                
-                const adminOnlyEls = document.querySelectorAll('.admin-only');
-                adminOnlyEls.forEach(el => el.style.display = role === 'admin' ? '' : 'none');
-
-                bukaView('panelProfil');
-            } else {
-                const publicEl = document.getElementById('publicContent'); if (publicEl) publicEl.classList.remove('d-none');
-                const privateEl = document.getElementById('privateDashboard'); if (privateEl) privateEl.classList.add('d-none');
-                if (greeting) greeting.textContent = '';
-                if (roleBadge) roleBadge.classList.add('d-none');
-
-                if (btnAuth) {
-                    btnAuth.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i> Masuk';
-                    btnAuth.onclick = function() { bukaModalLogin(); };
-                }
-            }
-        }
-
-        function logout() {
-            logAktivitas('Sistem', 'User Logout');
-            localStorage.removeItem('userRole');
-            localStorage.removeItem('userName');
-            localStorage.removeItem('isLoggedIn');
-            checkAuthUI();
-            showToast('info', 'Anda telah keluar.');
         }
 
         function bukaView(viewName) {
@@ -1060,12 +1124,18 @@
             const kasData = getKasData();
             let saldoKas = kasData.reduce((acc, curr) => curr.tipe === 'Masuk' ? acc + Number(curr.nominal) : acc - Number(curr.nominal), 0);
 
-            const elPlafon = document.getElementById('dashFinPlafon'); if (elPlafon) elPlafon.textContent = 'Rp ' + formatRp(tPlafon);
-            const elTotalNasabah = document.getElementById('dashFinTotalNasabah'); if (elTotalNasabah) elTotalNasabah.textContent = data.length;
-            const elRealPokok = document.getElementById('dashFinRealPokok'); if (elRealPokok) elRealPokok.textContent = 'Rp ' + formatRp(tRealPokok);
-            const elRealBunga = document.getElementById('dashFinRealBunga'); if (elRealBunga) elRealBunga.textContent = 'Rp ' + formatRp(tRealBunga);
-            const elSaldoOuts = document.getElementById('dashFinSaldoOuts'); if (elSaldoOuts) elSaldoOuts.textContent = 'Rp ' + formatRp(tSaldo);
-            const elSaldoKas = document.getElementById('dashFinSaldoKas'); if (elSaldoKas) elSaldoKas.textContent = 'Rp ' + formatRp(saldoKas);
+            document.getElementById('dashFinPlafon').textContent = 'Rp ' + formatRp(tPlafon);
+            document.getElementById('dashFinTotalNasabah').textContent = data.length;
+            document.getElementById('dashFinRealPokok').textContent = 'Rp ' + formatRp(tRealPokok);
+            document.getElementById('dashFinRealPokok2').textContent = 'Rp ' + formatRp(tRealPokok);
+            document.getElementById('dashFinRealBunga').textContent = 'Rp ' + formatRp(tRealBunga);
+            document.getElementById('dashFinSaldoOuts').textContent = 'Rp ' + formatRp(tSaldo);
+            document.getElementById('dashFinSaldoKas').textContent = 'Rp ' + formatRp(saldoKas);
+            document.getElementById('dashFinTargetPokok').textContent = 'Rp ' + formatRp(tTargetPokok);
+            document.getElementById('dashFinTunggakan').textContent = 'Rp ' + formatRp(tTunggakPokok);
+
+            const persenKolektibilitas = tTargetPokok > 0 ? Math.min(100, Math.round((tRealPokok / tTargetPokok) * 100)) : 100;
+            document.getElementById('dashFinProgressBar').style.width = `${persenKolektibilitas}%`;
 
             let labels = Object.keys(monthlyData).sort();
             let dataValues = labels.map(l => monthlyData[l]);
@@ -1075,47 +1145,33 @@
             const colorText = isDark ? '#e0e0e0' : '#2b2b2b';
             const colorAccent = isDark ? '#ff4d6d' : '#800020';
 
-            const canvasTren = document.getElementById('trenAngsuranChart');
-            if (canvasTren) {
-                if (trenAngsuranChartInstance) trenAngsuranChartInstance.destroy();
-                trenAngsuranChartInstance = new Chart(canvasTren, {
-                    type: 'bar',
-                    data: { labels: labels, datasets: [{ label: 'Pembayaran (Rp)', data: dataValues, backgroundColor: colorAccent, borderRadius: 6 }] },
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x:{ticks:{color:colorText}}, y: { ticks: { color: colorText, callback: v => 'Rp ' + formatRp(v) } } } }
-                });
-            }
+            if (trenAngsuranChartInstance) trenAngsuranChartInstance.destroy();
+            trenAngsuranChartInstance = new Chart(document.getElementById('trenAngsuranChart'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ label: 'Pembayaran (Rp)', data: dataValues, backgroundColor: colorAccent, borderRadius: 6 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x:{ticks:{color:colorText}}, y: { ticks: { color: colorText, callback: v => 'Rp ' + formatRp(v) } } } }
+            });
 
-            const canvasPie = document.getElementById('kolektibilitasPieChart');
-            if (canvasPie) {
-                if (kolektibilitasChartInstance) kolektibilitasChartInstance.destroy();
-                kolektibilitasChartInstance = new Chart(canvasPie, {
-                    type: 'doughnut',
-                    data: { labels: ['Lancar', 'Kurang Lancar', 'Diragukan', 'Macet'], datasets: [{ data: [kolStatus.lancar, kolStatus.kurangLancar, kolStatus.diragukan, kolStatus.macet], backgroundColor: ['#198754', '#ffc107', '#fd7e14', '#dc3545'], borderWidth: 0 }] },
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: colorText } } } }
-                });
-            }
+            if (kolektibilitasChartInstance) kolektibilitasChartInstance.destroy();
+            kolektibilitasChartInstance = new Chart(document.getElementById('kolektibilitasPieChart'), {
+                type: 'doughnut',
+                data: { labels: ['Lancar', 'Kurang Lancar', 'Diragukan', 'Macet'], datasets: [{ data: [kolStatus.lancar, kolStatus.kurangLancar, kolStatus.diragukan, kolStatus.macet], backgroundColor: ['#198754', '#ffc107', '#fd7e14', '#dc3545'], borderWidth: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: colorText } } } }
+            });
 
             const totalAktif = data.filter(d => d.saldo > 0).length;
             const pLancar = totalAktif > 0 ? Math.round((kolStatus.lancar / totalAktif) * 100) : 100;
-            const elPengembalian = document.getElementById('dashFinTingkatPengembalian');
-            if (elPengembalian) elPengembalian.textContent = pLancar + '% Pinjaman Lancar';
+            document.getElementById('dashFinTingkatPengembalian').textContent = `${pLancar}% Pinjaman Lancar`;
         }
 
         function renderJatuhTempoTable() {
             const allData = getLPPData();
             const tbody = document.getElementById('jatuhTempoTableBody');
-            if (!tbody) return;
             tbody.innerHTML = '';
-            
-            const filterDateEl = document.getElementById('filterTglJatuhTempo');
-            const selectedDateInput = filterDateEl ? filterDateEl.value : '';
+            const selectedDateInput = document.getElementById('filterTglJatuhTempo').value;
             const formattedSelectedDate = selectedDateInput ? formatTanggalID(new Date(selectedDateInput)) : formatTanggalID(new Date());
 
             let totalTodayPokok = 0, totalTodayJasa = 0;
-            if (allData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" class="text-center py-3 text-muted">Belum ada data peminjam.</td></tr>';
-                return;
-            }
 
             allData.forEach((item, realIndex) => {
                 const plafon = parseNum(item.plafon), tenor = parseInt(item.tenor) || 12;
@@ -1140,34 +1196,40 @@
                 }
 
                 if (bayarHariIniPokok > 0 || bayarHariIniJasa > 0) {
-                    statusBayarHariIni = '<span class="badge py-1 px-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle me-1"></i> Sudah Setor</span>';
+                    statusBayarHariIni = `<span class="badge py-1 px-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle me-1"></i> Sudah Setor</span>`;
+                } else if (parseNum(item.realIniPokok) > 0) {
+                    statusBayarHariIni = `<span class="badge bg-secondary text-white py-1 px-2 fw-semibold">Terisi LPP</span>`;
                 }
                 if (parseNum(item.saldo) <= 0) statusBayarHariIni = '<span class="badge bg-secondary text-white py-1 px-2 fw-semibold">LUNAS</span>';
 
                 totalTodayPokok += bayarHariIniPokok > 0 ? bayarHariIniPokok : parseNum(item.realIniPokok);
                 totalTodayJasa += bayarHariIniJasa > 0 ? bayarHariIniJasa : parseNum(item.realIniBunga);
 
-                tbody.innerHTML += '<tr>' +
-                    '<td class="text-center">' + (realIndex + 1) + '</td>' +
-                    '<td class="fw-semibold text-dark">' + (item.nama || '-') + '</td>' +
-                    '<td>' + (item.desa || '-') + '</td>' +
-                    '<td class="text-center fw-bold">' + bulanBerjalan + ' / ' + tenor + ' Bln</td>' +
-                    '<td class="text-end fw-bold text-danger">Rp ' + formatRp(tunggakanP) + '</td>' +
-                    '<td class="text-end fw-bold text-danger">Rp ' + formatRp(tunggakanJ) + '</td>' +
-                    '<td class="text-center">' + statusBayarHariIni + '</td>' +
-                    '<td class="text-center no-print">' +
-                        '<button class="btn btn-sm py-1 px-2 fw-semibold text-white me-1 shadow-sm bg-dark border-0" onclick="langsungBayarDariLPP(' + realIndex + ')"><i class="bi bi-cash me-1"></i> Kasir</button>' +
-                        '<button class="btn btn-sm btn-outline-dark py-1 px-2 shadow-sm me-1" onclick="kirimPesanJatuhTempoWA(\'' + (item.nama || '').replace(/'/g, "\\'") + '\', \'' + (item.desa || '').replace(/'/g, "\\'") + '\', \'' + (item.noHp || '') + '\', ' + item.saldo + ')"><i class="bi bi-whatsapp"></i></button>' +
-                        '<button class="btn btn-sm btn-outline-danger py-1 px-2 shadow-sm" onclick="bukaModalSP(' + realIndex + ')"><i class="bi bi-file-pdf"></i> SP</button>' +
-                    '</td>' +
-                '</tr>';
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="text-center">${realIndex + 1}</td>
+                        <td class="fw-semibold text-dark">${item.nama}</td>
+                        <td>${item.desa}</td>
+                        <td class="text-center fw-bold">${bulanBerjalan} / ${tenor} Bln</td>
+                        <td class="text-end fw-bold text-danger">Rp ${formatRp(tunggakanP)}</td>
+                        <td class="text-end fw-bold text-danger">Rp ${formatRp(tunggakanJ)}</td>
+                        <td class="text-center">${statusBayarHariIni}</td>
+                        <td class="text-center no-print">
+                            <button class="btn btn-sm py-1 px-2 fw-semibold text-white me-1 shadow-sm bg-dark border-0" onclick="langsungBayarDariLPP(${realIndex})"><i class="bi bi-cash me-1"></i> Kasir</button>
+                            <button class="btn btn-sm btn-outline-dark py-1 px-2 shadow-sm me-1" onclick="kirimPesanJatuhTempoWA('${item.nama.replace(/'/g, "\\'")}', '${item.desa.replace(/'/g, "\\'")}', '${item.noHp || ''}', ${item.saldo})"><i class="bi bi-whatsapp"></i></button>
+                            <button class="btn btn-sm btn-outline-danger py-1 px-2 shadow-sm" onclick="bukaModalSP(${realIndex})"><i class="bi bi-file-pdf"></i> SP</button>
+                        </td>
+                    </tr>`;
             });
+
+            document.getElementById('todayRealPokokDisplay').textContent = 'Rp ' + formatRp(totalTodayPokok);
+            document.getElementById('todayRealJasaDisplay').textContent = 'Rp ' + formatRp(totalTodayJasa);
         }
 
         function kirimPesanJatuhTempoWA(nama, desa, noHp, saldo) {
             let phone = (noHp || '').toString().replace(/[^0-9]/g, '');
             if (!phone || phone.length < 9) {
-                Swal.fire({ title: 'Nomor WhatsApp Kosong', text: 'Masukkan nomor untuk "' + nama + '":', input: 'text', showCancelButton: true }).then((res) => {
+                Swal.fire({ title: 'Nomor WhatsApp Kosong', text: `Masukkan nomor untuk "${nama}":`, input: 'text', showCancelButton: true }).then((res) => {
                     if (res.value) { phone = res.value.replace(/[^0-9]/g, ''); if (phone.startsWith('0')) phone = '62' + phone.substring(1); bukaWaUrl(phone, nama, desa, saldo); }
                 });
                 return;
@@ -1177,27 +1239,21 @@
         }
 
         function bukaWaUrl(phone, nama, desa, saldo) {
-            const pesan = "📢 *PEMBERITAHUAN TAGIHAN ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. *" + nama + "* (" + desa + ")\n\nSisa Saldo Pokok Anda: *Rp " + formatRp(saldo) + "*\n\nMohon untuk segera melakukan pembayaran angsuran ke kantor UPK DAPM Tanete Riattang Barat agar kewajiban tetap lancar. Terima kasih. 🙏";
-            window.open('https://api.whatsapp.com/send?phone=' + phone + '&text=' + encodeURIComponent(pesan), '_blank');
+            const pesan = `📢 *PEMBERITAHUAN TAGIHAN ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. *${nama}* (${desa})\n\nSisa Saldo Pokok Anda: *Rp ${formatRp(saldo)}*\n\nMohon untuk segera melakukan pembayaran angsuran ke kantor UPK DAPM Tanete Riattang Barat agar kewajiban tetap lancar. Terima kasih. 🙏`;
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
         function bukaModalSP(idx) {
             const n = getLPPData()[idx];
-            if (!n) return;
-            const idxEl = document.getElementById('spNasabahIdx'); if (idxEl) idxEl.value = idx;
-            const namaEl = document.getElementById('spNamaNasabah'); if (namaEl) namaEl.textContent = n.nama;
-            const modalEl = document.getElementById('modalCetakSP');
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                bootstrap.Modal.getOrCreateInstance(modalEl).show();
-            }
+            document.getElementById('spNasabahIdx').value = idx;
+            document.getElementById('spNamaNasabah').textContent = n.nama;
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCetakSP')).show();
         }
 
         function generateSPPDF(level) {
             if(!window.jspdf) { showToast('error', 'Modul PDF belum termuat.'); return; }
             const idx = document.getElementById('spNasabahIdx').value;
             const n = getLPPData()[idx];
-            if (!n) return;
-
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('p', 'mm', 'a4');
             
@@ -1214,52 +1270,47 @@
             doc.line(70, 52, 140, 52);
 
             doc.setFont("helvetica", "normal"); doc.setFontSize(11);
-            doc.text("Nomor     : " + level + "/SP-UPK/" + new Date().getFullYear(), 20, 65);
-            doc.text("Perihal   : Penyelesaian Tunggakan Pinjaman", 20, 71);
+            doc.text(`Nomor     : ${level}/SP-UPK/${new Date().getFullYear()}`, 20, 65);
+            doc.text(`Perihal   : Penyelesaian Tunggakan Pinjaman`, 20, 71);
 
-            doc.text("Kepada Yth.", 20, 85);
-            doc.setFont("helvetica", "bold"); doc.text("Bpk/Ibu " + n.nama, 20, 91);
-            doc.setFont("helvetica", "normal"); doc.text("Di Tempat (" + n.desa + ")", 20, 97);
+            doc.text(`Kepada Yth.`, 20, 85);
+            doc.setFont("helvetica", "bold"); doc.text(`Bpk/Ibu ${n.nama}`, 20, 91);
+            doc.setFont("helvetica", "normal"); doc.text(`Di Tempat (${n.desa})`, 20, 97);
 
-            let paragraf = doc.splitTextToSize("Dengan hormat,\nBerdasarkan catatan administrasi keuangan UPK DAPM Tanete Riattang Barat, Bpk/Ibu masih memiliki kewajiban sisa saldo pokok pinjaman sebesar Rp " + formatRp(n.saldo) + " yang telah melampaui jadwal kesepakatan angsuran.\n\nDemikian surat peringatan ini disampaikan agar Bpk/Ibu dapat segera menyelesaikan kewajiban tersebut di Kantor UPK Tanete Riattang Barat.", 170);
+            let paragraf = doc.splitTextToSize(`Dengan hormat,\nBerdasarkan catatan administrasi keuangan UPK DAPM Tanete Riattang Barat, Bpk/Ibu masih memiliki kewajiban sisa saldo pokok pinjaman sebesar Rp ${formatRp(n.saldo)} yang telah melampaui jadwal kesepakatan angsuran.\n\nDemikian surat peringatan ini disampaikan agar Bpk/Ibu dapat segera menyelesaikan kewajiban tersebut di Kantor UPK Tanete Riattang Barat.`, 170);
             doc.text(paragraf, 20, 110);
 
-            doc.text("Watampone, " + new Date().toLocaleDateString('id-ID'), 130, 180);
-            doc.text("Kepala UPK DAPM", 130, 186);
-            doc.text("( H. Jadjdji Irfan )", 130, 210);
+            doc.text(`Watampone, ${new Date().toLocaleDateString('id-ID')}`, 130, 180);
+            doc.text(`Kepala UPK DAPM`, 130, 186);
+            doc.text(`( H. Jadjdji Irfan )`, 130, 210);
 
-            doc.save("SP" + level + "_" + n.nama.replace(/\s+/g,'_') + ".pdf");
-            const modalEl = document.getElementById('modalCetakSP');
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-            }
-            logAktivitas('SP', 'Mencetak SP-' + level + ' untuk ' + n.nama);
+            doc.save(`SP${level}_${n.nama.replace(/\s+/g,'_')}.pdf`);
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCetakSP')).hide();
+            logAktivitas('SP', `Mencetak SP-${level} untuk ${n.nama}`);
             showToast('success', 'Surat Peringatan berhasil diunduh!');
         }
 
         let currentPeminjamPage = 1;
-        const peminjamItemsPerPage = 10;
+        let peminjamItemsPerPage = 10;
 
         function onPeminjamSearchInput() { currentPeminjamPage = 1; renderDataPeminjamTable(); }
 
         function renderDataPeminjamTable() {
-            const searchInput = document.getElementById('peminjamSearchInput');
-            const query = searchInput ? (searchInput.value || '').toLowerCase() : '';
-            const desaFilter = document.getElementById('peminjamDesaFilter');
-            const desa = desaFilter ? (desaFilter.value || '').toLowerCase() : '';
-            
+            const query = (document.getElementById('peminjamSearchInput').value || '').toLowerCase();
+            const desa = (document.getElementById('peminjamDesaFilter').value || '').toLowerCase();
+            const pageSizeSelect = document.getElementById('peminjamPageSizeSelect');
+            peminjamItemsPerPage = pageSizeSelect ? parseInt(pageSizeSelect.value) : 10;
+
             const allData = getLPPData();
             const tbody = document.getElementById('peminjamTableBody');
-            if (!tbody) return;
             tbody.innerHTML = '';
 
-            if (desaFilter) {
-                const currentVal = desaFilter.value;
-                const uniqueDesa = [...new Set(allData.map(item => (item.desa || '').trim()).filter(d => d))].sort();
-                desaFilter.innerHTML = '<option value="">Semua Kelurahan</option>';
-                uniqueDesa.forEach(d => { const opt = document.createElement('option'); opt.value = d; opt.textContent = d; desaFilter.appendChild(opt); });
-                desaFilter.value = currentVal;
-            }
+            const selectDesa = document.getElementById('peminjamDesaFilter');
+            const currentVal = selectDesa.value;
+            const uniqueDesa = [...new Set(allData.map(item => (item.desa || '').trim()).filter(d => d))].sort();
+            selectDesa.innerHTML = '<option value="">Semua Kelurahan</option>';
+            uniqueDesa.forEach(d => { const opt = document.createElement('option'); opt.value = d; opt.textContent = d; selectDesa.appendChild(opt); });
+            selectDesa.value = currentVal;
 
             const filtered = allData.filter(item => {
                 const matchQ = (item.nama || '').toLowerCase().includes(query) || (item.desa || '').toLowerCase().includes(query);
@@ -1267,17 +1318,22 @@
                 return matchQ && matchD;
             });
 
-            const totalPages = Math.ceil(filtered.length / peminjamItemsPerPage) || 1;
-            if (currentPeminjamPage > totalPages) currentPeminjamPage = totalPages;
-            const startIdx = (currentPeminjamPage - 1) * peminjamItemsPerPage;
-            const paginatedItems = filtered.slice(startIdx, startIdx + peminjamItemsPerPage);
+            let paginatedItems = filtered;
+            let totalPages = 1;
+            if (peminjamItemsPerPage > 0) {
+                totalPages = Math.ceil(filtered.length / peminjamItemsPerPage) || 1;
+                if (currentPeminjamPage > totalPages) currentPeminjamPage = totalPages;
+                if (currentPeminjamPage < 1) currentPeminjamPage = 1;
+                const startIdx = (currentPeminjamPage - 1) * peminjamItemsPerPage;
+                paginatedItems = filtered.slice(startIdx, startIdx + peminjamItemsPerPage);
+            }
 
             const isAdmin = localStorage.getItem('userRole') === 'admin';
 
             if (paginatedItems.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="11" class="text-center py-3 text-muted">Data peminjam tidak ditemukan.</td></tr>';
-                const infoEl = document.getElementById('peminjamPaginationInfo'); if (infoEl) infoEl.textContent = 'Menampilkan 0 data';
-                const pagEl = document.getElementById('peminjamPaginationContainer'); if (pagEl) pagEl.innerHTML = '';
+                document.getElementById('peminjamPaginationInfo').textContent = 'Menampilkan 0 data';
+                document.getElementById('peminjamPaginationContainer').innerHTML = '';
                 return;
             }
 
@@ -1287,54 +1343,412 @@
                 const isLunas = saldo <= 0;
                 let persenTampil = item.persenJasa !== undefined ? item.persenJasa : 1.5;
 
-                let delBtn = isAdmin ? '<button class="btn btn-sm btn-outline-danger py-1 px-2 shadow-sm" onclick="hapusPeminjam(' + realIndex + ')"><i class="bi bi-trash"></i></button>' : '';
+                let delBtn = isAdmin ? `<button class="btn btn-sm btn-outline-danger py-1 px-2 shadow-sm" onclick="hapusPeminjam(${realIndex})"><i class="bi bi-trash"></i></button>` : '';
 
-                tbody.innerHTML += '<tr>' +
-                    '<td class="text-center">' + (startIdx + index + 1) + '</td>' +
-                    '<td class="fw-semibold text-dark">' + (item.nama || '-') + '</td>' +
-                    '<td>' + (item.desa || '-') + '</td>' +
-                    '<td class="text-end fw-semibold">Rp ' + formatRp(plafon) + '</td>' +
-                    '<td class="text-center">' + item.tenor + ' Bln</td>' +
-                    '<td class="text-center fw-bold">' + persenTampil + '%</td>' +
-                    '<td class="text-center">' + formatTanggalTampil(item.tglCair) + '</td>' +
-                    '<td class="text-end fw-bold text-danger">Rp ' + formatRp(saldo) + '</td>' +
-                    '<td class="text-center"><span class="badge ' + (isLunas ? 'bg-secondary' : 'bg-dark') + '">' + (isLunas ? 'Lunas' : 'Aktif') + '</span></td>' +
-                    '<td class="text-center">' + (item.noHp || '-') + '</td>' +
-                    '<td class="text-center no-print">' +
-                        '<button class="btn btn-sm py-1 px-2 text-white bg-dark border-0 me-1 shadow-sm" onclick="bukaModalBuktiCairPeminjam(' + realIndex + ')" title="Bukti Transfer/Cair"><i class="bi bi-receipt-cutoff me-1"></i> Cair</button>' +
-                        '<button class="btn btn-sm btn-outline-dark py-1 px-2 me-1 shadow-sm" onclick="bukaModalEditPeminjam(' + realIndex + ')"><i class="bi bi-pencil-square"></i></button>' +
-                        delBtn +
-                    '</td>' +
-                '</tr>';
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="text-center">${peminjamItemsPerPage > 0 ? (currentPeminjamPage - 1) * peminjamItemsPerPage + index + 1 : index + 1}</td>
+                        <td class="fw-semibold text-dark">${item.nama}</td>
+                        <td>${item.desa}</td>
+                        <td class="text-end fw-semibold">Rp ${formatRp(plafon)}</td>
+                        <td class="text-center">${item.tenor} Bln</td>
+                        <td class="text-center fw-bold">${persenTampil}%</td>
+                        <td class="text-center">${formatTanggalTampil(item.tglCair)}</td>
+                        <td class="text-end fw-bold text-danger">Rp ${formatRp(saldo)}</td>
+                        <td class="text-center"><span class="badge ${isLunas ? 'bg-secondary' : 'bg-dark'}">${isLunas ? 'Lunas' : 'Aktif'}</span></td>
+                        <td class="text-center">${item.noHp || '-'}</td>
+                        <td class="text-center no-print">
+                            <button class="btn btn-sm py-1 px-2 text-white bg-dark border-0 me-1 shadow-sm" onclick="bukaModalBuktiCairPeminjam(${realIndex})" title="Bukti Transfer/Cair"><i class="bi bi-receipt-cutoff me-1"></i> Cair</button>
+                            <button class="btn btn-sm btn-outline-dark py-1 px-2 me-1 shadow-sm" onclick="bukaModalEditPeminjam(${realIndex})"><i class="bi bi-pencil-square"></i></button>
+                            ${delBtn}
+                        </td>
+                    </tr>`;
             });
 
+            // Update informasi & tombol kontrol paginasi
             const infoEl = document.getElementById('peminjamPaginationInfo');
-            if (infoEl) infoEl.textContent = 'Menampilkan ' + (startIdx + 1) + ' - ' + Math.min(startIdx + peminjamItemsPerPage, filtered.length) + ' dari ' + filtered.length + ' data';
-            
-            const pagContainer = document.getElementById('peminjamPaginationContainer');
-            if (pagContainer) {
-                pagContainer.innerHTML = '';
-                for (let i = 1; i <= totalPages; i++) {
-                    pagContainer.innerHTML += '<li class="page-item ' + (currentPeminjamPage === i ? 'active' : '') + '"><a class="page-link ' + (currentPeminjamPage === i ? 'bg-dark border-dark text-white' : 'text-dark') + '" href="#" onclick="changePeminjamPage(' + i + '); return false;">' + i + '</a></li>';
+            const containerEl = document.getElementById('peminjamPaginationContainer');
+
+            if (peminjamItemsPerPage > 0) {
+                const startItem = (currentPeminjamPage - 1) * peminjamItemsPerPage + 1;
+                const endItem = Math.min(currentPeminjamPage * peminjamItemsPerPage, filtered.length);
+                infoEl.textContent = `Menampilkan ${startItem} - ${endItem} dari ${filtered.length} data peminjam (Halaman ${currentPeminjamPage} dari ${totalPages})`;
+
+                let paginationHtml = `<li class="page-item ${currentPeminjamPage === 1 ? 'disabled' : ''}"><a class="page-link shadow-none" href="javascript:void(0)" onclick="gantiHalamanPeminjam(${currentPeminjamPage - 1})">&laquo;</a></li>`;
+                
+                for (let p = 1; p <= totalPages; p++) {
+                    paginationHtml += `<li class="page-item ${p === currentPeminjamPage ? 'active' : ''}"><a class="page-link shadow-none" href="javascript:void(0)" onclick="gantiHalamanPeminjam(${p})">${p}</a></li>`;
                 }
+
+                paginationHtml += `<li class="page-item ${currentPeminjamPage === totalPages ? 'disabled' : ''}"><a class="page-link shadow-none" href="javascript:void(0)" onclick="gantiHalamanPeminjam(${currentPeminjamPage + 1})">&raquo;</a></li>`;
+                containerEl.innerHTML = paginationHtml;
+            } else {
+                infoEl.textContent = `Menampilkan seluruh ${filtered.length} data peminjam`;
+                containerEl.innerHTML = '';
             }
         }
 
-        function changePeminjamPage(page) { currentPeminjamPage = page; renderDataPeminjamTable(); }
+        function gantiHalamanPeminjam(page) {
+            currentPeminjamPage = page;
+            renderDataPeminjamTable();
+        }
+
+        function langsungBayarDariLPP(idx) {
+            bukaView('panelBayarAngsuran');
+            pilihNasabahTeller(idx);
+        }
+
+        function hitungSimulasiPeminjamBaru() {
+            const plafon = parseNum(document.getElementById('newPlafon').value);
+            const tenor = parseInt(document.getElementById('newTenor').value) || 12;
+            const persenJasa = parseFloat(document.getElementById('newPersenJasa').value) || 1.5;
+
+            const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
+            const jasaPerBulan = bulatkan(plafon * (persenJasa / 100));
+            const totalPerBulan = pokokPerBulan + jasaPerBulan;
+
+            document.getElementById('simulasiPokokPerBulan').textContent = 'Rp ' + formatRp(pokokPerBulan);
+            document.getElementById('simulasiJasaPerBulan').textContent = 'Rp ' + formatRp(jasaPerBulan);
+            document.getElementById('simulasiTotalPerBulan').textContent = 'Rp ' + formatRp(totalPerBulan);
+        }
+
+        function bukaModalTambahPeminjam() {
+            document.getElementById('editIndex').value = '';
+            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-person-plus-fill text-danger me-1"></i> Tambah Peminjam Baru';
+            document.getElementById('formTambahPeminjam').reset();
+            document.getElementById('newPersenJasa').value = '1.5';
+            document.getElementById('newTenor').value = '12';
+            document.getElementById('newTglCair').value = new Date().toISOString().split('T')[0];
+            hitungSimulasiPeminjamBaru();
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('tambahPeminjamModal')).show();
+        }
+
+        function bukaModalEditPeminjam(idx) {
+            const allData = getLPPData();
+            const n = allData[idx];
+            if (!n) return;
+
+            document.getElementById('editIndex').value = idx;
+            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-pencil-square text-danger me-1"></i> Edit Data Peminjam';
+            document.getElementById('newNama').value = n.nama;
+            document.getElementById('newDesa').value = n.desa;
+            document.getElementById('newPlafon').value = formatRp(n.plafon);
+            document.getElementById('newTenor').value = n.tenor || '12';
+            document.getElementById('newPersenJasa').value = n.persenJasa !== undefined ? n.persenJasa : 1.5;
+            document.getElementById('newTglCair').value = convertToInputDate(n.tglCair);
+            document.getElementById('newNoHp').value = n.noHp || '';
+            hitungSimulasiPeminjamBaru();
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('tambahPeminjamModal')).show();
+        }
+
+        document.getElementById('formTambahPeminjam').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const idxStr = document.getElementById('editIndex').value;
+            const allData = getLPPData();
+
+            const nama = document.getElementById('newNama').value.trim().toUpperCase();
+            const desa = document.getElementById('newDesa').value.trim().toUpperCase();
+            const plafon = parseNum(document.getElementById('newPlafon').value);
+            const tenor = document.getElementById('newTenor').value;
+            const persenJasa = parseFloat(document.getElementById('newPersenJasa').value) || 1.5;
+            const tglCairRaw = document.getElementById('newTglCair').value;
+            const tglCairFormatted = formatTanggalID(new Date(tglCairRaw));
+            const noHp = document.getElementById('newNoHp').value.trim();
+
+            if (idxStr !== '') {
+                const idx = parseInt(idxStr);
+                const existing = allData[idx];
+                existing.nama = nama;
+                existing.desa = desa;
+                existing.plafon = plafon;
+                existing.tenor = tenor;
+                existing.persenJasa = persenJasa;
+                existing.tglCair = tglCairFormatted;
+                existing.noHp = noHp;
+                existing.saldo = Math.max(0, plafon - parseNum(existing.realTotPokok));
+                logAktivitas('Peminjam', `Mengubah data peminjam ${nama}`);
+            } else {
+                const newObj = {
+                    no: allData.length + 1,
+                    nama: nama,
+                    desa: desa,
+                    plafon: plafon,
+                    tenor: tenor,
+                    tglCair: tglCairFormatted,
+                    realLaluPokok: 0, realLaluBunga: 0,
+                    realIniPokok: 0, realIniBunga: 0,
+                    realTotPokok: 0, realTotBunga: 0,
+                    saldo: plafon,
+                    persen: "100%",
+                    angsuranKe: 1,
+                    noHp: noHp,
+                    persenJasa: persenJasa,
+                    history: []
+                };
+                allData.push(newObj);
+                logAktivitas('Peminjam', `Menambah peminjam baru ${nama}`);
+            }
+
+            saveLPPData(allData);
+            bootstrap.Modal.getInstance(document.getElementById('tambahPeminjamModal')).hide();
+            renderDataPeminjamTable();
+            updateDasborKeuangan();
+            backupKeGoogleSheet(true);
+            showToast('success', 'Data peminjam berhasil disimpan!');
+        });
+
+        function hapusPeminjam(idx) {
+            const allData = getLPPData();
+            const n = allData[idx];
+            if (!n) return;
+
+            Swal.fire({
+                title: 'Hapus Peminjam?',
+                text: `Apakah Anda yakin ingin menghapus "${n.nama}"? Data yang dihapus tidak dapat dikembalikan.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    logAktivitas('Peminjam', `Menghapus peminjam ${n.nama}`);
+                    allData.splice(idx, 1);
+                    saveLPPData(allData);
+                    renderDataPeminjamTable();
+                    updateDasborKeuangan();
+                    backupKeGoogleSheet(true);
+                    showToast('success', 'Data peminjam telah dihapus!');
+                }
+            });
+        }
+
+        function bukaModalBuktiCairPeminjam(idx) {
+            const n = getLPPData()[idx];
+            if (!n) return;
+            Swal.fire({
+                title: 'BUKTI PENCAIRAN PINJAMAN',
+                html: `
+                    <div class="text-start small p-3 card-light-custom rounded border">
+                        <p class="mb-1"><strong>Nama Nasabah:</strong> ${n.nama}</p>
+                        <p class="mb-1"><strong>Kelurahan:</strong> ${n.desa}</p>
+                        <p class="mb-1"><strong>Plafon Pinjaman:</strong> Rp ${formatRp(n.plafon)}</p>
+                        <p class="mb-1"><strong>Tenor:</strong> ${n.tenor} Bulan</p>
+                        <p class="mb-1"><strong>Persen Jasa:</strong> ${n.persenJasa || 1.5}% / bulan</p>
+                        <p class="mb-0"><strong>Tanggal Pencairan:</strong> ${formatTanggalTampil(n.tglCair)}</p>
+                    </div>
+                `,
+                icon: 'info',
+                confirmButtonText: 'Tutup'
+            });
+        }
+
+        function bukaModalTambahKas() {
+            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-journal-plus text-danger me-1"></i> Form Mutasi Kas';
+            document.getElementById('editKasId').value = '';
+            document.getElementById('transaksiForm').reset();
+            document.getElementById('tTanggal').value = new Date().toISOString().split('T')[0];
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('transaksiModal')).show();
+        }
+
+        document.getElementById('transaksiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const kasData = getKasData();
+            const tgl = document.getElementById('tTanggal').value;
+            const nama = document.getElementById('tNama').value.trim();
+            const kel = document.getElementById('tKelurahan').value.trim();
+            const tipe = document.getElementById('tTipe').value;
+            const kat = document.getElementById('tKategori').value;
+            const nominal = parseNum(document.getElementById('tNominal').value);
+            const kwitansi = document.getElementById('tKwitansi').value.trim() || 'KWT-KAS-' + Math.floor(1000 + Math.random() * 9000);
+
+            if (nominal <= 0) { showToast('warning', 'Masukkan nominal transaksi!'); return; }
+
+            kasData.unshift({
+                id: Date.now(),
+                tanggal: tgl,
+                nama: nama,
+                kelurahan: kel,
+                kategori: kat,
+                tipe: tipe,
+                nominal: nominal,
+                noKwitansi: kwitansi
+            });
+
+            localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+            bootstrap.Modal.getInstance(document.getElementById('transaksiModal')).hide();
+            renderKas();
+            updateDasborKeuangan();
+            backupKeGoogleSheet(true);
+            logAktivitas('Kas', `Tambah transaksi kas (${tipe}): ${nama} - Rp ${formatRp(nominal)}`);
+            showToast('success', 'Transaksi kas berhasil disimpan!');
+        });
+
+        function hapusKas(id) {
+            let kasData = getKasData();
+            const target = kasData.find(k => k.id === id);
+            if (!target) return;
+
+            Swal.fire({
+                title: 'Hapus Transaksi Kas?',
+                text: `Hapus mutasi "${target.nama}"?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Hapus'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    kasData = kasData.filter(k => k.id !== id);
+                    localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+                    renderKas();
+                    updateDasborKeuangan();
+                    backupKeGoogleSheet(true);
+                    logAktivitas('Kas', `Menghapus mutasi kas ID ${id}`);
+                    showToast('success', 'Transaksi kas dihapus!');
+                }
+            });
+        }
+
+        function hapusRiwayatPembayaran(nasabahIdx, historyIdx) {
+            const allData = getLPPData();
+            const n = allData[nasabahIdx];
+            if (!n || !n.history || !n.history[historyIdx]) return;
+
+            const h = n.history[historyIdx];
+            Swal.fire({
+                title: 'Hapus Pembayaran Ini?',
+                text: `Hapus riwayat angsuran ke-${h.angsuranKe} (${h.tanggal}) senilai Rp ${formatRp(h.total)}?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    n.realTotPokok = Math.max(0, parseNum(n.realTotPokok) - parseNum(h.pokok));
+                    n.realTotBunga = Math.max(0, parseNum(n.realTotBunga) - parseNum(h.jasa));
+                    n.saldo = Math.max(0, parseNum(n.plafon) - n.realTotPokok);
+                    n.history.splice(historyIdx, 1);
+
+                    saveLPPData(allData);
+                    renderRiwayatPembayaran(n);
+                    renderTellerCustomerList();
+                    updateDasborKeuangan();
+                    backupKeGoogleSheet(true);
+                    logAktivitas('Kasir', `Membatalkan pembayaran angsuran ${n.nama} tanggal ${h.tanggal}`);
+                    showToast('success', 'Riwayat pembayaran dibatalkan.');
+                }
+            });
+        }
+
+        function kirimBuktiWA() {
+            if (!lastPaymentReceipt) { showToast('error', 'Belum ada bukti setoran terakhir.'); return; }
+            let phone = (lastPaymentReceipt.noHp || '').toString().replace(/[^0-9]/g, '');
+            if (!phone) {
+                Swal.fire({ title: 'Nomor WhatsApp Kosong', text: 'Masukkan nomor WhatsApp nasabah:', input: 'text', showCancelButton: true }).then((res) => {
+                    if (res.value) { phone = res.value.replace(/[^0-9]/g, ''); if (phone.startsWith('0')) phone = '62' + phone.substring(1); kirimBuktiWAUrl(phone); }
+                });
+                return;
+            }
+            if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+            kirimBuktiWAUrl(phone);
+        }
+
+        function kirimBuktiWAUrl(phone) {
+            const r = lastPaymentReceipt;
+            const pesan = `✅ *BUKTI SETORAN RESMI UPK DAPM TR. BARAT*\n-----------------------------------------\nNo Kwitansi : *${r.noKwt}*\nTanggal     : ${r.tanggal}\nNama        : *${r.nama}* (${r.desa})\n\nSetoran Pokok (Ke-${r.angsuranKe}): Rp ${formatRp(r.pokok)}\nSetoran Jasa : Rp ${formatRp(r.jasa)}${r.denda > 0 ? '\nDenda        : Rp ' + formatRp(r.denda) : ''}\n-----------------------------------------\n*TOTAL SETORAN : Rp ${formatRp(r.total)}*\n-----------------------------------------\nSisa Saldo Pokok : *Rp ${formatRp(r.sisaSaldo)}*\nSisa Jasa        : ${r.sisaKali}x (Rp ${formatRp(r.sisaJasa)})\n\nTerima kasih atas pembayaran tepat waktu. 🙏`;
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
+        }
+
+        function downloadCurrentDataCSV() {
+            const data = getLPPData();
+            if (data.length === 0) { showToast('warning', 'Tidak ada data untuk diexport.'); return; }
+            let csv = Papa.unparse(data.map(d => ({
+                "No": d.no, "Nama Peminjam": d.nama, "Kelurahan": d.desa, "Plafon": d.plafon, "Tenor": d.tenor,
+                "Tgl Cair": d.tglCair, "Real Pokok": d.realTotPokok, "Real Jasa": d.realTotBunga, "Sisa Saldo": d.saldo, "No HP": d.noHp
+            })));
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", `Data_Peminjam_UPK_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+            showToast('success', 'CSV berhasil diunduh!');
+        }
+
+        function handleLPPFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    if (results.data && results.data.length > 0) {
+                        const imported = results.data.map((row, idx) => ({
+                            no: idx + 1,
+                            nama: (row["Nama Peminjam"] || row["nama"] || "TANPA NAMA").toUpperCase(),
+                            desa: (row["Kelurahan"] || row["desa"] || "TANETE RIATTANG BARAT").toUpperCase(),
+                            plafon: parseNum(row["Plafon"] || row["plafon"]),
+                            tenor: String(row["Tenor"] || row["tenor"] || "12"),
+                            tglCair: row["Tgl Cair"] || row["tglCair"] || formatTanggalID(new Date()),
+                            realLaluPokok: parseNum(row["Real Pokok"] || row["realTotPokok"]),
+                            realLaluBunga: parseNum(row["Real Jasa"] || row["realTotBunga"]),
+                            realIniPokok: 0, realIniBunga: 0,
+                            realTotPokok: parseNum(row["Real Pokok"] || row["realTotPokok"]),
+                            realTotBunga: parseNum(row["Real Jasa"] || row["realTotBunga"]),
+                            saldo: parseNum(row["Sisa Saldo"] || row["saldo"]) || Math.max(0, parseNum(row["Plafon"] || row["plafon"]) - parseNum(row["Real Pokok"] || row["realTotPokok"])),
+                            persen: "100%", angsuranKe: 1, noHp: row["No HP"] || row["noHp"] || "", persenJasa: 1.5, history: []
+                        }));
+                        saveLPPData(imported);
+                        renderLPPTable(); renderDataPeminjamTable(); updateDasborKeuangan(); backupKeGoogleSheet(true);
+                        showToast('success', `Berhasil mengimpor ${imported.length} data peminjam!`);
+                    }
+                }
+            });
+        }
+
+        function hitungKalkulator() {
+            const plafon = parseNum(document.getElementById('calcPlafon').value);
+            const tenor = parseInt(document.getElementById('calcTenor').value) || 12;
+            const jasa = parseFloat(document.getElementById('calcJasa').value) || 1.5;
+
+            if (plafon <= 0) { showToast('warning', 'Masukkan plafon pinjaman valid!'); return; }
+
+            const tbody = document.getElementById('calcTableBody');
+            tbody.innerHTML = '';
+
+            const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
+            const jasaPerBulan = bulatkan(plafon * (jasa / 100));
+            let sisaPokok = plafon;
+
+            for (let i = 1; i <= tenor; i++) {
+                let p = i === tenor ? sisaPokok : pokokPerBulan;
+                sisaPokok = Math.max(0, sisaPokok - p);
+                tbody.innerHTML += `
+                    <tr>
+                        <td>Bulan ${i}</td>
+                        <td class="text-end">Rp ${formatRp(p)}</td>
+                        <td class="text-end">Rp ${formatRp(jasaPerBulan)}</td>
+                        <td class="text-end fw-bold">Rp ${formatRp(p + jasaPerBulan)}</td>
+                        <td class="text-end text-danger fw-semibold">Rp ${formatRp(sisaPokok)}</td>
+                    </tr>`;
+            }
+        }
+
+        function clearLogs() {
+            localStorage.removeItem('upk_logs');
+            renderLogTable();
+            showToast('info', 'Log audit dibersihkan.');
+        }
 
         let currentActiveNasabahIdx = null;
         let lastPaymentReceipt = null;
 
         function renderTellerCustomerList() {
-            const searchInput = document.getElementById('tellerSearchInput');
-            const query = searchInput ? (searchInput.value || '').toLowerCase() : '';
+            const query = (document.getElementById('tellerSearchInput').value || '').toLowerCase();
             const allData = getLPPData();
             const listContainer = document.getElementById('tellerCustomerList');
-            if (!listContainer) return;
             listContainer.innerHTML = '';
 
             const filtered = allData.filter(item => (item.nama || '').toLowerCase().includes(query) || (item.desa || '').toLowerCase().includes(query));
-            const badge = document.getElementById('tellerCountBadge'); if (badge) badge.textContent = filtered.length;
 
             if (filtered.length === 0) { listContainer.innerHTML = '<div class="p-3 text-center small text-muted">Tidak ditemukan.</div>'; return; }
 
@@ -1342,17 +1756,17 @@
                 const originalIdx = allData.indexOf(item);
                 const saldo = parseNum(item.saldo), isLunas = saldo <= 0;
                 const itemBtn = document.createElement('div');
-                itemBtn.className = 'list-group-item customer-item p-2 ' + (currentActiveNasabahIdx === originalIdx ? 'active' : '');
-                itemBtn.onclick = function() { pilihNasabahTeller(originalIdx); };
-                itemBtn.innerHTML = 
-                    '<div class="d-flex justify-content-between align-items-center">' +
-                        '<strong class="text-dark">' + item.nama + '</strong>' +
-                        '<span class="badge ' + (isLunas ? 'bg-secondary' : 'bg-dark') + '" style="font-size: 0.68rem;">' + (isLunas ? 'Lunas' : 'Aktif') + '</span>' +
-                    '</div>' +
-                    '<div class="d-flex justify-content-between align-items-center small mt-1" style="font-size: 0.75rem; color: var(--text-muted);">' +
-                        '<span>' + item.desa + '</span>' +
-                        '<span class="text-danger fw-semibold">Rp ' + formatRp(saldo) + '</span>' +
-                    '</div>';
+                itemBtn.className = `list-group-item customer-item p-2 ${currentActiveNasabahIdx === originalIdx ? 'active' : ''}`;
+                itemBtn.onclick = () => pilihNasabahTeller(originalIdx);
+                itemBtn.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <strong class="text-dark">${item.nama}</strong>
+                        <span class="badge ${isLunas ? 'bg-secondary' : 'bg-dark'}" style="font-size: 0.68rem;">${isLunas ? 'Lunas' : 'Aktif'}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center small mt-1" style="font-size: 0.75rem; color: var(--text-muted);">
+                        <span>${item.desa}</span>
+                        <span class="text-danger fw-semibold">Rp ${formatRp(saldo)}</span>
+                    </div>`;
                 listContainer.appendChild(itemBtn);
             });
         }
@@ -1364,20 +1778,16 @@
             const n = allData[idx];
             if (!n) return;
 
-            const emptyState = document.getElementById('tellerEmptyState'); if (emptyState) emptyState.classList.add('d-none');
-            const activeForm = document.getElementById('tellerActiveForm'); if (activeForm) activeForm.classList.remove('d-none');
-            const kwtBox = document.getElementById('kwitansiSuccessBox'); if (kwtBox) kwtBox.classList.add('d-none');
-            
-            const inPokok = document.getElementById('tellerInputPokok'); if (inPokok) inPokok.value = '';
-            const inJasa = document.getElementById('tellerInputJasa'); if (inJasa) inJasa.value = '';
-            const inDenda = document.getElementById('tellerInputDenda'); if (inDenda) inDenda.value = '';
+            document.getElementById('tellerEmptyState').classList.add('d-none');
+            document.getElementById('tellerActiveForm').classList.remove('d-none');
+            document.getElementById('kwitansiSuccessBox').classList.add('d-none');
+            document.getElementById('tellerInputPokok').value = '';
+            document.getElementById('tellerInputJasa').value = '';
+            document.getElementById('tellerInputDenda').value = '';
 
             const plafon = parseNum(n.plafon), saldo = parseNum(n.saldo);
             const alertLunas = document.getElementById('nasabahLunasAlert');
-            if (alertLunas) {
-                if (saldo <= 0) alertLunas.classList.remove('d-none');
-                else alertLunas.classList.add('d-none');
-            }
+            if (saldo <= 0) alertLunas.classList.remove('d-none'); else alertLunas.classList.add('d-none');
 
             const tenor = parseInt(n.tenor) || 12;
             const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
@@ -1386,21 +1796,19 @@
             if (angsuranBerjalan < 1) angsuranBerjalan = 1;
 
             const selectAngs = document.getElementById('selectAngsuranKe');
-            if (selectAngs) {
-                selectAngs.innerHTML = '';
-                for (let i = 1; i <= tenor; i++) {
-                    const opt = document.createElement('option');
-                    opt.value = i; opt.textContent = 'Angsuran Ke-' + i + ' dari ' + tenor + ' Bln';
-                    if (i === angsuranBerjalan) opt.selected = true;
-                    selectAngs.appendChild(opt);
-                }
+            selectAngs.innerHTML = '';
+            for (let i = 1; i <= tenor; i++) {
+                const opt = document.createElement('option');
+                opt.value = i; opt.textContent = `Angsuran Ke-${i} dari ${tenor} Bln`;
+                if (i === angsuranBerjalan) opt.selected = true;
+                selectAngs.appendChild(opt);
             }
 
-            const elNama = document.getElementById('tellerNamaNasabah'); if (elNama) elNama.textContent = n.nama;
-            const elDesa = document.getElementById('tellerDesaNasabah'); if (elDesa) elDesa.textContent = 'Kelurahan: ' + n.desa + ' | Jasa: ' + (n.persenJasa || 1.5) + '%/bln | Cair: ' + formatTanggalTampil(n.tglCair);
-            const elPlafon = document.getElementById('tellerPlafonTenor'); if (elPlafon) elPlafon.textContent = 'Plafon: Rp ' + formatRp(plafon) + ' (' + tenor + ' Bln)';
-            const elTgl = document.getElementById('tellerInputTgl'); if (elTgl) elTgl.value = new Date().toISOString().split('T')[0];
-            const elWA = document.getElementById('tellerInputWA'); if (elWA) elWA.value = n.noHp || '';
+            document.getElementById('tellerNamaNasabah').textContent = n.nama;
+            document.getElementById('tellerDesaNasabah').textContent = `Kelurahan: ${n.desa} | Jasa: ${n.persenJasa || 1.5}%/bln | Cair: ${formatTanggalTampil(n.tglCair)}`;
+            document.getElementById('tellerPlafonTenor').textContent = `Plafon: Rp ${formatRp(plafon)} (${tenor} Bln)`;
+            document.getElementById('tellerInputTgl').value = new Date().toISOString().split('T')[0];
+            document.getElementById('tellerInputWA').value = n.noHp || '';
 
             kalkulasiOtomatisBerdasarkanAngsuran(angsuranBerjalan, true);
             renderRiwayatPembayaran(n);
@@ -1409,7 +1817,7 @@
         function onAngsuranKeChanged() { kalkulasiOtomatisBerdasarkanAngsuran(parseInt(document.getElementById('selectAngsuranKe').value) || 1, false); }
         function onTanggalBayarChanged() { onAngsuranKeChanged(); }
 
-        function kalkulasiOtomatisBerdasarkanAngsuran(keX, isInitial) {
+        function kalkulasiOtomatisBerdasarkanAngsuran(keX, isInitial = false) {
             if (currentActiveNasabahIdx === null) return;
             const n = getLPPData()[currentActiveNasabahIdx];
             if (!n) return;
@@ -1425,235 +1833,158 @@
             let sisaJasaTotal = Math.max(0, totalTargetJasa - realisasiJasaBulanLalu);
             let sisaPokokTotal = Math.max(0, plafon - parseNum(n.realTotPokok));
 
-            const elPosTargetP = document.getElementById('posTargetPokok'); if (elPosTargetP) elPosTargetP.textContent = formatRp(Math.min(plafon, pokokPerBulan * keX));
-            const elPosTargetB = document.getElementById('posTargetBunga'); if (elPosTargetB) elPosTargetB.textContent = formatRp(bungaPerBulan * keX);
-            const elRealLaluP = document.getElementById('posRealLaluPokok'); if (elRealLaluP) elRealLaluP.textContent = formatRp(parseNum(n.realTotPokok));
-            const elRealLaluB = document.getElementById('posRealLaluBunga'); if (elRealLaluB) elRealLaluB.textContent = formatRp(realisasiJasaBulanLalu);
-            const elSisaP = document.getElementById('tellerSisaPokok'); if (elSisaP) elSisaP.textContent = formatRp(sisaPokokTotal);
-            const elSisaJ = document.getElementById('tellerSisaJasa'); if (elSisaJ) elSisaJ.textContent = formatRp(sisaJasaTotal);
-            const elTotalGab = document.getElementById('tellerTotalSisaGabungan'); if (elTotalGab) elTotalGab.textContent = 'Rp ' + formatRp(sisaPokokTotal + sisaJasaTotal);
+            document.getElementById('posTargetPokok').textContent = formatRp(Math.min(plafon, pokokPerBulan * keX));
+            document.getElementById('posTargetBunga').textContent = formatRp(bungaPerBulan * keX);
+            document.getElementById('posRealLaluPokok').textContent = formatRp(parseNum(n.realTotPokok));
+            document.getElementById('posRealLaluBunga').textContent = formatRp(realisasiJasaBulanLalu);
+            document.getElementById('tellerSisaPokok').textContent = formatRp(sisaPokokTotal);
+            document.getElementById('tellerSisaJasa').textContent = formatRp(sisaJasaTotal);
+            document.getElementById('tellerTotalSisaGabungan').textContent = 'Rp ' + formatRp(sisaPokokTotal + sisaJasaTotal);
 
             if (isInitial) {
-                const inPokok = document.getElementById('tellerInputPokok'); if (inPokok) inPokok.value = formatRp(Math.min(pokokPerBulan, sisaPokokTotal));
-                const inJasa = document.getElementById('tellerInputJasa'); if (inJasa) inJasa.value = formatRp(bungaPerBulan);
+                document.getElementById('tellerInputPokok').value = formatRp(Math.min(pokokPerBulan, sisaPokokTotal));
+                document.getElementById('tellerInputJasa').value = formatRp(bungaPerBulan);
             }
             hitungTellerSisaRealtime();
         }
 
-        function quickFillAngsuran(type) {
-            if (currentActiveNasabahIdx === null) return;
-            const n = getLPPData()[currentActiveNasabahIdx];
-            if (!n) return;
-
-            const plafon = parseNum(n.plafon), tenor = parseInt(n.tenor) || 12, saldo = parseNum(n.saldo);
-            let pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
-            let bungaPerBulan = bulatkan(plafon * ((n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5) / 100));
-
-            const inPokok = document.getElementById('tellerInputPokok');
-            const inJasa = document.getElementById('tellerInputJasa');
-
-            if (type === 'target' || type === 'normal') {
-                if (inPokok) inPokok.value = formatRp(Math.min(pokokPerBulan, saldo));
-                if (inJasa) inJasa.value = formatRp(bungaPerBulan);
-            } else if (type === 'lunas') {
-                if (inPokok) inPokok.value = formatRp(saldo);
-                const totalTargetJasa = bulatkan(plafon * ((n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5) / 100) * tenor);
-                if (inJasa) inJasa.value = formatRp(Math.max(0, totalTargetJasa - parseNum(n.realTotBunga)));
+        function renderRiwayatPembayaran(nasabah) {
+            const tbody = document.getElementById('tellerHistoryTableBody');
+            tbody.innerHTML = '';
+            const isAdmin = localStorage.getItem('userRole') === 'admin';
+            
+            if (!nasabah.history || nasabah.history.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-muted small">Belum ada riwayat pembayaran tercatat.</td></tr>`;
+                return;
             }
-            hitungTellerSisaRealtime();
+            
+            nasabah.history.forEach((h, hIdx) => {
+                let delBtn = isAdmin ? `<button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" onclick="hapusRiwayatPembayaran(${currentActiveNasabahIdx}, ${hIdx})"><i class="bi bi-trash"></i></button>` : '-';
+                tbody.innerHTML += `
+                    <tr>
+                        <td>Ke-${h.angsuranKe}</td>
+                        <td>${h.tanggal}</td>
+                        <td class="text-end">Rp ${formatRp(h.pokok)}</td>
+                        <td class="text-end">Rp ${formatRp(h.jasa)}</td>
+                        <td class="text-end text-danger">Rp ${formatRp(h.denda || 0)}</td>
+                        <td class="text-end text-danger">Rp ${formatRp(h.sisaSaldo)}</td>
+                        <td class="admin-only">${delBtn}</td>
+                    </tr>`;
+            });
         }
 
         function hitungTellerSisaRealtime() {
             if (currentActiveNasabahIdx === null) return;
             const n = getLPPData()[currentActiveNasabahIdx];
             if (!n) return;
-            const inPokok = document.getElementById('tellerInputPokok');
-            const bayarP = parseNum(inPokok ? inPokok.value : 0);
+            const bayarP = parseNum(document.getElementById('tellerInputPokok').value);
             const saldoAktif = parseNum(n.saldo);
-            if (bayarP > saldoAktif) {
-                showToast('warning', 'Setoran pokok melebihi sisa piutang!');
-                if (inPokok) inPokok.value = formatRp(saldoAktif);
-            }
-            const elEst = document.getElementById('tellerEstimasiSisa');
-            if (elEst) elEst.textContent = 'Rp ' + formatRp(Math.max(0, saldoAktif - parseNum(inPokok ? inPokok.value : 0)));
-        }
-
-        function renderRiwayatPembayaran(nasabah) {
-            const tbody = document.getElementById('tellerHistoryTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-            const isAdmin = localStorage.getItem('userRole') === 'admin';
-            
-            if (!nasabah.history || nasabah.history.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="text-muted small">Belum ada riwayat pembayaran tercatat.</td></tr>';
-                return;
-            }
-            
-            nasabah.history.forEach((h, hIdx) => {
-                let delBtn = isAdmin ? '<button class="btn btn-sm btn-outline-danger py-0 px-2 shadow-sm" onclick="hapusRiwayatPembayaran(' + currentActiveNasabahIdx + ', ' + hIdx + ')"><i class="bi bi-trash"></i></button>' : '-';
-                tbody.innerHTML += '<tr>' +
-                    '<td>Ke-' + h.angsuranKe + '</td>' +
-                    '<td>' + h.tanggal + '</td>' +
-                    '<td class="text-end">Rp ' + formatRp(h.pokok) + '</td>' +
-                    '<td class="text-end">Rp ' + formatRp(h.jasa) + '</td>' +
-                    '<td class="text-end text-danger">Rp ' + formatRp(h.denda || 0) + '</td>' +
-                    '<td class="text-end text-danger">Rp ' + formatRp(h.sisaSaldo) + '</td>' +
-                    '<td class="admin-only">' + delBtn + '</td>' +
-                '</tr>';
-            });
-        }
-
-        function hapusRiwayatPembayaran(nasabahIdx, historyIdx) {
-            const allData = getLPPData();
-            const nasabah = allData[nasabahIdx];
-            if (!nasabah || !nasabah.history || !nasabah.history[historyIdx]) return;
-
-            Swal.fire({
-                title: 'Hapus Riwayat Angsuran?', text: 'Data target dan realisasi LPP akan disesuaikan kembali.', icon: 'warning',
-                showCancelButton: true, confirmButtonColor: '#800020', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus!'
-            }).then((res) => {
-                if (res.isConfirmed) {
-                    const deleted = nasabah.history.splice(historyIdx, 1)[0];
-                    nasabah.realTotPokok = Math.max(0, parseNum(nasabah.realTotPokok) - parseNum(deleted.pokok));
-                    nasabah.realTotBunga = Math.max(0, parseNum(nasabah.realTotBunga) - parseNum(deleted.jasa));
-                    nasabah.saldo = parseNum(nasabah.plafon) - parseNum(nasabah.realTotPokok);
-
-                    saveLPPData(allData); pilihNasabahTeller(nasabahIdx); updateDasborKeuangan(); backupKeGoogleSheet(true);
-                    logAktivitas('Kasir', 'MENGHAPUS angsuran Ke-' + deleted.angsuranKe + ' nasabah ' + nasabah.nama);
-                    showToast('success', 'Riwayat angsuran berhasil dihapus.');
-                }
-            });
+            document.getElementById('tellerEstimasiSisa').textContent = `Rp ${formatRp(Math.max(0, saldoAktif - bayarP))}`;
         }
 
         function resetTellerForm() {
             currentActiveNasabahIdx = null;
-            const emptyState = document.getElementById('tellerEmptyState'); if (emptyState) emptyState.classList.remove('d-none');
-            const activeForm = document.getElementById('tellerActiveForm'); if (activeForm) activeForm.classList.add('d-none');
-            const kwtBox = document.getElementById('kwitansiSuccessBox'); if (kwtBox) kwtBox.classList.add('d-none');
+            document.getElementById('tellerEmptyState').classList.remove('d-none');
+            document.getElementById('tellerActiveForm').classList.add('d-none');
             renderTellerCustomerList();
         }
 
-        const tellerFormEl = document.getElementById('tellerPaymentForm');
-        if (tellerFormEl) {
-            tellerFormEl.addEventListener('submit', function(e) {
-                e.preventDefault();
-                if (currentActiveNasabahIdx === null) return;
-                const allData = getLPPData();
-                const n = allData[currentActiveNasabahIdx];
-                if (!n) return;
+        document.getElementById('tellerPaymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (currentActiveNasabahIdx === null) return;
+            const allData = getLPPData();
+            const n = allData[currentActiveNasabahIdx];
+            if (!n) return;
 
-                const bayarPokok = parseNum(document.getElementById('tellerInputPokok').value);
-                const bayarJasa = parseNum(document.getElementById('tellerInputJasa').value);
-                const denda = parseNum(document.getElementById('tellerInputDenda').value);
-                const keX = parseInt(document.getElementById('selectAngsuranKe').value) || 1;
-                const noWA = document.getElementById('tellerInputWA').value.trim();
-                const tglBayar = document.getElementById('tellerInputTgl').value;
+            const bayarPokok = parseNum(document.getElementById('tellerInputPokok').value);
+            const bayarJasa = parseNum(document.getElementById('tellerInputJasa').value);
+            const denda = parseNum(document.getElementById('tellerInputDenda').value);
+            const keX = parseInt(document.getElementById('selectAngsuranKe').value) || 1;
+            const noWA = document.getElementById('tellerInputWA').value.trim();
+            const tglBayar = document.getElementById('tellerInputTgl').value;
 
-                if (bayarPokok <= 0 && bayarJasa <= 0 && denda <= 0) { showToast('warning', 'Masukkan setoran nominal!'); return; }
+            if (bayarPokok <= 0 && bayarJasa <= 0 && denda <= 0) { showToast('warning', 'Masukkan nominal setoran!'); return; }
 
-                const plafon = parseNum(n.plafon), tenor = parseInt(n.tenor) || 12;
-                const persenJasa = n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5;
-                const totalTargetJasa = bulatkan(plafon * (persenJasa / 100) * tenor);
-                const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
+            const plafon = parseNum(n.plafon), tenor = parseInt(n.tenor) || 12;
+            const persenJasa = n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5;
+            const totalTargetJasa = bulatkan(plafon * (persenJasa / 100) * tenor);
+            const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
 
-                n.realLaluPokok = parseNum(n.realTotPokok);
-                n.realLaluBunga = parseNum(n.realTotBunga);
-                n.realIniPokok = bayarPokok;
-                n.realIniBunga = bayarJasa;
-                n.realTotPokok = parseNum(n.realLaluPokok) + bayarPokok;
-                n.realTotBunga = parseNum(n.realLaluBunga) + bayarJasa;
-                n.saldo = Math.max(0, plafon - n.realTotPokok);
-                
-                const sisaJasaAktif = Math.max(0, totalTargetJasa - n.realTotBunga);
-                let sisaKaliBayarKwt = bungaPerBulan > 0 ? Math.round(sisaJasaAktif / bungaPerBulan) : 0;
+            n.realLaluPokok = parseNum(n.realTotPokok);
+            n.realLaluBunga = parseNum(n.realTotBunga);
+            n.realIniPokok = bayarPokok;
+            n.realIniBunga = bayarJasa;
+            n.realTotPokok = parseNum(n.realLaluPokok) + bayarPokok;
+            n.realTotBunga = parseNum(n.realLaluBunga) + bayarJasa;
+            n.saldo = Math.max(0, plafon - n.realTotPokok);
+            
+            const sisaJasaAktif = Math.max(0, totalTargetJasa - n.realTotBunga);
+            let sisaKaliBayarKwt = bungaPerBulan > 0 ? Math.round(sisaJasaAktif / bungaPerBulan) : 0;
 
-                n.noHp = noWA;
-                n.angsuranKe = keX + 1;
+            n.noHp = noWA;
+            n.angsuranKe = keX + 1;
 
-                if (!n.history) n.history = [];
-                n.history.unshift({
-                    angsuranKe: keX, tanggal: tglBayar ? formatTanggalID(new Date(tglBayar)) : formatTanggalID(new Date()),
-                    pokok: bayarPokok, jasa: bayarJasa, denda: denda, total: bayarPokok + bayarJasa + denda, sisaSaldo: n.saldo, sisaJasa: sisaJasaAktif
-                });
-
-                saveLPPData(allData);
-                const totalBayar = bayarPokok + bayarJasa;
-                const kwitansiOtomatis = 'KWT-' + Math.floor(100000 + Math.random() * 900000);
-                
-                const kasData = getKasData();
-                kasData.unshift({
-                    id: Date.now(), tanggal: tglBayar || new Date().toISOString().split('T')[0],
-                    nama: 'Angsuran Ke-' + keX + ' (' + n.nama + ') - P:' + formatRp(bayarPokok) + ', J:' + formatRp(bayarJasa),
-                    kelurahan: n.desa, kategori: 'Angsuran', tipe: 'Masuk', nominal: totalBayar, noKwitansi: kwitansiOtomatis
-                });
-
-                if (denda > 0) {
-                    kasData.unshift({
-                        id: Date.now() + 1, tanggal: tglBayar || new Date().toISOString().split('T')[0],
-                        nama: 'Denda Angsuran (' + n.nama + ')', kelurahan: n.desa, kategori: 'Denda', tipe: 'Masuk', nominal: denda, noKwitansi: kwitansiOtomatis + '-D'
-                    });
-                }
-
-                localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
-
-                lastPaymentReceipt = {
-                    noKwt: kwitansiOtomatis, nama: n.nama, desa: n.desa, pokok: bayarPokok, jasa: bayarJasa, denda: denda,
-                    total: totalBayar + denda, sisaSaldo: n.saldo, sisaJasa: sisaJasaAktif, sisaKali: sisaKaliBayarKwt, angsuranKe: keX,
-                    tanggal: tglBayar ? formatTanggalID(new Date(tglBayar)) : formatTanggalID(new Date()), noHp: noWA
-                };
-
-                const elNoKwt = document.getElementById('kwtNoTransaksi'); if (elNoKwt) elNoKwt.textContent = 'No: ' + lastPaymentReceipt.noKwt;
-                const elTglKwt = document.getElementById('kwtTglTransaksi'); if (elTglKwt) elTglKwt.textContent = 'Tgl: ' + lastPaymentReceipt.tanggal;
-                const elNamaKwt = document.getElementById('kwtNamaNasabah'); if (elNamaKwt) elNamaKwt.textContent = lastPaymentReceipt.nama;
-                const elDesaKwt = document.getElementById('kwtDesa'); if (elDesaKwt) elDesaKwt.textContent = lastPaymentReceipt.desa;
-                const elKeKwt = document.getElementById('kwtAngsPokokKe'); if (elKeKwt) elKeKwt.textContent = lastPaymentReceipt.angsuranKe;
-                const elPokokKwt = document.getElementById('kwtPokok'); if (elPokokKwt) elPokokKwt.textContent = 'Rp ' + formatRp(lastPaymentReceipt.pokok);
-                const elJasaKwt = document.getElementById('kwtJasa'); if (elJasaKwt) elJasaKwt.textContent = 'Rp ' + formatRp(lastPaymentReceipt.jasa);
-                
-                const dendaRow = document.getElementById('kwtDendaRow');
-                if (dendaRow) {
-                    if (denda > 0) {
-                        dendaRow.classList.remove('d-none');
-                        const elDendaKwt = document.getElementById('kwtDenda'); if (elDendaKwt) elDendaKwt.textContent = 'Rp ' + formatRp(denda);
-                    } else {
-                        dendaRow.classList.add('d-none');
-                    }
-                }
-
-                const elTotKwt = document.getElementById('kwtTotal'); if (elTotKwt) elTotKwt.textContent = 'Rp ' + formatRp(lastPaymentReceipt.total);
-                const elSisaPKwt = document.getElementById('kwtSisaSaldo'); if (elSisaPKwt) elSisaPKwt.textContent = 'Rp ' + formatRp(lastPaymentReceipt.sisaSaldo);
-                const elSisaJKwt = document.getElementById('kwtSisaJasaKwt'); if (elSisaJKwt) elSisaJKwt.textContent = lastPaymentReceipt.sisaKali + 'x (Rp ' + formatRp(lastPaymentReceipt.sisaJasa) + ')';
-
-                const kwtBox = document.getElementById('kwitansiSuccessBox'); if (kwtBox) kwtBox.classList.remove('d-none');
-                renderRiwayatPembayaran(n); updateDasborKeuangan(); backupKeGoogleSheet(true);
-                logAktivitas('Kasir', 'Menerima setoran ' + n.nama + ' senilai Rp ' + formatRp(totalBayar + denda));
-                showToast('success', 'Pembayaran berhasil disimpan!');
+            if (!n.history) n.history = [];
+            n.history.unshift({
+                angsuranKe: keX, tanggal: tglBayar ? formatTanggalID(new Date(tglBayar)) : formatTanggalID(new Date()),
+                pokok: bayarPokok, jasa: bayarJasa, denda: denda, total: bayarPokok + bayarJasa + denda, sisaSaldo: n.saldo, sisaJasa: sisaJasaAktif
             });
-        }
 
-        function kirimBuktiWA() {
-            if (!lastPaymentReceipt) return;
-            let phone = (lastPaymentReceipt.noHp || '').toString().replace(/[^0-9]/g, '');
-            if (!phone || phone.length < 9) {
-                Swal.fire({ title: 'Nomor WhatsApp Kosong', text: 'Masukkan nomor telepon aktif untuk "' + lastPaymentReceipt.nama + '":', input: 'text', showCancelButton: true }).then((res) => {
-                    if (res.value) { phone = res.value.replace(/[^0-9]/g, ''); if (phone.startsWith('0')) phone = '62' + phone.substring(1); bukaWaKwitansiUrl(phone); }
+            saveLPPData(allData);
+            const totalBayar = bayarPokok + bayarJasa;
+            const kwitansiOtomatis = 'KWT-' + Math.floor(100000 + Math.random() * 900000);
+            
+            const kasData = getKasData();
+            kasData.unshift({
+                id: Date.now(), tanggal: tglBayar || new Date().toISOString().split('T')[0],
+                nama: `Angsuran Ke-${keX} (${n.nama}) - P:${formatRp(bayarPokok)}, J:${formatRp(bayarJasa)}`,
+                kelurahan: n.desa, kategori: 'Angsuran', tipe: 'Masuk', nominal: totalBayar, noKwitansi: kwitansiOtomatis
+            });
+
+            if (denda > 0) {
+                kasData.unshift({
+                    id: Date.now() + 1, tanggal: tglBayar || new Date().toISOString().split('T')[0],
+                    nama: `Denda Angsuran (${n.nama})`, kelurahan: n.desa, kategori: 'Denda', tipe: 'Masuk', nominal: denda, noKwitansi: kwitansiOtomatis + '-D'
                 });
-                return;
             }
-            if (phone.startsWith('0')) phone = '62' + phone.substring(1);
-            bukaWaKwitansiUrl(phone);
-        }
 
-        function bukaWaKwitansiUrl(phone) {
-            const pesan = "🏛️ *BUKTI SETORAN RESMI UPK DAPM TR. BARAT*\n-----------------------------------------\nNo: " + lastPaymentReceipt.noKwt + "\nTgl: " + lastPaymentReceipt.tanggal + "\nNama: *" + lastPaymentReceipt.nama + "*\nKelurahan: " + lastPaymentReceipt.desa + "\n-----------------------------------------\n🔹 Pokok (Ke-" + lastPaymentReceipt.angsuranKe + "): Rp " + formatRp(lastPaymentReceipt.pokok) + "\n🔹 Jasa: Rp " + formatRp(lastPaymentReceipt.jasa) + "\n💰 *TOTAL: Rp " + formatRp(lastPaymentReceipt.total) + "*\n-----------------------------------------\n- Sisa Saldo Pokok: Rp " + formatRp(lastPaymentReceipt.sisaSaldo) + "\n-----------------------------------------\nTerima kasih atas pembayaran Anda. 🙏";
-            window.open('https://api.whatsapp.com/send?phone=' + phone + '&text=' + encodeURIComponent(pesan), '_blank');
-        }
+            localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+
+            lastPaymentReceipt = {
+                noKwt: kwitansiOtomatis, nama: n.nama, desa: n.desa, pokok: bayarPokok, jasa: bayarJasa, denda: denda,
+                total: totalBayar + denda, sisaSaldo: n.saldo, sisaJasa: sisaJasaAktif, sisaKali: sisaKaliBayarKwt, angsuranKe: keX,
+                tanggal: tglBayar ? formatTanggalID(new Date(tglBayar)) : formatTanggalID(new Date()), noHp: noWA
+            };
+
+            document.getElementById('kwtNoTransaksi').textContent = `No: ${lastPaymentReceipt.noKwt}`;
+            document.getElementById('kwtTglTransaksi').textContent = `Tgl: ${lastPaymentReceipt.tanggal}`;
+            document.getElementById('kwtNamaNasabah').textContent = lastPaymentReceipt.nama;
+            document.getElementById('kwtDesa').textContent = lastPaymentReceipt.desa;
+            document.getElementById('kwtAngsPokokKe').textContent = lastPaymentReceipt.angsuranKe;
+            document.getElementById('kwtPokok').textContent = `Rp ${formatRp(lastPaymentReceipt.pokok)}`;
+            document.getElementById('kwtJasa').textContent = `Rp ${formatRp(lastPaymentReceipt.jasa)}`;
+            
+            if (denda > 0) {
+                document.getElementById('kwtDendaRow').classList.remove('d-none');
+                document.getElementById('kwtDenda').textContent = `Rp ${formatRp(denda)}`;
+            } else {
+                document.getElementById('kwtDendaRow').classList.add('d-none');
+            }
+
+            document.getElementById('kwtTotal').textContent = `Rp ${formatRp(lastPaymentReceipt.total)}`;
+            document.getElementById('kwtSisaSaldo').textContent = `Rp ${formatRp(lastPaymentReceipt.sisaSaldo)}`;
+            document.getElementById('kwtSisaJasaKwt').textContent = `${lastPaymentReceipt.sisaKali}x (Rp ${formatRp(lastPaymentReceipt.sisaJasa)})`;
+
+            document.getElementById('kwitansiSuccessBox').classList.remove('d-none');
+            renderRiwayatPembayaran(n); updateDasborKeuangan(); backupKeGoogleSheet(true);
+            logAktivitas('Kasir', `Menerima setoran ${n.nama} senilai Rp ${formatRp(totalBayar + denda)}`);
+            showToast('success', 'Pembayaran berhasil disimpan!');
+        });
 
         function renderLPPTable(filterData = null) {
             const allData = getLPPData();
             const data = filterData !== null ? filterData : allData;
             const tbody = document.getElementById('lppTableBody'), tfoot = document.getElementById('lppTableFoot');
-            if(!tbody) return;
             tbody.innerHTML = ''; 
 
             const selectDesa = document.getElementById('desaFilter');
@@ -1668,7 +1999,7 @@
             let tPlafon = 0, tTarP = 0, tTarB = 0, tLaluP = 0, tLaluB = 0, tIniP = 0, tIniB = 0, tTotP = 0, tTotB = 0, tSaldo = 0, tTungP = 0, tTungB = 0;
 
             if (data.length === 0) { 
-                tbody.innerHTML = '<tr><td colspan="18" class="text-center py-3 text-muted">Data LPP kosong.</td></tr>'; 
+                tbody.innerHTML = `<tr><td colspan="18" class="text-center py-3 text-muted">Data LPP kosong.</td></tr>`; 
                 if (tfoot) tfoot.innerHTML = ''; 
                 return; 
             }
@@ -1687,8 +2018,8 @@
                 let totB = parseNum(r.realTotBunga) || (realLaluB + realIniB);
                 let saldo = parseNum(r.saldo) !== undefined && parseNum(r.saldo) !== 0 ? parseNum(r.saldo) : Math.max(0, plafon - totP);
                 
-                let persenStr = String(r.persen || '');
-                let persen = persenStr && !persenStr.includes('#') ? persenStr : (tarP > 0 ? Math.min(100, Math.round((totP / tarP) * 100)) + '%' : '100%');
+                let strPersen = String(r.persen || '');
+                let persen = strPersen && !strPersen.includes('#') ? strPersen : (tarP > 0 ? `${Math.min(100, Math.round((totP / tarP) * 100))}%` : '100%');
                 let tungP = Math.max(0, tarP - totP);
                 let tungB = Math.max(0, tarB - totB);
 
@@ -1698,43 +2029,43 @@
                 tTotP += totP; tTotB += totB;
                 tSaldo += saldo; tTungP += tungP; tTungB += tungB;
 
-                tbody.innerHTML += '<tr>' +
-                    '<td class="text-center">' + (idx + 1) + '</td>' +
-                    '<td class="fw-semibold text-dark text-start">' + (r.nama || '-') + '</td>' +
-                    '<td>' + (r.desa || '-') + '</td>' +
-                    '<td class="text-end">' + formatRp(plafon) + '</td>' +
-                    '<td class="text-center">' + tenor + 'B</td>' +
-                    '<td class="text-center">' + formatTanggalTampil(r.tglCair) + '</td>' +
-                    '<td class="text-end fw-bold" style="background: #fff5f5;">' + formatRp(tarP) + '</td>' +
-                    '<td class="text-end fw-bold" style="background: #fff5f5;">' + formatRp(tarB) + '</td>' +
-                    '<td class="text-end">' + formatRp(realLaluP) + '</td>' +
-                    '<td class="text-end">' + formatRp(realLaluB) + '</td>' +
-                    '<td class="text-end fw-semibold">' + formatRp(realIniP) + '</td>' +
-                    '<td class="text-end fw-semibold">' + formatRp(realIniB) + '</td>' +
-                    '<td class="text-end fw-bold" style="background: #fce8e8;">' + formatRp(totP) + '</td>' +
-                    '<td class="text-end fw-bold" style="background: #fce8e8;">' + formatRp(totB) + '</td>' +
-                    '<td class="text-end fw-bold text-danger">' + formatRp(saldo) + '</td>' +
-                    '<td class="text-center">' + persen + '</td>' +
-                    '<td class="text-end fw-bold text-danger" style="background: #f8d7da;">' + formatRp(tungP) + '</td>' +
-                    '<td class="text-end fw-bold text-danger" style="background: #f8d7da;">' + formatRp(tungB) + '</td>' +
-                '</tr>';
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="text-center">${idx + 1}</td>
+                        <td class="fw-semibold text-dark text-start">${r.nama || '-'}</td>
+                        <td>${r.desa || '-'}</td>
+                        <td class="text-end">${formatRp(plafon)}</td>
+                        <td class="text-center">${tenor}B</td>
+                        <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
+                        <td class="text-end fw-bold" style="background: #fff5f5;">${formatRp(tarP)}</td>
+                        <td class="text-end fw-bold" style="background: #fff5f5;">${formatRp(tarB)}</td>
+                        <td class="text-end">${formatRp(realLaluP)}</td>
+                        <td class="text-end">${formatRp(realLaluB)}</td>
+                        <td class="text-end fw-semibold">${formatRp(realIniP)}</td>
+                        <td class="text-end fw-semibold">${formatRp(realIniB)}</td>
+                        <td class="text-end fw-bold" style="background: #fce8e8;">${formatRp(totP)}</td>
+                        <td class="text-end fw-bold" style="background: #fce8e8;">${formatRp(totB)}</td>
+                        <td class="text-end fw-bold text-danger">${formatRp(saldo)}</td>
+                        <td class="text-center">${persen}</td>
+                        <td class="text-end fw-bold text-danger" style="background: #f8d7da;">${formatRp(tungP)}</td>
+                        <td class="text-end fw-bold text-danger" style="background: #f8d7da;">${formatRp(tungB)}</td>
+                    </tr>`;
             });
 
             if (tfoot) {
-                tfoot.innerHTML = '<tr class="text-end bg-light text-dark fw-bold">' +
-                    '<td colspan="3" class="text-center">TOTAL KESELURUHAN</td>' +
-                    '<td>' + formatRp(tPlafon) + '</td><td></td><td></td>' +
-                    '<td>' + formatRp(tTarP) + '</td><td>' + formatRp(tTarB) + '</td>' +
-                    '<td>' + formatRp(tLaluP) + '</td><td>' + formatRp(tLaluB) + '</td>' +
-                    '<td>' + formatRp(tIniP) + '</td><td>' + formatRp(tIniB) + '</td>' +
-                    '<td>' + formatRp(tTotP) + '</td><td>' + formatRp(tTotB) + '</td>' +
-                    '<td class="text-danger">' + formatRp(tSaldo) + '</td><td></td>' +
-                    '<td class="text-danger">' + formatRp(tTungP) + '</td><td class="text-danger">' + formatRp(tTungB) + '</td>' +
-                '</tr>';
+                tfoot.innerHTML = `
+                    <tr class="text-end bg-light text-dark fw-bold">
+                        <td colspan="3" class="text-center">TOTAL KESELURUHAN</td>
+                        <td>${formatRp(tPlafon)}</td><td></td><td></td>
+                        <td>${formatRp(tTarP)}</td><td>${formatRp(tTarB)}</td>
+                        <td>${formatRp(tLaluP)}</td><td>${formatRp(tLaluB)}</td>
+                        <td>${formatRp(tIniP)}</td><td>${formatRp(tIniB)}</td>
+                        <td>${formatRp(tTotP)}</td><td>${formatRp(tTotB)}</td>
+                        <td class="text-danger">${formatRp(tSaldo)}</td><td></td>
+                        <td class="text-danger">${formatRp(tTungP)}</td><td class="text-danger">${formatRp(tTungB)}</td>
+                    </tr>`;
             }
         }
-
-        function langsungBayarDariLPP(index) { bukaView('panelBayarAngsuran'); pilihNasabahTeller(index); }
 
         function filterLPPTable() {
             const query = (document.getElementById('searchInput').value || '').toLowerCase();
@@ -1743,173 +2074,14 @@
             renderLPPTable(allData.filter(item => (item.nama || '').toLowerCase().includes(query) && (desa === '' || (item.desa || '').toLowerCase() === desa)));
         }
 
-        function parseLPPFileRows(parsedRows) {
-            if (!parsedRows || parsedRows.length === 0) return [];
-
-            let headerIdx = -1;
-            let colMap = {
-                no: -1, nama: -1, desa: -1, plafon: -1, tenor: -1, tglCair: -1,
-                realLaluP: -1, realLaluB: -1, realIniP: -1, realIniB: -1,
-                realTotP: -1, realTotB: -1, saldo: -1, persen: -1, noHp: -1
-            };
-
-            for (let r = 0; r < Math.min(10, parsedRows.length); r++) {
-                let rowStr = parsedRows[r].map(c => String(c || '').toLowerCase().trim());
-                let hasNama = rowStr.some(c => c.includes('nama'));
-                let hasPlafon = rowStr.some(c => c.includes('plafon'));
-                if (hasNama && hasPlafon) {
-                    headerIdx = r;
-                    rowStr.forEach((c, idx) => {
-                        if (c.includes('nama')) colMap.nama = idx;
-                        else if (c.includes('desa') || c.includes('kelurahan')) colMap.desa = idx;
-                        else if (c.includes('plafon')) colMap.plafon = idx;
-                        else if (c.includes('tenor')) colMap.tenor = idx;
-                        else if (c.includes('cair') || c.includes('tgl')) colMap.tglCair = idx;
-                        else if (c.includes('lalu') && c.includes('pokok')) colMap.realLaluP = idx;
-                        else if (c.includes('lalu') && (c.includes('bunga') || c.includes('jasa'))) colMap.realLaluB = idx;
-                        else if (c.includes('ini') && c.includes('pokok') && !c.includes('target')) colMap.realIniP = idx;
-                        else if (c.includes('ini') && (c.includes('bunga') || c.includes('jasa')) && !c.includes('target')) colMap.realIniB = idx;
-                        else if ((c.includes('tot') || c.includes('total') || c.includes('kumulatif')) && c.includes('pokok')) colMap.realTotP = idx;
-                        else if ((c.includes('tot') || c.includes('total') || c.includes('kumulatif')) && (c.includes('bunga') || c.includes('jasa'))) colMap.realTotB = idx;
-                        else if (c.includes('saldo') || c.includes('outs')) colMap.saldo = idx;
-                        else if (c.includes('persen') || c.includes('%')) colMap.persen = idx;
-                        else if (c.includes('hp') || c.includes('wa')) colMap.noHp = idx;
-                    });
-                    break;
-                }
-            }
-
-            const mappedData = [];
-            const startRow = headerIdx !== -1 ? headerIdx + 1 : 0;
-
-            for (let i = startRow; i < parsedRows.length; i++) {
-                let row = parsedRows[i];
-                if (!row || row.length < 3) continue;
-
-                let namaP = '', desaP = '', plafonP = 0, tenorP = 12, tglCairP = '';
-                let realLaluP = 0, realLaluB = 0, realIniP = 0, realIniB = 0, realTotP = 0, realTotB = 0, saldoP = 0;
-                let persenP = '', noHpP = '';
-
-                if (headerIdx !== -1 && colMap.nama !== -1) {
-                    namaP = String(row[colMap.nama] || '').trim();
-                    desaP = colMap.desa !== -1 ? String(row[colMap.desa] || '').trim() : 'TANETE RIATTANG BARAT';
-                    plafonP = colMap.plafon !== -1 ? parseNum(row[colMap.plafon]) : 0;
-                    tenorP = colMap.tenor !== -1 ? (parseInt(row[colMap.tenor]) || 12) : 12;
-                    tglCairP = colMap.tglCair !== -1 ? String(row[colMap.tglCair] || '').trim() : '';
-                    realLaluP = colMap.realLaluP !== -1 ? parseNum(row[colMap.realLaluP]) : 0;
-                    realLaluB = colMap.realLaluB !== -1 ? parseNum(row[colMap.realLaluB]) : 0;
-                    realIniP = colMap.realIniP !== -1 ? parseNum(row[colMap.realIniP]) : 0;
-                    realIniB = colMap.realIniB !== -1 ? parseNum(row[colMap.realIniB]) : 0;
-                    realTotP = colMap.realTotP !== -1 ? parseNum(row[colMap.realTotP]) : (realLaluP + realIniP);
-                    realTotB = colMap.realTotB !== -1 ? parseNum(row[colMap.realTotB]) : (realLaluB + realIniB);
-                    saldoP = colMap.saldo !== -1 ? parseNum(row[colMap.saldo]) : Math.max(0, plafonP - realTotP);
-                    persenP = colMap.persen !== -1 ? String(row[colMap.persen] || '').trim() : '';
-                    noHpP = colMap.noHp !== -1 ? String(row[colMap.noHp] || '').trim() : '';
-                } else {
-                    namaP = String(row[1] || '').trim();
-                    desaP = String(row[2] || '').trim();
-                    plafonP = parseNum(row[3]);
-                    tenorP = parseInt(row[4]) || 12;
-                    tglCairP = String(row[5] || '').trim();
-
-                    if (row.length >= 18) {
-                        realLaluP = parseNum(row[8]); realLaluB = parseNum(row[9]);
-                        realIniP = parseNum(row[10]); realIniB = parseNum(row[11]);
-                        realTotP = parseNum(row[12]) || (realLaluP + realIniP);
-                        realTotB = parseNum(row[13]) || (realLaluB + realIniB);
-                        saldoP = parseNum(row[14]);
-                        persenP = row[15];
-                    } else {
-                        realLaluP = parseNum(row[6]); realLaluB = parseNum(row[7]);
-                        realIniP = parseNum(row[8]); realIniB = parseNum(row[9]);
-                        realTotP = parseNum(row[10]) || (realLaluP + realIniP);
-                        realTotB = parseNum(row[11]) || (realLaluB + realIniB);
-                        saldoP = parseNum(row[12]);
-                        persenP = row[13];
-                        noHpP = row[15] || '';
-                    }
-                }
-
-                if (!namaP || namaP.toLowerCase().includes('total') || namaP.toLowerCase().includes('jumlah') || plafonP <= 0) continue;
-
-                if (realTotP === 0 && (realLaluP > 0 || realIniP > 0)) realTotP = realLaluP + realIniP;
-                if (realTotB === 0 && (realLaluB > 0 || realIniB > 0)) realTotB = realLaluB + realIniB;
-                if (saldoP === 0 && plafonP > realTotP) saldoP = Math.max(0, plafonP - realTotP);
-
-                mappedData.push({
-                    no: mappedData.length + 1,
-                    nama: namaP.toUpperCase(),
-                    desa: (desaP || 'TANETE RIATTANG BARAT').toUpperCase(),
-                    plafon: plafonP,
-                    tenor: String(tenorP),
-                    tglCair: tglCairP || formatTanggalID(new Date()),
-                    realLaluPokok: realLaluP,
-                    realLaluBunga: realLaluB,
-                    realIniPokok: realIniP,
-                    realIniBunga: realIniB,
-                    realTotPokok: realTotP,
-                    realTotBunga: realTotB,
-                    saldo: saldoP,
-                    persen: persenP && !persenP.includes('#') ? persenP : '100%',
-                    angsuranKe: Math.max(1, Math.round(realTotP / (Math.ceil(plafonP / tenorP) || 1)) + 1),
-                    noHp: noHpP,
-                    persenJasa: 1.5,
-                    history: []
-                });
-            }
-
-            return mappedData;
-        }
-
-        function handleLPPFileUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            const isCSV = file.name.endsWith('.csv');
-
-            reader.onload = function(evt) {
-                let parsedRows = [];
-                if (isCSV) {
-                    parsedRows = Papa.parse(evt.target.result, { skipEmptyLines: true, delimiter: "" }).data;
-                } else {
-                    const workbook = XLSX.read(new Uint8Array(evt.target.result), { type: 'array' });
-                    parsedRows = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], { header: 1, defval: '' });
-                }
-
-                const mappedData = parseLPPFileRows(parsedRows);
-                if (mappedData.length > 0) {
-                    saveLPPData(mappedData);
-                    bukaView('panelDasborKeuangan');
-                    backupKeGoogleSheet(true);
-                    logAktivitas('Import', 'Mengimpor ' + mappedData.length + ' data LPP');
-                    showToast('success', 'Berhasil mengimpor ' + mappedData.length + ' data LPP!');
-                } else {
-                    showToast('error', 'Gagal membaca data dari file.');
-                }
-            };
-            if (isCSV) reader.readAsText(file, 'ISO-8859-1');
-            else reader.readAsArrayBuffer(file);
-            e.target.value = '';
-        }
-
-        function downloadCurrentDataCSV() {
-            if (typeof Papa === 'undefined') { showToast('error', 'Modul belum siap.'); return; }
-            const csv = Papa.unparse(getLPPData());
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
-            link.setAttribute('download', 'LPP_Perorangan.csv');
-            document.body.appendChild(link); link.click(); document.body.removeChild(link);
-        }
-
         function renderKas() {
             const data = getKasData();
-            const filterBulan = document.getElementById('filterBulanKas') ? document.getElementById('filterBulanKas').value : '';
-            const filterTahun = document.getElementById('filterTahunKas') ? document.getElementById('filterTahunKas').value : '';
+            const filterBulan = document.getElementById('filterBulanKas').value;
+            const filterTahun = document.getElementById('filterTahunKas').value;
 
             data.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
 
             const tbody = document.getElementById('transaksiTableBody');
-            if (!tbody) return;
             tbody.innerHTML = '';
             
             let totalMasukGlobal = 0, totalKeluarGlobal = 0;
@@ -1959,9 +2131,9 @@
             });
             const saldoKasAkhirGlobal = totalMasukGlobal - totalKeluarGlobal;
 
-            const elM = document.getElementById('rekapKasMasuk'); if (elM) elM.textContent = 'Rp ' + formatRp(totalMasukPeriode);
-            const elK = document.getElementById('rekapKasKeluar'); if (elK) elK.textContent = 'Rp ' + formatRp(totalKeluarPeriode);
-            const elS = document.getElementById('rekapSaldoKas'); if (elS) elS.textContent = 'Rp ' + formatRp(saldoKasAkhirGlobal);
+            document.getElementById('rekapKasMasuk').textContent = 'Rp ' + formatRp(totalMasukPeriode);
+            document.getElementById('rekapKasKeluar').textContent = 'Rp ' + formatRp(totalKeluarPeriode);
+            document.getElementById('rekapSaldoKas').textContent = 'Rp ' + formatRp(saldoKasAkhirGlobal);
 
             const isAdmin = localStorage.getItem('userRole') === 'admin';
 
@@ -1972,106 +2144,20 @@
 
             filteredData.forEach((item, index) => {
                 const isMasuk = item.tipe === 'Masuk';
-                let delBtn = isAdmin ? '<button class="btn btn-outline-danger btn-sm py-0 px-1 shadow-sm" title="Hapus" onclick="hapusKas(' + item.id + ')"><i class="bi bi-trash"></i></button>' : '-';
-                tbody.innerHTML += '<tr>' +
-                    '<td>' + (index + 1) + '</td>' +
-                    '<td>' + formatTanggalTampil(item.tanggal) + '</td>' +
-                    '<td class="fw-bold text-dark">' + (item.noKwitansi || '-') + '</td>' +
-                    '<td class="fw-semibold text-dark text-start">' + (item.nama || '-') + '</td>' +
-                    '<td>' + (item.kelurahan || '-') + '</td>' +
-                    '<td><span class="badge bg-light text-dark border">' + (item.kategori || 'Umum') + '</span></td>' +
-                    '<td><span class="badge ' + (isMasuk ? 'bg-dark' : 'bg-danger') + ' text-white">' + item.tipe + '</span></td>' +
-                    '<td class="' + (isMasuk ? 'text-success' : 'text-danger') + ' fw-bold text-end">Rp ' + formatRp(item.nominal) + '</td>' +
-                    '<td class="text-center no-print admin-only">' + delBtn + '</td>' +
-                '</tr>';
+                let delBtn = isAdmin ? `<button class="btn btn-outline-danger btn-sm py-0 px-1 shadow-sm" title="Hapus" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button>` : '-';
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${formatTanggalTampil(item.tanggal)}</td>
+                        <td class="fw-bold text-dark">${item.noKwitansi || '-'}</td>
+                        <td class="fw-semibold text-dark text-start">${item.nama}</td>
+                        <td>${item.kelurahan}</td>
+                        <td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
+                        <td><span class="badge ${isMasuk ? 'bg-dark' : 'bg-danger'} text-white">${item.tipe}</span></td>
+                        <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold text-end">Rp ${formatRp(item.nominal)}</td>
+                        <td class="text-center no-print admin-only">${delBtn}</td>
+                    </tr>`;
             });
-        }
-
-        function bukaModalTambahKas() {
-            const titleEl = document.getElementById('modalKasTitle'); if (titleEl) titleEl.innerHTML = '<i class="bi bi-journal-plus text-danger me-1"></i> Form Mutasi Kas';
-            const btnEl = document.getElementById('btnSimpanKasText'); if (btnEl) btnEl.textContent = 'Simpan Transaksi';
-            const editIdEl = document.getElementById('editKasId'); if (editIdEl) editIdEl.value = '';
-            
-            const formEl = document.getElementById('transaksiForm'); if (formEl) formEl.reset();
-            const tglEl = document.getElementById('tTanggal'); if (tglEl) tglEl.value = new Date().toISOString().split('T')[0];
-            const kwtEl = document.getElementById('tKwitansi'); if (kwtEl) kwtEl.value = 'KWT-KAS-' + Math.floor(100000 + Math.random() * 900000);
-            
-            const modalEl = document.getElementById('transaksiModal');
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                bootstrap.Modal.getOrCreateInstance(modalEl).show();
-            }
-        }
-
-        const transaksiFormEl = document.getElementById('transaksiForm');
-        if (transaksiFormEl) {
-            transaksiFormEl.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const data = getKasData();
-                const editId = document.getElementById('editKasId').value;
-                const tanggal = document.getElementById('tTanggal').value;
-                const nama = document.getElementById('tNama').value;
-                const kelurahan = document.getElementById('tKelurahan').value;
-                const tipe = document.getElementById('tTipe').value;
-                const kategori = document.getElementById('tKategori').value;
-                const nominal = parseNum(document.getElementById('tNominal').value);
-                const noKwitansi = document.getElementById('tKwitansi').value || ('KWT-KAS-' + Math.floor(100000 + Math.random() * 900000));
-
-                if (editId !== "") {
-                    const idx = data.findIndex(i => i.id == editId);
-                    if (idx !== -1) data[idx] = { id: Number(editId), tanggal, nama, kelurahan, tipe, kategori, nominal, noKwitansi };
-                    logAktivitas('Kas', 'MENGEDIT mutasi kas ID ' + editId);
-                } else {
-                    data.unshift({ id: Date.now(), tanggal, nama, kelurahan, tipe, kategori, nominal, noKwitansi });
-                    logAktivitas('Kas', 'Menambah mutasi kas (' + tipe + ') Rp ' + formatRp(nominal) + ' - ' + nama);
-                }
-
-                localStorage.setItem('upk_kas_data', JSON.stringify(data));
-                this.reset();
-                const modalEl = document.getElementById('transaksiModal');
-                if (modalEl && typeof bootstrap !== 'undefined') {
-                    bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-                }
-                renderKas(); updateDasborKeuangan(); backupKeGoogleSheet(true);
-                showToast('success', 'Mutasi kas berhasil disimpan!');
-            });
-        }
-
-        function hapusKas(id) {
-            Swal.fire({
-                title: 'Hapus Transaksi?', text: 'Data transaksi kas ini akan dihapus permanen.', icon: 'warning',
-                showCancelButton: true, confirmButtonColor: '#800020', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus'
-            }).then((res) => {
-                if (res.isConfirmed) {
-                    localStorage.setItem('upk_kas_data', JSON.stringify(getKasData().filter(i => i.id !== id)));
-                    logAktivitas('Kas', 'MENGHAPUS transaksi kas ID ' + id);
-                    renderKas(); updateDasborKeuangan(); backupKeGoogleSheet(true);
-                    showToast('success', 'Transaksi kas dihapus.');
-                }
-            });
-        }
-
-        function hitungKalkulator() {
-            const p = parseNum(document.getElementById('calcPlafon').value);
-            const t = parseInt(document.getElementById('calcTenor').value);
-            const j = parseFloat(document.getElementById('calcJasa').value);
-            
-            if (!p || !t) return;
-            const pokokPerBln = Math.ceil(p / t);
-            const jasaPerBln = p * (j / 100);
-            
-            const elP = document.getElementById('calcResPokok'); if (elP) elP.textContent = 'Rp ' + formatRp(pokokPerBln);
-            const elJ = document.getElementById('calcResJasa'); if (elJ) elJ.textContent = 'Rp ' + formatRp(jasaPerBln);
-            const elT = document.getElementById('calcResTotal'); if (elT) elT.textContent = 'Rp ' + formatRp(pokokPerBln + jasaPerBln);
-            const sumEl = document.getElementById('calcResultSummary'); if (sumEl) sumEl.classList.remove('d-none');
-
-            const tb = document.getElementById('calcTableBody'); if (!tb) return;
-            tb.innerHTML = '';
-            let sisa = p;
-            for (let i = 1; i <= t; i++) {
-                let pk = i === t ? sisa : pokokPerBln;
-                sisa -= pk;
-                tb.innerHTML += '<tr><td>Bulan ' + i + '</td><td>Rp ' + formatRp(pk) + '</td><td>Rp ' + formatRp(jasaPerBln) + '</td><td class="fw-bold">Rp ' + formatRp(pk + jasaPerBln) + '</td><td class="text-danger">Rp ' + formatRp(sisa) + '</td></tr>';
-            }
         }
 
         function renderLaporanRekapitulasi() {
@@ -2081,231 +2167,135 @@
 
             allData.forEach(item => {
                 const p = parseNum(item.plafon), r = parseNum(item.realTotPokok), s = parseNum(item.saldo);
-                const d = (item.desa || 'Lain-lain').trim().toUpperCase();
+                const d = (item.desa || 'Lainnya').trim().toUpperCase();
                 totalPlafon += p; totalRealisasi += r; totalSaldo += s;
                 if (!desaMap[d]) desaMap[d] = { count: 0, plafon: 0, saldo: 0 };
                 desaMap[d].count += 1; desaMap[d].plafon += p; desaMap[d].saldo += s;
             });
 
-            const elP = document.getElementById('repTotalPlafon'); if (elP) elP.textContent = 'Rp ' + formatRp(totalPlafon);
-            const elR = document.getElementById('repTotalRealisasi'); if (elR) elR.textContent = 'Rp ' + formatRp(totalRealisasi);
-            const elS = document.getElementById('repTotalSaldo'); if (elS) elS.textContent = 'Rp ' + formatRp(totalSaldo);
+            document.getElementById('repTotalPlafon').textContent = 'Rp ' + formatRp(totalPlafon);
+            document.getElementById('repTotalRealisasi').textContent = 'Rp ' + formatRp(totalRealisasi);
+            document.getElementById('repTotalSaldo').textContent = 'Rp ' + formatRp(totalSaldo);
 
             const tbody = document.getElementById('rekapDesaTableBody');
-            if (!tbody) return;
             tbody.innerHTML = '';
             let idx = 1;
             for (const [desaName, val] of Object.entries(desaMap).sort()) {
-                tbody.innerHTML += '<tr><td>' + (idx++) + '</td><td class="fw-semibold text-start">' + desaName + '</td><td>' + val.count + ' Peminjam</td><td class="text-end fw-semibold">Rp ' + formatRp(val.plafon) + '</td><td class="text-end text-danger fw-semibold">Rp ' + formatRp(val.saldo) + '</td></tr>';
+                tbody.innerHTML += `<tr><td>${idx++}</td><td class="fw-semibold text-start">${desaName}</td><td>${val.count} Peminjam</td><td class="text-end fw-semibold">Rp ${formatRp(val.plafon)}</td><td class="text-end text-danger fw-semibold">Rp ${formatRp(val.saldo)}</td></tr>`;
             }
         }
 
         function renderLogTable() {
             const logs = JSON.parse(localStorage.getItem('upk_logs') || '[]');
             const tbody = document.getElementById('logTableBody');
-            if (!tbody) return;
             tbody.innerHTML = '';
             if (logs.length === 0) { tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Belum ada riwayat aktivitas.</td></tr>'; return; }
             logs.forEach(l => {
-                tbody.innerHTML += '<tr><td class="small">' + l.time + '</td><td class="fw-bold">' + l.user + '</td><td><span class="badge bg-light text-dark border">' + l.kat + '</span></td><td class="small">' + l.detail + '</td></tr>';
+                tbody.innerHTML += `<tr><td class="small">${l.time}</td><td class="fw-bold">${l.user}</td><td><span class="badge bg-light text-dark border">${l.kat}</span></td><td class="small">${l.detail}</td></tr>`;
             });
         }
 
-        function clearLogs() {
-            Swal.fire({ title: 'Bersihkan Log?', icon: 'warning', showCancelButton: true }).then(r => {
-                if (r.isConfirmed) { localStorage.removeItem('upk_logs'); renderLogTable(); showToast('success', 'Log dibersihkan.'); }
-            });
+        function bukaModalLogin() {
+            document.getElementById('loginError').classList.add('d-none');
+            const modalEl = document.getElementById('loginModal');
+            bootstrap.Modal.getOrCreateInstance(modalEl).show();
         }
 
-        function bukaModalTambahPeminjam() {
-            const titleEl = document.getElementById('modalPeminjamTitle'); if (titleEl) titleEl.innerHTML = '<i class="bi bi-person-plus-fill text-danger me-1"></i> Tambah Peminjam Baru';
-            const btnEl = document.getElementById('btnSimpanPeminjamText'); if (btnEl) btnEl.innerHTML = '<i class="bi bi-save me-1"></i> Simpan Peminjam';
-            const idxEl = document.getElementById('editIndex'); if (idxEl) idxEl.value = '';
-            
-            const formEl = document.getElementById('formTambahPeminjam'); if (formEl) formEl.reset();
-            const jasaEl = document.getElementById('newPersenJasa'); if (jasaEl) jasaEl.value = '1.5';
-            const tglEl = document.getElementById('newTglCair'); if (tglEl) tglEl.value = new Date().toISOString().split('T')[0];
-            hitungSimulasiPeminjamBaru();
-
-            const modalEl = document.getElementById('tambahPeminjamModal');
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                bootstrap.Modal.getOrCreateInstance(modalEl).show();
+        function loginInstan(roleType) {
+            if (roleType === 'admin') {
+                localStorage.setItem('userRole', 'admin');
+                localStorage.setItem('userName', 'Admin UPK DAPM');
+                localStorage.setItem('isLoggedIn', 'true');
+            } else {
+                localStorage.setItem('userRole', 'teller');
+                localStorage.setItem('userName', 'Teller Kasir');
+                localStorage.setItem('isLoggedIn', 'true');
             }
-        }
-
-        function bukaModalEditPeminjam(idx) {
-            const allData = getLPPData();
-            const n = allData[idx];
-            if (!n) return;
-            const titleEl = document.getElementById('modalPeminjamTitle'); if (titleEl) titleEl.innerHTML = '<i class="bi bi-pencil-square text-danger me-1"></i> Edit Data Peminjam';
-            const btnEl = document.getElementById('btnSimpanPeminjamText'); if (btnEl) btnEl.innerHTML = '<i class="bi bi-save me-1"></i> Update Perubahan';
-            const idxEl = document.getElementById('editIndex'); if (idxEl) idxEl.value = idx;
+            logAktivitas('Sistem', 'Login instan sebagai ' + roleType);
+            const modalEl = document.getElementById('loginModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+            if (modalInstance) modalInstance.hide();
             
-            const elNama = document.getElementById('newNama'); if (elNama) elNama.value = n.nama || '';
-            const elDesa = document.getElementById('newDesa'); if (elDesa) elDesa.value = n.desa || '';
-            const elPlafon = document.getElementById('newPlafon'); if (elPlafon) elPlafon.value = formatRp(n.plafon);
-            const elTenor = document.getElementById('newTenor'); if (elTenor) elTenor.value = n.tenor || '12';
-            const elJasa = document.getElementById('newPersenJasa'); if (elJasa) elJasa.value = n.persenJasa !== undefined ? n.persenJasa : 1.5;
-            const elTgl = document.getElementById('newTglCair'); if (elTgl) elTgl.value = convertToInputDate(n.tglCair);
-            const elWA = document.getElementById('newNoHp'); if (elWA) elWA.value = n.noHp || '';
-            hitungSimulasiPeminjamBaru();
-
-            const modalEl = document.getElementById('tambahPeminjamModal');
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                bootstrap.Modal.getOrCreateInstance(modalEl).show();
-            }
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            checkAuthUI();
+            showToast('success', 'Selamat datang!');
         }
 
-        function hitungSimulasiPeminjamBaru() {
-            const elPlafon = document.getElementById('newPlafon');
-            const plafon = parseNum(elPlafon ? elPlafon.value : 0);
-            const elTenor = document.getElementById('newTenor');
-            const tenor = parseInt(elTenor ? elTenor.value : 12) || 12;
-            const elJasa = document.getElementById('newPersenJasa');
-            const persenJasa = parseFloat(elJasa ? elJasa.value : 1.5) || 1.5;
+        function checkAuthUI() {
+            const role = localStorage.getItem('userRole');
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') document.body.classList.add('dark-mode');
 
-            const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
-            const jasaPerBulan = bulatkan(plafon * (persenJasa / 100));
+            const btnAuth = document.getElementById('btnNavAuth');
+            const greeting = document.getElementById('adminGreeting');
+            const roleBadge = document.getElementById('roleBadge');
 
-            const elSimP = document.getElementById('simulasiPokokPerBulan'); if (elSimP) elSimP.textContent = 'Rp ' + formatRp(pokokPerBulan);
-            const elSimJ = document.getElementById('simulasiJasaPerBulan'); if (elSimJ) elSimJ.textContent = 'Rp ' + formatRp(jasaPerBulan) + ' (' + persenJasa + '%/bln)';
-            const elSimT = document.getElementById('simulasiTotalPerBulan'); if (elSimT) elSimT.textContent = 'Rp ' + formatRp(pokokPerBulan + jasaPerBulan);
-        }
-
-        const formTambahPeminjamEl = document.getElementById('formTambahPeminjam');
-        if (formTambahPeminjamEl) {
-            formTambahPeminjamEl.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const allData = getLPPData();
-                const editIdx = document.getElementById('editIndex').value;
-                const nama = document.getElementById('newNama').value.trim().toUpperCase();
-                const desa = document.getElementById('newDesa').value.trim().toUpperCase();
-                const plafon = parseNum(document.getElementById('newPlafon').value);
-                const tenor = parseInt(document.getElementById('newTenor').value) || 12;
-                const persenJasa = parseFloat(document.getElementById('newPersenJasa').value) || 0;
-                const tglCairInput = document.getElementById('newTglCair').value;
-                const noHp = document.getElementById('newNoHp').value.trim();
-
-                if (plafon <= 0) { showToast('warning', 'Plafon pinjaman harus lebih dari 0!'); return; }
-                const tglCairFormatted = tglCairInput ? formatTanggalID(new Date(tglCairInput)) : formatTanggalID(new Date());
-
-                if (editIdx !== "" && editIdx !== null && editIdx !== undefined) {
-                    const idx = parseInt(editIdx);
-                    let nasabah = allData[idx];
-                    nasabah.nama = nama; nasabah.desa = desa; nasabah.plafon = plafon;
-                    nasabah.tenor = String(tenor); nasabah.tglCair = tglCairFormatted;
-                    nasabah.persenJasa = persenJasa; nasabah.noHp = noHp;
-                    nasabah.saldo = Math.max(0, plafon - parseNum(nasabah.realTotPokok));
-                    saveLPPData(allData);
-                    logAktivitas('Peminjam', 'Update data peminjam ' + nama);
-                    
-                    const modalEl = document.getElementById('tambahPeminjamModal');
-                    if (modalEl && typeof bootstrap !== 'undefined') {
-                        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-                    }
-                    backupKeGoogleSheet(true);
-                    showToast('success', 'Peminjam "' + nama + '" diperbarui!');
-                    renderDataPeminjamTable();
-                } else {
-                    allData.push({
-                        no: allData.length + 1, nama: nama, desa: desa, plafon: plafon, tenor: String(tenor),
-                        tglCair: tglCairFormatted, realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 0, realIniBunga: 0,
-                        realTotPokok: 0, realTotBunga: 0, saldo: plafon, persen: "0%", angsuranKe: 1, noHp: noHp,
-                        persenJasa: persenJasa, history: []
-                    });
-                    saveLPPData(allData);
-
-                    const kasData = getKasData();
-                    kasData.unshift({
-                        id: Date.now(), tanggal: tglCairInput || new Date().toISOString().split('T')[0],
-                        nama: 'Pencairan Pinjaman (' + nama + ')', kelurahan: desa, kategori: 'Perguliran',
-                        tipe: 'Keluar', nominal: plafon, noKwitansi: 'KWT-CAIR-' + Math.floor(100000 + Math.random() * 900000)
-                    });
-                    localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
-                    
-                    logAktivitas('Peminjam', 'Pencairan peminjam baru ' + nama + ' Rp ' + formatRp(plafon));
-                    this.reset();
-                    const modalEl = document.getElementById('tambahPeminjamModal');
-                    if (modalEl && typeof bootstrap !== 'undefined') {
-                        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
-                    }
-                    backupKeGoogleSheet(true);
-                    showToast('success', 'Peminjam baru "' + nama + '" berhasil disimpan!');
-                    renderDataPeminjamTable();
-                }
-            });
-        }
-
-        function hapusPeminjam(idx) {
-            const allData = getLPPData();
-            const n = allData[idx];
-            if (!n) return;
-            Swal.fire({
-                title: 'Hapus Peminjam?', text: 'Yakin ingin menghapus "' + n.nama + '"?', icon: 'warning',
-                showCancelButton: true, confirmButtonColor: '#800020', cancelButtonColor: '#d33', confirmButtonText: 'Ya, Hapus!'
-            }).then((res) => {
-                if (res.isConfirmed) {
-                    allData.splice(idx, 1);
-                    allData.forEach((item, i) => item.no = i + 1);
-                    saveLPPData(allData); renderDataPeminjamTable(); updateDasborKeuangan(); backupKeGoogleSheet(true);
-                    logAktivitas('Peminjam', 'MENGHAPUS data peminjam ' + n.nama);
-                    showToast('success', 'Data peminjam dihapus.');
-                }
-            });
-        }
-
-        const loginFormEl = document.getElementById('loginForm');
-        if (loginFormEl) {
-            loginFormEl.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const uEl = document.getElementById('username');
-                const pEl = document.getElementById('password');
-                const u = (uEl ? uEl.value : '').trim().toLowerCase();
-                const p = (pEl ? pEl.value : '').trim();
+            if (role) {
+                document.getElementById('publicContent').classList.add('d-none');
+                document.getElementById('privateDashboard').classList.remove('d-none');
+                greeting.textContent = 'User: ' + (localStorage.getItem('userName') || 'Admin');
+                roleBadge.textContent = role.toUpperCase();
+                roleBadge.classList.remove('d-none');
+                btnAuth.innerHTML = '<i class="bi bi-box-arrow-right me-1"></i> Keluar';
+                btnAuth.onclick = logout;
                 
-                if ((u === 'upk_trb' && p === '454567') || (u === 'admin' && p === 'admin123') || (u === 'admin' && p === 'admin')) {
-                    localStorage.setItem('userRole', 'admin');
-                    localStorage.setItem('userName', 'Admin UPK DAPM');
-                    localStorage.setItem('isLoggedIn', 'true');
-                } else if ((u === 'teller' && p === 'teller123') || (u === 'teller' && p === 'teller')) {
-                    localStorage.setItem('userRole', 'teller');
-                    localStorage.setItem('userName', 'Teller Kasir');
-                    localStorage.setItem('isLoggedIn', 'true');
-                } else {
-                    const errEl = document.getElementById('loginError');
-                    if (errEl) errEl.classList.remove('d-none');
-                    return;
-                }
+                const adminOnlyEls = document.querySelectorAll('.admin-only');
+                adminOnlyEls.forEach(el => el.style.display = role === 'admin' ? '' : 'none');
 
-                logAktivitas('Sistem', 'Login sukses (' + u + ')');
-                const loginModalEl = document.getElementById('loginModal');
-                if (loginModalEl && typeof bootstrap !== 'undefined') {
-                    bootstrap.Modal.getOrCreateInstance(loginModalEl).hide();
-                }
-                const backdrops = document.querySelectorAll('.modal-backdrop');
-                backdrops.forEach(b => b.remove());
-                document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
-                document.body.style.paddingRight = '';
+                bukaView('panelDasborKeuangan');
+            } else {
+                document.getElementById('publicContent').classList.remove('d-none');
+                document.getElementById('privateDashboard').classList.add('d-none');
+                greeting.textContent = ''; roleBadge.classList.add('d-none');
+                btnAuth.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i> Masuk';
+                btnAuth.onclick = bukaModalLogin;
+            }
+        }
 
-                checkAuthUI();
-                showToast('success', 'Selamat datang!');
-            });
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('username').value.trim().toLowerCase();
+            const p = document.getElementById('password').value;
+            
+            if ((u === 'upk_trb' && p === '454567') || (u === 'admin' && p === 'admin123')) {
+                localStorage.setItem('userRole', 'admin');
+                localStorage.setItem('userName', 'Admin UPK DAPM');
+                localStorage.setItem('isLoggedIn', 'true');
+            } else if (u === 'teller' && p === 'teller123') {
+                localStorage.setItem('userRole', 'teller');
+                localStorage.setItem('userName', 'Teller Kasir');
+                localStorage.setItem('isLoggedIn', 'true');
+            } else {
+                document.getElementById('loginError').classList.remove('d-none'); return;
+            }
+
+            logAktivitas('Sistem', 'Login sukses ' + u);
+            const modalEl = document.getElementById('loginModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+            if (modalInstance) modalInstance.hide();
+
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            checkAuthUI();
+            showToast('success', 'Selamat datang!');
+        });
+
+        function logout() {
+            logAktivitas('Sistem', 'User Logout');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('isLoggedIn');
+            checkAuthUI();
+            showToast('info', 'Anda telah keluar.');
         }
 
         window.onload = async function() {
-            try {
-                if (!localStorage.getItem('theme')) localStorage.setItem('theme', 'light');
-                const tglKasInput = document.getElementById('tTanggal');
-                if (tglKasInput) tglKasInput.value = new Date().toISOString().split('T')[0];
-                if (typeof loadDataDariGoogleSheet === 'function') {
-                    await loadDataDariGoogleSheet();
-                }
-            } catch (e) {
-                console.warn('Onload initialization warning:', e);
-            } finally {
-                checkAuthUI();
-            }
+            if(!localStorage.getItem('theme')) localStorage.setItem('theme', 'light');
+            await loadDataDariGoogleSheet();
+            checkAuthUI();
         };
     </script>
 </body>
