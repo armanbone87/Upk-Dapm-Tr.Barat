@@ -1358,14 +1358,13 @@
                         <td class="text-center"><span class="badge ${isLunas ? 'bg-secondary' : 'bg-dark'}">${isLunas ? 'Lunas' : 'Aktif'}</span></td>
                         <td class="text-center">${item.noHp || '-'}</td>
                         <td class="text-center no-print">
-                            <button class="btn btn-sm py-1 px-2 text-white bg-dark border-0 me-1 shadow-sm" onclick="bukaModalBuktiCairPeminjam(${realIndex})" title="Bukti Transfer/Cair"><i class="bi bi-receipt-cutoff me-1"></i> Cair</button>
+                            <button class="btn btn-sm py-1 px-2 text-white bg-dark border-0 me-1 shadow-sm" onclick="bukaModalBuktiCairPeminjam(${realIndex})" title="Bukti Transfer & Kirim WA"><i class="bi bi-whatsapp me-1"></i> Cair</button>
                             <button class="btn btn-sm btn-outline-dark py-1 px-2 me-1 shadow-sm" onclick="bukaModalEditPeminjam(${realIndex})"><i class="bi bi-pencil-square"></i></button>
                             ${delBtn}
                         </td>
                     </tr>`;
             });
 
-            // Update informasi & tombol kontrol paginasi
             const infoEl = document.getElementById('peminjamPaginationInfo');
             const containerEl = document.getElementById('peminjamPaginationContainer');
 
@@ -1410,6 +1409,116 @@
             document.getElementById('simulasiPokokPerBulan').textContent = 'Rp ' + formatRp(pokokPerBulan);
             document.getElementById('simulasiJasaPerBulan').textContent = 'Rp ' + formatRp(jasaPerBulan);
             document.getElementById('simulasiTotalPerBulan').textContent = 'Rp ' + formatRp(totalPerBulan);
+        }
+
+        function bukaModalBuktiCairPeminjam(idx) {
+            const n = getLPPData()[idx];
+            if (!n) return;
+
+            const plafon = parseNum(n.plafon);
+            const tenor = parseInt(n.tenor) || 12;
+            const persenJasa = n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5;
+            const pokokBln = bulatkan(Math.ceil(plafon / tenor));
+            const jasaBln = bulatkan(plafon * (persenJasa / 100));
+            const totalBln = pokokBln + jasaBln;
+
+            Swal.fire({
+                title: '<span class="fs-6 fw-bold text-dark"><i class="bi bi-patch-check-fill text-danger me-2"></i> BUKTI PENCAIRAN PINJAMAN</span>',
+                html: `
+                    <div class="text-start small p-3 card-light-custom rounded-3 border">
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Nama Peminjam:</span>
+                            <strong class="text-dark">${n.nama}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Kelurahan:</span>
+                            <span class="fw-semibold text-dark">${n.desa}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Plafon Pinjaman:</span>
+                            <strong class="text-dark">Rp ${formatRp(plafon)}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Tenor & Jasa:</span>
+                            <span class="fw-semibold text-dark">${tenor} Bulan (${persenJasa}% / bln)</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Tanggal Pencairan:</span>
+                            <span class="fw-semibold text-dark">${formatTanggalTampil(n.tglCair)}</span>
+                        </div>
+                        <div class="bg-white p-2 rounded-2 border mt-2">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Angsuran Pokok / Bln:</span>
+                                <strong class="text-dark">Rp ${formatRp(pokokBln)}</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Jasa / Bln:</span>
+                                <strong class="text-dark">Rp ${formatRp(jasaBln)}</strong>
+                            </div>
+                            <div class="d-flex justify-content-between border-top pt-1 text-danger fw-bold">
+                                <span>Total Setoran / Bln:</span>
+                                <span>Rp ${formatRp(totalBln)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: '<i class="bi bi-whatsapp me-1"></i> Kirim WA Bukti Cair',
+                confirmButtonColor: '#25D366',
+                cancelButtonText: 'Tutup',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    kirimBuktiCairWA(idx);
+                }
+            });
+        }
+
+        function kirimBuktiCairWA(idx) {
+            const allData = getLPPData();
+            const n = allData[idx];
+            if (!n) return;
+
+            let phone = (n.noHp || '').toString().replace(/[^0-9]/g, '');
+            if (!phone || phone.length < 9) {
+                Swal.fire({
+                    title: 'Nomor WhatsApp Belum Ada',
+                    text: `Masukkan nomor WhatsApp untuk ${n.nama}:`,
+                    input: 'text',
+                    inputValue: n.noHp || '',
+                    showCancelButton: true,
+                    confirmButtonText: 'Kirim WA',
+                    cancelButtonText: 'Batal'
+                }).then((res) => {
+                    if (res.value) {
+                        phone = res.value.replace(/[^0-9]/g, '');
+                        if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+                        n.noHp = res.value.trim();
+                        saveLPPData(allData);
+                        renderDataPeminjamTable();
+                        prosesKirimBuktiCairWA(phone, n);
+                    }
+                });
+                return;
+            }
+
+            if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+            prosesKirimBuktiCairWA(phone, n);
+        }
+
+        function prosesKirimBuktiCairWA(phone, n) {
+            const plafon = parseNum(n.plafon);
+            const tenor = parseInt(n.tenor) || 12;
+            const persenJasa = n.persenJasa !== undefined ? parseFloat(n.persenJasa) : 1.5;
+            const pokokBln = bulatkan(Math.ceil(plafon / tenor));
+            const jasaBln = bulatkan(plafon * (persenJasa / 100));
+            const totalBln = pokokBln + jasaBln;
+
+            const pesan = `✅ *BUKTI PENCAIRAN PINJAMAN UPK DAPM TR. BARAT*\n-----------------------------------------\nYth. *${n.nama}* (${n.desa})\n\nPinjaman Anda telah berhasil dicairkan dengan rincian berikut:\n\n• *Plafon Pinjaman*: Rp ${formatRp(plafon)}\n• *Tenor*: ${tenor} Bulan\n• *Persen Jasa*: ${persenJasa}% / bulan\n• *Tanggal Cair*: ${formatTanggalTampil(n.tglCair)}\n\n*Rincian Setoran per Bulan:*\n• Angsuran Pokok : Rp ${formatRp(pokokBln)}\n• Jasa Pinjaman  : Rp ${formatRp(jasaBln)}\n• *Total Setoran* : *Rp ${formatRp(totalBln)}*\n-----------------------------------------\nUnit Pengelola Kegiatan (UPK) DAPM Tanete Riattang Barat\n_Semoga dana ini bermanfaat untuk pengembangan usaha Anda!_ 🙏`;
+
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
+            logAktivitas('Peminjam', `Mengirim Bukti Pencairan via WA ke ${n.nama}`);
+            showToast('success', 'Bukti pencairan berhasil dikirim via WA!');
         }
 
         function bukaModalTambahPeminjam() {
@@ -1520,26 +1629,6 @@
                     backupKeGoogleSheet(true);
                     showToast('success', 'Data peminjam telah dihapus!');
                 }
-            });
-        }
-
-        function bukaModalBuktiCairPeminjam(idx) {
-            const n = getLPPData()[idx];
-            if (!n) return;
-            Swal.fire({
-                title: 'BUKTI PENCAIRAN PINJAMAN',
-                html: `
-                    <div class="text-start small p-3 card-light-custom rounded border">
-                        <p class="mb-1"><strong>Nama Nasabah:</strong> ${n.nama}</p>
-                        <p class="mb-1"><strong>Kelurahan:</strong> ${n.desa}</p>
-                        <p class="mb-1"><strong>Plafon Pinjaman:</strong> Rp ${formatRp(n.plafon)}</p>
-                        <p class="mb-1"><strong>Tenor:</strong> ${n.tenor} Bulan</p>
-                        <p class="mb-1"><strong>Persen Jasa:</strong> ${n.persenJasa || 1.5}% / bulan</p>
-                        <p class="mb-0"><strong>Tanggal Pencairan:</strong> ${formatTanggalTampil(n.tglCair)}</p>
-                    </div>
-                `,
-                icon: 'info',
-                confirmButtonText: 'Tutup'
             });
         }
 
