@@ -735,15 +735,23 @@
                         </h5>
                         <p class="small mb-0 text-muted">Laporan tersinkronisasi otomatis dari perputaran pinjaman di LPP dan transaksi arus kas operasional.</p>
                     </div>
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 align-items-center flex-wrap">
+                        <label class="small fw-semibold text-muted">Tahun Buku:</label>
+                        <select id="filterTahunNeraca" class="form-select form-select-compact text-dark fw-bold" style="width: 100px;" onchange="renderLaporanNeracaMicrofinance()">
+                            <option value="2028">2028</option>
+                            <option value="2027">2027</option>
+                            <option value="2026" selected>2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                        </select>
                         <button class="btn btn-outline-dark btn-compact admin-only" onclick="bukaModalSettingNeraca()">
-                            <i class="bi bi-gear-fill me-1"></i> Sesuaikan Modal & Titipan
+                            <i class="bi bi-gear-fill me-1"></i> Sesuaikan Modal
                         </button>
                         <button class="btn btn-danger btn-compact admin-only" onclick="bukaModalTutupBuku()">
-                            <i class="bi bi-lock-fill me-1"></i> Tutup Buku Tahunan
+                            <i class="bi bi-lock-fill me-1"></i> Tutup Buku
                         </button>
                         <button class="btn btn-outline-dark btn-compact" onclick="window.print()">
-                            <i class="bi bi-printer me-1"></i> Cetak Laporan
+                            <i class="bi bi-printer me-1"></i> Cetak
                         </button>
                     </div>
                 </div>
@@ -752,13 +760,13 @@
                     <div class="text-center mb-4 border-bottom pb-3">
                         <h6 class="fw-bold mb-1 text-dark">UPK DAPM KECAMATAN TANETE RIATTANG BARAT</h6>
                         <h5 class="fw-bold mb-1" style="color: var(--accent-color);">NERACA & LAPORAN LABA RUGI PERIODE BERJALAN</h5>
-                        <small class="text-muted">Standar Pelaporan Keuangan Dana Bergulir Pemberdayaan Masyarakat (Microfinance)</small>
+                        <small class="text-muted">Standar Pelaporan Keuangan Dana Bergulir Pemberdayaan Masyarakat (Tahun Buku <span id="displayTahunBuku" class="fw-bold text-danger">2026</span>)</small>
                     </div>
 
                     <!-- 1. LAPORAN LABA RUGI -->
                     <div class="card-light-custom p-3 rounded-3 border mb-4 shadow-sm">
                         <div class="d-flex justify-content-between align-items-center mb-2 border-bottom pb-2">
-                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up text-danger me-2"></i> I. LAPORAN LABA / RUGI OPERASIONAL</h6>
+                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up text-danger me-2"></i> I. LAPORAN LABA / RUGI OPERASIONAL (1 JAN - 31 DES)</h6>
                             <span class="badge bg-dark text-white">Laba Bersih: <span id="lrBadgeSurplus">Rp 0</span></span>
                         </div>
                         <div class="table-responsive rounded border bg-white">
@@ -770,14 +778,14 @@
                                     <tr class="table-light fw-semibold"><td colspan="4">A. PENDAPATAN OPERASIONAL</td></tr>
                                     <tr>
                                         <td class="text-center">4.1.01</td>
-                                        <td>Pendapatan Jasa / Bunga Pinjaman</td>
-                                        <td class="text-muted small">Akumulasi Realisasi Bunga LPP</td>
+                                        <td>Pendapatan Jasa / Bunga Pinjaman (Realisasi Kas Tahun Berjalan)</td>
+                                        <td class="text-muted small">Setoran Jasa Masuk Jan-Des <span id="displayTahunJasa">2026</span></td>
                                         <td class="text-end fw-bold text-dark" id="lrPendapatanJasa">Rp 0</td>
                                     </tr>
                                     <tr>
                                         <td class="text-center">4.1.02</td>
                                         <td>Pendapatan Denda Keterlambatan Pinjaman</td>
-                                        <td class="text-muted small">Kas Masuk Kategori 'Denda'</td>
+                                        <td class="text-muted small">Kas Masuk Kategori 'Denda' Tahun <span id="displayTahunDenda">2026</span></td>
                                         <td class="text-end fw-bold text-dark" id="lrPendapatanDenda">Rp 0</td>
                                     </tr>
                                     <tr class="table-light fw-bold">
@@ -788,7 +796,7 @@
                                     <tr>
                                         <td class="text-center">5.1.01</td>
                                         <td>Beban Operasional, Honor, Adm & Umum</td>
-                                        <td class="text-muted small">Kas Keluar Operasional</td>
+                                        <td class="text-muted small">Kas Keluar Operasional Tahun <span id="displayTahunBeban">2026</span></td>
                                         <td class="text-end fw-bold text-danger" id="lrBebanOperasional">Rp 0</td>
                                     </tr>
                                     <tr class="table-light fw-bold">
@@ -1476,49 +1484,81 @@
             document.getElementById('dashFinTingkatPengembalian').textContent = `${pLancar}% Pinjaman Lancar`;
         }
 
-        // FUNGSI RENDER NERACA MICROFINANCE & LAPORAN LABA RUGI DENGAN RUPA-RUPA AKTIVA/PASIVA
+        // FUNGSI RENDER NERACA MICROFINANCE & LAPORAN LABA RUGI DENGAN REALISASI JASA TAHUN BERJALAN
         function renderLaporanNeracaMicrofinance() {
             const lppData = getLPPData();
             const kasData = getKasData();
             const cfg = getNeracaConfig();
 
-            // 1. Hitung Pendapatan & Beban (Laba Rugi)
-            let totalJasaLPP = 0;
+            const selectTahun = document.getElementById('filterTahunNeraca');
+            const selectedYear = selectTahun ? selectTahun.value : '2026';
+
+            document.getElementById('displayTahunBuku').textContent = selectedYear;
+            document.getElementById('displayTahunJasa').textContent = selectedYear;
+            document.getElementById('displayTahunDenda').textContent = selectedYear;
+            document.getElementById('displayTahunBeban').textContent = selectedYear;
+
+            // 1. Hitung Pendapatan Jasa KHUSUS Tahun Berjalan (Dari history transaksi yang tahunnya cocok)
+            let totalJasaTahunBerjalan = 0;
             let totalPiutangOutstanding = 0;
 
             lppData.forEach(item => {
-                totalJasaLPP += parseNum(item.realTotBunga);
                 totalPiutangOutstanding += parseNum(item.saldo);
+                if (item.history && Array.isArray(item.history)) {
+                    item.history.forEach(h => {
+                        if (h.tanggal) {
+                            let itemYear = "";
+                            if (h.tanggal.includes('/')) itemYear = h.tanggal.split('/')[2];
+                            else if (h.tanggal.includes('-')) itemYear = h.tanggal.split('-')[0];
+                            
+                            if (itemYear === selectedYear) {
+                                totalJasaTahunBerjalan += parseNum(h.jasa);
+                            }
+                        }
+                    });
+                }
             });
 
-            let totalDendaKas = 0;
-            let totalBebanOperasional = 0;
+            // Jika belum ada history spesifik tahun itu tapi ada realisasi bulan ini di LPP
+            if (totalJasaTahunBerjalan === 0 && selectedYear === '2026') {
+                lppData.forEach(item => {
+                    totalJasaTahunBerjalan += parseNum(item.realIniBunga);
+                });
+            }
+
+            // 2. Hitung Pendapatan Denda & Beban Operasional Kas Khusus Tahun Tersebut
+            let totalDendaKasTahun = 0;
+            let totalBebanKasTahun = 0;
             let saldoKasOperasional = 0;
 
             kasData.forEach(item => {
                 const nom = parseNum(item.nominal);
-                if (item.tipe === 'Masuk') {
-                    saldoKasOperasional += nom;
-                    if (item.kategori === 'Denda') totalDendaKas += nom;
-                } else if (item.tipe === 'Keluar') {
-                    saldoKasOperasional -= nom;
-                    totalBebanOperasional += nom;
+                let itemYear = item.tanggal ? item.tanggal.split('T')[0].split('-')[0] : '2026';
+
+                // Saldo kas kumulatif riil
+                if (item.tipe === 'Masuk') saldoKasOperasional += nom;
+                else if (item.tipe === 'Keluar') saldoKasOperasional -= nom;
+
+                // Filter pendapatan denda & beban operasional tahun berjalan
+                if (itemYear === selectedYear) {
+                    if (item.tipe === 'Masuk' && item.kategori === 'Denda') totalDendaKasTahun += nom;
+                    else if (item.tipe === 'Keluar') totalBebanKasTahun += nom;
                 }
             });
 
-            const totalPendapatan = totalJasaLPP + totalDendaKas;
-            const surplusLabaBersih = totalPendapatan - totalBebanOperasional;
+            const totalPendapatan = totalJasaTahunBerjalan + totalDendaKasTahun;
+            const surplusLabaBersih = totalPendapatan - totalBebanKasTahun;
 
             // Render ke tabel Laba Rugi
-            document.getElementById('lrPendapatanJasa').textContent = 'Rp ' + formatRp(totalJasaLPP);
-            document.getElementById('lrPendapatanDenda').textContent = 'Rp ' + formatRp(totalDendaKas);
+            document.getElementById('lrPendapatanJasa').textContent = 'Rp ' + formatRp(totalJasaTahunBerjalan);
+            document.getElementById('lrPendapatanDenda').textContent = 'Rp ' + formatRp(totalDendaKasTahun);
             document.getElementById('lrTotalPendapatan').textContent = 'Rp ' + formatRp(totalPendapatan);
-            document.getElementById('lrBebanOperasional').textContent = 'Rp ' + formatRp(totalBebanOperasional);
-            document.getElementById('lrTotalBeban').textContent = 'Rp ' + formatRp(totalBebanOperasional);
+            document.getElementById('lrBebanOperasional').textContent = 'Rp ' + formatRp(totalBebanKasTahun);
+            document.getElementById('lrTotalBeban').textContent = 'Rp ' + formatRp(totalBebanKasTahun);
             document.getElementById('lrSurplusBersih').textContent = 'Rp ' + formatRp(surplusLabaBersih);
             document.getElementById('lrBadgeSurplus').textContent = 'Rp ' + formatRp(surplusLabaBersih);
 
-            // 2. Neraca Keuangan
+            // 3. Neraca Keuangan
             const modalAwal = parseNum(cfg.modalAwal) || 65000000;
             const titipanAnggota = parseNum(cfg.titipan) || 0;
             const ckpn = parseNum(cfg.ckpn) || 0;
@@ -1536,7 +1576,7 @@
             document.getElementById('neracaSurplus').textContent = 'Rp ' + formatRp(surplusLabaBersih);
             document.getElementById('neracaSubPasiva').textContent = 'Rp ' + formatRp(subtotalPasivaNyata);
 
-            // 3. Logika Akun Rekonsiliasi Rupa-rupa Aktiva / Pasiva (Otomatis Balance)
+            // 4. Logika Akun Rekonsiliasi Rupa-rupa Aktiva / Pasiva (Otomatis Balance)
             const rowRupasAktiva = document.getElementById('rowRupaRupaAktiva');
             const rowRupasPasiva = document.getElementById('rowRupaRupaPasiva');
             const badgeBalance = document.getElementById('neracaBalanceBadge');
@@ -1546,7 +1586,6 @@
             let finalTotalPasiva = subtotalPasivaNyata;
 
             if (subtotalAktivaNyata < subtotalPasivaNyata) {
-                // Aktiva lebih kecil -> munculkan Rupa-rupa Aktiva
                 const selisih = subtotalPasivaNyata - subtotalAktivaNyata;
                 rowRupasAktiva.classList.remove('d-none');
                 rowRupasPasiva.classList.add('d-none');
@@ -1557,7 +1596,6 @@
                 badgeBalance.innerHTML = `<i class="bi bi-exclamation-circle-fill me-1"></i> Ditampung di Rupa-rupa Aktiva (Rp ${formatRp(selisih)})`;
                 ketSelisih.innerHTML = `Terdapat penyesuaian selisih saldo di pos <b>Rupa-rupa Aktiva</b> sebesar <b>Rp ${formatRp(selisih)}</b> agar total aktiva dan pasiva tetap seimbang secara profesional.`;
             } else if (subtotalAktivaNyata > subtotalPasivaNyata) {
-                // Aktiva lebih besar -> munculkan Rupa-rupa Pasiva
                 const selisih = subtotalAktivaNyata - subtotalPasivaNyata;
                 rowRupasPasiva.classList.remove('d-none');
                 rowRupasAktiva.classList.add('d-none');
@@ -1568,7 +1606,6 @@
                 badgeBalance.innerHTML = `<i class="bi bi-exclamation-circle-fill me-1"></i> Ditampung di Rupa-rupa Pasiva (Rp ${formatRp(selisih)})`;
                 ketSelisih.innerHTML = `Terdapat penyesuaian selisih saldo di pos <b>Rupa-rupa Pasiva</b> sebesar <b>Rp ${formatRp(selisih)}</b> agar total neraca tetap seimbang secara profesional.`;
             } else {
-                // Balance sempurna
                 rowRupasAktiva.classList.add('d-none');
                 rowRupasPasiva.classList.add('d-none');
                 badgeBalance.className = "badge bg-success py-1 px-2 fw-semibold";
@@ -1606,16 +1643,43 @@
         let surplusTutupBuku = 0;
 
         function bukaModalTutupBuku() {
+            const selectTahun = document.getElementById('filterTahunNeraca');
+            const selectedYear = selectTahun ? selectTahun.value : '2026';
             const lppData = getLPPData();
             const kasData = getKasData();
             
-            let totalJasa = lppData.reduce((acc, curr) => acc + parseNum(curr.realTotBunga), 0);
-            let totalDenda = kasData.filter(k => k.tipe === 'Masuk' && k.kategori === 'Denda').reduce((acc, curr) => acc + parseNum(curr.nominal), 0);
-            let totalBeban = kasData.filter(k => k.tipe === 'Keluar').reduce((acc, curr) => acc + parseNum(curr.nominal), 0);
+            let totalJasaTahun = 0;
+            lppData.forEach(item => {
+                if (item.history && Array.isArray(item.history)) {
+                    item.history.forEach(h => {
+                        if (h.tanggal) {
+                            let itemYear = h.tanggal.includes('/') ? h.tanggal.split('/')[2] : h.tanggal.split('-')[0];
+                            if (itemYear === selectedYear) totalJasaTahun += parseNum(h.jasa);
+                        }
+                    });
+                }
+            });
+
+            if (totalJasaTahun === 0 && selectedYear === '2026') {
+                lppData.forEach(item => { totalJasaTahun += parseNum(item.realIniBunga); });
+            }
+
+            let totalDendaTahun = 0;
+            let totalBebanTahun = 0;
+
+            kasData.forEach(item => {
+                const nom = parseNum(item.nominal);
+                let itemYear = item.tanggal ? item.tanggal.split('T')[0].split('-')[0] : '2026';
+                if (itemYear === selectedYear) {
+                    if (item.tipe === 'Masuk' && item.kategori === 'Denda') totalDendaTahun += nom;
+                    else if (item.tipe === 'Keluar') totalBebanTahun += nom;
+                }
+            });
             
-            surplusTutupBuku = Math.max(0, (totalJasa + totalDenda) - totalBeban);
+            surplusTutupBuku = Math.max(0, (totalJasaTahun + totalDendaTahun) - totalBebanTahun);
 
             document.getElementById('tbSurplusBersih').textContent = 'Rp ' + formatRp(surplusTutupBuku);
+            document.getElementById('tbTahunBuku').value = selectedYear;
             document.getElementById('tbAlokasiModal').value = 'Rp ' + formatRp(Math.round(surplusTutupBuku * 0.50));
             document.getElementById('tbAlokasiSosial').value = 'Rp ' + formatRp(Math.round(surplusTutupBuku * 0.15));
             document.getElementById('tbAlokasiJasa').value = 'Rp ' + formatRp(Math.round(surplusTutupBuku * 0.20));
