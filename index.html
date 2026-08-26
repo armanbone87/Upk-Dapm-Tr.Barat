@@ -20,43 +20,43 @@
 
     <style>
         :root {
-            --bg-body: #faf9f7;
-            --navbar-bg: #800020; 
-            --gold-primary: #b38728;
-            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+            --bg-body: #f4f7fc;
+            --navbar-bg: #002b66; /* Mandiri Navy Blue */
+            --gold-primary: #ffb81c; /* Mandiri Gold Accent */
+            --gold-gradient: linear-gradient(135deg, #ffb81c 0%, #d49200 100%);
             --card-bg: #ffffff;
-            --card-light-bg: #fffbf5;
-            --text-main: #2b2b2b;
-            --text-muted: #6c757d;
-            --border-color: #ede5da;
-            --accent-color: #800020; 
-            --table-th-bg: #800020;
+            --card-light-bg: #f0f6fc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #dbe4f0;
+            --accent-color: #004b93; /* Mandiri Royal Blue */
+            --table-th-bg: #002b66;
             --table-th-color: #ffffff;
             --table-td-bg: #ffffff;
-            --table-td-color: #2b2b2b;
+            --table-td-color: #1e293b;
             --input-bg: #ffffff;
         }
 
         body.dark-mode {
-            --bg-body: #111418;
-            --navbar-bg: #1a0006; 
-            --gold-primary: #e5b850;
-            --gold-gradient: linear-gradient(135deg, #e5b850 0%, #aa7c11 100%);
-            --card-bg: #1c2128;
-            --card-light-bg: #261c1e;
-            --text-main: #e6edf3;
-            --text-muted: #8b949e;
-            --border-color: #353b45;
-            --accent-color: #ff4d6d;
-            --table-th-bg: #30000c;
+            --bg-body: #0b1320;
+            --navbar-bg: #060d17; 
+            --gold-primary: #ffb81c;
+            --gold-gradient: linear-gradient(135deg, #ffb81c 0%, #b87d00 100%);
+            --card-bg: #111d30;
+            --card-light-bg: #16243c;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-color: #20334f;
+            --accent-color: #3b82f6;
+            --table-th-bg: #060e1c;
             --table-th-color: #ffffff;
-            --table-td-bg: #1c2128;
-            --table-td-color: #e6edf3;
-            --input-bg: #22272e;
+            --table-td-bg: #111d30;
+            --table-td-color: #e2e8f0;
+            --input-bg: #16243c;
         }
 
         body { 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; 
             font-size: 0.82rem; 
             background: var(--bg-body); 
             color: var(--text-main); 
@@ -66,21 +66,20 @@
         }
         .text-muted { color: var(--text-muted) !important; }
 
-        /* Banking Hero Typography */
         .font-brand { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-serif-title { font-family: 'Cinzel', serif; }
         
-        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 2px solid var(--border-color); box-shadow: 0 2px 10px rgba(0,0,0, 0.2); }
-        .card-custom { border: 1px solid var(--border-color); border-radius: 0.85rem; background: var(--card-bg); color: var(--text-main); box-shadow: 0 4px 16px rgba(0,0,0, 0.04); }
+        .navbar-custom { background: var(--navbar-bg) !important; border-bottom: 2px solid var(--gold-primary); box-shadow: 0 4px 14px rgba(0, 43, 102, 0.15); }
+        .card-custom { border: 1px solid var(--border-color); border-radius: 0.85rem; background: var(--card-bg); color: var(--text-main); box-shadow: 0 4px 16px rgba(0, 43, 102, 0.04); }
         .card-light-custom { background: var(--card-light-bg); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 0.75rem; }
 
-        .btn-compact { padding: 0.35rem 0.75rem; font-size: 0.8rem; border-radius: 0.5rem; font-weight: 500; }
-        .form-control-compact, .form-select-compact { font-size: 0.82rem; padding: 0.35rem 0.6rem; border-radius: 0.5rem; background-color: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); }
-        .form-control-compact:focus, .form-select-compact:focus { background-color: var(--input-bg); color: var(--text-main); border-color: var(--accent-color); box-shadow: 0 0 0 0.2rem rgba(167, 29, 42, 0.15); }
+        .btn-compact { padding: 0.38rem 0.8rem; font-size: 0.8rem; border-radius: 0.5rem; font-weight: 600; }
+        .form-control-compact, .form-select-compact { font-size: 0.82rem; padding: 0.38rem 0.65rem; border-radius: 0.5rem; background-color: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); }
+        .form-control-compact:focus, .form-select-compact:focus { background-color: var(--input-bg); color: var(--text-main); border-color: var(--accent-color); box-shadow: 0 0 0 0.2rem rgba(0, 75, 147, 0.15); }
         .form-control-compact::placeholder { color: var(--text-muted) !important; }
         
         .customer-item { transition: all 0.2s ease; cursor: pointer; border-left: 4px solid transparent; background-color: var(--card-bg); color: var(--text-main); border-bottom: 1px solid var(--border-color); }
-        .customer-item:hover, .customer-item.active { background-color: var(--card-light-bg) !important; border-left-color: var(--accent-color); transform: translateX(2px); color: var(--accent-color); }
+        .customer-item:hover, .customer-item.active { background-color: var(--card-light-bg) !important; border-left-color: var(--gold-primary); transform: translateX(2px); color: var(--accent-color); }
         
         .table-compact th, .table-lpp-compact th { background-color: var(--table-th-bg); color: var(--table-th-color); font-size: 0.72rem; text-transform: uppercase; vertical-align: middle; white-space: nowrap; padding: 0.5rem; text-align: center; border-color: var(--border-color); user-select: none; }
         .table-compact td, .table-lpp-compact td { font-size: 0.75rem; vertical-align: middle; white-space: nowrap; padding: 0.5rem; color: var(--table-td-color); border-color: var(--border-color); background-color: var(--table-td-bg); }
@@ -88,8 +87,8 @@
         .table-lpp-compact th { font-size: 0.65rem; padding: 0.45rem 0.3rem; }
         .table-lpp-compact td { font-size: 0.72rem; padding: 0.4rem 0.3rem; }
 
-        .btn-dark { background-color: var(--navbar-bg) !important; border-color: var(--border-color) !important; color: white !important;}
-        .btn-dark:hover { filter: brightness(1.2); }
+        .btn-dark { background-color: var(--navbar-bg) !important; border-color: var(--navbar-bg) !important; color: white !important;}
+        .btn-dark:hover { background-color: var(--accent-color) !important; border-color: var(--accent-color) !important; }
         .btn-outline-dark { color: var(--text-main) !important; border-color: var(--border-color) !important; background: transparent; }
         .btn-outline-dark:hover { background-color: var(--navbar-bg) !important; color: white !important; }
         .bg-dark { background-color: var(--navbar-bg) !important; }
@@ -97,14 +96,14 @@
         .badge.bg-dark { background-color: var(--navbar-bg) !important; color: white !important; }
 
         .btn-gold {
-            background: linear-gradient(135deg, #b38728 0%, #8f6517 100%) !important;
-            color: #ffffff !important;
+            background: linear-gradient(135deg, #ffb81c 0%, #e09b00 100%) !important;
+            color: #002b66 !important;
             border: none;
-            font-weight: 600;
+            font-weight: 700;
         }
-        .btn-gold:hover { filter: brightness(1.1); box-shadow: 0 4px 12px rgba(179, 135, 40, 0.3); }
+        .btn-gold:hover { filter: brightness(1.08); box-shadow: 0 4px 12px rgba(255, 184, 28, 0.35); }
 
-        .kwitansi-profesional { background: #ffffff; border: 2px solid var(--accent-color); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 15px rgba(167, 29, 42, 0.08); color: #000000; }
+        .kwitansi-profesional { background: #ffffff; border: 2px solid var(--accent-color); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0, 43, 102, 0.08); color: #000000; }
 
         .pengurus-avatar {
             width: 40px; height: 40px; border-radius: 50%; background: var(--card-light-bg); color: var(--accent-color);
@@ -115,19 +114,18 @@
         body.dark-mode .modal-header, body.dark-mode .modal-footer { border-color: var(--border-color); }
         body.dark-mode .btn-close { filter: invert(1); }
 
-        .rupas-row { background-color: #fff3cd !important; color: #856404 !important; font-weight: 600; }
-        body.dark-mode .rupas-row { background-color: #4d3800 !important; color: #ffda6a !important; }
+        .rupas-row { background-color: #fef3c7 !important; color: #92400e !important; font-weight: 600; }
+        body.dark-mode .rupas-row { background-color: #451a03 !important; color: #fde68a !important; }
 
-        /* Banking Portal Landing Styles */
         .portal-bg-pattern {
             background-color: var(--bg-body);
-            background-image: radial-gradient(rgba(179, 135, 40, 0.08) 1px, transparent 1px);
-            background-size: 24px 24px;
+            background-image: radial-gradient(rgba(0, 43, 102, 0.07) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
         .banking-card {
             background: var(--card-bg);
             border-radius: 1.25rem;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+            box-shadow: 0 15px 40px rgba(0, 43, 102, 0.08);
             border: 1px solid var(--border-color);
             overflow: hidden;
             position: relative;
@@ -137,7 +135,7 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 6px;
-            background: linear-gradient(90deg, #800020, #b38728, #d4af37, #800020);
+            background: linear-gradient(90deg, #002b66, #004b93, #ffb81c, #002b66);
         }
         .role-switch-btn {
             border: 1px solid var(--border-color);
@@ -150,7 +148,7 @@
             background: var(--navbar-bg) !important;
             color: #ffffff !important;
             border-color: var(--navbar-bg) !important;
-            box-shadow: 0 4px 10px rgba(128, 0, 32, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 43, 102, 0.25);
         }
 
         .feature-badge-pill {
@@ -164,10 +162,9 @@
             font-size: 0.72rem;
             font-weight: 600;
             color: var(--text-main);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 6px rgba(0, 43, 102, 0.03);
         }
 
-        /* Responsive Mobile Scrolling Nav & Tables */
         .nav-tabs-scroll {
             display: flex;
             flex-wrap: nowrap;
@@ -195,31 +192,32 @@
             #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi *, #areaCetakLaporan, #areaCetakLaporan *, #areaCetakBukuKas, #areaCetakBukuKas *, #areaCetakNeraca, #areaCetakNeraca * { visibility: visible !important; }
             #areaCetakLPP, #areaCetakBukuKas, #areaCetakNeraca { position: absolute; left: 0; top: 0; width: 100% !important; max-height: none !important; overflow: visible !important; background: #fff; }
             .table-responsive { overflow: visible !important; max-height: none !important; }
-            table { width: 100% !important; font-size: 8.5px !important; }
+            table { width: 100% !important; font-size: 8.5px !important; border-collapse: collapse !important; }
+            th { background-color: #002b66 !important; color: #ffffff !important; -webkit-print-color-adjust: exact; }
             .no-print { display: none !important; }
-            @page { size: portrait; margin: 8mm; }
+            @page { size: landscape; margin: 6mm; }
         }
     </style>
 </head>
 <body class="portal-bg-pattern">
 
-    <!-- Top Minimalist Banking Navbar -->
-    <nav class="navbar navbar-light bg-white py-2 border-bottom shadow-sm no-print sticky-top" style="background: var(--card-bg) !important;">
+    <!-- Top Minimalist Banking Navbar (Mandiri Theme) -->
+    <nav class="navbar navbar-dark navbar-custom py-2 shadow-sm no-print sticky-top">
         <div class="container-fluid px-3 px-md-5">
             <div class="d-flex align-items-center gap-2">
-                <img src="logo-pnpm.png" alt="Logo" onerror="this.src='https://placehold.co/32x32/800020/ffffff?text=UPK'" style="width: 32px; height: 32px; object-fit: contain; border-radius: 6px;" class="border p-1 shadow-sm">
-                <span class="fw-bold font-brand text-dark fs-6 d-none d-sm-inline" style="letter-spacing: 0.3px;">
-                    SISKEU <span class="badge ms-1 text-white bg-dark" style="font-size: 0.62rem;">UPK DAPM</span>
+                <img id="mainAppLogo" src="https://tse3.mm.bing.net/th/id/OIP.VKvCvVwvmJTbwyaLbTdRTAHaHa?r=0&w=480&h=480&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo UPK" crossorigin="anonymous" style="width: 32px; height: 32px; object-fit: contain; border-radius: 6px;" class="border p-1 shadow-sm bg-white">
+                <span class="fw-bold font-brand text-light fs-6 d-none d-sm-inline" style="letter-spacing: 0.3px;">
+                    SISKEU <span class="badge ms-1 fw-bold text-dark bg-warning" style="font-size: 0.65rem;">UPK DAPM</span>
                 </span>
             </div>
             <div class="d-flex align-items-center gap-2">
-                <span id="syncStatusBadge" class="badge rounded-pill bg-light text-dark border px-3 py-1 shadow-sm fw-semibold" style="font-size: 0.68rem;">
+                <span id="syncStatusBadge" class="badge rounded-pill bg-light text-primary border px-3 py-1 shadow-sm fw-semibold" style="font-size: 0.68rem;">
                     <span class="spinner-grow spinner-grow-sm text-warning me-1" style="width: 7px; height: 7px;"></span> Online Cloud
                 </span>
-                <button class="btn btn-sm btn-outline-dark border-0 px-2" onclick="toggleDarkMode()" title="Mode Gelap/Terang" id="btnThemeToggle">
+                <button class="btn btn-sm btn-outline-light border-0 px-2" onclick="toggleDarkMode()" title="Mode Gelap/Terang" id="btnThemeToggle">
                     <i class="bi bi-moon-fill"></i>
                 </button>
-                <span id="adminGreeting" class="text-dark small d-none d-md-inline fw-medium"></span>
+                <span id="adminGreeting" class="text-light small d-none d-md-inline fw-medium text-opacity-75"></span>
                 <span id="roleBadge" class="badge bg-warning text-dark d-none"></span>
                 <button id="btnNavAuth" class="btn btn-gold btn-compact px-3 shadow-sm" onclick="focusLoginPortal()">
                     <i class="bi bi-shield-lock-fill me-1"></i> Masuk
@@ -228,34 +226,33 @@
         </div>
     </nav>
 
-    <!-- PUBLIC BANKING PORTAL HERO VIEW -->
+    <!-- LANDING PORTAL HERO VIEW (Mandiri Blue Accent) -->
     <div id="publicContent" class="container py-4 py-lg-5">
         <div class="row align-items-center justify-content-between g-4 g-lg-5 my-auto">
             
-            <!-- Left Column: Official Branding & Info -->
             <div class="col-lg-6 text-start">
                 <div class="d-inline-flex align-items-center gap-2 mb-3">
-                    <span class="badge text-uppercase fw-bold px-3 py-1 rounded-pill" style="background: rgba(179, 135, 40, 0.15); color: var(--gold-primary); font-size: 0.72rem; letter-spacing: 1px;">
+                    <span class="badge text-uppercase fw-bold px-3 py-1 rounded-pill" style="background: rgba(0, 43, 102, 0.1); color: var(--accent-color); font-size: 0.72rem; letter-spacing: 1px;">
                         <i class="bi bi-shield-fill-check me-1"></i> Sistem Informasi Keuangan Terpadu
                     </span>
                 </div>
 
                 <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="card p-2 rounded-4 shadow-sm border" style="background: var(--card-bg);">
-                        <img src="logo-pnpm.png" alt="Logo PNPM/DAPM" onerror="this.src='https://placehold.co/60x60/800020/ffffff?text=DAPM'" style="width: 58px; height: 58px; object-fit: contain;">
+                    <div class="card p-2 rounded-4 shadow-sm border bg-white">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.VKvCvVwvmJTbwyaLbTdRTAHaHa?r=0&w=480&h=480&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo UPK DAPM" crossorigin="anonymous" style="width: 58px; height: 58px; object-fit: contain;">
                     </div>
                     <div>
-                        <h2 class="fw-bold font-brand text-dark mb-0" style="letter-spacing: -0.5px; line-height: 1.15;">
+                        <h2 class="fw-bold font-brand mb-0" style="letter-spacing: -0.5px; line-height: 1.15; color: var(--navbar-bg);">
                             UPK DAPM
                         </h2>
-                        <h3 class="fw-semibold text-muted mb-0" style="font-size: 1.35rem; color: var(--accent-color) !important;">
+                        <h3 class="fw-semibold text-primary mb-0" style="font-size: 1.35rem; color: var(--accent-color) !important;">
                             Tanete Riattang Barat
                         </h3>
                     </div>
                 </div>
 
                 <p class="text-muted mb-4 pe-lg-4" style="font-size: 0.88rem; line-height: 1.6;">
-                    Sistem LPP Terpadu, Kas Operasional, Neraca & Laba/Rugi Microfinance berbasis cloud — dirancang untuk transparansi dan akuntabilitas dana bergulir pemberdayaan masyarakat.
+                    Sistem LPP Terpadu, Kas Operasional, Neraca & Laba/Rugi Microfinance berbasis cloud — dirancang untuk transparansi dan akuntabilitas dana bergulir pemberdayaan masyarakat[cite: 1].
                 </p>
 
                 <div class="d-flex flex-wrap gap-2 mb-4">
@@ -266,16 +263,14 @@
                 </div>
             </div>
 
-            <!-- Right Column: Portal Petugas / Login Card -->
             <div class="col-lg-5 col-xl-5">
                 <div class="banking-card p-4 p-md-5">
                     <div class="text-center mb-3">
-                        <span class="text-uppercase fw-bold small d-block mb-1" style="color: var(--gold-primary); letter-spacing: 1.5px; font-size: 0.7rem;">PORTAL PETUGAS</span>
-                        <h4 class="fw-bold text-dark font-brand mb-1">Masuk Sistem</h4>
+                        <span class="text-uppercase fw-bold small d-block mb-1" style="color: var(--accent-color); letter-spacing: 1.5px; font-size: 0.7rem;">PORTAL PETUGAS</span>
+                        <h4 class="fw-bold font-brand mb-1" style="color: var(--navbar-bg);">Masuk Sistem</h4>
                         <p class="small text-muted mb-0">Pilih jenis akses Anda untuk melanjutkan</p>
                     </div>
 
-                    <!-- Role Segmented Switcher -->
                     <div class="d-flex p-1 bg-light rounded-3 border mb-3 gap-1">
                         <button type="button" class="btn btn-sm w-50 py-2 role-switch-btn active" id="roleBtnAdmin" onclick="setLoginRole('admin')">
                             <i class="bi bi-shield-lock-fill me-1"></i> Admin
@@ -312,12 +307,11 @@
                     <div class="text-center border-top pt-2">
                         <span class="small text-muted d-block mb-2" style="font-size: 0.72rem;">Atau Masuk Cepat (Demo):</span>
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-sm btn-outline-danger w-50 btn-compact" onclick="loginInstan('admin')"><i class="bi bi-lightning-charge me-1"></i> Admin</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary w-50 btn-compact" onclick="loginInstan('admin')"><i class="bi bi-lightning-charge me-1"></i> Admin</button>
                             <button type="button" class="btn btn-sm btn-outline-dark w-50 btn-compact" onclick="loginInstan('teller')"><i class="bi bi-lightning-charge me-1"></i> Teller</button>
                         </div>
                     </div>
 
-                    <!-- Collapsible Credentials -->
                     <div class="mt-3 pt-2 text-center">
                         <a class="small text-muted text-decoration-none fw-semibold" style="font-size: 0.7rem;" data-bs-toggle="collapse" href="#collapseKredensial" role="button">
                             <i class="bi bi-caret-right-fill"></i> KREDENSIAL UJI COBA
@@ -325,7 +319,7 @@
                         <div class="collapse mt-2" id="collapseKredensial">
                             <div class="card-light-custom p-2 text-start rounded-2 small text-muted border" style="font-size: 0.68rem;">
                                 • <b>Admin:</b> <code>upk_trb</code> / <code>454567</code><br>
-                                • <b>Teller:</b> <code>teller</code> / <code>teller123</code>
+                                • <b>Teller:</b> <code>teller</code> / <code>teller123</code>[cite: 1]
                             </div>
                         </div>
                     </div>
@@ -336,14 +330,13 @@
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 pt-3 border-top small text-muted">
             <div>© 2026 UPK DAPM Tanete Riattang Barat · SK Kemenkumham AHU-0003655.AH.01.07/2017</div>
-            <div><span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-2 py-1">● Cloud Sync</span> Versi Ultimate 2026</div>
+            <div><span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-2 py-1">● Cloud Sync</span> Versi Ultimate 2026</div>
         </div>
     </div>
 
-    <!-- PRIVATE DASHBOARD (Hanya tampil setelah login) -->
+    <!-- PRIVATE DASHBOARD -->
     <div id="privateDashboard" class="container-fluid px-2 px-md-3 py-2 py-md-3 d-none">
         
-        <!-- Touch-Friendly Scrollable Tab Navigation -->
         <div class="card-custom p-2 mb-3 no-print shadow-sm">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                 <div class="nav-tabs-scroll flex-grow-1" role="group">
@@ -377,22 +370,20 @@
                     <div class="col-lg-8">
                         <div class="d-flex align-items-center gap-2 mb-2">
                             <span class="badge text-white fw-bold px-3 py-1 bg-dark rounded-pill"><i class="bi bi-shield-check me-1"></i> Kelembagaan Resmi</span>
-                            <span class="badge text-danger bg-light border fw-semibold px-2 py-1 rounded-pill">Status: Aktif</span>
+                            <span class="badge text-primary bg-light border fw-semibold px-2 py-1 rounded-pill">Status: Aktif</span>
                         </div>
-                        <h3 class="fw-bold mb-2 text-dark" style="color: var(--accent-color) !important;">UPK DAPM TANETE RIATTANG BARAT</h3>
-                        <p class="small mb-2 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
+                        <h3 class="fw-bold mb-2" style="color: var(--navbar-bg) !important;">UPK DAPM TANETE RIATTANG BARAT</h3>
+                        <p class="small mb-2 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan[cite: 1].</p>
                         <p class="small mb-3 text-muted">Aplikasi SISKEU UPK merupakan wujud transformasi dan keberlanjutan dari Program Nasional Pemberdayaan Masyarakat Mandiri Perdesaan (PNPM-MPd) sejak Juni 2009 hingga berakhir di Desember 2014, kini dikelola secara mandiri & akuntabel sebagai dana bergulir pemberdayaan masyarakat[cite: 1].</p>
                         <div class="d-flex flex-wrap gap-2 small text-muted">
-                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone[cite: 1]</div>
-                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-file-text-fill text-danger me-1"></i> SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b>[cite: 1]</div>
+                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-geo-alt-fill text-primary me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone[cite: 1]</div>
+                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-file-text-fill text-primary me-1"></i> SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b>[cite: 1]</div>
                         </div>
                     </div>
                     <div class="col-lg-4 text-center">
                         <div class="p-3 p-md-4 card-light-custom rounded-4 border shadow-sm">
-                            <div class="logo-container mb-3 d-flex justify-content-center align-items-center gap-2">
-                                <img src="logo-pnpm.png" alt="Logo PNPM" class="logo-glow" style="width: 50px; height: 50px; border-radius: 50%; padding: 4px; background: #fff;" onerror="this.src='https://placehold.co/50x50/800020/ffffff?text=P'">
-                                <i class="bi bi-arrow-left-right text-danger fs-4 mx-2"></i>
-                                <img src="logo-dapm.png" alt="Logo DAPM" class="logo-glow" style="width: 50px; height: 50px; border-radius: 50%; padding: 4px; background: #fff;" onerror="this.src='https://placehold.co/50x50/800020/ffffff?text=D'">
+                            <div class="logo-container mb-3 d-flex justify-content-center align-items-center">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.VKvCvVwvmJTbwyaLbTdRTAHaHa?r=0&w=480&h=480&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo UPK DAPM" crossorigin="anonymous" style="width: 70px; height: 70px; object-fit: contain; border-radius: 50%; padding: 4px; background: #fff;" class="border shadow-sm">
                             </div>
                             <h6 class="fw-bold mb-1 text-dark">SISKEU UPK DAPM</h6>
                             <p class="small mb-0 text-muted">Sistem LPP Terpadu & Kas Operasional</p>
@@ -403,13 +394,13 @@
 
                 <hr class="border-secondary opacity-25 my-4">
 
-                <h5 class="fw-bold mb-3 text-dark d-flex align-items-center"><i class="bi bi-people-fill me-2 text-danger"></i> Susunan Pengurus & Pengawas Lembaga</h5>
+                <h5 class="fw-bold mb-3 text-dark d-flex align-items-center"><i class="bi bi-people-fill me-2 text-primary"></i> Susunan Pengurus & Pengawas Lembaga</h5>
                 
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <div class="card-light-custom p-3 p-md-4 rounded-3 border h-100 shadow-sm">
                             <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-                                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-shield-lock-fill text-danger me-2"></i> Pengurus Perkumpulan & UPK</h6>
+                                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-shield-lock-fill text-primary me-2"></i> Pengurus Perkumpulan & UPK</h6>
                                 <span class="badge bg-dark text-white">Eksekutif</span>
                             </div>
                             <ul class="list-unstyled small mb-0 d-flex flex-column gap-3">
@@ -427,7 +418,7 @@
                                 </li>
                                 <li class="d-flex align-items-center gap-3 border-top pt-2">
                                     <div class="pengurus-avatar" style="background:var(--navbar-bg); color:white;"><i class="bi bi-person-check-fill"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Kepala Unit Pengelola (UPK):</span><strong class="text-danger fs-6 fw-bold">H. Jadjdji Irfan</strong></div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Kepala Unit Pengelola (UPK):</span><strong class="text-primary fs-6 fw-bold">H. Jadjdji Irfan</strong></div>
                                 </li>
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-briefcase-fill"></i></div>
@@ -444,7 +435,7 @@
                     <div class="col-md-6">
                         <div class="card-light-custom p-3 p-md-4 rounded-3 border h-100 shadow-sm">
                             <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
-                                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-eye-fill text-danger me-2"></i> Badan Pengawas (BP)</h6>
+                                <h6 class="fw-bold text-dark mb-0"><i class="bi bi-eye-fill text-primary me-2"></i> Badan Pengawas (BP)</h6>
                                 <span class="badge bg-secondary text-white">Pengawas</span>
                             </div>
                             <ul class="list-unstyled small mb-0 d-flex flex-column gap-3">
@@ -470,28 +461,28 @@
         <div id="viewPanelDasborKeuangan">
             <div class="row g-2 g-md-3 mb-3">
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-2 p-md-3 border-start border-4 border-danger">
+                    <div class="card-custom p-2 p-md-3 border-start border-4 border-primary">
                         <span class="small d-block text-muted" style="font-size:0.7rem;">Plafon Tersalurkan</span>
                         <h6 class="fw-bold text-dark mb-0 mt-1" id="dashFinPlafon">Rp 0</h6>
                         <small class="text-muted mt-1 d-block" style="font-size:0.68rem;"><span id="dashFinTotalNasabah" class="fw-bold text-dark">0</span> Peminjam</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-2 p-md-3 border-start border-4 border-danger">
+                    <div class="card-custom p-2 p-md-3 border-start border-4 border-primary">
                         <span class="small d-block text-muted" style="font-size:0.7rem;">Realisasi Pokok</span>
                         <h6 class="fw-bold text-dark mb-0 mt-1" id="dashFinRealPokok">Rp 0</h6>
                         <small class="text-muted mt-1 d-block" style="font-size:0.68rem;">Jasa: <span id="dashFinRealBunga" class="fw-bold text-dark">Rp 0</span></small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-2 p-md-3 border-start border-4 border-danger">
+                    <div class="card-custom p-2 p-md-3 border-start border-4 border-primary">
                         <span class="small d-block text-muted" style="font-size:0.7rem;">Saldo Outs.</span>
                         <h6 class="fw-bold text-dark mb-0 mt-1" id="dashFinSaldoOuts">Rp 0</h6>
                         <small class="text-muted mt-1 d-block" style="font-size:0.68rem;">Dana Bergulir</small>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <div class="card-custom p-2 p-md-3 border-start border-4 border-danger">
+                    <div class="card-custom p-2 p-md-3 border-start border-4 border-primary">
                         <span class="small d-block text-muted" style="font-size:0.7rem;">Kas Operasional</span>
                         <h6 class="fw-bold mb-0 mt-1 text-dark" id="dashFinSaldoKas">Rp 0</h6>
                         <small class="text-muted mt-1 d-block" style="font-size:0.68rem;">Kas Bersih</small>
@@ -502,7 +493,7 @@
             <div class="row g-2 g-md-3 mb-3">
                 <div class="col-lg-8">
                     <div class="card-custom p-3 p-md-4 h-100">
-                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-bar-chart-line text-danger me-1"></i> Grafik Tren Pembayaran Angsuran</h6>
+                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-bar-chart-line text-primary me-1"></i> Grafik Tren Pembayaran Angsuran</h6>
                         <div style="position: relative; height:240px; width:100%">
                             <canvas id="trenAngsuranChart"></canvas>
                         </div>
@@ -510,7 +501,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card-custom p-3 p-md-4 h-100">
-                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-pie-chart text-danger me-1"></i> Rasio Kolektibilitas</h6>
+                        <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-pie-chart text-primary me-1"></i> Rasio Kolektibilitas</h6>
                         <div style="position: relative; height:190px; width:100%">
                             <canvas id="kolektibilitasPieChart"></canvas>
                         </div>
@@ -523,10 +514,10 @@
                 <div class="col-lg-8">
                     <div class="card-custom p-3 p-md-4 h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up-arrow text-danger me-1"></i> Target vs Realisasi Pokok</h6>
+                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up-arrow text-primary me-1"></i> Target vs Realisasi Pokok</h6>
                         </div>
                         <div class="progress mb-3 bg-secondary bg-opacity-25 rounded-pill overflow-hidden" style="height: 14px;">
-                            <div class="progress-bar bg-dark" id="dashFinProgressBar" role="progressbar" style="width: 0%;"></div>
+                            <div class="progress-bar bg-primary" id="dashFinProgressBar" role="progressbar" style="width: 0%;"></div>
                         </div>
                         <div class="row g-2 text-center small pt-2">
                             <div class="col-4 border-end">
@@ -548,18 +539,18 @@
                 <div class="col-lg-4">
                     <div class="card-custom p-3 p-md-4 h-100 d-flex flex-column justify-content-between">
                         <div>
-                            <h6 class="fw-bold mb-2 text-dark"><i class="bi bi-lightning-charge-fill text-danger me-1"></i> Aksi Cepat</h6>
+                            <h6 class="fw-bold mb-2 text-dark"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Aksi Cepat</h6>
                             <p class="small mb-3 text-muted">Pilih modul operasional UPK:</p>
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelNeraca')">
-                                <i class="bi bi-bank2 text-danger me-2"></i> Laporan Neraca & L/R
+                                <i class="bi bi-bank2 text-primary me-2"></i> Laporan Neraca & L/R
                             </button>
                             <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelBayarAngsuran')">
-                                <i class="bi bi-receipt-cutoff text-danger me-2"></i> Kasir & Bayar
+                                <i class="bi bi-receipt-cutoff text-primary me-2"></i> Kasir & Bayar
                             </button>
                             <button class="btn btn-outline-dark btn-compact text-start fw-semibold py-2" onclick="bukaView('panelKalkulator')">
-                                <i class="bi bi-calculator text-danger me-2"></i> Kalkulator Pinjaman
+                                <i class="bi bi-calculator text-primary me-2"></i> Kalkulator Pinjaman
                             </button>
                         </div>
                     </div>
@@ -571,7 +562,7 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-3 border-bottom">
                     <div>
-                        <h5 class="fw-bold mb-1 text-dark" style="color: var(--accent-color) !important;"><i class="bi bi-calendar-check me-2"></i> Penagihan, Jatuh Tempo & SP</h5>
+                        <h5 class="fw-bold mb-1" style="color: var(--navbar-bg) !important;"><i class="bi bi-calendar-check me-2 text-primary"></i> Penagihan, Jatuh Tempo & SP</h5>
                         <p class="small mb-0 text-muted">Pantau tunggakan, cetak PDF Surat Peringatan (SP), atau kirim WhatsApp.</p>
                     </div>
                     <div class="d-flex gap-2 align-items-center">
@@ -583,13 +574,13 @@
                 <div class="row g-2 g-md-3 mb-3">
                     <div class="col-6">
                         <div class="card-light-custom p-2 p-md-3 rounded-3 border">
-                            <span class="small d-block text-muted mb-1" style="font-size:0.7rem;"><i class="bi bi-cash-stack text-danger me-1"></i> Real. Pokok Hari Ini</span>
+                            <span class="small d-block text-muted mb-1" style="font-size:0.7rem;"><i class="bi bi-cash-stack text-primary me-1"></i> Real. Pokok Hari Ini</span>
                             <h5 class="fw-bold mb-0 text-dark" id="todayRealPokokDisplay">Rp 0</h5>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="card-light-custom p-2 p-md-3 rounded-3 border">
-                            <span class="small d-block text-muted mb-1" style="font-size:0.7rem;"><i class="bi bi-percent text-danger me-1"></i> Real. Jasa Hari Ini</span>
+                            <span class="small d-block text-muted mb-1" style="font-size:0.7rem;"><i class="bi bi-percent text-primary me-1"></i> Real. Jasa Hari Ini</span>
                             <h5 class="fw-bold text-dark mb-0" id="todayRealJasaDisplay">Rp 0</h5>
                         </div>
                     </div>
@@ -660,7 +651,7 @@
                 <div class="col-lg-4 col-xl-3">
                     <div class="card-custom p-3 h-100">
                         <div class="input-group input-group-sm mb-2">
-                            <span class="input-group-text border-end-0 bg-white text-danger"><i class="bi bi-search"></i></span>
+                            <span class="input-group-text border-end-0 bg-white text-primary"><i class="bi bi-search"></i></span>
                             <input type="text" id="tellerSearchInput" class="form-control form-control-compact border-start-0 text-dark" placeholder="Cari nasabah..." oninput="renderTellerCustomerList()">
                         </div>
                         <div class="list-group rounded-2 overflow-auto border" id="tellerCustomerList" style="max-height: 380px;"></div>
@@ -670,7 +661,7 @@
                 <div class="col-lg-8 col-xl-9">
                     <div id="tellerEmptyState" class="card-custom p-5 text-center h-100 d-flex justify-content-center align-items-center">
                         <div>
-                            <i class="bi bi-person-lines-fill fs-1 mb-3 text-danger opacity-75"></i>
+                            <i class="bi bi-person-lines-fill fs-1 mb-3 text-primary opacity-75"></i>
                             <h6 class="fw-bold text-dark">Pilih Nasabah di Sebelah Kiri</h6>
                         </div>
                     </div>
@@ -678,16 +669,16 @@
                     <div id="tellerActiveForm" class="card-custom p-3 p-md-4 d-none">
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
                             <div>
-                                <h6 class="fw-bold mb-0 text-dark" style="color: var(--accent-color) !important;" id="tellerNamaNasabah">-</h6>
+                                <h6 class="fw-bold mb-0 text-primary" id="tellerNamaNasabah">-</h6>
                                 <small class="text-muted" id="tellerDesaNasabah">-</small>
                             </div>
                             <div class="text-end">
-                                <span class="badge border py-1 px-2 bg-light text-danger fw-semibold" id="tellerPlafonTenor">-</span>
+                                <span class="badge border py-1 px-2 bg-light text-primary fw-semibold" id="tellerPlafonTenor">-</span>
                             </div>
                         </div>
 
                         <div id="nasabahLunasAlert" class="alert alert-secondary py-2 small d-none mb-3 border-0 shadow-sm text-dark bg-light border">
-                            <i class="bi bi-info-circle-fill me-1 text-danger"></i> Status pinjaman nasabah ini sudah <b>LUNAS</b>.
+                            <i class="bi bi-info-circle-fill me-1 text-primary"></i> Status pinjaman nasabah ini sudah <b>LUNAS</b>.
                         </div>
 
                         <div class="row g-2 mb-3 card-light-custom p-2 rounded-2 border">
@@ -717,7 +708,7 @@
                                         <td class="text-end fw-bold text-dark" id="posTargetPokok">0</td>
                                         <td class="text-end fw-bold text-dark" id="posTargetBunga">0</td>
                                         <td class="text-end fw-bold text-dark table-secondary align-middle" rowspan="2">
-                                            <span id="tellerTotalSisaGabungan" class="fs-6 text-danger">Rp 0</span><br>
+                                            <span id="tellerTotalSisaGabungan" class="fs-6 text-primary">Rp 0</span><br>
                                             <small class="fw-normal text-muted" style="font-size:0.68rem;">(P: <span id="tellerSisaPokok">0</span> + J: <span id="tellerSisaJasa">0</span>)</small>
                                         </td>
                                     </tr>
@@ -734,13 +725,13 @@
                             <div class="row g-2 mb-3">
                                 <div class="col-md-4">
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-text fw-bold bg-light text-danger">Pokok</span>
+                                        <span class="input-group-text fw-bold bg-light text-primary">Pokok</span>
                                         <input type="text" id="tellerInputPokok" class="form-control form-control-compact text-end fw-bold text-dark" placeholder="0" required oninput="formatInputNumber(this); hitungTellerSisaRealtime();">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-text fw-bold bg-light text-danger">Jasa</span>
+                                        <span class="input-group-text fw-bold bg-light text-primary">Jasa</span>
                                         <input type="text" id="tellerInputJasa" class="form-control form-control-compact text-end fw-bold text-dark" placeholder="0" required oninput="formatInputNumber(this); hitungTellerSisaRealtime();">
                                     </div>
                                 </div>
@@ -758,7 +749,7 @@
                                 </div>
                                 <div class="col-md-6 text-end">
                                     <span class="small me-2 text-dark">Estimasi Sisa Pokok:</span>
-                                    <strong class="text-danger small" id="tellerEstimasiSisa">Rp 0</strong>
+                                    <strong class="text-primary small" id="tellerEstimasiSisa">Rp 0</strong>
                                 </div>
                             </div>
 
@@ -769,7 +760,7 @@
                         </form>
 
                         <div class="mt-4 pt-3 border-top">
-                            <h6 class="fw-bold mb-2 text-dark" style="font-size: 0.82rem;"><i class="bi bi-clock-history text-danger me-1"></i> Riwayat Pembayaran</h6>
+                            <h6 class="fw-bold mb-2 text-dark" style="font-size: 0.82rem;"><i class="bi bi-clock-history text-primary me-1"></i> Riwayat Pembayaran</h6>
                             <div class="table-responsive rounded-2 border" style="max-height: 180px;">
                                 <table class="table table-sm table-bordered table-compact mb-0 text-center">
                                     <thead>
@@ -780,9 +771,10 @@
                             </div>
                         </div>
 
+                        <!-- KWITANSI RESMI (Dilengkapi Logo Baru Mandiri Theme) -->
                         <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge p-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle-fill me-1"></i> Pembayaran Tercatat</span>
+                                <span class="badge p-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle-fill me-1 text-warning"></i> Pembayaran Tercatat</span>
                                 <div class="d-flex gap-2 no-print">
                                     <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
                                     <button class="btn btn-dark btn-compact fw-semibold text-white shadow-sm" onclick="kirimBuktiWA()"><i class="bi bi-whatsapp me-1"></i> Kirim WA</button>
@@ -791,12 +783,15 @@
 
                             <div id="areaCetakKwitansi" class="kwitansi-profesional">
                                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                                    <div>
-                                        <h6 class="fw-bold mb-0 text-dark" style="color: var(--accent-color) !important;"><i class="bi bi-patch-check-fill text-danger me-1"></i> BUKTI SETORAN RESMI UPK</h6>
-                                        <small class="text-muted">DAPM Tanete Riattang Barat - Kab. Bone</small>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img src="https://tse3.mm.bing.net/th/id/OIP.VKvCvVwvmJTbwyaLbTdRTAHaHa?r=0&w=480&h=480&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo" crossorigin="anonymous" style="width: 44px; height: 44px; object-fit: contain; border-radius: 6px;" class="border p-1 bg-white">
+                                        <div>
+                                            <h6 class="fw-bold mb-0 text-primary">BUKTI SETORAN RESMI UPK</h6>
+                                            <small class="text-muted">DAPM Tanete Riattang Barat - Kab. Bone</small>
+                                        </div>
                                     </div>
                                     <div class="text-end">
-                                        <span class="badge border py-1 px-2 bg-light text-danger fw-semibold" id="kwtNoTransaksi">No: -</span><br>
+                                        <span class="badge border py-1 px-2 bg-light text-primary fw-semibold" id="kwtNoTransaksi">No: -</span><br>
                                         <small class="text-muted" id="kwtTglTransaksi">-</small>
                                     </div>
                                 </div>
@@ -811,12 +806,12 @@
                                             <tr><td class="text-start text-dark">Setoran Pokok (Ke-<span id="kwtAngsPokokKe">-</span>)</td><td class="text-end fw-bold text-dark" id="kwtPokok">Rp 0</td></tr>
                                             <tr><td class="text-start text-dark">Setoran Jasa / Bunga Pinjaman</td><td class="text-end fw-bold text-dark" id="kwtJasa">Rp 0</td></tr>
                                             <tr id="kwtDendaRow" class="d-none"><td class="text-start text-danger">Denda Keterlambatan</td><td class="text-end fw-bold text-danger" id="kwtDenda">Rp 0</td></tr>
-                                            <tr class="table-active fw-bold"><td class="text-start text-danger">TOTAL SETORAN</td><td class="text-end fs-6 text-danger" id="kwtTotal">Rp 0</td></tr>
+                                            <tr class="table-active fw-bold"><td class="text-start text-primary">TOTAL SETORAN</td><td class="text-end fs-6 text-primary" id="kwtTotal">Rp 0</td></tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="row g-2 card-light-custom p-2 rounded border small text-center">
-                                    <div class="col-6 border-end"><span class="d-block text-muted">Sisa Saldo Pokok</span><strong class="text-danger fs-6" id="kwtSisaSaldo">Rp 0</strong></div>
+                                    <div class="col-6 border-end"><span class="d-block text-muted">Sisa Saldo Pokok</span><strong class="text-primary fs-6" id="kwtSisaSaldo">Rp 0</strong></div>
                                     <div class="col-6"><span class="d-block text-muted">Sisa Jasa</span><strong class="text-dark fs-6" id="kwtSisaJasaKwt">0x (Rp 0)</strong></div>
                                 </div>
                             </div>
@@ -849,19 +844,19 @@
                         <thead>
                             <tr>
                                 <th rowspan="2">No</th><th rowspan="2">Nama Peminjam</th><th rowspan="2">Kelurahan</th><th rowspan="2">Plafon</th><th rowspan="2">Tenor</th><th rowspan="2">Cair</th>
-                                <th colspan="2" style="background-color: #600018; color: #ffffff;">Target s/d Bln Ini</th>
-                                <th colspan="2" style="background-color: #800020; color: #ffffff;">Realisasi s/d Bln Lalu</th>
-                                <th colspan="2" style="background-color: #800020; color: #ffffff;">Realisasi Bln Ini</th>
-                                <th colspan="2" style="background-color: #500010; color: #ffffff;">Realisasi Total</th>
+                                <th colspan="2" style="background-color: #001f4d; color: #ffffff;">Target s/d Bln Ini</th>
+                                <th colspan="2" style="background-color: #002b66; color: #ffffff;">Realisasi s/d Bln Lalu</th>
+                                <th colspan="2" style="background-color: #002b66; color: #ffffff;">Realisasi Bln Ini</th>
+                                <th colspan="2" style="background-color: #003a8c; color: #ffffff;">Realisasi Total</th>
                                 <th rowspan="2">Saldo Outs</th><th rowspan="2">%</th>
-                                <th colspan="2" style="background-color: #a71d2a; color: #ffffff;">Tunggakan</th>
+                                <th colspan="2" style="background-color: #004b93; color: #ffffff;">Tunggakan</th>
                             </tr>
                             <tr>
-                                <th style="background-color: #600018; color: #ffffff;">Pokok</th><th style="background-color: #600018; color: #ffffff;">Bunga</th>
-                                <th style="background-color: #800020; color: #ffffff;">Pokok</th><th style="background-color: #800020; color: #ffffff;">Bunga</th>
-                                <th style="background-color: #800020; color: #ffffff;">Pokok</th><th style="background-color: #800020; color: #ffffff;">Bunga</th>
-                                <th style="background-color: #500010; color: #ffffff;">Pokok</th><th style="background-color: #500010; color: #ffffff;">Bunga</th>
-                                <th style="background-color: #a71d2a; color: #ffffff;">Pokok</th><th style="background-color: #a71d2a; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #001f4d; color: #ffffff;">Pokok</th><th style="background-color: #001f4d; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #002b66; color: #ffffff;">Pokok</th><th style="background-color: #002b66; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #002b66; color: #ffffff;">Pokok</th><th style="background-color: #002b66; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #003a8c; color: #ffffff;">Pokok</th><th style="background-color: #003a8c; color: #ffffff;">Bunga</th>
+                                <th style="background-color: #004b93; color: #ffffff;">Pokok</th><th style="background-color: #004b93; color: #ffffff;">Bunga</th>
                             </tr>
                         </thead>
                         <tbody id="lppTableBody"></tbody>
@@ -874,7 +869,7 @@
         <div id="viewPanelKas" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2 no-print">
-                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-journal-text me-1 text-danger"></i> Buku Kas Operasional</h6>
+                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-journal-text me-1 text-primary"></i> Buku Kas Operasional</h6>
                     <div class="d-flex align-items-center gap-2 flex-wrap">
                         <select id="filterBulanKas" class="form-select form-select-compact text-dark" style="width: 110px;" onchange="renderKas()">
                             <option value="">Semua Bulan</option>
@@ -898,7 +893,7 @@
                 <div class="row g-2 g-md-3 mb-3">
                     <div class="col-4"><div class="card-light-custom p-2 p-md-3 border-success"><span class="small d-block text-muted" style="font-size:0.7rem;">Kas Masuk</span><h6 class="fw-bold text-success mb-0" id="rekapKasMasuk">Rp 0</h6></div></div>
                     <div class="col-4"><div class="card-light-custom p-2 p-md-3 border-danger"><span class="small d-block text-muted" style="font-size:0.7rem;">Kas Keluar</span><h6 class="fw-bold text-danger mb-0" id="rekapKasKeluar">Rp 0</h6></div></div>
-                    <div class="col-4"><div class="card-custom p-2 p-md-3 border-danger"><span class="small d-block text-muted" style="font-size:0.7rem;">Saldo Akhir</span><h6 class="fw-bold text-dark mb-0" id="rekapSaldoKas">Rp 0</h6></div></div>
+                    <div class="col-4"><div class="card-custom p-2 p-md-3 border-primary"><span class="small d-block text-muted" style="font-size:0.7rem;">Saldo Akhir</span><h6 class="fw-bold text-dark mb-0" id="rekapSaldoKas">Rp 0</h6></div></div>
                 </div>
 
                 <div id="areaCetakBukuKas" class="table-responsive rounded-3 border shadow-sm" style="max-height: 480px;">
@@ -916,8 +911,8 @@
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-3 mb-3 border-bottom gap-2 no-print">
                     <div>
-                        <h5 class="fw-bold mb-1 text-dark" style="color: var(--accent-color) !important;">
-                            <i class="bi bi-bank2 me-2"></i> Laporan Neraca & Laba Rugi Microfinance
+                        <h5 class="fw-bold mb-1" style="color: var(--navbar-bg) !important;">
+                            <i class="bi bi-bank2 me-2 text-primary"></i> Laporan Neraca & Laba Rugi Microfinance
                         </h5>
                         <p class="small mb-0 text-muted">Laporan tersinkronisasi perputaran pinjaman LPP & arus kas.</p>
                     </div>
@@ -946,12 +941,12 @@
                     <div class="text-center mb-4 border-bottom pb-3">
                         <h6 class="fw-bold mb-1 text-dark">UPK DAPM KECAMATAN TANETE RIATTANG BARAT</h6>
                         <h5 class="fw-bold mb-1" style="color: var(--accent-color);">NERACA & LAPORAN LABA RUGI PERIODE BERJALAN</h5>
-                        <small class="text-muted">Standar Pelaporan Keuangan Dana Bergulir Pemberdayaan Masyarakat (Tahun Buku <span id="displayTahunBuku" class="fw-bold text-danger">2026</span>)</small>
+                        <small class="text-muted">Standar Pelaporan Keuangan Dana Bergulir Pemberdayaan Masyarakat (Tahun Buku <span id="displayTahunBuku" class="fw-bold text-primary">2026</span>)</small>
                     </div>
 
                     <div class="card-light-custom p-3 rounded-3 border mb-4 shadow-sm">
                         <div class="d-flex justify-content-between align-items-center mb-2 border-bottom pb-2">
-                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up text-danger me-2"></i> I. LAPORAN LABA / RUGI OPERASIONAL</h6>
+                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up text-primary me-2"></i> I. LAPORAN LABA / RUGI OPERASIONAL</h6>
                             <span class="badge bg-dark text-white">Laba Bersih: <span id="lrBadgeSurplus">Rp 0</span></span>
                         </div>
                         <div class="table-responsive rounded border bg-white">
@@ -990,7 +985,7 @@
                                     </tr>
                                     <tr class="table-warning fw-bold fs-6">
                                         <td colspan="3" class="text-end text-dark">SURPLUS / LABA BERSIH TAHUN BERJALAN (A - B)</td>
-                                        <td class="text-end text-danger" id="lrSurplusBersih">Rp 0</td>
+                                        <td class="text-end text-primary" id="lrSurplusBersih">Rp 0</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -999,7 +994,7 @@
 
                     <div class="card-light-custom p-3 rounded-3 border shadow-sm">
                         <div class="d-flex flex-wrap justify-content-between align-items-center mb-2 border-bottom pb-2 gap-2">
-                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-bank text-danger me-2"></i> II. NERACA KEUANGAN (BALANCE SHEET)</h6>
+                            <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-bank text-primary me-2"></i> II. NERACA KEUANGAN (BALANCE SHEET)</h6>
                             <div id="neracaBalanceBadge" class="badge bg-success py-1 px-2 fw-semibold"><i class="bi bi-check-circle-fill me-1"></i> Neraca Seimbang</div>
                         </div>
 
@@ -1082,7 +1077,7 @@
                                             <tr>
                                                 <td class="text-center">3.2.01</td>
                                                 <td>Surplus / Laba Bersih Berjalan</td>
-                                                <td class="text-end fw-semibold text-danger" id="neracaSurplus">Rp 0</td>
+                                                <td class="text-end fw-semibold text-primary" id="neracaSurplus">Rp 0</td>
                                             </tr>
                                             <tr class="table-light fw-semibold">
                                                 <td colspan="2">Subtotal Pasiva Nyata</td>
@@ -1107,7 +1102,7 @@
 
                         <div class="card p-2 rounded-2 mt-3 bg-white border small text-muted">
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-info-circle-fill text-danger fs-5 me-2"></i>
+                                <i class="bi bi-info-circle-fill text-primary fs-5 me-2"></i>
                                 <div>
                                     <b>Catatan Keseimbangan Neraca UPK Microfinance:</b>
                                     <span id="neracaKeteranganSelisih">Aktiva dan Pasiva dalam posisi seimbang (Balanced).</span>
@@ -1122,7 +1117,7 @@
 
         <div id="viewPanelKalkulator" class="d-none">
             <div class="card-custom p-3 p-md-4">
-                <h5 class="fw-bold text-dark border-bottom pb-2 mb-3"><i class="bi bi-calculator me-2 text-danger"></i> Kalkulator Simulasi Pinjaman Mandiri</h5>
+                <h5 class="fw-bold text-dark border-bottom pb-2 mb-3"><i class="bi bi-calculator me-2 text-primary"></i> Kalkulator Simulasi Pinjaman Mandiri</h5>
                 <div class="row g-3 g-md-4">
                     <div class="col-md-4 border-end">
                         <form id="formKalkulator">
@@ -1158,14 +1153,14 @@
         <div id="viewPanelLaporan" class="d-none">
             <div class="card-custom p-3 p-md-5">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
-                    <h5 class="fw-bold mb-1 text-dark"><i class="bi bi-file-earmark-bar-graph me-2 text-danger"></i> Laporan Rekapitulasi Piutang</h5>
+                    <h5 class="fw-bold mb-1" style="color: var(--navbar-bg) !important;"><i class="bi bi-file-earmark-bar-graph me-2 text-primary"></i> Laporan Rekapitulasi Piutang</h5>
                     <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
                 </div>
                 <div id="areaCetakLaporan">
                     <div class="row g-2 g-md-3 mb-4">
                         <div class="col-md-4"><div class="card-light-custom p-3"><span class="small text-muted">Total Plafon</span><h5 class="fw-bold text-dark mb-0" id="repTotalPlafon">Rp 0</h5></div></div>
                         <div class="col-md-4"><div class="card-light-custom p-3"><span class="small text-muted">Total Realisasi</span><h5 class="fw-bold text-dark mb-0" id="repTotalRealisasi">Rp 0</h5></div></div>
-                        <div class="col-md-4"><div class="card-light-custom p-3"><span class="small text-muted">Total Saldo Sisa</span><h5 class="fw-bold text-danger mb-0" id="repTotalSaldo">Rp 0</h5></div></div>
+                        <div class="col-md-4"><div class="card-light-custom p-3"><span class="small text-muted">Total Saldo Sisa</span><h5 class="fw-bold text-primary mb-0" id="repTotalSaldo">Rp 0</h5></div></div>
                     </div>
                     <table class="table table-bordered table-compact text-center">
                         <thead><tr><th>No</th><th>Kelurahan</th><th>Jumlah Peminjam</th><th>Total Plafon</th><th>Total Saldo</th></tr></thead>
@@ -1178,7 +1173,7 @@
         <div id="viewPanelLog" class="d-none admin-only">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex justify-content-between border-bottom pb-2 mb-3">
-                    <h5 class="fw-bold text-dark"><i class="bi bi-clock-history me-2 text-danger"></i> Log Audit Aktivitas</h5>
+                    <h5 class="fw-bold text-dark"><i class="bi bi-clock-history me-2 text-primary"></i> Log Audit Aktivitas</h5>
                     <button class="btn btn-sm btn-outline-danger" onclick="clearLogs()"><i class="bi bi-trash"></i> Bersihkan</button>
                 </div>
                 <table class="table table-sm table-striped table-compact text-start">
@@ -1195,8 +1190,8 @@
         <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                    <h6 class="fw-bold mb-0 text-dark" style="color: var(--accent-color) !important;">
-                        <i class="bi bi-sliders text-danger me-1"></i> Pengaturan Modal & Titipan
+                    <h6 class="fw-bold mb-0 text-primary">
+                        <i class="bi bi-sliders text-warning me-1"></i> Pengaturan Modal & Titipan
                     </h6>
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
                 </div>
@@ -1228,8 +1223,8 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                    <h6 class="fw-bold mb-0 text-dark" style="color: var(--accent-color) !important;">
-                        <i class="bi bi-journal-check text-danger me-2"></i> Form Tutup Buku & Alokasi Surplus Tahunan
+                    <h6 class="fw-bold mb-0 text-primary">
+                        <i class="bi bi-journal-check text-warning me-2"></i> Form Tutup Buku & Alokasi Surplus Tahunan
                     </h6>
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
                 </div>
@@ -1296,8 +1291,8 @@
                     <p class="small text-muted mb-3">Pilih SP untuk <b id="spNamaNasabah" class="text-dark"></b>:</p>
                     <input type="hidden" id="spNasabahIdx">
                     <div class="d-grid gap-2">
-                        <button class="btn btn-warning btn-sm fw-bold" onclick="generateSPPDF(1)">SP-1 (Awal)</button>
-                        <button class="btn btn-sm fw-bold text-white" style="background:#fd7e14;" onclick="generateSPPDF(2)">SP-2 (Tegas)</button>
+                        <button class="btn btn-warning btn-sm fw-bold text-dark" onclick="generateSPPDF(1)">SP-1 (Awal)</button>
+                        <button class="btn btn-sm fw-bold text-white" style="background:#004b93;" onclick="generateSPPDF(2)">SP-2 (Tegas)</button>
                         <button class="btn btn-danger btn-sm fw-bold" onclick="generateSPPDF(3)">SP-3 (Panggilan)</button>
                     </div>
                 </div>
@@ -1309,7 +1304,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                    <h6 class="fw-bold mb-0 text-dark" style="color: var(--accent-color) !important;" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill text-danger me-1"></i> Tambah Peminjam</h6>
+                    <h6 class="fw-bold mb-0 text-primary" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill text-warning me-1"></i> Tambah Peminjam</h6>
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formTambahPeminjam">
@@ -1328,7 +1323,7 @@
                     <div class="card-light-custom p-2 rounded-2 border mb-3 small">
                         <div class="d-flex justify-content-between mb-1"><span>Pokok/bln:</span><strong class="text-dark" id="simulasiPokokPerBulan">Rp 0</strong></div>
                         <div class="d-flex justify-content-between mb-1"><span>Jasa/bln:</span><strong class="text-dark" id="simulasiJasaPerBulan">Rp 0</strong></div>
-                        <div class="d-flex justify-content-between fw-bold border-top pt-1 mt-1"><span class="text-danger">Total:</span><strong class="text-danger" id="simulasiTotalPerBulan">Rp 0</strong></div>
+                        <div class="d-flex justify-content-between fw-bold border-top pt-1 mt-1"><span class="text-primary">Total:</span><strong class="text-primary" id="simulasiTotalPerBulan">Rp 0</strong></div>
                     </div>
                     <div class="d-flex justify-content-end gap-2 border-top pt-3">
                         <button type="button" class="btn btn-outline-dark btn-compact" data-bs-dismiss="modal">Batal</button>
@@ -1342,7 +1337,7 @@
     <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
-                <h6 class="fw-bold mb-3 text-dark" id="modalKasTitle"><i class="bi bi-journal-plus text-danger me-1"></i> Form Mutasi Kas</h6>
+                <h6 class="fw-bold mb-3 text-primary" id="modalKasTitle"><i class="bi bi-journal-plus text-warning me-1"></i> Form Mutasi Kas</h6>
                 <form id="transaksiForm">
                     <input type="hidden" id="editKasId">
                     <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Tanggal</label><input type="date" id="tTanggal" class="form-control form-control-compact text-dark" required></div>
@@ -1367,6 +1362,7 @@
 
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXnNVMKLpmVfF6oPoG4Q2cQ-dmtjaH-jZXQdOkX7Gcj0uJVg6FfuYhOwPhreQzRVDj5g/exec";
+        const APP_LOGO_URL = "https://tse3.mm.bing.net/th/id/OIP.VKvCvVwvmJTbwyaLbTdRTAHaHa?r=0&w=480&h=480&rs=1&pid=ImgDetMain&o=7&rm=3";
 
         const Toast = Swal.mixin({
             toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true
@@ -1389,7 +1385,6 @@
             input.value = val ? parseInt(val).toLocaleString('id-ID') : '';
         }
 
-        // Parsing Tanggal Universal
         function parseTanggal(strDate) {
             if (!strDate) return new Date();
             if (strDate instanceof Date) return strDate;
@@ -1489,7 +1484,7 @@
                 if (result && result.lpp && result.lpp.length > 0) saveLPPData(result.lpp);
                 if (result && result.kas && result.kas.length > 0) localStorage.setItem('upk_kas_data', JSON.stringify(result.kas));
                 if (result && result.neracaCfg) saveNeracaConfig(result.neracaCfg);
-                if (badge) { badge.innerHTML = '<i class="bi bi-cloud-check-fill text-success me-1"></i> Online Cloud'; }
+                if (badge) { badge.innerHTML = '<i class="bi bi-cloud-check-fill text-primary me-1"></i> Online Cloud'; }
             } catch (err) {
                 if (badge) { badge.innerHTML = '<i class="bi bi-hdd-fill text-secondary me-1"></i> Offline Lokal'; }
             }
@@ -1508,7 +1503,7 @@
             };
             try {
                 await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
-                if (badge) { badge.innerHTML = '<i class="bi bi-cloud-check-fill text-success me-1"></i> Online Cloud'; }
+                if (badge) { badge.innerHTML = '<i class="bi bi-cloud-check-fill text-primary me-1"></i> Online Cloud'; }
                 if (!silent) showToast('success', 'Tersinkron ke Google Sheet!');
             } catch (err) {
                 if (!silent) showToast('error', 'Gagal kirim data ke Cloud.');
@@ -1571,7 +1566,6 @@
             }
         }
 
-        // Login Handler Dari Portal Hero Card
         document.getElementById('heroLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const u = document.getElementById('heroUsername').value.trim().toLowerCase();
@@ -1628,7 +1622,7 @@
                 roleBadge.textContent = role.toUpperCase();
                 roleBadge.classList.remove('d-none');
                 btnAuth.innerHTML = '<i class="bi bi-box-arrow-right me-1"></i> Keluar';
-                btnAuth.className = 'btn btn-outline-danger btn-compact shadow-sm';
+                btnAuth.className = 'btn btn-outline-light btn-compact shadow-sm';
                 btnAuth.onclick = logout;
                 
                 const adminOnlyEls = document.querySelectorAll('.admin-only');
@@ -1713,8 +1707,8 @@
             if (labels.length === 0) { labels = ['Bulan Ini']; dataValues = [0]; }
 
             const isDark = document.body.classList.contains('dark-mode');
-            const colorText = isDark ? '#e0e0e0' : '#2b2b2b';
-            const colorAccent = isDark ? '#ff4d6d' : '#800020';
+            const colorText = isDark ? '#e2e8f0' : '#1e293b';
+            const colorAccent = isDark ? '#3b82f6' : '#004b93';
 
             if (trenAngsuranChartInstance) trenAngsuranChartInstance.destroy();
             trenAngsuranChartInstance = new Chart(document.getElementById('trenAngsuranChart'), {
@@ -1726,7 +1720,7 @@
             if (kolektibilitasChartInstance) kolektibilitasChartInstance.destroy();
             kolektibilitasChartInstance = new Chart(document.getElementById('kolektibilitasPieChart'), {
                 type: 'doughnut',
-                data: { labels: ['Lancar', 'Kurang Lancar', 'Diragukan', 'Macet'], datasets: [{ data: [kolStatus.lancar, kolStatus.kurangLancar, kolStatus.diragukan, kolStatus.macet], backgroundColor: ['#198754', '#ffc107', '#fd7e14', '#dc3545'], borderWidth: 0 }] },
+                data: { labels: ['Lancar', 'Kurang Lancar', 'Diragukan', 'Macet'], datasets: [{ data: [kolStatus.lancar, kolStatus.kurangLancar, kolStatus.diragukan, kolStatus.macet], backgroundColor: ['#10b981', '#ffb81c', '#f97316', '#ef4444'], borderWidth: 0 }] },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: colorText } } } }
             });
 
@@ -1934,7 +1928,7 @@
                 text: '50% surplus otomatis dipupuk ke Modal Dana Bergulir tahun berikutnya.',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#800020',
+                confirmButtonColor: '#002b66',
                 confirmButtonText: 'Ya, Sahkan!'
             }).then((res) => {
                 if (res.isConfirmed) {
@@ -1959,6 +1953,13 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('p', 'mm', 'a4');
             const thn = document.getElementById('tbTahunBuku').value;
+
+            try {
+                const domLogo = document.getElementById('mainAppLogo');
+                if (domLogo && domLogo.complete) {
+                    doc.addImage(domLogo, 'PNG', 20, 15, 18, 18);
+                }
+            } catch(e) {}
 
             doc.setFont("helvetica", "bold"); doc.setFontSize(13);
             doc.text("BERITA ACARA TUTUP BUKU TAHUNAN & LPJ", 105, 20, { align: "center" });
@@ -2027,7 +2028,7 @@
                 }
 
                 if (bayarHariIniPokok > 0 || bayarHariIniJasa > 0) {
-                    statusBayarHariIni = `<span class="badge py-1 px-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle me-1"></i> Sudah</span>`;
+                    statusBayarHariIni = `<span class="badge py-1 px-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle me-1 text-warning"></i> Sudah</span>`;
                 } else if (parseNum(item.realIniPokok) > 0) {
                     statusBayarHariIni = `<span class="badge bg-secondary text-white py-1 px-2 fw-semibold">Terisi LPP</span>`;
                 }
@@ -2082,6 +2083,7 @@
             bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCetakSP')).show();
         }
 
+        // FUNGSI CETAK SP PDF (Tema Mandiri Navy Blue)
         function generateSPPDF(level) {
             if (!window.jspdf) { 
                 showToast('error', 'Modul PDF belum termuat.'); 
@@ -2099,27 +2101,33 @@
 
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
-            const primaryColor = [128, 0, 32];
+            const primaryColor = [0, 43, 102]; // Mandiri Navy Blue
 
-            // Kop Surat
+            try {
+                const domLogo = document.getElementById('mainAppLogo');
+                if (domLogo && domLogo.complete) {
+                    doc.addImage(domLogo, 'PNG', 20, 14, 20, 20);
+                }
+            } catch(e) {}
+
             doc.setFont("helvetica", "bold");
-            doc.setFontSize(14);
+            doc.setFontSize(13);
             doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-            doc.text("UNIT PENGELOLA KEGIATAN (UPK) DAPM", 105, 20, { align: "center" });
-            doc.setFontSize(12);
-            doc.text("KECAMATAN TANETE RIATTANG BARAT", 105, 26, { align: "center" });
+            doc.text("UNIT PENGELOLA KEGIATAN (UPK) DAPM", 112, 19, { align: "center" });
+            doc.setFontSize(11);
+            doc.text("KECAMATAN TANETE RIATTANG BARAT", 112, 25, { align: "center" });
             
             doc.setFont("helvetica", "normal");
-            doc.setFontSize(9);
+            doc.setFontSize(8.5);
             doc.setTextColor(80, 80, 80);
-            doc.text("Sekretariat: Kec. Tanete Riattang Barat, Kab. Bone, Sulawesi Selatan", 105, 31, { align: "center" });
-            doc.text("Badan Hukum AHU-0003655.AH.01.07 TAHUN 2017", 105, 35, { align: "center" });
+            doc.text("Sekretariat: Kec. Tanete Riattang Barat, Kab. Bone, Sulawesi Selatan", 112, 30, { align: "center" });
+            doc.text("Badan Hukum AHU-0003655.AH.01.07 TAHUN 2017", 112, 34, { align: "center" });
             
-            doc.setDrawColor(128, 0, 32);
+            doc.setDrawColor(0, 43, 102);
             doc.setLineWidth(0.8);
-            doc.line(20, 38, 190, 38);
+            doc.line(20, 37, 190, 37);
             doc.setLineWidth(0.2);
-            doc.line(20, 39.5, 190, 39.5);
+            doc.line(20, 38.5, 190, 38.5);
 
             let spTitle = "SURAT PERINGATAN I (PERTAMA)";
             let spTingkat = "Pertama";
@@ -2138,9 +2146,9 @@
             doc.setFont("helvetica", "bold");
             doc.setFontSize(12);
             doc.setTextColor(0, 0, 0);
-            doc.text(spTitle, 105, 49, { align: "center" });
+            doc.text(spTitle, 105, 48, { align: "center" });
             doc.setLineWidth(0.4);
-            doc.line(65, 51, 145, 51);
+            doc.line(65, 50, 145, 50);
 
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
@@ -2254,7 +2262,7 @@
                         <td class="text-center">${item.tenor} Bln</td>
                         <td class="text-center fw-bold">${persenTampil}%</td>
                         <td class="text-center">${formatTanggalTampil(item.tglCair)}</td>
-                        <td class="text-end fw-bold text-danger">Rp ${formatRp(saldo)}</td>
+                        <td class="text-end fw-bold text-primary">Rp ${formatRp(saldo)}</td>
                         <td class="text-center"><span class="badge ${isLunas ? 'bg-secondary' : 'bg-dark'}">${isLunas ? 'Lunas' : 'Aktif'}</span></td>
                         <td class="text-center">${item.noHp || '-'}</td>
                         <td class="text-center no-print">
@@ -2328,7 +2336,7 @@
             const totalBln = pokokBln + jasaBln;
 
             Swal.fire({
-                title: '<span class="fs-6 fw-bold text-dark"><i class="bi bi-patch-check-fill text-danger me-2"></i> BUKTI PENCAIRAN</span>',
+                title: '<span class="fs-6 fw-bold text-dark"><i class="bi bi-patch-check-fill text-primary me-2"></i> BUKTI PENCAIRAN</span>',
                 html: `
                     <div class="text-start small p-3 card-light-custom rounded-3 border">
                         <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
@@ -2356,7 +2364,7 @@
                                 <span>Jasa / Bln:</span>
                                 <strong class="text-dark">Rp ${formatRp(jasaBln)}</strong>
                             </div>
-                            <div class="d-flex justify-content-between border-top pt-1 text-danger fw-bold">
+                            <div class="d-flex justify-content-between border-top pt-1 text-primary fw-bold">
                                 <span>Total Setoran:</span>
                                 <span>Rp ${formatRp(totalBln)}</span>
                             </div>
@@ -2427,7 +2435,7 @@
 
         function bukaModalTambahPeminjam() {
             document.getElementById('editIndex').value = '';
-            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-person-plus-fill text-danger me-1"></i> Tambah Peminjam';
+            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-person-plus-fill text-warning me-1"></i> Tambah Peminjam';
             document.getElementById('formTambahPeminjam').reset();
             document.getElementById('newPersenJasa').value = '1.5';
             document.getElementById('newTenor').value = '12';
@@ -2442,7 +2450,7 @@
             if (!n) return;
 
             document.getElementById('editIndex').value = idx;
-            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-pencil-square text-danger me-1"></i> Edit Peminjam';
+            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-pencil-square text-warning me-1"></i> Edit Peminjam';
             document.getElementById('newNama').value = n.nama;
             document.getElementById('newDesa').value = n.desa;
             document.getElementById('newPlafon').value = formatRp(n.plafon);
@@ -2527,7 +2535,7 @@
                 text: `Hapus "${n.nama}"? Data tidak dapat dikembalikan.`,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#002b66',
                 confirmButtonText: 'Ya, Hapus!'
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -2543,7 +2551,7 @@
         }
 
         function bukaModalTambahKas() {
-            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-journal-plus text-danger me-1"></i> Form Mutasi Kas';
+            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-journal-plus text-warning me-1"></i> Form Mutasi Kas';
             document.getElementById('editKasId').value = '';
             document.getElementById('transaksiForm').reset();
             document.getElementById('tTanggal').value = new Date().toISOString().split('T')[0];
@@ -2593,7 +2601,7 @@
                 text: `Hapus "${target.nama}"?`,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#002b66',
                 confirmButtonText: 'Hapus'
             }).then((res) => {
                 if (res.isConfirmed) {
@@ -2619,7 +2627,7 @@
                 text: `Hapus angsuran ke-${h.angsuranKe} senilai Rp ${formatRp(h.total)}? Data LPP dan Buku Kas otomatis disesuaikan.`,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#002b66',
                 confirmButtonText: 'Ya, Hapus'
             }).then((res) => {
                 if (res.isConfirmed) {
@@ -2755,7 +2763,7 @@
                         <td class="text-end">Rp ${formatRp(p)}</td>
                         <td class="text-end">Rp ${formatRp(jasaPerBulan)}</td>
                         <td class="text-end fw-bold">Rp ${formatRp(p + jasaPerBulan)}</td>
-                        <td class="text-end text-danger fw-semibold">Rp ${formatRp(sisaPokok)}</td>
+                        <td class="text-end text-primary fw-semibold">Rp ${formatRp(sisaPokok)}</td>
                     </tr>`;
             }
         }
@@ -2792,7 +2800,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center small mt-1" style="font-size: 0.72rem; color: var(--text-muted);">
                         <span>${item.desa}</span>
-                        <span class="text-danger fw-semibold">Rp ${formatRp(saldo)}</span>
+                        <span class="text-primary fw-semibold">Rp ${formatRp(saldo)}</span>
                     </div>`;
                 listContainer.appendChild(itemBtn);
             });
@@ -2899,7 +2907,7 @@
                         <td class="text-end">Rp ${formatRp(h.pokok)}</td>
                         <td class="text-end">Rp ${formatRp(h.jasa)}</td>
                         <td class="text-end text-danger">Rp ${formatRp(h.denda || 0)}</td>
-                        <td class="text-end text-danger">Rp ${formatRp(h.sisaSaldo)}</td>
+                        <td class="text-end text-primary">Rp ${formatRp(h.sisaSaldo)}</td>
                         <td class="admin-only">${delBtn}</td>
                     </tr>`;
             });
@@ -3097,15 +3105,15 @@
                         <td class="text-end">${formatRp(plafon)}</td>
                         <td class="text-center">${tenor}B</td>
                         <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
-                        <td class="text-end fw-bold" style="background: #fff5f5;">${formatRp(tarP)}</td>
-                        <td class="text-end fw-bold" style="background: #fff5f5;">${formatRp(tarB)}</td>
+                        <td class="text-end fw-bold" style="background: #f0f6fc;">${formatRp(tarP)}</td>
+                        <td class="text-end fw-bold" style="background: #f0f6fc;">${formatRp(tarB)}</td>
                         <td class="text-end">${formatRp(realLaluP)}</td>
                         <td class="text-end">${formatRp(realLaluB)}</td>
                         <td class="text-end fw-semibold">${formatRp(realIniP)}</td>
                         <td class="text-end fw-semibold">${formatRp(realIniB)}</td>
-                        <td class="text-end fw-bold" style="background: #fce8e8;">${formatRp(totP)}</td>
-                        <td class="text-end fw-bold" style="background: #fce8e8;">${formatRp(totB)}</td>
-                        <td class="text-end fw-bold text-danger">${formatRp(saldo)}</td>
+                        <td class="text-end fw-bold" style="background: #e1ecf9;">${formatRp(totP)}</td>
+                        <td class="text-end fw-bold" style="background: #e1ecf9;">${formatRp(totB)}</td>
+                        <td class="text-end fw-bold text-primary">${formatRp(saldo)}</td>
                         <td class="text-center">${persen}</td>
                         <td class="text-end fw-bold text-danger" style="background: #f8d7da;">${formatRp(tungP)}</td>
                         <td class="text-end fw-bold text-danger" style="background: #f8d7da;">${formatRp(tungB)}</td>
@@ -3121,7 +3129,7 @@
                         <td>${formatRp(tLaluP)}</td><td>${formatRp(tLaluB)}</td>
                         <td>${formatRp(tIniP)}</td><td>${formatRp(tIniB)}</td>
                         <td>${formatRp(tTotP)}</td><td>${formatRp(tTotB)}</td>
-                        <td class="text-danger">${formatRp(tSaldo)}</td><td></td>
+                        <td class="text-primary">${formatRp(tSaldo)}</td><td></td>
                         <td class="text-danger">${formatRp(tTungP)}</td><td class="text-danger">${formatRp(tTungB)}</td>
                     </tr>`;
             }
@@ -3134,7 +3142,6 @@
             renderLPPTable(allData.filter(item => (item.nama || '').toLowerCase().includes(query) && (desa === '' || (item.desa || '').toLowerCase() === desa)));
         }
 
-        // Render Kas dengan Sorting Terbaru
         function renderKas() {
             const data = getKasData();
             const filterBulan = document.getElementById('filterBulanKas').value;
@@ -3205,7 +3212,7 @@
                         <td class="fw-semibold text-dark text-start">${item.nama || '-'}</td>
                         <td>${item.kelurahan || '-'}</td>
                         <td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
-                        <td><span class="badge ${isMasuk ? 'bg-dark' : 'bg-danger'} text-white">${item.tipe}</span></td>
+                        <td><span class="badge ${isMasuk ? 'bg-primary' : 'bg-danger'} text-white">${item.tipe}</span></td>
                         <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold text-end">Rp ${formatRp(item.nominal)}</td>
                         <td class="text-center no-print admin-only">${delBtn}</td>
                     </tr>`;
@@ -3233,7 +3240,7 @@
             tbody.innerHTML = '';
             let idx = 1;
             for (const [desaName, val] of Object.entries(desaMap).sort()) {
-                tbody.innerHTML += `<tr><td>${idx++}</td><td class="fw-semibold text-start">${desaName}</td><td>${val.count} Peminjam</td><td class="text-end fw-semibold">Rp ${formatRp(val.plafon)}</td><td class="text-end text-danger fw-semibold">Rp ${formatRp(val.saldo)}</td></tr>`;
+                tbody.innerHTML += `<tr><td>${idx++}</td><td class="fw-semibold text-start">${desaName}</td><td>${val.count} Peminjam</td><td class="text-end fw-semibold">Rp ${formatRp(val.plafon)}</td><td class="text-end text-primary fw-semibold">Rp ${formatRp(val.saldo)}</td></tr>`;
             }
         }
 
