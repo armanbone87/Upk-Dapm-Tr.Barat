@@ -125,12 +125,6 @@
                 font-size: 0.68rem;
                 padding: 0.35rem 0.25rem;
             }
-            .mobile-action-bar {
-                flex-direction: column;
-                align-items: stretch !important;
-                gap: 0.5rem;
-            }
-            .mobile-action-bar > * { width: 100%; }
         }
 
         @media print {
@@ -762,7 +756,6 @@
             </div>
         </div>
 
-        <!-- PANEL NERACA MICROFINANCE & LABA RUGI -->
         <div id="viewPanelNeraca" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-3 mb-3 border-bottom gap-2 no-print">
@@ -800,7 +793,6 @@
                         <small class="text-muted">Standar Pelaporan Keuangan Dana Bergulir Pemberdayaan Masyarakat (Tahun Buku <span id="displayTahunBuku" class="fw-bold text-danger">2026</span>)</small>
                     </div>
 
-                    <!-- 1. LAPORAN LABA RUGI -->
                     <div class="card-light-custom p-3 rounded-3 border mb-4 shadow-sm">
                         <div class="d-flex justify-content-between align-items-center mb-2 border-bottom pb-2">
                             <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up text-danger me-2"></i> I. LAPORAN LABA / RUGI OPERASIONAL</h6>
@@ -849,7 +841,6 @@
                         </div>
                     </div>
 
-                    <!-- 2. NERACA KEUANGAN (BALANCE SHEET) -->
                     <div class="card-light-custom p-3 rounded-3 border shadow-sm">
                         <div class="d-flex flex-wrap justify-content-between align-items-center mb-2 border-bottom pb-2 gap-2">
                             <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-bank text-danger me-2"></i> II. NERACA KEUANGAN (BALANCE SHEET)</h6>
@@ -857,7 +848,6 @@
                         </div>
 
                         <div class="row g-3">
-                            <!-- Sisi Aktiva -->
                             <div class="col-lg-6">
                                 <div class="table-responsive rounded border bg-white h-100">
                                     <table class="table table-sm table-bordered table-compact mb-0">
@@ -905,7 +895,6 @@
                                 </div>
                             </div>
 
-                            <!-- Sisi Pasiva -->
                             <div class="col-lg-6">
                                 <div class="table-responsive rounded border bg-white h-100">
                                     <table class="table table-sm table-bordered table-compact mb-0">
@@ -1275,13 +1264,22 @@
             input.value = val ? parseInt(val).toLocaleString('id-ID') : '';
         }
 
+        // Parsing Tanggal Universal (Mendukung DD/MM/YYYY, YYYY-MM-DD, dan Format ISO Google Sheets)
         function parseTanggal(strDate) {
             if (!strDate) return new Date();
-            if (strDate.includes('T')) return new Date(strDate);
-            if (strDate.includes('/')) {
-                const p = strDate.split('/'); return new Date(p[2], p[1] - 1, p[0]);
+            if (strDate instanceof Date) return strDate;
+            let s = String(strDate).trim();
+            if (s.includes('T')) return new Date(s);
+            if (s.includes('/')) {
+                const p = s.split('/');
+                if (p.length === 3) return new Date(parseInt(p[2], 10), parseInt(p[1], 10) - 1, parseInt(p[0], 10));
             }
-            return new Date(strDate);
+            if (s.includes('-')) {
+                const p = s.split('-');
+                if (p.length === 3) return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+            }
+            const d = new Date(s);
+            return isNaN(d.getTime()) ? new Date() : d;
         }
 
         function formatTanggalID(dateObj) {
@@ -1290,20 +1288,15 @@
 
         function formatTanggalTampil(strDate) {
             if (!strDate) return '-';
-            if (strDate.includes('T')) {
-                const d = new Date(strDate);
-                if (!isNaN(d.getTime())) return formatTanggalID(d);
-            }
-            return strDate;
+            const d = parseTanggal(strDate);
+            return isNaN(d.getTime()) ? String(strDate) : formatTanggalID(d);
         }
 
         function convertToInputDate(strDate) {
             if (!strDate) return new Date().toISOString().split('T')[0];
-            if (strDate.includes('T')) return strDate.split('T')[0];
-            if (strDate.includes('/')) {
-                const p = strDate.split('/'); return `${p[2]}-${p[1].padStart(2, '0')}-${p[0].padStart(2, '0')}`;
-            }
-            return strDate;
+            const d = parseTanggal(strDate);
+            if (isNaN(d.getTime())) return new Date().toISOString().split('T')[0];
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
         }
 
         function hitungBulanBerjalan(tglCairStr, tenorMax) {
@@ -1320,13 +1313,7 @@
             { no: 1, nama: "RISMAWATI,S.PD", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", angsuranKe: 6, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 5, tanggal: "05/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 5750000, noKwitansi: "KWT-100001" }] },
             { no: 2, nama: "MAHMUD AGSAN(MASYITA)", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "08/10/2025", realLaluPokok: 7650000, realLaluBunga: 1350000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 8500000, realTotBunga: 1500000, saldo: 1500000, persen: "100%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 10, tanggal: "03/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 1500000, noKwitansi: "KWT-100002" }] },
             { no: 3, nama: "INDRAWATI", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/02/2026", realLaluPokok: 4254000, realLaluBunga: 750000, realIniPokok: 851000, realIniBunga: 150000, realTotPokok: 5105000, realTotBunga: 900000, saldo: 4895000, persen: "100%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 6, tanggal: "05/08/2026", pokok: 851000, jasa: 150000, denda: 0, total: 1001000, sisaSaldo: 4895000, noKwitansi: "KWT-100003" }] },
-            { no: 4, nama: "JUHERIAH,SE", desa: "WATANG PALAKKA", plafon: 2000000, tenor: "12", tglCair: "07/04/2026", realLaluPokok: 510000, realLaluBunga: 90000, realIniPokok: 170000, realIniBunga: 30000, realTotPokok: 680000, realTotBunga: 120000, saldo: 1320000, persen: "100%", angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 4, tanggal: "02/08/2026", pokok: 170000, jasa: 30000, denda: 0, total: 200000, sisaSaldo: 1320000, noKwitansi: "KWT-100004" }] },
-            { no: 5, nama: "SUMARNI", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "16/07/2026", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 835000, realIniBunga: 175000, realTotPokok: 835000, realTotBunga: 175000, saldo: 9165000, persen: "100%", angsuranKe: 2, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 1, tanggal: "16/08/2026", pokok: 835000, jasa: 175000, denda: 0, total: 1010000, sisaSaldo: 9165000, noKwitansi: "KWT-100005" }] },
-            { no: 6, nama: "SYATIR AL", desa: "WATANG PALAKKA", plafon: 15000000, tenor: "12", tglCair: "21/07/2026", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 1250000, realIniBunga: 263000, realTotPokok: 1250000, realTotBunga: 263000, saldo: 13750000, persen: "100%", angsuranKe: 2, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 1, tanggal: "16/08/2026", pokok: 1250000, jasa: 263000, denda: 0, total: 1513000, sisaSaldo: 13750000, noKwitansi: "KWT-100006" }] },
-            { no: 7, nama: "IRFANI VIRZAN PUTRI", desa: "BULU TEMPE", plafon: 8000000, tenor: "12", tglCair: "22/07/2019", realLaluPokok: 7085000, realLaluBunga: 1440000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 7085000, realTotBunga: 1440000, saldo: 915000, persen: "89%", angsuranKe: 12, noHp: "", persenJasa: 1.5, history: [] },
-            { no: 8, nama: "HINAYAH HAMID", desa: "MT.WALIE", plafon: 20830000, tenor: "24", tglCair: "01/01/2018", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 0, realIniBunga: 0, realTotPokok: 0, realTotBunga: 0, saldo: 20830000, persen: "0%", angsuranKe: 1, noHp: "085396838614", persenJasa: 0, history: [] },
-            { no: 9, nama: "TANTI WAHYUNI", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "19/11/2019", realLaluPokok: 7870000, realLaluBunga: 1800000, realIniPokok: 300000, realIniBunga: 0, realTotPokok: 8170000, realTotBunga: 1800000, saldo: 1830000, persen: "82%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 10, tanggal: "05/08/2026", pokok: 300000, jasa: 0, denda: 0, total: 300000, sisaSaldo: 1830000, noKwitansi: "KWT-100007" }] },
-            { no: 10, nama: "DRA NURJANNAH TINGGI", desa: "BULU TEMPE", plafon: 15000000, tenor: "12", tglCair: "15/03/2021", realLaluPokok: 8000000, realLaluBunga: 2700000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 8000000, realTotBunga: 2700000, saldo: 7000000, persen: "53%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [] }
+            { no: 4, nama: "JUHERIAH,SE", desa: "WATANG PALAKKA", plafon: 2000000, tenor: "12", tglCair: "07/04/2026", realLaluPokok: 510000, realLaluBunga: 90000, realIniPokok: 170000, realIniBunga: 30000, realTotPokok: 680000, realTotBunga: 120000, saldo: 1320000, persen: "100%", angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 4, tanggal: "02/08/2026", pokok: 170000, jasa: 30000, denda: 0, total: 200000, sisaSaldo: 1320000, noKwitansi: "KWT-100004" }] }
         ];
 
         function getLPPData() {
@@ -1337,7 +1324,7 @@
         function saveLPPData(data) { localStorage.setItem('upk_lpp_master', JSON.stringify(data)); }
 
         const defaultKas = [
-            { id: 1, tanggal: new Date().toISOString().split('T')[0], nama: 'Saldo Kas Operasional awal', kelurahan: 'Tanete Riattang Barat', kategori: 'Adm & Umum', tipe: 'Masuk', nominal: 2500000, noKwitansi: 'KWT-KAS-01' }
+            { id: 1, tanggal: "2026-08-26", nama: 'Saldo Kas Operasional awal', kelurahan: 'Tanete Riattang Barat', kategori: 'Adm & Umum', tipe: 'Masuk', nominal: 2500000, noKwitansi: 'KWT-KAS-01' }
         ];
 
         function getKasData() { 
@@ -1472,8 +1459,9 @@
                 }
 
                 if (r.history) r.history.forEach(h => {
-                    if (h.tanggal && h.tanggal.includes('/')) {
-                        const mKey = `${h.tanggal.split('/')[1]}/${h.tanggal.split('/')[2]}`;
+                    if (h.tanggal) {
+                        const d = parseTanggal(h.tanggal);
+                        const mKey = `${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
                         monthlyData[mKey] = (monthlyData[mKey] || 0) + parseNum(h.total);
                     }
                 });
@@ -1543,11 +1531,8 @@
                 if (item.history && Array.isArray(item.history)) {
                     item.history.forEach(h => {
                         if (h.tanggal) {
-                            let itemYear = "";
-                            if (h.tanggal.includes('/')) itemYear = h.tanggal.split('/')[2];
-                            else if (h.tanggal.includes('-')) itemYear = h.tanggal.split('-')[0];
-                            
-                            if (itemYear === selectedYear) {
+                            const d = parseTanggal(h.tanggal);
+                            if (String(d.getFullYear()) === selectedYear) {
                                 totalJasaTahunBerjalan += parseNum(h.jasa);
                             }
                         }
@@ -1567,7 +1552,8 @@
 
             kasData.forEach(item => {
                 const nom = parseNum(item.nominal);
-                let itemYear = item.tanggal ? item.tanggal.split('T')[0].split('-')[0] : '2026';
+                const d = parseTanggal(item.tanggal);
+                const itemYear = String(d.getFullYear());
 
                 if (item.tipe === 'Masuk') saldoKasOperasional += nom;
                 else if (item.tipe === 'Keluar') saldoKasOperasional -= nom;
@@ -1681,8 +1667,8 @@
                 if (item.history && Array.isArray(item.history)) {
                     item.history.forEach(h => {
                         if (h.tanggal) {
-                            let itemYear = h.tanggal.includes('/') ? h.tanggal.split('/')[2] : h.tanggal.split('-')[0];
-                            if (itemYear === selectedYear) totalJasaTahun += parseNum(h.jasa);
+                            const d = parseTanggal(h.tanggal);
+                            if (String(d.getFullYear()) === selectedYear) totalJasaTahun += parseNum(h.jasa);
                         }
                     });
                 }
@@ -1697,7 +1683,8 @@
 
             kasData.forEach(item => {
                 const nom = parseNum(item.nominal);
-                let itemYear = item.tanggal ? item.tanggal.split('T')[0].split('-')[0] : '2026';
+                const d = parseTanggal(item.tanggal);
+                const itemYear = String(d.getFullYear());
                 if (itemYear === selectedYear) {
                     if (item.tipe === 'Masuk' && item.kategori === 'Denda') totalDendaTahun += nom;
                     else if (item.tipe === 'Keluar') totalBebanTahun += nom;
@@ -1807,7 +1794,10 @@
 
                 if (item.history && item.history.length > 0) {
                     item.history.forEach(h => {
-                        if (h.tanggal === formattedSelectedDate) { bayarHariIniPokok += parseNum(h.pokok); bayarHariIniJasa += parseNum(h.jasa); }
+                        if (formatTanggalTampil(h.tanggal) === formattedSelectedDate) { 
+                            bayarHariIniPokok += parseNum(h.pokok); 
+                            bayarHariIniJasa += parseNum(h.jasa); 
+                        }
                     });
                 }
 
@@ -2680,7 +2670,7 @@
                 tbody.innerHTML += `
                     <tr>
                         <td>Ke-${h.angsuranKe}</td>
-                        <td>${h.tanggal}</td>
+                        <td>${formatTanggalTampil(h.tanggal)}</td>
                         <td class="text-end">Rp ${formatRp(h.pokok)}</td>
                         <td class="text-end">Rp ${formatRp(h.jasa)}</td>
                         <td class="text-end text-danger">Rp ${formatRp(h.denda || 0)}</td>
@@ -2919,48 +2909,40 @@
             renderLPPTable(allData.filter(item => (item.nama || '').toLowerCase().includes(query) && (desa === '' || (item.desa || '').toLowerCase() === desa)));
         }
 
+        // FUNGSI RENDER KAS (Memperbaiki filter tahun/bulan & pengurutan terbaru)
         function renderKas() {
             const data = getKasData();
             const filterBulan = document.getElementById('filterBulanKas').value;
-            const filterTahun = document.getElementById('filterTahunKas').value;
+            const filterTahun = document.getElementById('filterTahunKas').value || '2026';
 
-            data.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+            data.sort((a, b) => {
+                const dateA = parseTanggal(a.tanggal).getTime();
+                const dateB = parseTanggal(b.tanggal).getTime();
+                if (dateB !== dateA) return dateB - dateA;
+                return (Number(b.id) || 0) - (Number(a.id) || 0);
+            });
 
             const tbody = document.getElementById('transaksiTableBody');
             tbody.innerHTML = '';
             
             let totalMasukGlobal = 0, totalKeluarGlobal = 0;
-            let saldoKumulatifSebelumnya = 0;
             let filteredData = [];
 
             data.forEach(item => {
-                if (!item.tanggal) return;
-                const parts = item.tanggal.split('T')[0].split('-');
-                const itemThn = parts[0];
-                const itemBln = parts[1];
+                if (!item.tanggal && !item.nominal) return;
+                const d = parseTanggal(item.tanggal);
+                const itemThn = String(d.getFullYear());
+                const itemBln = String(d.getMonth() + 1).padStart(2, '0');
 
-                const isMasuk = item.tipe === 'Masuk';
                 const nom = Number(item.nominal) || 0;
                 const matchesYear = !filterTahun || itemThn === filterTahun;
                 
                 if (matchesYear) {
-                    if (!filterBulan) {
+                    if (!filterBulan || itemBln === filterBulan) {
                         filteredData.push(item);
-                    } else {
-                        if (itemBln === filterBulan) {
-                            filteredData.push(item);
-                        } else if (itemBln < filterBulan) {
-                            if (isMasuk) saldoKumulatifSebelumnya += nom;
-                            else saldoKumulatifSebelumnya -= nom;
-                        }
                     }
-                } else if (itemThn < (filterTahun || '2026')) {
-                    if (isMasuk) saldoKumulatifSebelumnya += nom;
-                    else saldoKumulatifSebelumnya -= nom;
                 }
             });
-
-            filteredData.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
 
             let totalMasukPeriode = 0, totalKeluarPeriode = 0;
             filteredData.forEach(item => {
@@ -2982,8 +2964,8 @@
 
             const isAdmin = localStorage.getItem('userRole') === 'admin';
 
-            if (filteredData.length === 0 && saldoKumulatifSebelumnya === 0) { 
-                tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-3">Belum ada transaksi kas pada periode ini.</td></tr>'; 
+            if (filteredData.length === 0) { 
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-3">Belum ada mutasi kas tercatat pada periode ini.</td></tr>'; 
                 return; 
             }
 
@@ -2995,8 +2977,8 @@
                         <td>${index + 1}</td>
                         <td>${formatTanggalTampil(item.tanggal)}</td>
                         <td class="fw-bold text-dark">${item.noKwitansi || '-'}</td>
-                        <td class="fw-semibold text-dark text-start">${item.nama}</td>
-                        <td>${item.kelurahan}</td>
+                        <td class="fw-semibold text-dark text-start">${item.nama || '-'}</td>
+                        <td>${item.kelurahan || '-'}</td>
                         <td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
                         <td><span class="badge ${isMasuk ? 'bg-dark' : 'bg-danger'} text-white">${item.tipe}</span></td>
                         <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold text-end">Rp ${formatRp(item.nominal)}</td>
