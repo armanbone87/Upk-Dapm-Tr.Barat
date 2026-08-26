@@ -1108,6 +1108,7 @@
         </div>
     </div>
 
+    <!-- Modal Cetak SP -->
     <div class="modal fade" id="modalCetakSP" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content card-custom p-3 border">
@@ -1484,7 +1485,6 @@
             document.getElementById('dashFinTingkatPengembalian').textContent = `${pLancar}% Pinjaman Lancar`;
         }
 
-        // FUNGSI RENDER NERACA MICROFINANCE & LAPORAN LABA RUGI DENGAN REALISASI JASA TAHUN BERJALAN
         function renderLaporanNeracaMicrofinance() {
             const lppData = getLPPData();
             const kasData = getKasData();
@@ -1829,49 +1829,128 @@
 
         function bukaModalSP(idx) {
             const n = getLPPData()[idx];
+            if (!n) return;
             document.getElementById('spNasabahIdx').value = idx;
             document.getElementById('spNamaNasabah').textContent = n.nama;
             bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCetakSP')).show();
         }
 
+        // FUNGSI CETAK SP DIPERBAHARUI LENGKAP DENGAN PREVIEW & AUTO DOWNLOAD
         function generateSPPDF(level) {
-            if(!window.jspdf) { showToast('error', 'Modul PDF belum termuat.'); return; }
-            const idx = document.getElementById('spNasabahIdx').value;
-            const n = getLPPData()[idx];
+            if (!window.jspdf) { 
+                showToast('error', 'Modul PDF belum termuat.'); 
+                return; 
+            }
+            
+            const idx = parseInt(document.getElementById('spNasabahIdx').value, 10);
+            const allData = getLPPData();
+            const n = allData[idx];
+
+            if (!n) {
+                showToast('error', 'Data nasabah tidak ditemukan.');
+                return;
+            }
+
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF('p', 'mm', 'a4');
+            const doc = new jsPDF({
+                orientation: 'p',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            const primaryColor = [128, 0, 32];
+
+            // 1. KOP SURAT
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(14);
+            doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+            doc.text("UNIT PENGELOLA KEGIATAN (UPK) DAPM", 105, 20, { align: "center" });
+            doc.setFontSize(12);
+            doc.text("KECAMATAN TANETE RIATTANG BARAT", 105, 26, { align: "center" });
             
-            doc.setFont("helvetica", "bold"); doc.setFontSize(14);
-            doc.text("UNIT PENGELOLA KEGIATAN (UPK)", 105, 20, { align: "center" });
-            doc.text("DAPM TANETE RIATTANG BARAT", 105, 26, { align: "center" });
-            doc.setFont("helvetica", "normal"); doc.setFontSize(10);
-            doc.text("Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan", 105, 32, { align: "center" });
-            doc.setLineWidth(0.5); doc.line(20, 35, 190, 35);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9);
+            doc.setTextColor(80, 80, 80);
+            doc.text("Sekretariat: Kec. Tanete Riattang Barat, Kab. Bone, Sulawesi Selatan", 105, 31, { align: "center" });
+            doc.text("Badan Hukum AHU-0003655.AH.01.07 TAHUN 2017", 105, 35, { align: "center" });
             
-            let spTitle = level === 1 ? "SURAT PERINGATAN I (PERTAMA)" : (level === 2 ? "SURAT PERINGATAN II (KEDUA)" : "SURAT PERINGATAN III (PANGGILAN)");
-            doc.setFont("helvetica", "bold"); doc.setFontSize(12);
-            doc.text(spTitle, 105, 50, { align: "center" });
-            doc.line(70, 52, 140, 52);
+            // Garis Kop Ganda
+            doc.setDrawColor(128, 0, 32);
+            doc.setLineWidth(0.8);
+            doc.line(20, 38, 190, 38);
+            doc.setLineWidth(0.2);
+            doc.line(20, 39.5, 190, 39.5);
 
-            doc.setFont("helvetica", "normal"); doc.setFontSize(11);
-            doc.text(`Nomor     : ${level}/SP-UPK/${new Date().getFullYear()}`, 20, 65);
-            doc.text(`Perihal   : Penyelesaian Tunggakan Pinjaman`, 20, 71);
+            // 2. JUDUL SURAT PERINGATAN
+            let spTitle = "SURAT PERINGATAN I (PERTAMA)";
+            let spTingkat = "Pertama";
+            let batasWaktu = "7 (tujuh) hari";
 
-            doc.text(`Kepada Yth.`, 20, 85);
-            doc.setFont("helvetica", "bold"); doc.text(`Bpk/Ibu ${n.nama}`, 20, 91);
-            doc.setFont("helvetica", "normal"); doc.text(`Di Tempat (${n.desa})`, 20, 97);
+            if (level === 2) {
+                spTitle = "SURAT PERINGATAN II (KEDUA)";
+                spTingkat = "Kedua";
+                batasWaktu = "3 (tiga) hari";
+            } else if (level === 3) {
+                spTitle = "SURAT PERINGATAN III / SURAT PANGGILAN";
+                spTingkat = "Ketiga / Terakhir";
+                batasWaktu = "2 x 24 jam";
+            }
 
-            let paragraf = doc.splitTextToSize(`Dengan hormat,\nBerdasarkan catatan administrasi keuangan UPK DAPM Tanete Riattang Barat, Bpk/Ibu masih memiliki kewajiban sisa saldo pokok pinjaman sebesar Rp ${formatRp(n.saldo)} yang telah melampaui jadwal kesepakatan angsuran.\n\nDemikian surat peringatan ini disampaikan agar Bpk/Ibu dapat segera menyelesaikan kewajiban tersebut di Kantor UPK Tanete Riattang Barat.`, 170);
-            doc.text(paragraf, 20, 110);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text(spTitle, 105, 49, { align: "center" });
+            doc.setLineWidth(0.4);
+            doc.line(65, 51, 145, 51);
 
-            doc.text(`Watampone, ${new Date().toLocaleDateString('id-ID')}`, 130, 180);
-            doc.text(`Kepala UPK DAPM`, 130, 186);
-            doc.text(`( H. Jadjdji Irfan )`, 130, 210);
+            // 3. NOMOR & PERIHAL
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            doc.text(`Nomor     : 0${level}/SP-UPK.TRB/${new Date().getFullYear()}`, 20, 60);
+            doc.text(`Lampiran : -`, 20, 65);
+            doc.text(`Perihal   : Pemberitahuan & Penyelesaian Tunggakan Pinjaman`, 20, 70);
 
-            doc.save(`SP${level}_${n.nama.replace(/\s+/g,'_')}.pdf`);
-            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCetakSP')).hide();
+            // 4. TUJUAN SURAT
+            doc.text(`Kepada Yth.`, 20, 80);
+            doc.setFont("helvetica", "bold");
+            doc.text(`Bapak/Ibu ${n.nama}`, 20, 85);
+            doc.setFont("helvetica", "normal");
+            doc.text(`di - Tempat (Kelurahan ${n.desa})`, 20, 90);
+
+            // 5. ISI SURAT
+            let isiSurat = `Dengan hormat,\n\n` +
+                `Sehubungan dengan catatan administrasi pembukuan UPK DAPM Tanete Riattang Barat per tanggal ${new Date().toLocaleDateString('id-ID')}, kami menyampaikan bahwa Bapak/Ibu tercatat memiliki sisa kewajiban pinjaman dana bergulir yang telah jatuh tempo dengan rincian sebagai berikut:\n\n` +
+                `  •  Nama Peminjam        : ${n.nama}\n` +
+                `  •  Plafon Pinjaman         : Rp ${formatRp(n.plafon)}\n` +
+                `  •  Tenor Pinjaman           : ${n.tenor} Bulan\n` +
+                `  •  Sisa Saldo Pokok       : Rp ${formatRp(n.saldo)}\n\n` +
+                `Mengingat kewajiban tersebut belum diselesaikan sesuai jadwal angsuran yang disepakati, maka melalui Surat Peringatan ${spTingkat} ini kami meminta Bapak/Ibu segera datang ke Kantor UPK Tanete Riattang Barat dalam waktu selambat-lambatnya ${batasWaktu} sejak surat ini diterima.\n\n` +
+                `Demikian surat peringatan ini kami sampaikan untuk menjadi perhatian dan segera diselesaikan dengan penuh tanggung jawab. Atas kerja sama yang baik diucapkan terima kasih.`;
+
+            let paragraf = doc.splitTextToSize(isiSurat, 170);
+            doc.text(paragraf, 20, 102);
+
+            // 6. TANDA TANGAN
+            const tglSekarang = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            doc.text(`Watampone, ${tglSekarang}`, 130, 215);
+            doc.text(`Pengelola UPK DAPM TR. BARAT`, 130, 220);
+            doc.text(`Kepala UPK,`, 130, 225);
+
+            doc.setFont("helvetica", "bold");
+            doc.text(`( H. JADJDJI IRFAN )`, 130, 252);
+
+            // 7. TUTUP MODAL & LOG
+            const modalEl = document.getElementById('modalCetakSP');
+            const modalInst = bootstrap.Modal.getInstance(modalEl);
+            if (modalInst) modalInst.hide();
+            
             logAktivitas('SP', `Mencetak SP-${level} untuk ${n.nama}`);
-            showToast('success', 'Surat Peringatan berhasil diunduh!');
+            showToast('success', 'Surat Peringatan berhasil dibuat!');
+
+            // 8. TAMPILKAN TAB CETAK BARU & UNDUH OTOMATIS
+            const pdfBlob = doc.output('bloburl');
+            window.open(pdfBlob, '_blank');
+            doc.save(`SP_${level}_${n.nama.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`);
         }
 
         let currentPeminjamPage = 1;
@@ -2299,7 +2378,6 @@
             });
         }
 
-        // FIXED: Hapus Pembayaran yang Membersihkan LPP dan Buku Kas Sekaligus
         function hapusRiwayatPembayaran(nasabahIdx, historyIdx) {
             const allData = getLPPData();
             const n = allData[nasabahIdx];
