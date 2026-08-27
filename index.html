@@ -185,34 +185,17 @@
             }
         }
 
-        /* PRINT STYLING UNTUK SEMUA LAPORAN & DOKUMEN */
         @media print {
-            body { background: #ffffff !important; color: #000 !important; font-size: 11pt !important; }
+            body { background: #ffffff !important; color: #000 !important; }
             body.dark-mode * { color: #000 !important; }
             body * { visibility: hidden; }
-            #areaCetakLPP, #areaCetakLPP *, 
-            #areaCetakKwitansi, #areaCetakKwitansi *, 
-            #areaCetakLaporan, #areaCetakLaporan *, 
-            #areaCetakBukuKas, #areaCetakBukuKas *, 
-            #areaCetakNeraca, #areaCetakNeraca *,
-            #areaCetakDokumenMaster, #areaCetakDokumenMaster *,
-            .tab-pane.active, .tab-pane.active * { 
-                visibility: visible !important; 
-            }
-            #areaCetakLPP, #areaCetakBukuKas, #areaCetakNeraca, #areaCetakDokumenMaster { 
-                position: absolute; 
-                left: 0; 
-                top: 0; 
-                width: 100% !important; 
-                max-height: none !important; 
-                overflow: visible !important; 
-                background: #fff !important; 
-            }
+            #areaCetakLPP, #areaCetakLPP *, #areaCetakKwitansi, #areaCetakKwitansi *, #areaCetakLaporan, #areaCetakLaporan *, #areaCetakBukuKas, #areaCetakBukuKas *, #areaCetakNeraca, #areaCetakNeraca * { visibility: visible !important; }
+            #areaCetakLPP, #areaCetakBukuKas, #areaCetakNeraca { position: absolute; left: 0; top: 0; width: 100% !important; max-height: none !important; overflow: visible !important; background: #fff; }
             .table-responsive { overflow: visible !important; max-height: none !important; }
-            table { width: 100% !important; font-size: 9.5px !important; border-collapse: collapse !important; }
+            table { width: 100% !important; font-size: 8.5px !important; border-collapse: collapse !important; }
             th { background-color: #002b66 !important; color: #ffffff !important; -webkit-print-color-adjust: exact; }
-            .no-print, .nav-tabs, .modal-header, .btn-close { display: none !important; }
-            @page { size: portrait; margin: 10mm; }
+            .no-print { display: none !important; }
+            @page { size: landscape; margin: 6mm; }
         }
     </style>
 </head>
@@ -274,9 +257,9 @@
 
                 <div class="d-flex flex-wrap gap-2 mb-4">
                     <div class="feature-badge-pill"><i class="bi bi-shield-lock-fill text-warning"></i> Terenkripsi</div>
-                    <div class="feature-badge-pill"><i class="bi bi-file-earmark-check-fill text-success"></i> Akad & Berita Acara</div>
+                    <div class="feature-badge-pill"><i class="bi bi-check-circle-fill text-success"></i> Audit Trail</div>
                     <div class="feature-badge-pill"><i class="bi bi-cloud-check-fill text-primary"></i> Sinkron Google Sheets</div>
-                    <div class="feature-badge-pill"><i class="bi bi-printer-fill text-danger"></i> Cetak Dokumen Lengkap</div>
+                    <div class="feature-badge-pill"><i class="bi bi-printer-fill text-danger"></i> Cetak Resmi A4</div>
                 </div>
             </div>
 
@@ -320,16 +303,13 @@
                             <i class="bi bi-box-arrow-in-right me-1"></i> Masuk Dasbor
                         </button>
                     </form>
-                    <div class="mt-3 p-2 bg-light rounded border text-muted small text-center" style="font-size: 0.72rem;">
-                        Info Akses: <b>upk_trb</b> / <b>454567</b> atau <b>teller</b> / <b>teller123</b>
-                    </div>
                 </div>
             </div>
 
         </div>
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 pt-3 border-top small text-muted">
-            <div>© 2026 UPK DAPM Tanete Riattang Barat · SK Kemenkumham AHU-0003655.AH.01.07/2017[cite: 3]</div>
+            <div>© 2026 UPK DAPM Tanete Riattang Barat · SK Kemenkumham AHU-0003655.AH.01.07/2017</div>
             <div><span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-2 py-1">● Cloud Sync</span> Versi Ultimate 2026</div>
         </div>
     </div>
@@ -358,13 +338,12 @@
                         <i class="bi bi-cloud-arrow-up me-1"></i> Sync Cloud
                     </button>
                     <button class="btn btn-dark btn-compact fw-semibold text-white shadow-sm py-1 px-2 admin-only" onclick="bukaModalTambahPeminjam()">
-                        <i class="bi bi-plus-lg me-1"></i> Tambah Peminjam
+                        <i class="bi bi-plus-lg me-1"></i> Tambah
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Profil Lembaga -->
         <div id="viewPanelProfil" class="d-none">
             <div class="card-custom p-3 p-md-5 mb-3 border shadow-sm">
                 <div class="row align-items-center mb-4 g-4">
@@ -374,11 +353,11 @@
                             <span class="badge text-primary bg-light border fw-semibold px-2 py-1 rounded-pill">Status: Aktif</span>
                         </div>
                         <h3 class="fw-bold mb-2" style="color: var(--navbar-bg) !important;">UPK DAPM TANETE RIATTANG BARAT</h3>
-                        <p class="small mb-2 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.[cite: 3]</p>
-                        <p class="small mb-3 text-muted">Aplikasi SISKEU UPK merupakan wujud transformasi dan keberlanjutan dari Program Nasional Pemberdayaan Masyarakat Mandiri Perdesaan (PNPM-MPd) sejak Juni 2009 hingga berakhir di Desember 2014, kini dikelola secara mandiri & akuntabel sebagai dana bergulir pemberdayaan masyarakat.[cite: 3]</p>
+                        <p class="small mb-2 text-muted">Unit Pengelola Kegiatan (UPK) Dana Amanah Pemberdayaan Masyarakat (DAPM) Kecamatan Tanete Riattang Barat, Kabupaten Bone, Sulawesi Selatan.</p>
+                        <p class="small mb-3 text-muted">Aplikasi SISKEU UPK merupakan wujud transformasi dan keberlanjutan dari Program Nasional Pemberdayaan Masyarakat Mandiri Perdesaan (PNPM-MPd) sejak Juni 2009 hingga berakhir di Desember 2014, kini dikelola secara mandiri & akuntabel sebagai dana bergulir pemberdayaan masyarakat.</p>
                         <div class="d-flex flex-wrap gap-2 small text-muted">
-                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-geo-alt-fill text-primary me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone[cite: 3]</div>
-                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-file-text-fill text-primary me-1"></i> SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b>[cite: 3]</div>
+                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-geo-alt-fill text-primary me-1"></i> Kec. Tanete Riattang Barat, Kab. Bone</div>
+                            <div class="card-light-custom px-3 py-2 rounded-2 border"><i class="bi bi-file-text-fill text-primary me-1"></i> SK Kemenkumham: <b>AHU-0003655.AH.01.07 TAHUN 2017</b></div>
                         </div>
                     </div>
                     <div class="col-lg-4 text-center">
@@ -387,7 +366,7 @@
                                 <img src="https://tse3.mm.bing.net/th/id/OIP.VKvCvVwvmJTbwyaLbTdRTAHaHa?r=0&w=480&h=480&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo UPK DAPM" crossorigin="anonymous" style="width: 70px; height: 70px; object-fit: contain; border-radius: 50%; padding: 4px; background: #fff;" class="border shadow-sm">
                             </div>
                             <h6 class="fw-bold mb-1 text-dark">SISKEU UPK DAPM</h6>
-                            <p class="small mb-0 text-muted">Sistem LPP Terpadu & Kas Operasional[cite: 3]</p>
+                            <p class="small mb-0 text-muted">Sistem LPP Terpadu & Kas Operasional</p>
                             <span class="badge bg-dark text-white mt-2 px-3 py-1">Versi Ultimate 2026</span>
                         </div>
                     </div>
@@ -407,27 +386,27 @@
                             <ul class="list-unstyled small mb-0 d-flex flex-column gap-3">
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-person-badge-fill"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Ketua BKPP:</span><strong class="text-dark fs-6">Hamzah Najad</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Ketua BKPP:</span><strong class="text-dark fs-6">Hamzah Najad</strong></div>
                                 </li>
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-file-earmark-person-fill"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Sekretaris:</span><strong class="text-dark fs-6">H. Abd. Mannang, S.IP</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Sekretaris:</span><strong class="text-dark fs-6">H. Abd. Mannang, S.IP</strong></div>
                                 </li>
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-cash-stack"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Bendahara:</span><strong class="text-dark fs-6">Evi Nasriyanti, S.Pd</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Bendahara:</span><strong class="text-dark fs-6">Evi Nasriyanti, S.Pd</strong></div>
                                 </li>
                                 <li class="d-flex align-items-center gap-3 border-top pt-2">
                                     <div class="pengurus-avatar" style="background:var(--navbar-bg); color:white;"><i class="bi bi-person-check-fill"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Kepala Unit Pengelola (UPK):</span><strong class="text-primary fs-6 fw-bold">H. Jadjdji Irfan</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Kepala Unit Pengelola (UPK):</span><strong class="text-primary fs-6 fw-bold">H. Jadjdji Irfan</strong></div>
                                 </li>
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-briefcase-fill"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Staf Administrasi:</span><strong class="text-dark fs-6">Syapriadi, S.H</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Staf Administrasi:</span><strong class="text-dark fs-6">Syapriadi, S.H</strong></div>
                                 </li>
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-wallet2"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Bendahara Keuangan UPK:</span><strong class="text-dark fs-6">Harman, S.M</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Bendahara Keuangan UPK:</span><strong class="text-dark fs-6">Harman, S.M</strong></div>
                                 </li>
                             </ul>
                         </div>
@@ -442,15 +421,15 @@
                             <ul class="list-unstyled small mb-0 d-flex flex-column gap-3">
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-award-fill"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Ketua Badan Pengawas:</span><strong class="text-dark fs-6">Drs. Muh. Idris</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Ketua Badan Pengawas:</span><strong class="text-dark fs-6">Drs. Muh. Idris</strong></div>
                                 </li>
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-person-fill-check"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Anggota Pengawas 1:</span><strong class="text-dark fs-6">A. Mappangerang</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Anggota Pengawas 1:</span><strong class="text-dark fs-6">A. Mappangerang</strong></div>
                                 </li>
                                 <li class="d-flex align-items-center gap-3">
                                     <div class="pengurus-avatar"><i class="bi bi-person-fill-check"></i></div>
-                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Anggota Pengawas 2:</span><strong class="text-dark fs-6">Mahmud Agsan, S.Ag</strong>[cite: 3]</div>
+                                    <div><span class="text-muted d-block" style="font-size:0.72rem;">Anggota Pengawas 2:</span><strong class="text-dark fs-6">Mahmud Agsan, S.Ag</strong></div>
                                 </li>
                             </ul>
                         </div>
@@ -459,7 +438,6 @@
             </div>
         </div>
 
-        <!-- Dasbor Keuangan -->
         <div id="viewPanelDasborKeuangan">
             <div class="row g-2 g-md-3 mb-3">
                 <div class="col-6 col-lg-3">
@@ -560,7 +538,6 @@
             </div>
         </div>
 
-        <!-- Penagihan, Jatuh Tempo & SP -->
         <div id="viewPanelJatuhTempo" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-3 border-bottom">
@@ -609,14 +586,13 @@
             </div>
         </div>
 
-        <!-- Data Peminjam -->
         <div id="viewPanelDataPeminjam" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
                     <div class="d-flex gap-2 align-items-center flex-wrap w-100 w-md-auto">
                         <input type="text" id="peminjamSearchInput" class="form-control form-control-compact text-dark flex-grow-1" style="min-width: 140px;" placeholder="Cari..." oninput="onPeminjamSearchInput()">
                         <select id="peminjamDesaFilter" class="form-select form-select-compact text-dark" style="width: 130px;" onchange="renderDataPeminjamTable()">
-                            <option value="">Semua Kelurahan</option>
+                            <option value="">Semua Desa</option>
                         </select>
                         <select id="peminjamPageSizeSelect" class="form-select form-select-compact text-dark" style="width: 100px;" onchange="currentPeminjamPage=1; renderDataPeminjamTable()">
                             <option value="10">10 Data</option>
@@ -627,7 +603,7 @@
                     </div>
                     <div class="d-flex gap-2 ms-auto">
                         <button class="btn btn-dark btn-compact text-white fw-semibold shadow-sm admin-only" onclick="bukaModalTambahPeminjam()">
-                            <i class="bi bi-person-plus-fill me-1"></i> Tambah Peminjam
+                            <i class="bi bi-person-plus-fill me-1"></i> Tambah
                         </button>
                     </div>
                 </div>
@@ -636,7 +612,7 @@
                     <table class="table table-bordered table-hover table-compact mb-0">
                         <thead>
                             <tr>
-                                <th>No</th><th>Nama Peminjam</th><th>Kelurahan</th><th>Plafon (Rp)</th><th>Tenor</th><th>% Jasa</th><th>Tgl Cair</th><th>Sisa Pokok</th><th>Status</th><th>WhatsApp</th><th class="no-print">Aksi & Dokumen</th>
+                                <th>No</th><th>Nama Peminjam</th><th>Kelurahan</th><th>Plafon (Rp)</th><th>Tenor</th><th>% Jasa</th><th>Tgl Cair</th><th>Sisa Pokok</th><th>Status</th><th>WhatsApp</th><th class="no-print">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="peminjamTableBody"></tbody>
@@ -650,7 +626,6 @@
             </div>
         </div>
 
-        <!-- Kasir & Bayar Angsuran -->
         <div id="viewPanelBayarAngsuran" class="d-none">
             <div class="row g-3">
                 <div class="col-lg-4 col-xl-3">
@@ -776,7 +751,7 @@
                             </div>
                         </div>
 
-                        <!-- KWITANSI RESMI PEMBAYARAN ANGSURAN -->
+                        <!-- KWITANSI RESMI -->
                         <div id="kwitansiSuccessBox" class="mt-4 pt-3 border-top d-none">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="badge p-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle-fill me-1 text-warning"></i> Pembayaran Tercatat</span>
@@ -827,7 +802,6 @@
             </div>
         </div>
 
-        <!-- Tabel LPP -->
         <div id="viewPanelLPP" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
@@ -872,7 +846,6 @@
             </div>
         </div>
 
-        <!-- Buku Kas -->
         <div id="viewPanelKas" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2 no-print">
@@ -893,7 +866,7 @@
                             <option value="2024">2024</option>
                         </select>
                         <button class="btn btn-outline-dark btn-compact" onclick="window.print()"><i class="bi bi-printer me-1"></i> Cetak</button>
-                        <button class="btn btn-dark btn-compact text-white fw-semibold admin-only" onclick="bukaModalTambahKas()"><i class="bi bi-plus-circle me-1"></i> Mutasi Kas</button>
+                        <button class="btn btn-dark btn-compact text-white fw-semibold admin-only" onclick="bukaModalTambahKas()"><i class="bi bi-plus-circle me-1"></i> Mutasi</button>
                     </div>
                 </div>
 
@@ -914,7 +887,6 @@
             </div>
         </div>
 
-        <!-- Neraca & Laba Rugi Microfinance -->
         <div id="viewPanelNeraca" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-3 mb-3 border-bottom gap-2 no-print">
@@ -1123,7 +1095,6 @@
             </div>
         </div>
 
-        <!-- Kalkulator Pinjaman -->
         <div id="viewPanelKalkulator" class="d-none">
             <div class="card-custom p-3 p-md-4">
                 <h5 class="fw-bold text-dark border-bottom pb-2 mb-3"><i class="bi bi-calculator me-2 text-primary"></i> Kalkulator Simulasi Pinjaman Mandiri</h5>
@@ -1159,7 +1130,6 @@
             </div>
         </div>
 
-        <!-- Rekap Desa -->
         <div id="viewPanelLaporan" class="d-none">
             <div class="card-custom p-3 p-md-5">
                 <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
@@ -1180,7 +1150,6 @@
             </div>
         </div>
 
-        <!-- Audit Log -->
         <div id="viewPanelLog" class="d-none admin-only">
             <div class="card-custom p-3 p-md-4">
                 <div class="d-flex justify-content-between border-bottom pb-2 mb-3">
@@ -1196,7 +1165,7 @@
 
     </div>
 
-    <!-- MODAL SETTING NERACA & MODAL AWAL -->
+    <!-- Modal Setting Neraca & Modal Awal -->
     <div class="modal fade" id="modalSettingNeraca" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
@@ -1210,7 +1179,7 @@
                     <div class="mb-3">
                         <label class="small fw-semibold mb-1 text-dark">Modal Awal Dana Bergulir Bersih (Rp)</label>
                         <input type="text" id="cfgModalAwal" class="form-control form-control-compact fw-bold text-dark" placeholder="65.000.000" required oninput="formatInputNumber(this)">
-                        <small class="text-muted" style="font-size:0.7rem;">Modal bergulir awal perkumpulan dari program DAPM / PNPM-MPd.[cite: 3]</small>
+                        <small class="text-muted" style="font-size:0.7rem;">Modal bergulir awal perkumpulan dari program DAPM / PNPM-MPd.</small>
                     </div>
                     <div class="mb-3">
                         <label class="small fw-semibold mb-1 text-dark">Titipan / Tabungan Anggota (Rp)</label>
@@ -1229,7 +1198,7 @@
         </div>
     </div>
 
-    <!-- MODAL TUTUP BUKU -->
+    <!-- Modal Tutup Buku & Alokasi Surplus Tahunan -->
     <div class="modal fade" id="modalTutupBuku" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
@@ -1293,7 +1262,7 @@
         </div>
     </div>
 
-    <!-- MODAL CETAK SP -->
+    <!-- Modal Cetak SP -->
     <div class="modal fade" id="modalCetakSP" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content card-custom p-3 border">
@@ -1311,377 +1280,42 @@
         </div>
     </div>
 
-    <!-- MODAL TAMBAH / EDIT PEMINJAM LENGKAP DENGAN UPLOAD KTP -->
+    <!-- Modal Tambah / Edit Peminjam -->
     <div class="modal fade" id="tambahPeminjamModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content card-custom p-4 shadow-lg border">
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                    <h6 class="fw-bold mb-0 text-primary" id="modalPeminjamTitle">
-                        <i class="bi bi-person-plus-fill text-warning me-1"></i> Form Peminjam & Berkas Administrasi
-                    </h6>
+                    <h6 class="fw-bold mb-0 text-primary" id="modalPeminjamTitle"><i class="bi bi-person-plus-fill text-warning me-1"></i> Tambah Peminjam</h6>
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="modal"></button>
                 </div>
-                
                 <form id="formTambahPeminjam">
                     <input type="hidden" id="editIndex" value="">
-                    <input type="hidden" id="base64KtpPeminjam" value="">
-                    <input type="hidden" id="base64KtpPasangan" value="">
-
-                    <ul class="nav nav-pills mb-3 gap-2" id="peminjamTabNav" role="tablist">
-                        <li class="nav-item">
-                            <button class="btn btn-sm btn-outline-dark active" id="tab-data-pokok" data-bs-toggle="pill" data-bs-target="#panelDataPokok" type="button"><i class="bi bi-person-vcard me-1"></i> 1. Identitas & Pinjaman</button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="btn btn-sm btn-outline-dark" id="tab-data-pasangan" data-bs-toggle="pill" data-bs-target="#panelDataPasangan" type="button"><i class="bi bi-people me-1"></i> 2. Pasangan / Jaminan</button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="btn btn-sm btn-outline-dark" id="tab-upload-ktp" data-bs-toggle="pill" data-bs-target="#panelUploadKTP" type="button"><i class="bi bi-camera me-1"></i> 3. Upload Berkas KTP</button>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content border p-3 rounded-3 bg-light mb-3">
-                        <!-- Tab 1: Identitas & Pinjaman -->
-                        <div class="tab-pane fade show active" id="panelDataPokok">
-                            <div class="row g-2">
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">Nama Lengkap Sesuai KTP *</label>
-                                    <input type="text" id="newNama" class="form-control form-control-compact text-dark fw-bold" placeholder="Contoh: SURIANI, S.Pd" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">Nomor Induk Kependudukan (NIK) *</label>
-                                    <input type="text" id="newNik" maxlength="16" class="form-control form-control-compact text-dark" placeholder="7308xxxxxxxxxxxx" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">Kelurahan / Desa *</label>
-                                    <input type="text" id="newDesa" class="form-control form-control-compact text-dark" placeholder="Contoh: WATANG PALAKKA" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">Alamat Lengkap / Lingkungan</label>
-                                    <input type="text" id="newAlamatDetail" class="form-control form-control-compact text-dark" placeholder="Jl. Poros No. ... RT/RW">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">Pekerjaan / Bidang Usaha</label>
-                                    <input type="text" id="newPekerjaan" class="form-control form-control-compact text-dark" placeholder="Pedagang / Petani / Wiraswasta">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">Tujuan Penggunaan Pinjaman</label>
-                                    <input type="text" id="newTujuan" class="form-control form-control-compact text-dark" value="Penambahan Modal Usaha Dagang">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <label class="small fw-semibold text-dark">Plafon Pinjaman (Rp) *</label>
-                                    <input type="text" id="newPlafon" class="form-control form-control-compact fw-bold text-dark" required oninput="formatInputNumber(this); hitungSimulasiPeminjamBaru();">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <label class="small fw-semibold text-dark">Tenor Pinjaman *</label>
-                                    <select id="newTenor" class="form-select form-select-compact text-dark" onchange="hitungSimulasiPeminjamBaru()">
-                                        <option value="6">6 Bulan</option>
-                                        <option value="12" selected>12 Bulan</option>
-                                        <option value="18">18 Bulan</option>
-                                        <option value="24">24 Bulan</option>
-                                        <option value="36">36 Bulan</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <label class="small fw-semibold text-dark">Jasa / Margin (%/bln) *</label>
-                                    <input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact text-dark" value="1.5" required oninput="hitungSimulasiPeminjamBaru()">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">Tanggal Realisasi / Akad *</label>
-                                    <input type="date" id="newTglCair" class="form-control form-control-compact text-dark" required>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">No. WhatsApp / HP</label>
-                                    <input type="text" id="newNoHp" class="form-control form-control-compact text-dark" placeholder="0812xxxxxxxx">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tab 2: Pasangan & Jaminan -->
-                        <div class="tab-pane fade" id="panelDataPasangan">
-                            <div class="row g-2">
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">Nama Suami / Istri / Penjamin</label>
-                                    <input type="text" id="newNamaPasangan" class="form-control form-control-compact text-dark" placeholder="Nama Pasangan...">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="small fw-semibold text-dark">NIK Suami / Istri / Penjamin</label>
-                                    <input type="text" id="newNikPasangan" maxlength="16" class="form-control form-control-compact text-dark" placeholder="NIK Pasangan...">
-                                </div>
-                                <div class="col-12 mb-2">
-                                    <label class="small fw-semibold text-dark">Nomor Akad / Register Kantor (Opsional)</label>
-                                    <input type="text" id="newNoAkad" class="form-control form-control-compact text-dark" placeholder="Otomatis digenerate sistem jika dikosongkan">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tab 3: Upload KTP -->
-                        <div class="tab-pane fade" id="panelUploadKTP">
-                            <div class="row g-3">
-                                <div class="col-md-6 text-center">
-                                    <label class="small fw-bold d-block text-dark mb-1">Foto KTP Peminjam</label>
-                                    <input type="file" accept="image/*" id="fileKtpPeminjam" class="form-control form-control-compact mb-2" onchange="handleKTPUpload(event, 'previewKtpPeminjam', 'base64KtpPeminjam')">
-                                    <div class="border rounded bg-white p-2 text-center" style="min-height: 140px;">
-                                        <img id="previewKtpPeminjam" src="" alt="Preview KTP Peminjam" class="img-fluid rounded d-none" style="max-height: 130px;">
-                                        <span id="labelKtpPeminjamEmpty" class="text-muted small d-block pt-5"><i class="bi bi-image fs-3 d-block"></i>Belum ada foto KTP</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 text-center">
-                                    <label class="small fw-bold d-block text-dark mb-1">Foto KTP Pasangan / Penjamin</label>
-                                    <input type="file" accept="image/*" id="fileKtpPasangan" class="form-control form-control-compact mb-2" onchange="handleKTPUpload(event, 'previewKtpPasangan', 'base64KtpPasangan')">
-                                    <div class="border rounded bg-white p-2 text-center" style="min-height: 140px;">
-                                        <img id="previewKtpPasangan" src="" alt="Preview KTP Pasangan" class="img-fluid rounded d-none" style="max-height: 130px;">
-                                        <span id="labelKtpPasanganEmpty" class="text-muted small d-block pt-5"><i class="bi bi-image fs-3 d-block"></i>Belum ada foto KTP</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Nama Lengkap</label><input type="text" id="newNama" class="form-control form-control-compact text-dark" placeholder="Contoh: SURIANI, S.Pd" required></div>
+                    <div class="mb-2"><label class="small fw-semibold mb-1 text-dark">Kelurahan</label><input type="text" id="newDesa" class="form-control form-control-compact text-dark" placeholder="Contoh: WATANG PALAKKA" required></div>
+                    <div class="row g-2 mb-2">
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Plafon Pinjaman (Rp)</label><input type="text" id="newPlafon" class="form-control form-control-compact fw-bold text-dark" required oninput="formatInputNumber(this); hitungSimulasiPeminjamBaru();"></div>
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Tenor</label><select id="newTenor" class="form-select form-select-compact text-dark" onchange="hitungSimulasiPeminjamBaru()"><option value="12">12 Bulan</option><option value="18">18 Bulan</option><option value="24">24 Bulan</option></select></div>
                     </div>
-
-                    <!-- Live Simulation Summary -->
+                    <div class="row g-2 mb-2">
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Jasa (%/bln)</label><input type="number" step="0.01" id="newPersenJasa" class="form-control form-control-compact text-dark" value="1.5" required oninput="hitungSimulasiPeminjamBaru()"></div>
+                        <div class="col-md-6"><label class="small fw-semibold mb-1 text-dark">Tgl Cair</label><input type="date" id="newTglCair" class="form-control form-control-compact text-dark" required></div>
+                    </div>
+                    <div class="mb-3"><label class="small fw-semibold mb-1 text-dark">No. WhatsApp</label><input type="text" id="newNoHp" class="form-control form-control-compact text-dark" placeholder="0812..."></div>
                     <div class="card-light-custom p-2 rounded-2 border mb-3 small">
-                        <div class="d-flex justify-content-between mb-1"><span>Pokok per Bulan:</span><strong class="text-dark" id="simulasiPokokPerBulan">Rp 0</strong></div>
-                        <div class="d-flex justify-content-between mb-1"><span>Jasa/Margin per Bulan:</span><strong class="text-dark" id="simulasiJasaPerBulan">Rp 0</strong></div>
-                        <div class="d-flex justify-content-between fw-bold border-top pt-1 mt-1"><span class="text-primary">Total Angsuran per Bulan:</span><strong class="text-primary" id="simulasiTotalPerBulan">Rp 0</strong></div>
+                        <div class="d-flex justify-content-between mb-1"><span>Pokok/bln:</span><strong class="text-dark" id="simulasiPokokPerBulan">Rp 0</strong></div>
+                        <div class="d-flex justify-content-between mb-1"><span>Jasa/bln:</span><strong class="text-dark" id="simulasiJasaPerBulan">Rp 0</strong></div>
+                        <div class="d-flex justify-content-between fw-bold border-top pt-1 mt-1"><span class="text-primary">Total:</span><strong class="text-primary" id="simulasiTotalPerBulan">Rp 0</strong></div>
                     </div>
-
                     <div class="d-flex justify-content-end gap-2 border-top pt-3">
                         <button type="button" class="btn btn-outline-dark btn-compact" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-dark btn-compact fw-semibold text-white shadow-sm" id="btnSimpanPeminjamText"><i class="bi bi-save me-1"></i> Simpan Peminjam</button>
+                        <button type="submit" class="btn btn-dark btn-compact fw-semibold text-white shadow-sm" id="btnSimpanPeminjamText"><i class="bi bi-save me-1"></i> Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- MODAL DOKUMEN ADMINISTRASI KANTOR (AKAD, BA, KWITANSI, KARTU ANGSURAN, KTP) -->
-    <div class="modal fade" id="modalDokumenAdministrasi" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content card-custom p-3 p-md-4 shadow-lg border">
-                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3 no-print">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="bi bi-printer-fill text-primary fs-4"></i>
-                        <div>
-                            <h6 class="fw-bold mb-0 text-dark">Pusat Cetak Dokumen Administrasi Kantor UPK</h6>
-                            <small class="text-muted" id="docNasabahNamaSub">-</small>
-                        </div>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-dark btn-compact fw-bold text-white shadow-sm" onclick="cetakAreaDokumenTerpilih()"><i class="bi bi-printer me-1"></i> Cetak Dokumen</button>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                </div>
-
-                <!-- Tab Dokumen Administrasi -->
-                <ul class="nav nav-tabs mb-3 no-print" id="docTabNav" role="tablist">
-                    <li class="nav-item">
-                        <button class="nav-link active fw-bold small" data-bs-toggle="tab" data-bs-target="#tabAkadPerjanjian" type="button"><i class="bi bi-file-earmark-text me-1"></i> 1. Akad Syariah (Murabahah)[cite: 2]</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link fw-bold small" data-bs-toggle="tab" data-bs-target="#tabBeritaAcara" type="button"><i class="bi bi-file-earmark-check me-1"></i> 2. Berita Acara</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link fw-bold small" data-bs-toggle="tab" data-bs-target="#tabKwitansiCair" type="button"><i class="bi bi-receipt me-1"></i> 3. Kwitansi Pencairan</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link fw-bold small" data-bs-toggle="tab" data-bs-target="#tabKartuAngsuran" type="button"><i class="bi bi-card-checklist me-1"></i> 4. Kartu Kontrol Angsuran</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link fw-bold small" data-bs-toggle="tab" data-bs-target="#tabBerkasKtp" type="button"><i class="bi bi-person-badge me-1"></i> 5. Lampiran KTP</button>
-                    </li>
-                </ul>
-
-                <div class="tab-content" id="areaCetakDokumenMaster">
-                    <!-- 1. DOKUMEN AKAD PERJANJIAN SYARIAH (MURABAHAH BIL WAKALAH) -->
-                    <div class="tab-pane fade show active p-3 bg-white text-dark border rounded" id="tabAkadPerjanjian" style="font-family: 'Times New Roman', Times, serif; line-height: 1.5; font-size: 13px;">
-                        <div class="text-center mb-3 pb-2 border-bottom border-2 border-dark">
-                            <h5 class="fw-bold mb-1" style="letter-spacing: 0.5px;">PERJANJIAN PEMBIAYAAN SYARIAH (AKAD MURABAHAH BIL WAKALAH)</h5>
-                            <h6 class="fw-bold mb-1">UPK DANA AMANAH PEMBERDAYAAN MASYARAKAT (DAPM)</h6>
-                            <small class="d-block fw-bold">KECAMATAN TANETE RIATTANG BARAT - KABUPATEN BONE</small>
-                            <small class="text-muted" id="docAkadNomorSurat">Nomor: .../UPK-DAPM-SYARIAH/TRB/.../2026[cite: 2]</small>
-                        </div>
-
-                        <p class="mb-2">Pada hari ini, <b id="docAkadHari">-</b> tanggal <b id="docAkadTgl">-</b>, bertempat di Kantor UPK DAPM Kecamatan Tanete Riattang Barat, yang bertanda tangan di bawah ini:[cite: 2]</p>
-                        
-                        <div class="ms-3 mb-2">
-                            <table class="table-borderless w-100 mb-2">
-                                <tr><td style="width: 25px;"><b>I.</b></td><td style="width: 170px;"><b>Nama Pengurus UPK</b></td><td>: <b>H. Jadjdji Irfan</b>[cite: 2, 3]</td></tr>
-                                <tr><td></td><td>Jabatan</td><td>: Pengelola UPK DAPM Kec. Tanete Riattang Barat[cite: 2, 3]</td></tr>
-                                <tr><td></td><td>Alamat</td><td>: Jl. Poros Carawali, Kelurahan Bulu Tempe, Kec. Tanete Riattang Barat, Kab. Bone[cite: 2]</td></tr>
-                                <tr><td></td><td colspan="2"><i>Bertindak untuk dan atas nama UPK DAPM Kec. Tanete Riattang Barat, selanjutnya disebut <b>PIHAK PERTAMA (SHAHIBUL MAAL)</b>.[cite: 2]</i></td></tr>
-                            </table>
-
-                            <table class="table-borderless w-100">
-                                <tr><td style="width: 25px;"><b>II.</b></td><td style="width: 170px;"><b>Nama Peminjam</b></td><td>: <b id="docAkadNama">-</b></td></tr>
-                                <tr><td></td><td>NIK</td><td>: <span id="docAkadNik">-</span></td></tr>
-                                <tr><td></td><td>Alamat / Kelurahan</td><td>: <span id="docAkadAlamat">-</span>, Kel. <span id="docAkadDesa">-</span></td></tr>
-                                <tr><td></td><td>Pekerjaan / Usaha</td><td>: <span id="docAkadPekerjaan">-</span></td></tr>
-                                <tr><td></td><td>Nama Suami / Istri</td><td>: <span id="docAkadPasangan">-</span> (NIK: <span id="docAkadNikPasangan">-</span>)</td></tr>
-                                <tr><td></td><td colspan="2"><i>Selanjutnya disebut sebagai <b>PIHAK KEDUA (MUDHARIB / PENERIMA PEMBIAYAAN)</b>.[cite: 2]</i></td></tr>
-                            </table>
-                        </div>
-
-                        <p class="mb-2">Kedua belah pihak sepakat mengikatkan diri dalam Perjanjian Pembiayaan Modal Usaha berdasarkan Prinsip Syariah dengan ketentuan sebagai berikut:[cite: 2]</p>
-
-                        <div class="small ps-2">
-                            <p class="mb-1"><b>PASAL 1: PRINSIP DASAR & PENUNJUKAN KUASA</b><br>
-                            1. Pembiayaan diselenggarakan berdasarkan prinsip syariah (menghindari riba, maysir, dan gharar).[cite: 2]<br>
-                            2. PIHAK PERTAMA memberikan kuasa (Wakalah) kepada PIHAK KEDUA untuk membeli sendiri barang atau modal usaha yang dibutuhkan.[cite: 2] Setelah barang/modal dibeli, PIHAK PERTAMA menyerahkan dana pembiayaan sesuai akad jual beli (Murabahah).[cite: 2]</p>
-
-                            <p class="mb-1"><b>PASAL 2: OBJEK DAN MARGIN KEUNTUNGAN</b><br>
-                            • Harga Pokok Modal Usaha : <b>Rp <span id="docAkadPlafon">-</span></b>[cite: 2]<br>
-                            • Margin Keuntungan (Ushulah) UPK : <b><span id="docAkadPersenJasa">-</span>% / bulan</b> (Rp <span id="docAkadTotalJasa">-</span>)[cite: 2]<br>
-                            • Total Kewajiban Pengembalian : <b>Rp <span id="docAkadTotalBayar">-</span></b>[cite: 2]<br>
-                            • Jangka Waktu Angsuran : <b><span id="docAkadTenor">-</span> Bulan</b> (Angsuran per bulan: <b>Rp <span id="docAkadAngsBulanan">-</span></b>)[cite: 2]</p>
-
-                            <p class="mb-1"><b>PASAL 3: KLAUSUL TANGGUNG RENTENG & JAMINAN</b><br>
-                            1. PIHAK KEDUA wajib menjaga amanah dan bertanggung jawab penuh atas pelunasan pembiayaan modal usaha.[cite: 2]<br>
-                            2. Apabila terjadi wanprestasi atau kelalaian, PIHAK PERTAMA berhak melakukan tindakan penagihan dan eksekusi jaminan sesuai ketentuan musyawarah.[cite: 2]<br>
-                            3. Dokumen ini disetujui bersama oleh suami/istri sebagai bentuk persetujuan harta bersama demi kelancaran usaha.[cite: 2]</p>
-
-                            <p class="mb-2"><b>PASAL 4: KETENTUAN KETERLAMBATAN (TA'ZIR) & PERSELISIHAN</b><br>
-                            Keterlambatan pembayaran tanpa alasan syar'i dikenakan sanksi ta'zir yang diperuntukkan bagi kas sosial kemaslahatan umat UPK DAPM.[cite: 2] Segala perselisihan diselesaikan secara musyawarah mufakat atau melalui instansi yang berwenang di Pengadilan Negeri Watampone.[cite: 2]</p>
-                        </div>
-
-                        <div class="row text-center mt-4 pt-2">
-                            <div class="col-4">
-                                Penerima Pembiayaan,<br><br><br><br>
-                                <b>( <span id="docSignPeminjam">-</span> )</b>[cite: 2]
-                            </div>
-                            <div class="col-4">
-                                Menyetujui Suami/Istri,<br><br><br><br>
-                                <b>( <span id="docSignPasangan">.....................................</span> )</b>
-                            </div>
-                            <div class="col-4">
-                                Pengelola UPK DAPM,<br><br><br><br>
-                                <b>( H. JADJDJI IRFAN )</b>[cite: 2, 3]
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. BERITA ACARA PENCAIRAN PINJAMAN -->
-                    <div class="tab-pane fade p-4 bg-white text-dark border rounded" id="tabBeritaAcara" style="font-family: 'Times New Roman', Times, serif; font-size: 14px; line-height: 1.6;">
-                        <div class="text-center mb-4 pb-2 border-bottom border-2 border-dark">
-                            <h5 class="fw-bold mb-1">BERITA ACARA REALISASI & SERAH TERIMA DANA BERGULIR</h5>
-                            <h6 class="fw-bold mb-0">UPK DAPM KECAMATAN TANETE RIATTANG BARAT</h6>
-                            <small class="text-muted">Nomor: BA-CAIR/UPK-TRB/<span id="docBaBulan">08</span>/2026</small>
-                        </div>
-                        
-                        <p>Pada hari ini, <b id="docBaHari">-</b> Tanggal <b id="docBaTgl">-</b>, telah dilaksanakan verifikasi kelayakan serta penyaluran dana bergulir kepada:</p>
-
-                        <div class="card p-3 bg-light border mb-3">
-                            <div class="row">
-                                <div class="col-4 text-muted">Nama Peminjam</div><div class="col-8 fw-bold">: <span id="docBaNama">-</span></div>
-                                <div class="col-4 text-muted">NIK Peminjam</div><div class="col-8">: <span id="docBaNik">-</span></div>
-                                <div class="col-4 text-muted">Kelurahan / Desa</div><div class="col-8">: <span id="docBaDesa">-</span></div>
-                                <div class="col-4 text-muted">Nominal Pencairan</div><div class="col-8 fw-bold text-primary">: Rp <span id="docBaPlafon">-</span></div>
-                                <div class="col-4 text-muted">Jangka Waktu</div><div class="col-8">: <span id="docBaTenor">-</span> Bulan</div>
-                                <div class="col-4 text-muted">Peruntukan Dana</div><div class="col-8">: <span id="docBaTujuan">-</span></div>
-                            </div>
-                        </div>
-
-                        <p>Penyaluran dana tersebut telah diserahkan secara lengkap, sah, dan diterima langsung oleh penerima manfaat untuk dimanfaatkan sebagaimana mestinya sesuai ketentuan anggaran dasar dan rumah tangga UPK DAPM Tanete Riattang Barat.</p>
-
-                        <div class="row text-center mt-5 pt-3">
-                            <div class="col-6">
-                                Penerima Dana Bergulir,<br><br><br><br>
-                                <b>( <span id="docBaSignPeminjam">-</span> )</b>
-                            </div>
-                            <div class="col-6">
-                                Bendahara Keuangan UPK,<br><br><br><br>
-                                <b>( HARMAN, S.M )</b>[cite: 3]
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. KWITANSI PENCAIRAN RESMI -->
-                    <div class="tab-pane fade p-3 bg-white text-dark border rounded" id="tabKwitansiCair">
-                        <div class="kwitansi-profesional">
-                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                                <div class="d-flex align-items-center gap-2">
-                                    <img src="https://tse3.mm.bing.net/th/id/OIP.VKvCvVwvmJTbwyaLbTdRTAHaHa?r=0&w=480&h=480&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo" style="width: 44px; height: 44px; object-fit: contain;" class="border p-1 bg-white rounded">
-                                    <div>
-                                        <h6 class="fw-bold mb-0 text-primary">BUKTI PENCAIRAN DANA BERGULIR</h6>
-                                        <small class="text-muted">UPK DAPM TANETE RIATTANG BARAT</small>
-                                    </div>
-                                </div>
-                                <div class="text-end">
-                                    <span class="badge border py-1 px-2 bg-light text-primary fw-semibold" id="kwtCairNo">KWT-CAIR-2026</span><br>
-                                    <small class="text-muted" id="kwtCairTgl">-</small>
-                                </div>
-                            </div>
-                            <div class="table-responsive mb-3">
-                                <table class="table table-bordered table-sm small">
-                                    <tr><td style="width: 25%;" class="bg-light">Telah Diberikan Kepada</td><td class="fw-bold fs-6" id="kwtCairNama">-</td></tr>
-                                    <tr><td class="bg-light">NIK / No KTP</td><td id="kwtCairNik">-</td></tr>
-                                    <tr><td class="bg-light">Kelurahan / Desa</td><td id="kwtCairDesa">-</td></tr>
-                                    <tr><td class="bg-light">Jumlah Uang (Rp)</td><td class="fw-bold text-success fs-5" id="kwtCairNominal">Rp 0</td></tr>
-                                    <tr><td class="bg-light">Untuk Pembayaran</td><td id="kwtCairUntuk">Pencairan Dana Bergulir Usaha Tenor ... Bulan</td></tr>
-                                </table>
-                            </div>
-                            <div class="row text-center small mt-4">
-                                <div class="col-4">Penerima Dana,<br><br><br><b>( <span id="kwtCairSignP">-</span> )</b></div>
-                                <div class="col-4">Kasir / Teller,<br><br><br><b>( Staf UPK )</b></div>
-                                <div class="col-4">Kepala UPK,<br><br><br><b>( H. JADJDJI IRFAN )</b>[cite: 3]</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. KARTU ANGSURAN / KONTROL PINJAMAN -->
-                    <div class="tab-pane fade p-3 bg-white text-dark border rounded" id="tabKartuAngsuran">
-                        <div class="text-center mb-3 pb-2 border-bottom">
-                            <h6 class="fw-bold mb-0">KARTU KONTROL ANGSURAN PINJAMAN BERGULIR</h6>
-                            <small class="text-muted">UPK DAPM TANETE RIATTANG BARAT - KABUPATEN BONE</small>
-                        </div>
-                        <div class="row small mb-2 p-2 bg-light rounded border">
-                            <div class="col-6">
-                                <div>Nama: <b id="kaNama">-</b></div>
-                                <div>Kelurahan: <span id="kaDesa">-</span></div>
-                                <div>Plafon: <b class="text-primary" id="kaPlafon">-</b></div>
-                            </div>
-                            <div class="col-6 text-end">
-                                <div>Tenor: <b id="kaTenor">-</b></div>
-                                <div>Jasa/bln: <b id="kaJasa">-</b></div>
-                                <div>Tgl Cair: <span id="kaTglCair">-</span></div>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-sm text-center small" style="font-size: 11px;">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>Angs Ke</th><th>Tgl Jatuh Tempo</th><th>Pokok (Rp)</th><th>Jasa (Rp)</th><th>Total Bayar (Rp)</th><th>Sisa Pokok</th><th>Tgl Setor</th><th>Paraf Petugas</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="kaTableScheduleBody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- 5. LAMPIRAN BERKAS & FOTO KTP -->
-                    <div class="tab-pane fade p-3 bg-white text-dark border rounded text-center" id="tabBerkasKtp">
-                        <h6 class="fw-bold border-bottom pb-2 mb-3">LAMPIRAN IDENTITAS DIRI (KTP) NASABAH & PASANGAN</h6>
-                        <div class="row g-3 justify-content-center">
-                            <div class="col-md-6">
-                                <div class="card p-3 border shadow-sm">
-                                    <h6 class="fw-bold small text-primary mb-2">KTP PEMINJAM</h6>
-                                    <img id="docPreviewKtpPeminjam" src="" alt="Foto KTP Peminjam" class="img-fluid rounded border mb-2" style="max-height: 220px; object-fit: contain;">
-                                    <div class="small fw-semibold" id="docLabelKtpPeminjam">-</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card p-3 border shadow-sm">
-                                    <h6 class="fw-bold small text-primary mb-2">KTP SUAMI / ISTRI / PENJAMIN</h6>
-                                    <img id="docPreviewKtpPasangan" src="" alt="Foto KTP Pasangan" class="img-fluid rounded border mb-2" style="max-height: 220px; object-fit: contain;">
-                                    <div class="small fw-semibold" id="docLabelKtpPasangan">-</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL MUTASI KAS -->
+    <!-- Modal Mutasi Kas -->
     <div class="modal fade" id="transaksiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
             <div class="modal-content card-custom p-4 shadow-lg border">
@@ -1706,7 +1340,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap & Client Logic Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -1779,16 +1412,16 @@
         }
 
         const sampleLPPData = [
-            { no: 1, nama: "RISMAWATI,S.PD", nik: "7308215504850001", desa: "WATANG PALAKKA", alamatDetail: "Jl. Poros Watang Palakka", pekerjaan: "Guru Honorer", tujuanPinjaman: "Modal Usaha Sembako", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", angsuranKe: 6, noHp: "", persenJasa: 1.5, namaPasangan: "BAHTIAR", nikPasangan: "7308211002820002", fotoKtp: "", fotoKtpPasangan: "", noAkad: "01/UPK-DAPM-SYARIAH/TRB/03/2026", history: [{ angsuranKe: 5, tanggal: "05/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 5750000, noKwitansi: "KWT-100001" }] },
-            { no: 2, nama: "MAHMUD AGSAN(MASYITA)", nik: "7308210906780003", desa: "WATANG PALAKKA", alamatDetail: "Lingkungan Palakka", pekerjaan: "Wiraswasta", tujuanPinjaman: "Modal Bengkel", plafon: 10000000, tenor: "12", tglCair: "08/10/2025", realLaluPokok: 7650000, realLaluBunga: 1350000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 8500000, realTotBunga: 1500000, saldo: 1500000, persen: "100%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 10, tanggal: "03/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 1500000, noKwitansi: "KWT-100002" }] },
-            { no: 3, nama: "INDRAWATI", nik: "7308216601880004", desa: "WATANG PALAKKA", alamatDetail: "Palakka Barat", pekerjaan: "Pedagang Kue", tujuanPinjaman: "Modal Bahan Kue", plafon: 10000000, tenor: "12", tglCair: "02/02/2026", realLaluPokok: 4254000, realLaluBunga: 750000, realIniPokok: 851000, realIniBunga: 150000, realTotPokok: 5105000, realTotBunga: 900000, saldo: 4895000, persen: "100%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 6, tanggal: "05/08/2026", pokok: 851000, jasa: 150000, denda: 0, total: 1001000, sisaSaldo: 4895000, noKwitansi: "KWT-100003" }] },
-            { no: 4, nama: "JUHERIAH,SE", nik: "7308214407870001", desa: "WATANG PALAKKA", alamatDetail: "Jl. Lapangan Watang Palakka", pekerjaan: "Wiraswasta", tujuanPinjaman: "Modal Usaha ATK", plafon: 2000000, tenor: "12", tglCair: "07/04/2026", realLaluPokok: 510000, realLaluBunga: 90000, realIniPokok: 170000, realIniBunga: 30000, realTotPokok: 680000, realTotBunga: 120000, saldo: 1320000, persen: "100%", angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 4, tanggal: "02/08/2026", pokok: 170000, jasa: 30000, denda: 0, total: 200000, sisaSaldo: 1320000, noKwitansi: "KWT-100004" }] },
-            { no: 5, nama: "SUMARNI", nik: "7308215509900002", desa: "WATANG PALAKKA", alamatDetail: "Palakka Raya", pekerjaan: "Pedagang Pakaian", tujuanPinjaman: "Penambahan Stok Baju", plafon: 10000000, tenor: "12", tglCair: "16/07/2026", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 835000, realIniBunga: 175000, realTotPokok: 835000, realTotBunga: 175000, saldo: 9165000, persen: "100%", angsuranKe: 2, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 1, tanggal: "16/08/2026", pokok: 835000, jasa: 175000, denda: 0, total: 1010000, sisaSaldo: 9165000, noKwitansi: "KWT-100005" }] },
-            { no: 6, nama: "SYATIR AL", nik: "7308210903860002", desa: "WATANG PALAKKA", alamatDetail: "Watang Palakka", pekerjaan: "Peternak Ayam", tujuanPinjaman: "Pakan Ternak & Kandang", plafon: 15000000, tenor: "12", tglCair: "21/07/2026", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 1250000, realIniBunga: 263000, realTotPokok: 1250000, realTotBunga: 263000, saldo: 13750000, persen: "100%", angsuranKe: 2, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 1, tanggal: "16/08/2026", pokok: 1250000, jasa: 263000, denda: 0, total: 1513000, sisaSaldo: 13750000, noKwitansi: "KWT-100006" }] },
-            { no: 7, nama: "IRFANI VIRZAN PUTRI", nik: "7308216102950003", desa: "BULU TEMPE", alamatDetail: "Jl. Poros Carawali", pekerjaan: "Wiraswasta", tujuanPinjaman: "Modal Usaha Salon", plafon: 8000000, tenor: "12", tglCair: "22/07/2019", realLaluPokok: 7085000, realLaluBunga: 1440000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 7085000, realTotBunga: 1440000, saldo: 915000, persen: "89%", angsuranKe: 12, noHp: "", persenJasa: 1.5, history: [] },
-            { no: 8, nama: "HINAYAH HAMID", nik: "7308215011800001", desa: "MT.WALIE", alamatDetail: "Kelurahan MT. Walie", pekerjaan: "Petani Jagung", tujuanPinjaman: "Modal Pupuk & Bibit", plafon: 20830000, tenor: "24", tglCair: "01/01/2018", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 0, realIniBunga: 0, realTotPokok: 0, realTotBunga: 0, saldo: 20830000, persen: "0%", angsuranKe: 1, noHp: "085396838614", persenJasa: 0, history: [] },
-            { no: 9, nama: "TANTI WAHYUNI", nik: "7308214209920002", desa: "BULU TEMPE", alamatDetail: "Bulu Tempe", pekerjaan: "Pedagang Sayur", tujuanPinjaman: "Modal Dagang Keliling", plafon: 10000000, tenor: "12", tglCair: "19/11/2019", realLaluPokok: 7870000, realLaluBunga: 1800000, realIniPokok: 300000, realIniBunga: 0, realTotPokok: 8170000, realTotBunga: 1800000, saldo: 1830000, persen: "82%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 10, tanggal: "05/08/2026", pokok: 300000, jasa: 0, denda: 0, total: 300000, sisaSaldo: 1830000, noKwitansi: "KWT-100007" }] },
-            { no: 10, nama: "DRA NURJANNAH TINGGI", nik: "7308215912680001", desa: "BULU TEMPE", alamatDetail: "Jl. Veteran Bulu Tempe", pekerjaan: "PNS / Guru", tujuanPinjaman: "Modal Usaha Percetakan", plafon: 15000000, tenor: "12", tglCair: "15/03/2021", realLaluPokok: 8000000, realLaluBunga: 2700000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 8000000, realTotBunga: 2700000, saldo: 7000000, persen: "53%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [] }
+            { no: 1, nama: "RISMAWATI,S.PD", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/03/2026", realLaluPokok: 3400000, realLaluBunga: 600000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 4250000, realTotBunga: 750000, saldo: 5750000, persen: "100%", angsuranKe: 6, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 5, tanggal: "05/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 5750000, noKwitansi: "KWT-100001" }] },
+            { no: 2, nama: "MAHMUD AGSAN(MASYITA)", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "08/10/2025", realLaluPokok: 7650000, realLaluBunga: 1350000, realIniPokok: 850000, realIniBunga: 150000, realTotPokok: 8500000, realTotBunga: 1500000, saldo: 1500000, persen: "100%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 10, tanggal: "03/08/2026", pokok: 850000, jasa: 150000, denda: 0, total: 1000000, sisaSaldo: 1500000, noKwitansi: "KWT-100002" }] },
+            { no: 3, nama: "INDRAWATI", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "02/02/2026", realLaluPokok: 4254000, realLaluBunga: 750000, realIniPokok: 851000, realIniBunga: 150000, realTotPokok: 5105000, realTotBunga: 900000, saldo: 4895000, persen: "100%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 6, tanggal: "05/08/2026", pokok: 851000, jasa: 150000, denda: 0, total: 1001000, sisaSaldo: 4895000, noKwitansi: "KWT-100003" }] },
+            { no: 4, nama: "JUHERIAH,SE", desa: "WATANG PALAKKA", plafon: 2000000, tenor: "12", tglCair: "07/04/2026", realLaluPokok: 510000, realLaluBunga: 90000, realIniPokok: 170000, realIniBunga: 30000, realTotPokok: 680000, realTotBunga: 120000, saldo: 1320000, persen: "100%", angsuranKe: 5, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 4, tanggal: "02/08/2026", pokok: 170000, jasa: 30000, denda: 0, total: 200000, sisaSaldo: 1320000, noKwitansi: "KWT-100004" }] },
+            { no: 5, nama: "SUMARNI", desa: "WATANG PALAKKA", plafon: 10000000, tenor: "12", tglCair: "16/07/2026", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 835000, realIniBunga: 175000, realTotPokok: 835000, realTotBunga: 175000, saldo: 9165000, persen: "100%", angsuranKe: 2, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 1, tanggal: "16/08/2026", pokok: 835000, jasa: 175000, denda: 0, total: 1010000, sisaSaldo: 9165000, noKwitansi: "KWT-100005" }] },
+            { no: 6, nama: "SYATIR AL", desa: "WATANG PALAKKA", plafon: 15000000, tenor: "12", tglCair: "21/07/2026", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 1250000, realIniBunga: 263000, realTotPokok: 1250000, realTotBunga: 263000, saldo: 13750000, persen: "100%", angsuranKe: 2, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 1, tanggal: "16/08/2026", pokok: 1250000, jasa: 263000, denda: 0, total: 1513000, sisaSaldo: 13750000, noKwitansi: "KWT-100006" }] },
+            { no: 7, nama: "IRFANI VIRZAN PUTRI", desa: "BULU TEMPE", plafon: 8000000, tenor: "12", tglCair: "22/07/2019", realLaluPokok: 7085000, realLaluBunga: 1440000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 7085000, realTotBunga: 1440000, saldo: 915000, persen: "89%", angsuranKe: 12, noHp: "", persenJasa: 1.5, history: [] },
+            { no: 8, nama: "HINAYAH HAMID", desa: "MT.WALIE", plafon: 20830000, tenor: "24", tglCair: "01/01/2018", realLaluPokok: 0, realLaluBunga: 0, realIniPokok: 0, realIniBunga: 0, realTotPokok: 0, realTotBunga: 0, saldo: 20830000, persen: "0%", angsuranKe: 1, noHp: "085396838614", persenJasa: 0, history: [] },
+            { no: 9, nama: "TANTI WAHYUNI", desa: "BULU TEMPE", plafon: 10000000, tenor: "12", tglCair: "19/11/2019", realLaluPokok: 7870000, realLaluBunga: 1800000, realIniPokok: 300000, realIniBunga: 0, realTotPokok: 8170000, realTotBunga: 1800000, saldo: 1830000, persen: "82%", angsuranKe: 11, noHp: "", persenJasa: 1.5, history: [{ angsuranKe: 10, tanggal: "05/08/2026", pokok: 300000, jasa: 0, denda: 0, total: 300000, sisaSaldo: 1830000, noKwitansi: "KWT-100007" }] },
+            { no: 10, nama: "DRA NURJANNAH TINGGI", desa: "BULU TEMPE", plafon: 15000000, tenor: "12", tglCair: "15/03/2021", realLaluPokok: 8000000, realLaluBunga: 2700000, realIniPokok: 0, realIniBunga: 0, realTotPokok: 8000000, realTotBunga: 2700000, saldo: 7000000, persen: "53%", angsuranKe: 7, noHp: "", persenJasa: 1.5, history: [] }
         ];
 
         function getLPPData() {
@@ -1923,14 +1556,14 @@
         document.getElementById('heroLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const u = document.getElementById('heroUsername').value.trim().toLowerCase();
-            const p = document.getElementById('heroPassword').value.trim();
+            const p = document.getElementById('heroPassword').value;
             const err = document.getElementById('loginErrorMsg');
 
-            if ((u === 'upk_trb' && p === '454567') || (u === 'admin' && p === 'admin123') || (u === 'admin' && p === 'admin')) {
+            if ((u === 'upk_trb' && p === '454567') || (u === 'admin' && p === 'admin123')) {
                 localStorage.setItem('userRole', 'admin');
                 localStorage.setItem('userName', 'Admin UPK DAPM');
                 localStorage.setItem('isLoggedIn', 'true');
-            } else if ((u === 'teller' && p === 'teller123') || (u === 'teller' && p === 'teller')) {
+            } else if (u === 'teller' && p === 'teller123') {
                 localStorage.setItem('userRole', 'teller');
                 localStorage.setItem('userName', 'Teller Kasir');
                 localStorage.setItem('isLoggedIn', 'true');
@@ -1940,7 +1573,7 @@
             }
 
             err.classList.add('d-none');
-            logAktivitas('Sistem', 'Login sukses: ' + u);
+            logAktivitas('Sistem', 'Login sukses ' + u);
             checkAuthUI();
             showToast('success', 'Selamat datang di SISKEU UPK!');
         });
@@ -2068,221 +1701,470 @@
             document.getElementById('dashFinTingkatPengembalian').textContent = `${pLancar}% Pinjaman Lancar`;
         }
 
-        // Modul Upload & Kompresi Gambar KTP
-        function handleKTPUpload(event, previewImgId, hiddenInputId) {
-            const file = event.target.files[0];
-            if (!file) return;
+        function renderLaporanNeracaMicrofinance() {
+            const lppData = getLPPData();
+            const kasData = getKasData();
+            const cfg = getNeracaConfig();
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    let width = img.width;
-                    let height = img.height;
-                    const maxDimension = 800;
+            const selectTahun = document.getElementById('filterTahunNeraca');
+            const selectedYear = selectTahun ? selectTahun.value : '2026';
 
-                    if (width > height) {
-                        if (width > maxDimension) {
-                            height = Math.round((height * maxDimension) / width);
-                            width = maxDimension;
+            document.getElementById('displayTahunBuku').textContent = selectedYear;
+            document.getElementById('displayTahunJasa').textContent = selectedYear;
+            document.getElementById('displayTahunDenda').textContent = selectedYear;
+            document.getElementById('displayTahunBeban').textContent = selectedYear;
+
+            let totalJasaTahunBerjalan = 0;
+            let totalPiutangOutstanding = 0;
+
+            lppData.forEach(item => {
+                totalPiutangOutstanding += parseNum(item.saldo);
+                if (item.history && Array.isArray(item.history)) {
+                    item.history.forEach(h => {
+                        if (h.tanggal) {
+                            const d = parseTanggal(h.tanggal);
+                            if (String(d.getFullYear()) === selectedYear) {
+                                totalJasaTahunBerjalan += parseNum(h.jasa);
+                            }
                         }
-                    } else {
-                        if (height > maxDimension) {
-                            width = Math.round((width * maxDimension) / height);
-                            height = maxDimension;
-                        }
-                    }
+                    });
+                }
+            });
 
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-                    document.getElementById(hiddenInputId).value = compressedBase64;
-                    
-                    const previewEl = document.getElementById(previewImgId);
-                    previewEl.src = compressedBase64;
-                    previewEl.classList.remove('d-none');
-
-                    const emptyLabel = previewImgId === 'previewKtpPeminjam' ? 'labelKtpPeminjamEmpty' : 'labelKtpPasanganEmpty';
-                    const emptyEl = document.getElementById(emptyLabel);
-                    if (emptyEl) emptyEl.classList.add('d-none');
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function bukaModalTambahPeminjam() {
-            document.getElementById('editIndex').value = '';
-            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-person-plus-fill text-warning me-1"></i> Form Peminjam & Berkas Administrasi';
-            document.getElementById('formTambahPeminjam').reset();
-            document.getElementById('base64KtpPeminjam').value = '';
-            document.getElementById('base64KtpPasangan').value = '';
-            
-            document.getElementById('previewKtpPeminjam').classList.add('d-none');
-            document.getElementById('previewKtpPasangan').classList.add('d-none');
-            document.getElementById('labelKtpPeminjamEmpty').classList.remove('d-none');
-            document.getElementById('labelKtpPasanganEmpty').classList.remove('d-none');
-
-            document.getElementById('newPersenJasa').value = '1.5';
-            document.getElementById('newTenor').value = '12';
-            document.getElementById('newTglCair').value = new Date().toISOString().split('T')[0];
-            
-            hitungSimulasiPeminjamBaru();
-            bootstrap.Modal.getOrCreateInstance(document.getElementById('tambahPeminjamModal')).show();
-        }
-
-        function bukaModalEditPeminjam(idx) {
-            const allData = getLPPData();
-            const n = allData[idx];
-            if (!n) return;
-
-            document.getElementById('editIndex').value = idx;
-            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-pencil-square text-warning me-1"></i> Edit Data & Berkas Peminjam';
-            
-            document.getElementById('newNama').value = n.nama || '';
-            document.getElementById('newNik').value = n.nik || '';
-            document.getElementById('newDesa').value = n.desa || '';
-            document.getElementById('newAlamatDetail').value = n.alamatDetail || '';
-            document.getElementById('newPekerjaan').value = n.pekerjaan || '';
-            document.getElementById('newTujuan').value = n.tujuanPinjaman || 'Modal Usaha';
-            document.getElementById('newPlafon').value = formatRp(n.plafon);
-            document.getElementById('newTenor').value = n.tenor || '12';
-            document.getElementById('newPersenJasa').value = n.persenJasa !== undefined ? n.persenJasa : 1.5;
-            document.getElementById('newTglCair').value = convertToInputDate(n.tglCair);
-            document.getElementById('newNoHp').value = n.noHp || '';
-            document.getElementById('newNamaPasangan').value = n.namaPasangan || '';
-            document.getElementById('newNikPasangan').value = n.nikPasangan || '';
-            document.getElementById('newNoAkad').value = n.noAkad || '';
-
-            document.getElementById('base64KtpPeminjam').value = n.fotoKtp || '';
-            document.getElementById('base64KtpPasangan').value = n.fotoKtpPasangan || '';
-
-            if (n.fotoKtp) {
-                document.getElementById('previewKtpPeminjam').src = n.fotoKtp;
-                document.getElementById('previewKtpPeminjam').classList.remove('d-none');
-                document.getElementById('labelKtpPeminjamEmpty').classList.add('d-none');
-            } else {
-                document.getElementById('previewKtpPeminjam').classList.add('d-none');
-                document.getElementById('labelKtpPeminjamEmpty').classList.remove('d-none');
+            if (totalJasaTahunBerjalan === 0 && selectedYear === '2026') {
+                lppData.forEach(item => {
+                    totalJasaTahunBerjalan += parseNum(item.realIniBunga);
+                });
             }
 
-            if (n.fotoKtpPasangan) {
-                document.getElementById('previewKtpPasangan').src = n.fotoKtpPasangan;
-                document.getElementById('previewKtpPasangan').classList.remove('d-none');
-                document.getElementById('labelKtpPasanganEmpty').classList.add('d-none');
+            let totalDendaKasTahun = 0;
+            let totalBebanKasTahun = 0;
+            let saldoKasOperasional = 0;
+
+            kasData.forEach(item => {
+                const nom = parseNum(item.nominal);
+                const d = parseTanggal(item.tanggal);
+                const itemYear = String(d.getFullYear());
+
+                if (item.tipe === 'Masuk') saldoKasOperasional += nom;
+                else if (item.tipe === 'Keluar') saldoKasOperasional -= nom;
+
+                if (itemYear === selectedYear) {
+                    if (item.tipe === 'Masuk' && item.kategori === 'Denda') totalDendaKasTahun += nom;
+                    else if (item.tipe === 'Keluar') totalBebanKasTahun += nom;
+                }
+            });
+
+            const totalPendapatan = totalJasaTahunBerjalan + totalDendaKasTahun;
+            const surplusLabaBersih = totalPendapatan - totalBebanKasTahun;
+
+            document.getElementById('lrPendapatanJasa').textContent = 'Rp ' + formatRp(totalJasaTahunBerjalan);
+            document.getElementById('lrPendapatanDenda').textContent = 'Rp ' + formatRp(totalDendaKasTahun);
+            document.getElementById('lrTotalPendapatan').textContent = 'Rp ' + formatRp(totalPendapatan);
+            document.getElementById('lrBebanOperasional').textContent = 'Rp ' + formatRp(totalBebanKasTahun);
+            document.getElementById('lrTotalBeban').textContent = 'Rp ' + formatRp(totalBebanKasTahun);
+            document.getElementById('lrSurplusBersih').textContent = 'Rp ' + formatRp(surplusLabaBersih);
+            document.getElementById('lrBadgeSurplus').textContent = 'Rp ' + formatRp(surplusLabaBersih);
+
+            const modalAwal = parseNum(cfg.modalAwal) || 65000000;
+            const titipanAnggota = parseNum(cfg.titipan) || 0;
+            const ckpn = parseNum(cfg.ckpn) || 0;
+
+            const subtotalAktivaNyata = (saldoKasOperasional + totalPiutangOutstanding) - ckpn;
+            const subtotalPasivaNyata = titipanAnggota + modalAwal + surplusLabaBersih;
+
+            document.getElementById('neracaKas').textContent = 'Rp ' + formatRp(saldoKasOperasional);
+            document.getElementById('neracaPiutang').textContent = 'Rp ' + formatRp(totalPiutangOutstanding);
+            document.getElementById('neracaCKPN').textContent = `(Rp ${formatRp(ckpn)})`;
+            document.getElementById('neracaSubAktiva').textContent = 'Rp ' + formatRp(subtotalAktivaNyata);
+
+            document.getElementById('neracaTitipan').textContent = 'Rp ' + formatRp(titipanAnggota);
+            document.getElementById('neracaModalAwal').textContent = 'Rp ' + formatRp(modalAwal);
+            document.getElementById('neracaSurplus').textContent = 'Rp ' + formatRp(surplusLabaBersih);
+            document.getElementById('neracaSubPasiva').textContent = 'Rp ' + formatRp(subtotalPasivaNyata);
+
+            const rowRupasAktiva = document.getElementById('rowRupaRupaAktiva');
+            const rowRupasPasiva = document.getElementById('rowRupaRupaPasiva');
+            const badgeBalance = document.getElementById('neracaBalanceBadge');
+            const ketSelisih = document.getElementById('neracaKeteranganSelisih');
+
+            let finalTotalAktiva = subtotalAktivaNyata;
+            let finalTotalPasiva = subtotalPasivaNyata;
+
+            if (subtotalAktivaNyata < subtotalPasivaNyata) {
+                const selisih = subtotalPasivaNyata - subtotalAktivaNyata;
+                rowRupasAktiva.classList.remove('d-none');
+                rowRupasPasiva.classList.add('d-none');
+                document.getElementById('neracaRupaRupaAktiva').textContent = 'Rp ' + formatRp(selisih);
+                finalTotalAktiva += selisih;
+
+                badgeBalance.className = "badge bg-warning text-dark py-1 px-2 fw-semibold";
+                badgeBalance.innerHTML = `<i class="bi bi-exclamation-circle-fill me-1"></i> Rupa-rupa Aktiva (Rp ${formatRp(selisih)})`;
+                ketSelisih.innerHTML = `Terdapat penyesuaian selisih saldo di pos <b>Rupa-rupa Aktiva</b> sebesar <b>Rp ${formatRp(selisih)}</b>.`;
+            } else if (subtotalAktivaNyata > subtotalPasivaNyata) {
+                const selisih = subtotalAktivaNyata - subtotalPasivaNyata;
+                rowRupasPasiva.classList.remove('d-none');
+                rowRupasAktiva.classList.add('d-none');
+                document.getElementById('neracaRupaRupaPasiva').textContent = 'Rp ' + formatRp(selisih);
+                finalTotalPasiva += selisih;
+
+                badgeBalance.className = "badge bg-warning text-dark py-1 px-2 fw-semibold";
+                badgeBalance.innerHTML = `<i class="bi bi-exclamation-circle-fill me-1"></i> Rupa-rupa Pasiva (Rp ${formatRp(selisih)})`;
+                ketSelisih.innerHTML = `Terdapat penyesuaian selisih saldo di pos <b>Rupa-rupa Pasiva</b> sebesar <b>Rp ${formatRp(selisih)}</b>.`;
             } else {
-                document.getElementById('previewKtpPasangan').classList.add('d-none');
-                document.getElementById('labelKtpPasanganEmpty').classList.remove('d-none');
+                rowRupasAktiva.classList.add('d-none');
+                rowRupasPasiva.classList.add('d-none');
+                badgeBalance.className = "badge bg-success py-1 px-2 fw-semibold";
+                badgeBalance.innerHTML = `<i class="bi bi-check-circle-fill me-1"></i> Neraca Seimbang Sempurna`;
+                ketSelisih.textContent = "Aktiva nyata dan Pasiva nyata berada dalam kondisi seimbang sempurna (100% Balanced).";
             }
 
-            hitungSimulasiPeminjamBaru();
-            bootstrap.Modal.getOrCreateInstance(document.getElementById('tambahPeminjamModal')).show();
+            document.getElementById('neracaTotalAktiva').textContent = 'Rp ' + formatRp(finalTotalAktiva);
+            document.getElementById('neracaTotalPasiva').textContent = 'Rp ' + formatRp(finalTotalPasiva);
         }
 
-        document.getElementById('formTambahPeminjam').addEventListener('submit', function(e) {
+        function bukaModalSettingNeraca() {
+            const cfg = getNeracaConfig();
+            document.getElementById('cfgModalAwal').value = formatRp(cfg.modalAwal || 65000000);
+            document.getElementById('cfgTitipan').value = formatRp(cfg.titipan || 0);
+            document.getElementById('cfgCKPN').value = formatRp(cfg.ckpn || 0);
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalSettingNeraca')).show();
+        }
+
+        document.getElementById('formSettingNeraca').addEventListener('submit', function(e) {
             e.preventDefault();
-            const idxStr = document.getElementById('editIndex').value;
-            const allData = getLPPData();
+            const modalAwal = parseNum(document.getElementById('cfgModalAwal').value);
+            const titipan = parseNum(document.getElementById('cfgTitipan').value);
+            const ckpn = parseNum(document.getElementById('cfgCKPN').value);
 
-            const nama = document.getElementById('newNama').value.trim().toUpperCase();
-            const nik = document.getElementById('newNik').value.trim();
-            const desa = document.getElementById('newDesa').value.trim().toUpperCase();
-            const alamatDetail = document.getElementById('newAlamatDetail').value.trim();
-            const pekerjaan = document.getElementById('newPekerjaan').value.trim();
-            const tujuan = document.getElementById('newTujuan').value.trim();
-            const plafon = parseNum(document.getElementById('newPlafon').value);
-            const tenor = document.getElementById('newTenor').value;
-            const persenJasa = parseFloat(document.getElementById('newPersenJasa').value) || 1.5;
-            const tglCairRaw = document.getElementById('newTglCair').value;
-            const tglCairFormatted = formatTanggalID(new Date(tglCairRaw));
-            const noHp = document.getElementById('newNoHp').value.trim();
-            const namaPasangan = document.getElementById('newNamaPasangan').value.trim().toUpperCase();
-            const nikPasangan = document.getElementById('newNikPasangan').value.trim();
-            const fotoKtp = document.getElementById('base64KtpPeminjam').value;
-            const fotoKtpPasangan = document.getElementById('base64KtpPasangan').value;
-            
-            let noAkad = document.getElementById('newNoAkad').value.trim();
-            if (!noAkad) {
-                noAkad = `${Math.floor(100 + Math.random() * 900)}/UPK-DAPM-SYARIAH/TRB/${new Date().getMonth() + 1}/${new Date().getFullYear()}`;
-            }
-
-            if (idxStr !== '') {
-                const idx = parseInt(idxStr);
-                const item = allData[idx];
-                item.nama = nama;
-                item.nik = nik;
-                item.desa = desa;
-                item.alamatDetail = alamatDetail;
-                item.pekerjaan = pekerjaan;
-                item.tujuanPinjaman = tujuan;
-                item.plafon = plafon;
-                item.tenor = tenor;
-                item.persenJasa = persenJasa;
-                item.tglCair = tglCairFormatted;
-                item.noHp = noHp;
-                item.namaPasangan = namaPasangan;
-                item.nikPasangan = nikPasangan;
-                item.fotoKtp = fotoKtp;
-                item.fotoKtpPasangan = fotoKtpPasangan;
-                item.noAkad = noAkad;
-                item.saldo = Math.max(0, plafon - parseNum(item.realTotPokok));
-                logAktivitas('Peminjam', `Perbarui berkas peminjam: ${nama}`);
-            } else {
-                const newObj = {
-                    no: allData.length + 1,
-                    nama: nama,
-                    nik: nik,
-                    desa: desa,
-                    alamatDetail: alamatDetail,
-                    pekerjaan: pekerjaan,
-                    tujuanPinjaman: tujuan,
-                    plafon: plafon,
-                    tenor: tenor,
-                    tglCair: tglCairFormatted,
-                    realLaluPokok: 0, realLaluBunga: 0,
-                    realIniPokok: 0, realIniBunga: 0,
-                    realTotPokok: 0, realTotBunga: 0,
-                    saldo: plafon,
-                    persen: "100%",
-                    angsuranKe: 1,
-                    noHp: noHp,
-                    persenJasa: persenJasa,
-                    namaPasangan: namaPasangan,
-                    nikPasangan: nikPasangan,
-                    fotoKtp: fotoKtp,
-                    fotoKtpPasangan: fotoKtpPasangan,
-                    noAkad: noAkad,
-                    history: []
-                };
-                allData.push(newObj);
-                logAktivitas('Peminjam', `Tambah peminjam & berkas: ${nama}`);
-            }
-
-            saveLPPData(allData);
-            bootstrap.Modal.getInstance(document.getElementById('tambahPeminjamModal')).hide();
-            renderDataPeminjamTable();
-            updateDasborKeuangan();
+            saveNeracaConfig({ modalAwal: modalAwal, titipan: titipan, ckpn: ckpn });
+            bootstrap.Modal.getInstance(document.getElementById('modalSettingNeraca')).hide();
+            renderLaporanNeracaMicrofinance();
             backupKeGoogleSheet(true);
-            showToast('success', 'Data & berkas peminjam berhasil disimpan!');
+            logAktivitas('Neraca', `Ubah konfigurasi modal neraca: Rp ${formatRp(modalAwal)}`);
+            showToast('success', 'Pengaturan modal berhasil diperbarui!');
         });
 
-        function hitungSimulasiPeminjamBaru() {
-            const plafon = parseNum(document.getElementById('newPlafon').value);
-            const tenor = parseInt(document.getElementById('newTenor').value) || 12;
-            const valJasa = parseFloat(document.getElementById('newPersenJasa').value);
-            const persenJasa = isNaN(valJasa) ? 1.5 : valJasa;
+        let surplusTutupBuku = 0;
 
-            const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
-            const jasaPerBulan = bulatkan(plafon * (persenJasa / 100));
-            const totalPerBulan = pokokPerBulan + jasaPerBulan;
+        function bukaModalTutupBuku() {
+            const selectTahun = document.getElementById('filterTahunNeraca');
+            const selectedYear = selectTahun ? selectTahun.value : '2026';
+            const lppData = getLPPData();
+            const kasData = getKasData();
+            
+            let totalJasaTahun = 0;
+            lppData.forEach(item => {
+                if (item.history && Array.isArray(item.history)) {
+                    item.history.forEach(h => {
+                        if (h.tanggal) {
+                            const d = parseTanggal(h.tanggal);
+                            if (String(d.getFullYear()) === selectedYear) totalJasaTahun += parseNum(h.jasa);
+                        }
+                    });
+                }
+            });
 
-            document.getElementById('simulasiPokokPerBulan').textContent = 'Rp ' + formatRp(pokokPerBulan);
-            document.getElementById('simulasiJasaPerBulan').textContent = 'Rp ' + formatRp(jasaPerBulan);
-            document.getElementById('simulasiTotalPerBulan').textContent = 'Rp ' + formatRp(totalPerBulan);
+            if (totalJasaTahun === 0 && selectedYear === '2026') {
+                lppData.forEach(item => { totalJasaTahun += parseNum(item.realIniBunga); });
+            }
+
+            let totalDendaTahun = 0;
+            let totalBebanTahun = 0;
+
+            kasData.forEach(item => {
+                const nom = parseNum(item.nominal);
+                const d = parseTanggal(item.tanggal);
+                const itemYear = String(d.getFullYear());
+                if (itemYear === selectedYear) {
+                    if (item.tipe === 'Masuk' && item.kategori === 'Denda') totalDendaTahun += nom;
+                    else if (item.tipe === 'Keluar') totalBebanTahun += nom;
+                }
+            });
+            
+            surplusTutupBuku = Math.max(0, (totalJasaTahun + totalDendaTahun) - totalBebanTahun);
+
+            document.getElementById('tbSurplusBersih').textContent = 'Rp ' + formatRp(surplusTutupBuku);
+            document.getElementById('tbTahunBuku').value = selectedYear;
+            document.getElementById('tbAlokasiModal').value = 'Rp ' + formatRp(Math.round(surplusTutupBuku * 0.50));
+            document.getElementById('tbAlokasiSosial').value = 'Rp ' + formatRp(Math.round(surplusTutupBuku * 0.15));
+            document.getElementById('tbAlokasiJasa').value = 'Rp ' + formatRp(Math.round(surplusTutupBuku * 0.20));
+            document.getElementById('tbAlokasiKelembagaan').value = 'Rp ' + formatRp(Math.round(surplusTutupBuku * 0.15));
+
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalTutupBuku')).show();
+        }
+
+        function eksekusiTutupBuku() {
+            Swal.fire({
+                title: 'Konfirmasi Tutup Buku?',
+                text: '50% surplus otomatis dipupuk ke Modal Dana Bergulir tahun berikutnya.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#002b66',
+                confirmButtonText: 'Ya, Sahkan!'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    const cfg = getNeracaConfig();
+                    const tambahanModal = Math.round(surplusTutupBuku * 0.50);
+                    
+                    cfg.modalAwal = (parseNum(cfg.modalAwal) || 65000000) + tambahanModal;
+                    saveNeracaConfig(cfg);
+                    
+                    logAktivitas('Tutup Buku', `Sahkan Tutup Buku. Penambahan modal: Rp ${formatRp(tambahanModal)}`);
+                    bootstrap.Modal.getInstance(document.getElementById('modalTutupBuku')).hide();
+                    
+                    renderLaporanNeracaMicrofinance();
+                    backupKeGoogleSheet(true);
+                    showToast('success', 'Tutup buku berhasil disahkan!');
+                }
+            });
+        }
+
+        function cetakBeritaAcaraTutupBuku() {
+            if(!window.jspdf) { showToast('error', 'Modul PDF belum termuat.'); return; }
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4');
+            const thn = document.getElementById('tbTahunBuku').value;
+
+            try {
+                const domLogo = document.getElementById('mainAppLogo');
+                if (domLogo && domLogo.complete) {
+                    doc.addImage(domLogo, 'PNG', 20, 15, 18, 18);
+                }
+            } catch(e) {}
+
+            doc.setFont("helvetica", "bold"); doc.setFontSize(13);
+            doc.text("BERITA ACARA TUTUP BUKU TAHUNAN & LPJ", 105, 20, { align: "center" });
+            doc.text("UNIT PENGELOLA KEGIATAN (UPK) DAPM TR. BARAT", 105, 27, { align: "center" });
+            doc.setFontSize(10); doc.setFont("helvetica", "normal");
+            doc.text(`Tahun Buku: ${thn} | Tanggal: ${new Date().toLocaleDateString('id-ID')}`, 105, 33, { align: "center" });
+            doc.line(20, 36, 190, 36);
+
+            doc.setFontSize(11);
+            doc.text("Hasil Rekapitulasi Keuangan Tahun Berjalan:", 20, 45);
+            doc.setFont("helvetica", "bold");
+            doc.text(`Total Surplus Bersih Operasional : Rp ${formatRp(surplusTutupBuku)}`, 25, 53);
+
+            doc.setFont("helvetica", "normal");
+            doc.text("Rincian Alokasi Surplus Sesuai Ketetapan Kelembagaan:", 20, 65);
+            doc.text(`• Pemupukan Modal Bergulir (50%)      : Rp ${formatRp(Math.round(surplusTutupBuku * 0.50))}`, 25, 73);
+            doc.text(`• Bantuan Sosial & Pemberdayaan (15%) : Rp ${formatRp(Math.round(surplusTutupBuku * 0.15))}`, 25, 81);
+            doc.text(`• Jasa Pengurus, Pengawas & Staf (20%): Rp ${formatRp(Math.round(surplusTutupBuku * 0.20))}`, 25, 89);
+            doc.text(`• Pengembangan Kelembagaan (15%)     : Rp ${formatRp(Math.round(surplusTutupBuku * 0.15))}`, 25, 97);
+
+            doc.text("Watampone, " + new Date().toLocaleDateString('id-ID'), 130, 140);
+            doc.text("Kepala UPK DAPM", 130, 146);
+            doc.text("( H. Jadjdji Irfan )", 130, 170);
+
+            doc.text("Ketua BKPP", 30, 146);
+            doc.text("( Hamzah Najad )", 30, 170);
+
+            doc.save(`Berita_Acara_Tutup_Buku_${thn}.pdf`);
+            showToast('success', 'Berita Acara berhasil diunduh!');
+        }
+
+        function renderJatuhTempoTable() {
+            const allData = getLPPData();
+            const tbody = document.getElementById('jatuhTempoTableBody');
+            tbody.innerHTML = '';
+            const selectedDateInput = document.getElementById('filterTglJatuhTempo').value;
+            const formattedSelectedDate = selectedDateInput ? formatTanggalID(new Date(selectedDateInput)) : formatTanggalID(new Date());
+
+            let totalTodayPokok = 0, totalTodayJasa = 0;
+
+            allData.forEach((item, realIndex) => {
+                const plafon = parseNum(item.plafon), tenor = parseInt(item.tenor) || 12;
+                const parsedJasa = parseFloat(item.persenJasa);
+                const persenJasa = isNaN(parsedJasa) ? 1.5 : parsedJasa;
+
+                const bulanBerjalan = hitungBulanBerjalan(item.tglCair, tenor);
+
+                const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
+                const bungaPerBulan = bulatkan(plafon * (persenJasa / 100));
+                const targetPokokRT = bulanBerjalan >= tenor ? plafon : bulatkan(pokokPerBulan * bulanBerjalan);
+                const targetJasaRT = bulatkan(bungaPerBulan * bulanBerjalan);
+
+                const tunggakanP = Math.max(0, targetPokokRT - parseNum(item.realTotPokok));
+                const tunggakanJ = Math.max(0, targetJasaRT - parseNum(item.realTotBunga));
+
+                let bayarHariIniPokok = 0, bayarHariIniJasa = 0;
+                let statusBayarHariIni = '<span class="badge bg-light text-dark border py-1 px-2">Belum Setor</span>';
+
+                if (item.history && item.history.length > 0) {
+                    item.history.forEach(h => {
+                        if (formatTanggalTampil(h.tanggal) === formattedSelectedDate) { 
+                            bayarHariIniPokok += parseNum(h.pokok); 
+                            bayarHariIniJasa += parseNum(h.jasa); 
+                        }
+                    });
+                }
+
+                if (bayarHariIniPokok > 0 || bayarHariIniJasa > 0) {
+                    statusBayarHariIni = `<span class="badge py-1 px-2 text-white fw-semibold bg-dark"><i class="bi bi-check-circle me-1 text-warning"></i> Sudah</span>`;
+                } else if (parseNum(item.realIniPokok) > 0) {
+                    statusBayarHariIni = `<span class="badge bg-secondary text-white py-1 px-2 fw-semibold">Terisi LPP</span>`;
+                }
+                if (parseNum(item.saldo) <= 0) statusBayarHariIni = '<span class="badge bg-secondary text-white py-1 px-2 fw-semibold">LUNAS</span>';
+
+                totalTodayPokok += bayarHariIniPokok > 0 ? bayarHariIniPokok : parseNum(item.realIniPokok);
+                totalTodayJasa += bayarHariIniJasa > 0 ? bayarHariIniJasa : parseNum(item.realIniBunga);
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="text-center">${realIndex + 1}</td>
+                        <td class="fw-semibold text-dark">${item.nama}</td>
+                        <td>${item.desa}</td>
+                        <td class="text-center fw-bold">${bulanBerjalan}/${tenor}B</td>
+                        <td class="text-end fw-bold text-danger">Rp ${formatRp(tunggakanP)}</td>
+                        <td class="text-end fw-bold text-danger">Rp ${formatRp(tunggakanJ)}</td>
+                        <td class="text-center">${statusBayarHariIni}</td>
+                        <td class="text-center no-print">
+                            <button class="btn btn-sm py-1 px-2 fw-semibold text-white me-1 shadow-sm bg-dark border-0" onclick="langsungBayarDariLPP(${realIndex})"><i class="bi bi-cash"></i></button>
+                            <button class="btn btn-sm btn-outline-dark py-1 px-2 shadow-sm me-1" onclick="kirimPesanJatuhTempoWA('${item.nama.replace(/'/g, "\\'")}', '${item.desa.replace(/'/g, "\\'")}', '${item.noHp || ''}', ${item.saldo})"><i class="bi bi-whatsapp"></i></button>
+                            <button class="btn btn-sm btn-outline-danger py-1 px-2 shadow-sm" onclick="bukaModalSP(${realIndex})"><i class="bi bi-file-pdf"></i> SP</button>
+                        </td>
+                    </tr>`;
+            });
+
+            document.getElementById('todayRealPokokDisplay').textContent = 'Rp ' + formatRp(totalTodayPokok);
+            document.getElementById('todayRealJasaDisplay').textContent = 'Rp ' + formatRp(totalTodayJasa);
+        }
+
+        function kirimPesanJatuhTempoWA(nama, desa, noHp, saldo) {
+            let phone = (noHp || '').toString().replace(/[^0-9]/g, '');
+            if (!phone || phone.length < 9) {
+                Swal.fire({ title: 'Nomor WhatsApp Kosong', text: `Masukkan nomor WhatsApp untuk "${nama}":`, input: 'text', showCancelButton: true }).then((res) => {
+                    if (res.value) { phone = res.value.replace(/[^0-9]/g, ''); if (phone.startsWith('0')) phone = '62' + phone.substring(1); bukaWaUrl(phone, nama, desa, saldo); }
+                });
+                return;
+            }
+            if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+            bukaWaUrl(phone, nama, desa, saldo);
+        }
+
+        function bukaWaUrl(phone, nama, desa, saldo) {
+            const pesan = `📢 *PEMBERITAHUAN TAGIHAN ANGSURAN UPK DAPM TR. BARAT*\n-----------------------------------------\nKepada Yth. *${nama}* (${desa})\n\nSisa Saldo Pokok Anda: *Rp ${formatRp(saldo)}*\n\nMohon segera melakukan pembayaran angsuran ke kantor UPK DAPM Tanete Riattang Barat agar kewajiban tetap lancar. Terima kasih. 🙏`;
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
+        }
+
+        function bukaModalSP(idx) {
+            const n = getLPPData()[idx];
+            if (!n) return;
+            document.getElementById('spNasabahIdx').value = idx;
+            document.getElementById('spNamaNasabah').textContent = n.nama;
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCetakSP')).show();
+        }
+
+        function generateSPPDF(level) {
+            if (!window.jspdf) { 
+                showToast('error', 'Modul PDF belum termuat.'); 
+                return; 
+            }
+            
+            const idx = parseInt(document.getElementById('spNasabahIdx').value, 10);
+            const allData = getLPPData();
+            const n = allData[idx];
+
+            if (!n) {
+                showToast('error', 'Data nasabah tidak ditemukan.');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+            const primaryColor = [0, 43, 102];
+
+            try {
+                const domLogo = document.getElementById('mainAppLogo');
+                if (domLogo && domLogo.complete) {
+                    doc.addImage(domLogo, 'PNG', 20, 14, 20, 20);
+                }
+            } catch(e) {}
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(13);
+            doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+            doc.text("UNIT PENGELOLA KEGIATAN (UPK) DAPM", 112, 19, { align: "center" });
+            doc.setFontSize(11);
+            doc.text("KECAMATAN TANETE RIATTANG BARAT", 112, 25, { align: "center" });
+            
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(8.5);
+            doc.setTextColor(80, 80, 80);
+            doc.text("Sekretariat: Kec. Tanete Riattang Barat, Kab. Bone, Sulawesi Selatan", 112, 30, { align: "center" });
+            doc.text("Badan Hukum AHU-0003655.AH.01.07 TAHUN 2017", 112, 34, { align: "center" });
+            
+            doc.setDrawColor(0, 43, 102);
+            doc.setLineWidth(0.8);
+            doc.line(20, 37, 190, 37);
+            doc.setLineWidth(0.2);
+            doc.line(20, 38.5, 190, 38.5);
+
+            let spTitle = "SURAT PERINGATAN I (PERTAMA)";
+            let spTingkat = "Pertama";
+            let batasWaktu = "7 (tujuh) hari";
+
+            if (level === 2) {
+                spTitle = "SURAT PERINGATAN II (KEDUA)";
+                spTingkat = "Kedua";
+                batasWaktu = "3 (tiga) hari";
+            } else if (level === 3) {
+                spTitle = "SURAT PERINGATAN III / SURAT PANGGILAN";
+                spTingkat = "Ketiga / Terakhir";
+                batasWaktu = "2 x 24 jam";
+            }
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text(spTitle, 105, 48, { align: "center" });
+            doc.setLineWidth(0.4);
+            doc.line(65, 50, 145, 50);
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            doc.text(`Nomor     : 0${level}/SP-UPK.TRB/${new Date().getFullYear()}`, 20, 60);
+            doc.text(`Lampiran : -`, 20, 65);
+            doc.text(`Perihal   : Pemberitahuan & Penyelesaian Tunggakan Pinjaman`, 20, 70);
+
+            doc.text(`Kepada Yth.`, 20, 80);
+            doc.setFont("helvetica", "bold");
+            doc.text(`Bapak/Ibu ${n.nama}`, 20, 85);
+            doc.setFont("helvetica", "normal");
+            doc.text(`di - Tempat (Kelurahan ${n.desa})`, 20, 90);
+
+            let isiSurat = `Dengan hormat,\n\n` +
+                `Sehubungan dengan catatan administrasi pembukuan UPK DAPM Tanete Riattang Barat per tanggal ${new Date().toLocaleDateString('id-ID')}, kami menyampaikan bahwa Bapak/Ibu tercatat memiliki sisa kewajiban pinjaman dana bergulir yang telah jatuh tempo dengan rincian sebagai berikut:\n\n` +
+                `  •  Nama Peminjam        : ${n.nama}\n` +
+                `  •  Plafon Pinjaman         : Rp ${formatRp(n.plafon)}\n` +
+                `  •  Tenor Pinjaman           : ${n.tenor} Bulan\n` +
+                `  •  Sisa Saldo Pokok       : Rp ${formatRp(n.saldo)}\n\n` +
+                `Mengingat kewajiban tersebut belum diselesaikan sesuai jadwal angsuran yang disepakati, maka melalui Surat Peringatan ${spTingkat} ini kami meminta Bapak/Ibu segera datang ke Kantor UPK Tanete Riattang Barat dalam waktu selambat-lambatnya ${batasWaktu} sejak surat ini diterima.\n\n` +
+                `Demikian surat peringatan ini kami sampaikan untuk menjadi perhatian dan segera diselesaikan dengan penuh tanggung jawab. Atas kerja sama yang baik diucapkan terima kasih.`;
+
+            let paragraf = doc.splitTextToSize(isiSurat, 170);
+            doc.text(paragraf, 20, 102);
+
+            const tglSekarang = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            doc.text(`Watampone, ${tglSekarang}`, 130, 215);
+            doc.text(`Pengelola UPK DAPM TR. BARAT`, 130, 220);
+            doc.text(`Kepala UPK,`, 130, 225);
+
+            doc.setFont("helvetica", "bold");
+            doc.text(`( H. JADJDJI IRFAN )`, 130, 252);
+
+            const modalEl = document.getElementById('modalCetakSP');
+            const modalInst = bootstrap.Modal.getInstance(modalEl);
+            if (modalInst) modalInst.hide();
+            
+            logAktivitas('SP', `Mencetak SP-${level} untuk ${n.nama}`);
+            showToast('success', 'Surat Peringatan berhasil dibuat!');
+
+            try {
+                const pdfBlob = doc.output('bloburl');
+                window.open(pdfBlob, '_blank');
+            } catch(e) {}
+            doc.save(`SP_${level}_${n.nama.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`);
         }
 
         let currentPeminjamPage = 1;
@@ -2355,7 +2237,7 @@
                         <td class="text-center"><span class="badge ${isLunas ? 'bg-secondary' : 'bg-dark'}">${isLunas ? 'Lunas' : 'Aktif'}</span></td>
                         <td class="text-center">${item.noHp || '-'}</td>
                         <td class="text-center no-print">
-                            <button class="btn btn-sm py-1 px-2 text-white bg-primary border-0 me-1 shadow-sm" onclick="bukaModalCetakDokumen(${realIndex})" title="Cetak Dokumen Lengkap (Akad, BA, KWT, Kartu, KTP)"><i class="bi bi-file-earmark-pdf-fill"></i> Dokumen</button>
+                            <button class="btn btn-sm py-1 px-2 text-white bg-dark border-0 me-1 shadow-sm" onclick="bukaModalBuktiCairPeminjam(${realIndex})" title="Bukti Transfer & Kirim WA"><i class="bi bi-whatsapp"></i></button>
                             <button class="btn btn-sm btn-outline-dark py-1 px-2 me-1 shadow-sm" onclick="bukaModalEditPeminjam(${realIndex})"><i class="bi bi-pencil-square"></i></button>
                             ${delBtn}
                         </td>
@@ -2389,6 +2271,231 @@
             renderDataPeminjamTable();
         }
 
+        function langsungBayarDariLPP(idx) {
+            bukaView('panelBayarAngsuran');
+            pilihNasabahTeller(idx);
+        }
+
+        function hitungSimulasiPeminjamBaru() {
+            const plafon = parseNum(document.getElementById('newPlafon').value);
+            const tenor = parseInt(document.getElementById('newTenor').value) || 12;
+            
+            const valJasa = parseFloat(document.getElementById('newPersenJasa').value);
+            const persenJasa = isNaN(valJasa) ? 1.5 : valJasa;
+
+            const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
+            const jasaPerBulan = bulatkan(plafon * (persenJasa / 100));
+            const totalPerBulan = pokokPerBulan + jasaPerBulan;
+
+            document.getElementById('simulasiPokokPerBulan').textContent = 'Rp ' + formatRp(pokokPerBulan);
+            document.getElementById('simulasiJasaPerBulan').textContent = 'Rp ' + formatRp(jasaPerBulan);
+            document.getElementById('simulasiTotalPerBulan').textContent = 'Rp ' + formatRp(totalPerBulan);
+        }
+
+        function bukaModalBuktiCairPeminjam(idx) {
+            const n = getLPPData()[idx];
+            if (!n) return;
+
+            const plafon = parseNum(n.plafon);
+            const tenor = parseInt(n.tenor) || 12;
+            
+            const valJasa = parseFloat(n.persenJasa);
+            const persenJasa = isNaN(valJasa) ? 1.5 : valJasa;
+
+            const pokokBln = bulatkan(Math.ceil(plafon / tenor));
+            const jasaBln = bulatkan(plafon * (persenJasa / 100));
+            const totalBln = pokokBln + jasaBln;
+
+            Swal.fire({
+                title: '<span class="fs-6 fw-bold text-dark"><i class="bi bi-patch-check-fill text-primary me-2"></i> BUKTI PENCAIRAN</span>',
+                html: `
+                    <div class="text-start small p-3 card-light-custom rounded-3 border">
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Nama:</span>
+                            <strong class="text-dark">${n.nama}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Kelurahan:</span>
+                            <span class="fw-semibold text-dark">${n.desa}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Plafon Pinjaman:</span>
+                            <strong class="text-dark">Rp ${formatRp(plafon)}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+                            <span class="text-muted">Tenor & Jasa:</span>
+                            <span class="fw-semibold text-dark">${tenor} Bulan (${persenJasa}% / bln)</span>
+                        </div>
+                        <div class="bg-white p-2 rounded-2 border mt-2">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Pokok / Bln:</span>
+                                <strong class="text-dark">Rp ${formatRp(pokokBln)}</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Jasa / Bln:</span>
+                                <strong class="text-dark">Rp ${formatRp(jasaBln)}</strong>
+                            </div>
+                            <div class="d-flex justify-content-between border-top pt-1 text-primary fw-bold">
+                                <span>Total Setoran:</span>
+                                <span>Rp ${formatRp(totalBln)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: '<i class="bi bi-whatsapp me-1"></i> Kirim WA',
+                confirmButtonColor: '#25D366',
+                cancelButtonText: 'Tutup',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    kirimBuktiCairWA(idx);
+                }
+            });
+        }
+
+        function kirimBuktiCairWA(idx) {
+            const allData = getLPPData();
+            const n = allData[idx];
+            if (!n) return;
+
+            let phone = (n.noHp || '').toString().replace(/[^0-9]/g, '');
+            if (!phone || phone.length < 9) {
+                Swal.fire({
+                    title: 'Nomor WhatsApp Belum Ada',
+                    text: `Masukkan nomor WhatsApp untuk ${n.nama}:`,
+                    input: 'text',
+                    inputValue: n.noHp || '',
+                    showCancelButton: true,
+                    confirmButtonText: 'Kirim WA',
+                    cancelButtonText: 'Batal'
+                }).then((res) => {
+                    if (res.value) {
+                        phone = res.value.replace(/[^0-9]/g, '');
+                        if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+                        n.noHp = res.value.trim();
+                        saveLPPData(allData);
+                        renderDataPeminjamTable();
+                        prosesKirimBuktiCairWA(phone, n);
+                    }
+                });
+                return;
+            }
+
+            if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+            prosesKirimBuktiCairWA(phone, n);
+        }
+
+        function prosesKirimBuktiCairWA(phone, n) {
+            const plafon = parseNum(n.plafon);
+            const tenor = parseInt(n.tenor) || 12;
+            
+            const valJasa = parseFloat(n.persenJasa);
+            const persenJasa = isNaN(valJasa) ? 1.5 : valJasa;
+
+            const pokokBln = bulatkan(Math.ceil(plafon / tenor));
+            const jasaBln = bulatkan(plafon * (persenJasa / 100));
+            const totalBln = pokokBln + jasaBln;
+
+            const pesan = `✅ *BUKTI PENCAIRAN PINJAMAN UPK DAPM TR. BARAT*\n-----------------------------------------\nYth. *${n.nama}* (${n.desa})\n\nPinjaman Anda telah dicairkan dengan rincian:\n\n• Plafon: Rp ${formatRp(plafon)}\n• Tenor: ${tenor} Bulan (${persenJasa}%/bln)\n• Tgl Cair: ${formatTanggalTampil(n.tglCair)}\n\n*Rincian Setoran per Bulan:*\n• Pokok: Rp ${formatRp(pokokBln)}\n• Jasa: Rp ${formatRp(jasaBln)}\n• *Total Setoran*: *Rp ${formatRp(totalBln)}*\n-----------------------------------------\nUPK DAPM Tanete Riattang Barat 🙏`;
+
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
+            logAktivitas('Peminjam', `Kirim Bukti Cair WA ke ${n.nama}`);
+            showToast('success', 'Bukti pencairan dikirim via WA!');
+        }
+
+        function bukaModalTambahPeminjam() {
+            document.getElementById('editIndex').value = '';
+            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-person-plus-fill text-warning me-1"></i> Tambah Peminjam';
+            document.getElementById('formTambahPeminjam').reset();
+            document.getElementById('newPersenJasa').value = '1.5';
+            document.getElementById('newTenor').value = '12';
+            document.getElementById('newTglCair').value = new Date().toISOString().split('T')[0];
+            hitungSimulasiPeminjamBaru();
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('tambahPeminjamModal')).show();
+        }
+
+        function bukaModalEditPeminjam(idx) {
+            const allData = getLPPData();
+            const n = allData[idx];
+            if (!n) return;
+
+            document.getElementById('editIndex').value = idx;
+            document.getElementById('modalPeminjamTitle').innerHTML = '<i class="bi bi-pencil-square text-warning me-1"></i> Edit Peminjam';
+            document.getElementById('newNama').value = n.nama;
+            document.getElementById('newDesa').value = n.desa;
+            document.getElementById('newPlafon').value = formatRp(n.plafon);
+            document.getElementById('newTenor').value = n.tenor || '12';
+            
+            const valJasa = parseFloat(n.persenJasa);
+            document.getElementById('newPersenJasa').value = isNaN(valJasa) ? 1.5 : valJasa;
+
+            document.getElementById('newTglCair').value = convertToInputDate(n.tglCair);
+            document.getElementById('newNoHp').value = n.noHp || '';
+            hitungSimulasiPeminjamBaru();
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('tambahPeminjamModal')).show();
+        }
+
+        document.getElementById('formTambahPeminjam').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const idxStr = document.getElementById('editIndex').value;
+            const allData = getLPPData();
+
+            const nama = document.getElementById('newNama').value.trim().toUpperCase();
+            const desa = document.getElementById('newDesa').value.trim().toUpperCase();
+            const plafon = parseNum(document.getElementById('newPlafon').value);
+            const tenor = document.getElementById('newTenor').value;
+            
+            const rawJasa = document.getElementById('newPersenJasa').value;
+            const parsedJasa = parseFloat(rawJasa);
+            const persenJasa = isNaN(parsedJasa) ? 1.5 : parsedJasa;
+
+            const tglCairRaw = document.getElementById('newTglCair').value;
+            const tglCairFormatted = formatTanggalID(new Date(tglCairRaw));
+            const noHp = document.getElementById('newNoHp').value.trim();
+
+            if (idxStr !== '') {
+                const idx = parseInt(idxStr);
+                const existing = allData[idx];
+                existing.nama = nama;
+                existing.desa = desa;
+                existing.plafon = plafon;
+                existing.tenor = tenor;
+                existing.persenJasa = persenJasa;
+                existing.tglCair = tglCairFormatted;
+                existing.noHp = noHp;
+                existing.saldo = Math.max(0, plafon - parseNum(existing.realTotPokok));
+                logAktivitas('Peminjam', `Ubah data ${nama}`);
+            } else {
+                const newObj = {
+                    no: allData.length + 1,
+                    nama: nama,
+                    desa: desa,
+                    plafon: plafon,
+                    tenor: tenor,
+                    tglCair: tglCairFormatted,
+                    realLaluPokok: 0, realLaluBunga: 0,
+                    realIniPokok: 0, realIniBunga: 0,
+                    realTotPokok: 0, realTotBunga: 0,
+                    saldo: plafon,
+                    persen: persenJasa === 0 ? "0%" : "100%",
+                    angsuranKe: 1,
+                    noHp: noHp,
+                    persenJasa: persenJasa,
+                    history: []
+                };
+                allData.push(newObj);
+                logAktivitas('Peminjam', `Tambah baru ${nama}`);
+            }
+
+            saveLPPData(allData);
+            bootstrap.Modal.getInstance(document.getElementById('tambahPeminjamModal')).hide();
+            renderDataPeminjamTable();
+            updateDasborKeuangan();
+            backupKeGoogleSheet(true);
+            showToast('success', 'Data peminjam disimpan!');
+        });
+
         function hapusPeminjam(idx) {
             const allData = getLPPData();
             const n = allData[idx];
@@ -2414,130 +2521,230 @@
             });
         }
 
-        // Render Dokumen Administrasi Lengkap Kantor UPK
-        function bukaModalCetakDokumen(idx) {
+        function bukaModalTambahKas() {
+            document.getElementById('modalKasTitle').innerHTML = '<i class="bi bi-journal-plus text-warning me-1"></i> Form Mutasi Kas';
+            document.getElementById('editKasId').value = '';
+            document.getElementById('transaksiForm').reset();
+            document.getElementById('tTanggal').value = new Date().toISOString().split('T')[0];
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('transaksiModal')).show();
+        }
+
+        document.getElementById('transaksiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const kasData = getKasData();
+            const tgl = document.getElementById('tTanggal').value;
+            const nama = document.getElementById('tNama').value.trim();
+            const kel = document.getElementById('tKelurahan').value.trim();
+            const tipe = document.getElementById('tTipe').value;
+            const kat = document.getElementById('tKategori').value;
+            const nominal = parseNum(document.getElementById('tNominal').value);
+            const kwitansi = document.getElementById('tKwitansi').value.trim() || 'KWT-KAS-' + Math.floor(1000 + Math.random() * 9000);
+
+            if (nominal <= 0) { showToast('warning', 'Masukkan nominal valid!'); return; }
+
+            kasData.unshift({
+                id: Date.now(),
+                tanggal: tgl,
+                nama: nama,
+                kelurahan: kel,
+                kategori: kat,
+                tipe: tipe,
+                nominal: nominal,
+                noKwitansi: kwitansi
+            });
+
+            localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+            bootstrap.Modal.getInstance(document.getElementById('transaksiModal')).hide();
+            renderKas();
+            updateDasborKeuangan();
+            backupKeGoogleSheet(true);
+            logAktivitas('Kas', `Mutasi kas (${tipe}): ${nama} - Rp ${formatRp(nominal)}`);
+            showToast('success', 'Transaksi kas disimpan!');
+        });
+
+        function hapusKas(id) {
+            let kasData = getKasData();
+            const target = kasData.find(k => k.id === id);
+            if (!target) return;
+
+            Swal.fire({
+                title: 'Hapus Kas?',
+                text: `Hapus "${target.nama}"?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#002b66',
+                confirmButtonText: 'Hapus'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    kasData = kasData.filter(k => k.id !== id);
+                    localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+                    renderKas();
+                    updateDasborKeuangan();
+                    backupKeGoogleSheet(true);
+                    logAktivitas('Kas', `Hapus mutasi kas ID ${id}`);
+                    showToast('success', 'Mutasi dihapus!');
+                }
+            });
+        }
+
+        function hapusRiwayatPembayaran(nasabahIdx, historyIdx) {
             const allData = getLPPData();
-            const n = allData[idx];
-            if (!n) return;
+            const n = allData[nasabahIdx];
+            if (!n || !n.history || !n.history[historyIdx]) return;
 
-            const plafon = parseNum(n.plafon);
-            const tenor = parseInt(n.tenor) || 12;
-            const persenJasa = parseFloat(n.persenJasa) || 1.5;
+            const h = n.history[historyIdx];
+            Swal.fire({
+                title: 'Hapus Pembayaran?',
+                text: `Hapus angsuran ke-${h.angsuranKe} senilai Rp ${formatRp(h.total)}? Data LPP dan Buku Kas otomatis disesuaikan.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#002b66',
+                confirmButtonText: 'Ya, Hapus'
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    const plafon = parseNum(n.plafon);
+                    const tenor = parseInt(n.tenor) || 12;
+
+                    n.realIniPokok = Math.max(0, (parseNum(n.realIniPokok) || 0) - parseNum(h.pokok));
+                    n.realIniBunga = Math.max(0, (parseNum(n.realIniBunga) || 0) - parseNum(h.jasa));
+
+                    n.realTotPokok = Math.max(0, (parseNum(n.realTotPokok) || 0) - parseNum(h.pokok));
+                    n.realTotBunga = Math.max(0, (parseNum(n.realTotBunga) || 0) - parseNum(h.jasa));
+
+                    n.realLaluPokok = Math.max(0, n.realTotPokok - n.realIniPokok);
+                    n.realLaluBunga = Math.max(0, n.realTotBunga - n.realIniBunga);
+                    n.saldo = Math.max(0, plafon - n.realTotPokok);
+
+                    if (h.noKwitansi) {
+                        let kasData = getKasData();
+                        kasData = kasData.filter(k => k.noKwitansi !== h.noKwitansi && k.noKwitansi !== (h.noKwitansi + '-D'));
+                        localStorage.setItem('upk_kas_data', JSON.stringify(kasData));
+                    }
+
+                    n.history.splice(historyIdx, 1);
+
+                    const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
+                    let nextAngs = Math.round(n.realTotPokok / (pokokPerBulan || 1)) + 1;
+                    if (nextAngs > tenor) nextAngs = tenor;
+                    if (nextAngs < 1) nextAngs = 1;
+                    n.angsuranKe = nextAngs;
+
+                    saveLPPData(allData);
+                    pilihNasabahTeller(nasabahIdx);
+                    renderLPPTable();
+                    renderKas();
+                    renderJatuhTempoTable();
+                    renderDataPeminjamTable();
+                    renderLaporanNeracaMicrofinance();
+                    updateDasborKeuangan();
+                    backupKeGoogleSheet(true);
+
+                    logAktivitas('Kasir', `Batal angsuran ke-${h.angsuranKe} ${n.nama} senilai Rp ${formatRp(h.total)}`);
+                    showToast('success', 'Riwayat pembayaran dibatalkan!');
+                }
+            });
+        }
+
+        function kirimBuktiWA() {
+            if (!lastPaymentReceipt) { showToast('error', 'Belum ada bukti setoran terakhir.'); return; }
+            let phone = (lastPaymentReceipt.noHp || '').toString().replace(/[^0-9]/g, '');
+            if (!phone) {
+                Swal.fire({ title: 'Nomor WhatsApp Kosong', text: 'Masukkan nomor WhatsApp nasabah:', input: 'text', showCancelButton: true }).then((res) => {
+                    if (res.value) { phone = res.value.replace(/[^0-9]/g, ''); if (phone.startsWith('0')) phone = '62' + phone.substring(1); kirimBuktiWAUrl(phone); }
+                });
+                return;
+            }
+            if (phone.startsWith('0')) phone = '62' + phone.substring(1);
+            kirimBuktiWAUrl(phone);
+        }
+
+        function kirimBuktiWAUrl(phone) {
+            const r = lastPaymentReceipt;
+            const pesan = `✅ *BUKTI SETORAN RESMI UPK DAPM TR. BARAT*\n-----------------------------------------\nNo Kwitansi : *${r.noKwt}*\nTanggal     : ${r.tanggal}\nNama        : *${r.nama}* (${r.desa})\n\nSetoran Pokok (Ke-${r.angsuranKe}): Rp ${formatRp(r.pokok)}\nSetoran Jasa : Rp ${formatRp(r.jasa)}${r.denda > 0 ? '\nDenda        : Rp ' + formatRp(r.denda) : ''}\n-----------------------------------------\n*TOTAL SETORAN : Rp ${formatRp(r.total)}*\n-----------------------------------------\nSisa Saldo Pokok : *Rp ${formatRp(r.sisaSaldo)}*\nSisa Jasa        : ${r.sisaKali}x (Rp ${formatRp(r.sisaJasa)})\n\nTerima kasih atas pembayarannya. 🙏`;
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(pesan)}`, '_blank');
+        }
+
+        function downloadCurrentDataCSV() {
+            const data = getLPPData();
+            if (data.length === 0) { showToast('warning', 'Tidak ada data.'); return; }
+            let csv = Papa.unparse(data.map(d => ({
+                "No": d.no, "Nama Peminjam": d.nama, "Kelurahan": d.desa, "Plafon": d.plafon, "Tenor": d.tenor,
+                "Tgl Cair": d.tglCair, "Real Pokok": d.realTotPokok, "Real Jasa": d.realTotBunga, "Sisa Saldo": d.saldo, "No HP": d.noHp
+            })));
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", `Data_Peminjam_UPK_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+            showToast('success', 'CSV diunduh!');
+        }
+
+        function handleLPPFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    if (results.data && results.data.length > 0) {
+                        const imported = results.data.map((row, idx) => ({
+                            no: idx + 1,
+                            nama: (row["Nama Peminjam"] || row["nama"] || "TANPA NAMA").toUpperCase(),
+                            desa: (row["Kelurahan"] || row["desa"] || "TANETE RIATTANG BARAT").toUpperCase(),
+                            plafon: parseNum(row["Plafon"] || row["plafon"]),
+                            tenor: String(row["Tenor"] || row["tenor"] || "12"),
+                            tglCair: row["Tgl Cair"] || row["tglCair"] || formatTanggalID(new Date()),
+                            realLaluPokok: parseNum(row["Real Pokok"] || row["realTotPokok"]),
+                            realLaluBunga: parseNum(row["Real Jasa"] || row["realTotBunga"]),
+                            realIniPokok: 0, realIniBunga: 0,
+                            realTotPokok: parseNum(row["Real Pokok"] || row["realTotPokok"]),
+                            realTotBunga: parseNum(row["Real Jasa"] || row["realTotBunga"]),
+                            saldo: parseNum(row["Sisa Saldo"] || row["saldo"]) || Math.max(0, parseNum(row["Plafon"] || row["plafon"]) - parseNum(row["Real Pokok"] || row["realTotPokok"])),
+                            persen: "100%", angsuranKe: 1, noHp: row["No HP"] || row["noHp"] || "", persenJasa: 1.5, history: []
+                        }));
+                        saveLPPData(imported);
+                        renderLPPTable(); renderDataPeminjamTable(); updateDasborKeuangan(); backupKeGoogleSheet(true);
+                        showToast('success', `Berhasil impor ${imported.length} data!`);
+                    }
+                }
+            });
+        }
+
+        function hitungKalkulator() {
+            const plafon = parseNum(document.getElementById('calcPlafon').value);
+            const tenor = parseInt(document.getElementById('calcTenor').value) || 12;
+            const valJasa = parseFloat(document.getElementById('calcJasa').value);
+            const jasa = isNaN(valJasa) ? 1.5 : valJasa;
+
+            if (plafon <= 0) { showToast('warning', 'Masukkan plafon pinjaman valid!'); return; }
+
+            const tbody = document.getElementById('calcTableBody');
+            tbody.innerHTML = '';
+
             const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
-            const jasaPerBulan = bulatkan(plafon * (persenJasa / 100));
-            const totalPerBulan = pokokPerBulan + jasaPerBulan;
-            const totalJasa = jasaPerBulan * tenor;
-            const totalBayar = plafon + totalJasa;
-
-            const dCair = parseTanggal(n.tglCair);
-            const namaHari = dCair.toLocaleDateString('id-ID', { weekday: 'long' });
-            const tglLengkap = dCair.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-
-            document.getElementById('docNasabahNamaSub').textContent = `${n.nama} - Plafon Rp ${formatRp(plafon)} (${tenor} Bln)`;
-
-            // 1. Akad Syariah[cite: 2]
-            document.getElementById('docAkadNomorSurat').textContent = `Nomor: ${n.noAkad || '.../UPK-DAPM-SYARIAH/TRB/2026'}`;
-            document.getElementById('docAkadHari').textContent = namaHari;
-            document.getElementById('docAkadTgl').textContent = tglLengkap;
-            document.getElementById('docAkadNama').textContent = n.nama;
-            document.getElementById('docAkadNik').textContent = n.nik || '-';
-            document.getElementById('docAkadAlamat').textContent = n.alamatDetail || 'Tanete Riattang Barat';
-            document.getElementById('docAkadDesa').textContent = n.desa;
-            document.getElementById('docAkadPekerjaan').textContent = n.pekerjaan || 'Wiraswasta';
-            document.getElementById('docAkadPasangan').textContent = n.namaPasangan || '....................';
-            document.getElementById('docAkadNikPasangan').textContent = n.nikPasangan || '....................';
-            document.getElementById('docAkadPlafon').textContent = formatRp(plafon);
-            document.getElementById('docAkadPersenJasa').textContent = persenJasa;
-            document.getElementById('docAkadTotalJasa').textContent = formatRp(totalJasa);
-            document.getElementById('docAkadTotalBayar').textContent = formatRp(totalBayar);
-            document.getElementById('docAkadTenor').textContent = tenor;
-            document.getElementById('docAkadAngsBulanan').textContent = formatRp(totalPerBulan);
-            document.getElementById('docSignPeminjam').textContent = n.nama;
-            document.getElementById('docSignPasangan').textContent = n.namaPasangan || '.....................................';
-
-            // 2. Berita Acara
-            document.getElementById('docBaHari').textContent = namaHari;
-            document.getElementById('docBaTgl').textContent = tglLengkap;
-            document.getElementById('docBaNama').textContent = n.nama;
-            document.getElementById('docBaNik').textContent = n.nik || '-';
-            document.getElementById('docBaDesa').textContent = n.desa;
-            document.getElementById('docBaPlafon').textContent = formatRp(plafon);
-            document.getElementById('docBaTenor').textContent = tenor;
-            document.getElementById('docBaTujuan').textContent = n.tujuanPinjaman || 'Penambahan Modal Usaha';
-            document.getElementById('docBaSignPeminjam').textContent = n.nama;
-
-            // 3. Kwitansi Pencairan
-            document.getElementById('kwtCairNo').textContent = `KWT-CAIR-${n.no || '001'}`;
-            document.getElementById('kwtCairTgl').textContent = tglLengkap;
-            document.getElementById('kwtCairNama').textContent = n.nama;
-            document.getElementById('kwtCairNik').textContent = n.nik || '-';
-            document.getElementById('kwtCairDesa').textContent = n.desa;
-            document.getElementById('kwtCairNominal').textContent = 'Rp ' + formatRp(plafon);
-            document.getElementById('kwtCairUntuk').textContent = `Pencairan Pembiayaan Modal Usaha UPK DAPM (${tenor} Bulan)`;
-            document.getElementById('kwtCairSignP').textContent = n.nama;
-
-            // 4. Kartu Kontrol Angsuran
-            document.getElementById('kaNama').textContent = n.nama;
-            document.getElementById('kaDesa').textContent = n.desa;
-            document.getElementById('kaPlafon').textContent = 'Rp ' + formatRp(plafon);
-            document.getElementById('kaTenor').textContent = `${tenor} Bulan`;
-            document.getElementById('kaJasa').textContent = `${persenJasa}% (Rp ${formatRp(jasaPerBulan)})`;
-            document.getElementById('kaTglCair').textContent = formatTanggalTampil(n.tglCair);
-
-            const tbodySchedule = document.getElementById('kaTableScheduleBody');
-            tbodySchedule.innerHTML = '';
-            let sisaP = plafon;
+            const jasaPerBulan = bulatkan(plafon * (jasa / 100));
+            let sisaPokok = plafon;
 
             for (let i = 1; i <= tenor; i++) {
-                let pBln = i === tenor ? sisaP : pokokPerBulan;
-                sisaP = Math.max(0, sisaP - pBln);
-
-                let tglJatuhTempo = new Date(dCair);
-                tglJatuhTempo.setMonth(tglJatuhTempo.getMonth() + i);
-
-                tbodySchedule.innerHTML += `
+                let p = i === tenor ? sisaPokok : pokokPerBulan;
+                sisaPokok = Math.max(0, sisaPokok - p);
+                tbody.innerHTML += `
                     <tr>
-                        <td class="fw-bold">${i}</td>
-                        <td>${formatTanggalID(tglJatuhTempo)}</td>
-                        <td class="text-end">Rp ${formatRp(pBln)}</td>
+                        <td>Bulan ${i}</td>
+                        <td class="text-end">Rp ${formatRp(p)}</td>
                         <td class="text-end">Rp ${formatRp(jasaPerBulan)}</td>
-                        <td class="text-end fw-bold">Rp ${formatRp(pBln + jasaPerBulan)}</td>
-                        <td class="text-end text-primary">Rp ${formatRp(sisaP)}</td>
-                        <td style="min-width: 80px;"></td>
-                        <td style="min-width: 80px;"></td>
+                        <td class="text-end fw-bold">Rp ${formatRp(p + jasaPerBulan)}</td>
+                        <td class="text-end text-primary fw-semibold">Rp ${formatRp(sisaPokok)}</td>
                     </tr>`;
             }
-
-            // 5. Lampiran KTP
-            const previewKtpP = document.getElementById('docPreviewKtpPeminjam');
-            const previewKtpPas = document.getElementById('docPreviewKtpPasangan');
-            
-            if (n.fotoKtp) {
-                previewKtpP.src = n.fotoKtp;
-                previewKtpP.classList.remove('d-none');
-                document.getElementById('docLabelKtpPeminjam').textContent = `${n.nama} (NIK: ${n.nik || '-'})`;
-            } else {
-                previewKtpP.src = 'https://via.placeholder.com/400x250?text=KTP+Belum+Diupload';
-                document.getElementById('docLabelKtpPeminjam').textContent = 'Berkas KTP belum dilampirkan';
-            }
-
-            if (n.fotoKtpPasangan) {
-                previewKtpPas.src = n.fotoKtpPasangan;
-                previewKtpPas.classList.remove('d-none');
-                document.getElementById('docLabelKtpPasangan').textContent = `${n.namaPasangan || 'Pasangan'} (NIK: ${n.nikPasangan || '-'})`;
-            } else {
-                previewKtpPas.src = 'https://via.placeholder.com/400x250?text=KTP+Pasangan+Belum+Diupload';
-                document.getElementById('docLabelKtpPasangan').textContent = 'KTP Pasangan/Penjamin tidak dilampirkan';
-            }
-
-            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDokumenAdministrasi')).show();
         }
 
-        function cetakAreaDokumenTerpilih() {
-            window.print();
+        function clearLogs() {
+            localStorage.removeItem('upk_logs');
+            renderLogTable();
+            showToast('info', 'Log audit dibersihkan.');
         }
 
-        // Modul Kasir & Teller
         let currentActiveNasabahIdx = null;
         let lastPaymentReceipt = null;
 
@@ -2810,86 +3017,212 @@
             showToast('success', 'Pembayaran berhasil disimpan!');
         });
 
-        function downloadCurrentDataCSV() {
-            const data = getLPPData();
-            if (data.length === 0) { showToast('warning', 'Tidak ada data.'); return; }
-            let csv = Papa.unparse(data.map(d => ({
-                "No": d.no, "Nama Peminjam": d.nama, "NIK": d.nik || '', "Kelurahan": d.desa, "Plafon": d.plafon, "Tenor": d.tenor,
-                "Tgl Cair": d.tglCair, "Real Pokok": d.realTotPokok, "Real Jasa": d.realTotBunga, "Sisa Saldo": d.saldo, "No HP": d.noHp
-            })));
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.setAttribute("download", `Data_Peminjam_UPK_${new Date().toISOString().split('T')[0]}.csv`);
-            document.body.appendChild(link); link.click(); document.body.removeChild(link);
-            showToast('success', 'CSV diunduh!');
-        }
+        function renderLPPTable(filterData = null) {
+            const allData = getLPPData();
+            const data = filterData !== null ? filterData : allData;
+            const tbody = document.getElementById('lppTableBody'), tfoot = document.getElementById('lppTableFoot');
+            tbody.innerHTML = ''; 
 
-        function handleLPPFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            Papa.parse(file, {
-                header: true,
-                skipEmptyLines: true,
-                complete: function(results) {
-                    if (results.data && results.data.length > 0) {
-                        const imported = results.data.map((row, idx) => ({
-                            no: idx + 1,
-                            nama: (row["Nama Peminjam"] || row["nama"] || "TANPA NAMA").toUpperCase(),
-                            nik: row["NIK"] || row["nik"] || "",
-                            desa: (row["Kelurahan"] || row["desa"] || "TANETE RIATTANG BARAT").toUpperCase(),
-                            plafon: parseNum(row["Plafon"] || row["plafon"]),
-                            tenor: String(row["Tenor"] || row["tenor"] || "12"),
-                            tglCair: row["Tgl Cair"] || row["tglCair"] || formatTanggalID(new Date()),
-                            realLaluPokok: parseNum(row["Real Pokok"] || row["realTotPokok"]),
-                            realLaluBunga: parseNum(row["Real Jasa"] || row["realTotBunga"]),
-                            realIniPokok: 0, realIniBunga: 0,
-                            realTotPokok: parseNum(row["Real Pokok"] || row["realTotPokok"]),
-                            realTotBunga: parseNum(row["Real Jasa"] || row["realTotBunga"]),
-                            saldo: parseNum(row["Sisa Saldo"] || row["saldo"]) || Math.max(0, parseNum(row["Plafon"] || row["plafon"]) - parseNum(row["Real Pokok"] || row["realTotPokok"])),
-                            persen: "100%", angsuranKe: 1, noHp: row["No HP"] || row["noHp"] || "", persenJasa: 1.5, history: []
-                        }));
-                        saveLPPData(imported);
-                        renderLPPTable(); renderDataPeminjamTable(); updateDasborKeuangan(); backupKeGoogleSheet(true);
-                        showToast('success', `Berhasil impor ${imported.length} data!`);
-                    }
-                }
-            });
-        }
+            const selectDesa = document.getElementById('desaFilter');
+            if (selectDesa && !filterData) {
+                const currentVal = selectDesa.value;
+                const uniqueDesa = [...new Set(allData.map(item => (item.desa || '').trim()).filter(d => d))].sort();
+                selectDesa.innerHTML = '<option value="">Semua Kelurahan</option>';
+                uniqueDesa.forEach(d => { const opt = document.createElement('option'); opt.value = d; opt.textContent = d; selectDesa.appendChild(opt); });
+                selectDesa.value = currentVal;
+            }
 
-        function hitungKalkulator() {
-            const plafon = parseNum(document.getElementById('calcPlafon').value);
-            const tenor = parseInt(document.getElementById('calcTenor').value) || 12;
-            const valJasa = parseFloat(document.getElementById('calcJasa').value);
-            const jasa = isNaN(valJasa) ? 1.5 : valJasa;
+            let tPlafon = 0, tTarP = 0, tTarB = 0, tLaluP = 0, tLaluB = 0, tIniP = 0, tIniB = 0, tTotP = 0, tTotB = 0, tSaldo = 0, tTungP = 0, tTungB = 0;
 
-            if (plafon <= 0) { showToast('warning', 'Masukkan plafon pinjaman valid!'); return; }
+            if (data.length === 0) { 
+                tbody.innerHTML = `<tr><td colspan="18" class="text-center py-3 text-muted">Data LPP kosong.</td></tr>`; 
+                if (tfoot) tfoot.innerHTML = ''; 
+                return; 
+            }
 
-            const tbody = document.getElementById('calcTableBody');
-            tbody.innerHTML = '';
+            data.forEach((r, idx) => {
+                const plafon = parseNum(r.plafon), tenor = parseInt(r.tenor) || 12;
+                const valJasa = parseFloat(r.persenJasa);
+                const persenJasa = isNaN(valJasa) ? 1.5 : valJasa;
 
-            const pokokPerBulan = bulatkan(Math.ceil(plafon / tenor));
-            const jasaPerBulan = bulatkan(plafon * (jasa / 100));
-            let sisaPokok = plafon;
+                const bln = hitungBulanBerjalan(r.tglCair, tenor);
+                let tarP = bln >= tenor ? plafon : bulatkan(bulatkan(Math.ceil(plafon / tenor)) * bln);
+                let tarB = bulatkan(bulatkan(plafon * (persenJasa / 100)) * bln);
 
-            for (let i = 1; i <= tenor; i++) {
-                let p = i === tenor ? sisaPokok : pokokPerBulan;
-                sisaPokok = Math.max(0, sisaPokok - p);
+                let realLaluP = parseNum(r.realLaluPokok);
+                let realLaluB = parseNum(r.realLaluBunga);
+                let realIniP = parseNum(r.realIniPokok);
+                let realIniB = parseNum(r.realIniBunga);
+                let totP = parseNum(r.realTotPokok) || (realLaluP + realIniP);
+                let totB = parseNum(r.realTotBunga) || (realLaluB + realIniB);
+                let saldo = parseNum(r.saldo) !== undefined && parseNum(r.saldo) !== 0 ? parseNum(r.saldo) : Math.max(0, plafon - totP);
+                
+                let strPersen = String(r.persen || '');
+                let persen = strPersen && !strPersen.includes('#') ? strPersen : (tarP > 0 ? `${Math.min(100, Math.round((totP / tarP) * 100))}%` : '100%');
+                let tungP = Math.max(0, tarP - totP);
+                let tungB = Math.max(0, tarB - totB);
+
+                tPlafon += plafon; tTarP += tarP; tTarB += tarB;
+                tLaluP += realLaluP; tLaluB += realLaluB;
+                tIniP += realIniP; tIniB += realIniB;
+                tTotP += totP; tTotB += totB;
+                tSaldo += saldo; tTungP += tungP; tTungB += tungB;
+
                 tbody.innerHTML += `
                     <tr>
-                        <td>Bulan ${i}</td>
-                        <td class="text-end">Rp ${formatRp(p)}</td>
-                        <td class="text-end">Rp ${formatRp(jasaPerBulan)}</td>
-                        <td class="text-end fw-bold">Rp ${formatRp(p + jasaPerBulan)}</td>
-                        <td class="text-end text-primary fw-semibold">Rp ${formatRp(sisaPokok)}</td>
+                        <td class="text-center">${idx + 1}</td>
+                        <td class="fw-semibold text-dark text-start">${r.nama || '-'}</td>
+                        <td>${r.desa || '-'}</td>
+                        <td class="text-end">${formatRp(plafon)}</td>
+                        <td class="text-center">${tenor}B</td>
+                        <td class="text-center">${formatTanggalTampil(r.tglCair)}</td>
+                        <td class="text-end fw-bold" style="background: #f0f6fc;">${formatRp(tarP)}</td>
+                        <td class="text-end fw-bold" style="background: #f0f6fc;">${formatRp(tarB)}</td>
+                        <td class="text-end">${formatRp(realLaluP)}</td>
+                        <td class="text-end">${formatRp(realLaluB)}</td>
+                        <td class="text-end fw-semibold">${formatRp(realIniP)}</td>
+                        <td class="text-end fw-semibold">${formatRp(realIniB)}</td>
+                        <td class="text-end fw-bold" style="background: #e1ecf9;">${formatRp(totP)}</td>
+                        <td class="text-end fw-bold" style="background: #e1ecf9;">${formatRp(totB)}</td>
+                        <td class="text-end fw-bold text-primary">${formatRp(saldo)}</td>
+                        <td class="text-center">${persen}</td>
+                        <td class="text-end fw-bold text-danger" style="background: #f8d7da;">${formatRp(tungP)}</td>
+                        <td class="text-end fw-bold text-danger" style="background: #f8d7da;">${formatRp(tungB)}</td>
+                    </tr>`;
+            });
+
+            if (tfoot) {
+                tfoot.innerHTML = `
+                    <tr class="text-end bg-light text-dark fw-bold">
+                        <td colspan="3" class="text-center">TOTAL</td>
+                        <td>${formatRp(tPlafon)}</td><td></td><td></td>
+                        <td>${formatRp(tTarP)}</td><td>${formatRp(tTarB)}</td>
+                        <td>${formatRp(tLaluP)}</td><td>${formatRp(tLaluB)}</td>
+                        <td>${formatRp(tIniP)}</td><td>${formatRp(tIniB)}</td>
+                        <td>${formatRp(tTotP)}</td><td>${formatRp(tTotB)}</td>
+                        <td class="text-primary">${formatRp(tSaldo)}</td><td></td>
+                        <td class="text-danger">${formatRp(tTungP)}</td><td class="text-danger">${formatRp(tTungB)}</td>
                     </tr>`;
             }
         }
 
-        function clearLogs() {
-            localStorage.removeItem('upk_logs');
-            renderLogTable();
-            showToast('info', 'Log audit dibersihkan.');
+        function filterLPPTable() {
+            const query = (document.getElementById('searchInput').value || '').toLowerCase();
+            const desa = (document.getElementById('desaFilter').value || '').toLowerCase();
+            const allData = getLPPData();
+            renderLPPTable(allData.filter(item => (item.nama || '').toLowerCase().includes(query) && (desa === '' || (item.desa || '').toLowerCase() === desa)));
+        }
+
+        function renderKas() {
+            const data = getKasData();
+            const filterBulan = document.getElementById('filterBulanKas').value;
+            const filterTahun = document.getElementById('filterTahunKas').value || '2026';
+
+            data.sort((a, b) => {
+                const dateA = parseTanggal(a.tanggal).getTime();
+                const dateB = parseTanggal(b.tanggal).getTime();
+                if (dateB !== dateA) return dateB - dateA;
+                return (Number(b.id) || 0) - (Number(a.id) || 0);
+            });
+
+            const tbody = document.getElementById('transaksiTableBody');
+            tbody.innerHTML = '';
+            
+            let totalMasukGlobal = 0, totalKeluarGlobal = 0;
+            let filteredData = [];
+
+            data.forEach(item => {
+                if (!item.tanggal && !item.nominal) return;
+                const d = parseTanggal(item.tanggal);
+                const itemThn = String(d.getFullYear());
+                const itemBln = String(d.getMonth() + 1).padStart(2, '0');
+
+                const nom = Number(item.nominal) || 0;
+                const matchesYear = !filterTahun || itemThn === filterTahun;
+                
+                if (matchesYear) {
+                    if (!filterBulan || itemBln === filterBulan) {
+                        filteredData.push(item);
+                    }
+                }
+            });
+
+            let totalMasukPeriode = 0, totalKeluarPeriode = 0;
+            filteredData.forEach(item => {
+                const nom = Number(item.nominal) || 0;
+                if (item.tipe === 'Masuk') totalMasukPeriode += nom;
+                if (item.tipe === 'Keluar') totalKeluarPeriode += nom;
+            });
+
+            data.forEach(item => {
+                const nom = Number(item.nominal) || 0;
+                if (item.tipe === 'Masuk') totalMasukGlobal += nom;
+                if (item.tipe === 'Keluar') totalKeluarGlobal += nom;
+            });
+            const saldoKasAkhirGlobal = totalMasukGlobal - totalKeluarGlobal;
+
+            document.getElementById('rekapKasMasuk').textContent = 'Rp ' + formatRp(totalMasukPeriode);
+            document.getElementById('rekapKasKeluar').textContent = 'Rp ' + formatRp(totalKeluarPeriode);
+            document.getElementById('rekapSaldoKas').textContent = 'Rp ' + formatRp(saldoKasAkhirGlobal);
+
+            const isAdmin = localStorage.getItem('userRole') === 'admin';
+
+            if (filteredData.length === 0) { 
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted py-3">Belum ada mutasi kas tercatat pada periode ini.</td></tr>'; 
+                return; 
+            }
+
+            filteredData.forEach((item, index) => {
+                const isMasuk = item.tipe === 'Masuk';
+                let delBtn = isAdmin ? `<button class="btn btn-outline-danger btn-sm py-0 px-1 shadow-sm" title="Hapus" onclick="hapusKas(${item.id})"><i class="bi bi-trash"></i></button>` : '-';
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${formatTanggalTampil(item.tanggal)}</td>
+                        <td class="fw-bold text-dark">${item.noKwitansi || '-'}</td>
+                        <td class="fw-semibold text-dark text-start">${item.nama || '-'}</td>
+                        <td>${item.kelurahan || '-'}</td>
+                        <td><span class="badge bg-light text-dark border">${item.kategori || 'Umum'}</span></td>
+                        <td><span class="badge ${isMasuk ? 'bg-primary' : 'bg-danger'} text-white">${item.tipe}</span></td>
+                        <td class="${isMasuk ? 'text-success' : 'text-danger'} fw-bold text-end">Rp ${formatRp(item.nominal)}</td>
+                        <td class="text-center no-print admin-only">${delBtn}</td>
+                    </tr>`;
+            });
+        }
+
+        function renderLaporanRekapitulasi() {
+            const allData = getLPPData();
+            let totalPlafon = 0, totalRealisasi = 0, totalSaldo = 0;
+            const desaMap = {};
+
+            allData.forEach(item => {
+                const p = parseNum(item.plafon), r = parseNum(item.realTotPokok), s = parseNum(item.saldo);
+                const d = (item.desa || 'Lainnya').trim().toUpperCase();
+                totalPlafon += p; totalRealisasi += r; totalSaldo += s;
+                if (!desaMap[d]) desaMap[d] = { count: 0, plafon: 0, saldo: 0 };
+                desaMap[d].count += 1; desaMap[d].plafon += p; desaMap[d].saldo += s;
+            });
+
+            document.getElementById('repTotalPlafon').textContent = 'Rp ' + formatRp(totalPlafon);
+            document.getElementById('repTotalRealisasi').textContent = 'Rp ' + formatRp(totalRealisasi);
+            document.getElementById('repTotalSaldo').textContent = 'Rp ' + formatRp(totalSaldo);
+
+            const tbody = document.getElementById('rekapDesaTableBody');
+            tbody.innerHTML = '';
+            let idx = 1;
+            for (const [desaName, val] of Object.entries(desaMap).sort()) {
+                tbody.innerHTML += `<tr><td>${idx++}</td><td class="fw-semibold text-start">${desaName}</td><td>${val.count} Peminjam</td><td class="text-end fw-semibold">Rp ${formatRp(val.plafon)}</td><td class="text-end text-primary fw-semibold">Rp ${formatRp(val.saldo)}</td></tr>`;
+            }
+        }
+
+        function renderLogTable() {
+            const logs = JSON.parse(localStorage.getItem('upk_logs') || '[]');
+            const tbody = document.getElementById('logTableBody');
+            tbody.innerHTML = '';
+            if (logs.length === 0) { tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Belum ada riwayat aktivitas.</td></tr>'; return; }
+            logs.forEach(l => {
+                tbody.innerHTML += `<tr><td class="small">${l.time}</td><td class="fw-bold">${l.user}</td><td><span class="badge bg-light text-dark border">${l.kat}</span></td><td class="small">${l.detail}</td></tr>`;
+            });
         }
 
         window.onload = async function() {
